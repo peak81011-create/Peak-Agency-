@@ -29,6 +29,13 @@ export type SessionUser = {
   client: { id: string; status: ClientStatus; creatorName: string } | null;
 };
 
+// my_permissions() renvoie un ensemble de textes : PostgREST peut le livrer
+// sous forme de valeurs simples ou d'objets { my_permissions: "…" }.
+function permissionKeys(rows: unknown): string[] {
+  if (!Array.isArray(rows)) return [];
+  return rows.map((row) => (typeof row === "string" ? row : (row as { my_permissions?: string })?.my_permissions ?? ""));
+}
+
 /** Utilisateur connecté, lu une seule fois par requête. Null si non connecté. */
 export const getSessionUser = cache(async (): Promise<SessionUser | null> => {
   const supabase = await createSupabaseServerClient();
@@ -60,7 +67,7 @@ export const getSessionUser = cache(async (): Promise<SessionUser | null> => {
     locale: profile.locale === "en" ? "en" : "fr",
     isActive: profile.is_active,
     aal: claims.aal === "aal2" ? "aal2" : "aal1",
-    permissions: new Set(((perms as string[] | null) ?? []).filter(isPermission)),
+    permissions: new Set(permissionKeys(perms).filter(isPermission)),
     client,
   };
 });
