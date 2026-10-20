@@ -38,6 +38,12 @@ async function check<T>(label: string, p: PromiseLike<{ data: T; error: { messag
   return data as NonNullable<T>;
 }
 
+/** Écriture sans retour de données : seule l'erreur compte. */
+async function run(label: string, p: PromiseLike<{ error: { message: string } | null }>): Promise<void> {
+  const { error } = await p;
+  if (error) throw new Error(`${label} : ${error.message}`);
+}
+
 async function findUserId(email: string): Promise<string | null> {
   for (let page = 1; ; page++) {
     const { data, error } = await db.auth.admin.listUsers({ page, perPage: 200 });
@@ -49,17 +55,30 @@ async function findUserId(email: string): Promise<string | null> {
 }
 
 async function ensureUser(user: DemoUser): Promise<string> {
-  const existing = await findUserId(user.email);
-  if (existing) return existing;
-  const { data, error } = await db.auth.admin.createUser({
-    email: user.email,
-    password,
-    email_confirm: true,
-    app_metadata: { role: user.role },
-    user_metadata: { full_name: user.fullName, creator_name: user.creatorName ?? "", locale: "fr" },
-  });
-  if (error || !data.user) throw new Error(`Création de ${user.email} : ${error?.message}`);
-  return data.user.id;
+  let id = await findUserId(user.email);
+  if (!id) {
+    const { data, error } = await db.auth.admin.createUser({
+      email: user.email,
+      password,
+      email_confirm: true,
+      app_metadata: { role: user.role },
+      user_metadata: { full_name: user.fullName, creator_name: user.creatorName ?? "", locale: "fr" },
+    });
+    if (error || !data.user) throw new Error(`Création de ${user.email} : ${error?.message}`);
+    id = data.user.id;
+  }
+  // Selon la version de Supabase Auth, app_metadata peut être écrit après
+  // l'insertion du compte : on aligne donc explicitement le profil sur le rôle.
+  await run(`rôle de ${user.email}`, db.from("profiles").update({ role: user.role, full_name: user.fullName }).eq("id", id));
+  if (user.role !== "client") {
+    await run(`fiche client de ${user.email}`, db.from("clients").delete().eq("profile_id", id));
+  } else {
+    await run(
+      `fiche client de ${user.email}`,
+      db.from("clients").upsert({ profile_id: id, creator_name: user.creatorName ?? "" }, { onConflict: "profile_id" }),
+    );
+  }
+  return id;
 }
 
 async function ensurePlans(): Promise<string[]> {
@@ -139,7 +158,7 @@ async function main() {
   end.setMonth(end.getMonth() + 1);
 
   // Client 1 : actif (paiement validé), validation client activée
-  await check(
+  await run(
     "client actif",
     db
       .from("clients")
@@ -157,7 +176,7 @@ async function main() {
       .eq("id", active),
   );
   // Client 2 : preuve de virement déposée, à vérifier
-  await check(
+  await run(
     "client à vérifier",
     db
       .from("clients")
@@ -167,7 +186,7 @@ async function main() {
   // Client 3 : vient de s'inscrire (statut par défaut « inscrit »)
 
   const year = new Date().getFullYear();
-  await check(
+  await run(
     "paiements",
     db.from("payments").upsert(
       [
@@ -197,7 +216,7 @@ async function main() {
   );
 
   // Équipe : le monteur et l'assistante suivent le client actif ; l'assistante suit aussi le client 2.
-  await check(
+  await run(
     "attributions",
     db.from("assignments").upsert(
       [
@@ -208,7 +227,7 @@ async function main() {
       { onConflict: "user_id,client_id" },
     ),
   );
-  await check(
+  await run(
     "notes internes",
     db.from("client_private_notes").upsert({ client_id: active, body: "Note interne de démonstration (jamais visible par le client)." }),
   );
