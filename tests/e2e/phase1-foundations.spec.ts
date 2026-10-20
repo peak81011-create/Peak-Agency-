@@ -19,7 +19,8 @@ test.describe("Fondations", () => {
 
   test("mauvais mot de passe : message clair", async ({ page }) => {
     await login(page, DEMO_USERS.clientActive.email, "Mauvais-mot-de-passe-1!");
-    await expect(page.getByRole("alert")).toContainText("E-mail ou mot de passe incorrect");
+    // (Next.js ajoute son propre role="alert" pour les annonces de navigation)
+    await expect(page.getByRole("alert").filter({ hasText: "E-mail ou mot de passe incorrect" })).toBeVisible();
   });
 
   test("un client actif voit son espace débloqué", async ({ page }) => {
@@ -55,7 +56,10 @@ test.describe("Fondations", () => {
     const admin = adminClient();
     const { data: users } = await admin.auth.admin.listUsers({ perPage: 200 });
     const owner = users.users.find((u) => u.email === DEMO_USERS.owner.email);
-    for (const factor of owner?.factors ?? []) await admin.auth.admin.mfa.deleteFactor({ id: factor.id, userId: owner!.id });
+    if (owner) {
+      const { data: factors } = await admin.auth.admin.mfa.listFactors({ userId: owner.id });
+      for (const factor of factors?.factors ?? []) await admin.auth.admin.mfa.deleteFactor({ id: factor.id, userId: owner.id });
+    }
 
     await login(page, DEMO_USERS.owner.email);
     await expectPath(page, /\/fr\/mfa/);

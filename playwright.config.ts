@@ -22,5 +22,8 @@ export default defineConfig({
         reuseExistingServer: !process.env.CI,
         timeout: 120_000,
         env: { RATE_LIMIT_FACTOR: "100" },
+        // Journal du serveur visible dans la CI pour diagnostiquer un échec
+        stdout: "pipe",
+        stderr: "pipe",
       },
 });
