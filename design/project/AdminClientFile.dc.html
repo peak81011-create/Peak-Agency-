@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Admin — fiche client</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="admin" active="clients" hint-size="100%,1000px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Clients" crumb="Léa Martin" initials="AD" hint-size="100%,69px"></dc-import>
+      <div class="page-head" style="align-items: center">
+        <div class="row g-4">
+          <span class="av av-xl">LM</span>
+          <div class="stack g-2">
+            <a class="sm row g-1" href="AdminClients.dc.html" style="text-decoration: none"><span class="ic ic-sm ic-chev-l"></span>Clients</a>
+            <h1 class="h1">Léa Martin</h1>
+            <div class="row g-2"><span class="badge plain t-forest">Croissance</span><span class="badge plain t-green">Actif</span><span class="sm subtle">@leamrtn · Lifestyle · client depuis juil. 2026</span></div>
+          </div>
+        </div>
+        <div class="row g-2"><a class="btn btn-secondary" href="Banners.dc.html"><span class="ic ic-sm ic-eye"></span>Voir en tant que</a><a class="btn btn-secondary" href="AdminInbox.dc.html"><span class="ic ic-sm ic-msg"></span>Message</a><button class="btn btn-secondary btn-icon" aria-label="Plus d'actions"><span class="ic ic-more"></span></button></div>
+      </div>
+      <div class="page-body">
+        <div class="tabs" role="tablist" aria-label="Sections de la fiche">
+          <sc-for list="{{tabs}}" as="t" hint-placeholder-count="10">
+            <button class="tab {{t.cls}}" role="tab" aria-selected="{{t.sel}}" onClick="{{t.pick}}">{{t.label}}<sc-if value="{{t.n}}" hint-placeholder-val="{{false}}"><span class="cnt">{{t.n}}</span></sc-if></button>
+          </sc-for>
+        </div>
+
+        <sc-if value="{{is.profil}}" hint-placeholder-val="{{true}}">
+          <div class="split">
+            <section class="card stack g-4"><h2 class="h3">Profil créateur</h2>
+              <dl class="dl" style="margin: 0"><dt>Nom</dt><dd>Léa Martin</dd><dt>E-mail</dt><dd>lea.martin@exemple.fr</dd><dt>Niche</dt><dd>Lifestyle</dd><dt>Fréquence</dt><dd>3 à 5 lives / semaine</dd><dt>Objectifs</dt><dd>Gagner des abonnés sur Twitch · Faire découvrir les lives</dd><dt>Objectif 3 mois</dt><dd>50 000 abonnés Twitch</dd><dt>À éviter</dt><dd style="font-weight: 400">Ne pas montrer sa sœur. Pas de sujets politiques.</dd></dl>
+            </section>
+            <div class="stack g-5">
+              <section class="card stack g-3"><h2 class="h3">Chaînes sources</h2>
+                <a class="file-row" href="#" style="text-decoration: none; color: #19261F"><span class="file-ic"><span class="ic ic-sm ic-link"></span></span><div class="stack grow" style="gap: 0"><span class="sm strong">Twitch</span><span class="xs subtle">twitch.tv/leamrtn · 184 k</span></div><span class="ic ic-sm ic-ext subtle"></span></a>
+                <a class="file-row" href="#" style="text-decoration: none; color: #19261F"><span class="file-ic"><span class="ic ic-sm ic-link"></span></span><div class="stack grow" style="gap: 0"><span class="sm strong">YouTube</span><span class="xs subtle">youtube.com/@leamrtn · 52 k</span></div><span class="ic ic-sm ic-ext subtle"></span></a>
+              </section>
+              <section class="card card-sage stack g-2"><h2 class="h3">En un coup d'œil</h2><div class="grid-2" style="gap: 10px"><div class="stack" style="gap: 0"><span class="xs subtle">Clips ce mois</span><span class="h2 num">24 / [40]</span></div><div class="stack" style="gap: 0"><span class="xs subtle">Vues 30 j</span><span class="h2 num">2,4 M</span></div><div class="stack" style="gap: 0"><span class="xs subtle">Abonnés gagnés</span><span class="h2 num">+9 820</span></div><div class="stack" style="gap: 0"><span class="xs subtle">Demandes ouvertes</span><span class="h2 num">2</span></div></div></section>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{is.abonnement}}" hint-placeholder-val="{{false}}">
+          <section class="card stack g-4" style="max-width: 720px"><div class="row between"><h2 class="h3">Abonnement</h2><span class="badge plain t-green">Actif</span></div><dl class="dl" style="margin: 0"><dt>Offre</dt><dd>Croissance · [XXX] € HT / mois</dd><dt>Prochaine échéance</dt><dd>25/11/2026</dd><dt>Référence</dt><dd class="mono">PEAK-LM-2611</dd><dt>Début</dt><dd>02/07/2026</dd></dl><div class="row g-2"><button class="btn btn-secondary">Changer d'offre</button><button class="btn btn-secondary">Prolonger manuellement</button><button class="btn btn-danger-ghost">Suspendre</button></div></section>
+        </sc-if>
+
+        <sc-if value="{{is.paiements}}" hint-placeholder-val="{{false}}">
+          <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Période</th><th>Référence</th><th class="r">Montant</th><th>Statut</th><th>Vérifié par</th></tr></thead><tbody>
+            <tr><td class="strong">Octobre</td><td class="mono sm">PEAK-LM-2610</td><td class="r num">[XXX] €</td><td><span class="badge st-paye">Validé</span></td><td>Camille · 20/10</td></tr>
+            <tr><td class="strong">Septembre</td><td class="mono sm">PEAK-LM-2609</td><td class="r num">[XXX] €</td><td><span class="badge st-paye">Validé</span></td><td>Alexandre · 22/09</td></tr>
+            <tr><td class="strong">Août</td><td class="mono sm">PEAK-LM-2608</td><td class="r num">[XXX] €</td><td><span class="badge st-refuse">Refusé</span></td><td>Camille · 21/08 · montant incorrect</td></tr>
+          </tbody></table></div>
+        </sc-if>
+
+        <sc-if value="{{is.equipe}}" hint-placeholder-val="{{false}}">
+          <section class="card stack g-3" style="max-width: 720px"><div class="row between"><h2 class="h3">Équipe attribuée</h2><button class="btn btn-secondary btn-sm"><span class="ic ic-sm ic-plus"></span>Attribuer</button></div>
+            <div class="file-row"><span class="av av-dark">TL</span><div class="stack grow" style="gap: 0"><span class="strong">Théo Lambert</span><span class="xs subtle">Monteur principal</span></div><button class="btn btn-ghost btn-sm">Retirer</button></div>
+            <div class="file-row"><span class="av">CR</span><div class="stack grow" style="gap: 0"><span class="strong">Camille Roux</span><span class="xs subtle">Assistante · suivi client</span></div><button class="btn btn-ghost btn-sm">Retirer</button></div>
+          </section>
+        </sc-if>
+
+        <sc-if value="{{is.videos}}" hint-placeholder-val="{{false}}">
+          <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Vidéo</th><th>Reçue</th><th>Priorité</th><th class="r">Clips</th><th>Statut</th></tr></thead><tbody>
+            <tr><td class="strong">live-20-oct-integral.mp4</td><td>Aujourd'hui</td><td><span class="prio prio-normale"><i></i>Normale</span></td><td class="r">—</td><td><span class="badge t-blue">Envoi 62 %</span></td></tr>
+            <tr><td class="strong">Live du 14/10 (Twitch)</td><td>15/10</td><td><span class="prio prio-haute"><i></i>Haute</span></td><td class="r">9</td><td><span class="badge t-violet">En découpage</span></td></tr>
+            <tr><td class="strong">podcast-ep42.mov</td><td>09/10</td><td><span class="prio prio-normale"><i></i>Normale</span></td><td class="r">12</td><td><span class="badge t-green">Terminée</span></td></tr>
+          </tbody></table></div>
+        </sc-if>
+
+        <sc-if value="{{is.clips}}" hint-placeholder-val="{{false}}">
+          <div class="row g-2"><span class="badge st-planifie">Planifié · 1</span><span class="badge st-montage">En montage · 4</span><span class="badge st-avalider">À valider · 2</span><span class="badge st-valide">Validé · 1</span><span class="badge st-programme">Programmé · 6</span><span class="badge st-publie">Publié · 128</span><span class="badge st-rejete">Rejeté · 3</span></div>
+          <a class="btn btn-secondary" href="AdminClips.dc.html" style="align-self: flex-start">Ouvrir dans le Kanban des clips</a>
+        </sc-if>
+
+        <sc-if value="{{is.comptes}}" hint-placeholder-val="{{false}}">
+          <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Plateforme</th><th>Compte</th><th class="r">Abonnés</th><th class="r">Clips</th><th>Statut</th></tr></thead><tbody>
+            <tr><td><span class="plat plat-tt">TikTok</span></td><td class="strong">@leamrtn.clips</td><td class="r num">48,2 k</td><td class="r num">64</td><td><span class="badge plain t-green">Actif</span></td></tr>
+            <tr><td><span class="plat plat-ig">Instagram</span></td><td class="strong">@lea.moments</td><td class="r num">21,7 k</td><td class="r num">41</td><td><span class="badge plain t-green">Actif</span></td></tr>
+            <tr><td><span class="plat plat-yt">YouTube</span></td><td class="strong">Léa Clips</td><td class="r num">6 940</td><td class="r num">23</td><td><span class="badge plain t-green">Actif</span></td></tr>
+          </tbody></table></div>
+        </sc-if>
+
+        <sc-if value="{{is.demandes}}" hint-placeholder-val="{{false}}">
+          <section class="card stack" style="gap: 0; padding: 0; max-width: 820px">
+            <a class="row g-3" href="AdminInbox.dc.html" style="padding: 14px 18px; border-bottom: 1px solid #EBEFE6; text-decoration: none; color: #19261F"><span class="grow strong">Ajouter des sous-titres en anglais sur les Shorts</span><span class="badge t-blue">En cours</span></a>
+            <a class="row g-3" href="AdminInbox.dc.html" style="padding: 14px 18px; text-decoration: none; color: #19261F"><span class="grow strong">Prioriser le live du 24 octobre</span><span class="badge t-neutral">Reçue</span></a>
+          </section>
+        </sc-if>
+
+        <sc-if value="{{is.notes}}" hint-placeholder-val="{{false}}">
+          <section class="stack g-4" style="max-width: 820px">
+            <div class="callout callout-warn"><span class="ic ic-lock"></span><span>Notes internes : jamais visibles par le client.</span></div>
+            <div class="card stack g-2"><div class="row between"><span class="row g-2 sm strong"><span class="av av-sm av-dark">AD</span>Alexandre</span><span class="xs subtle">12/10</span></div><p class="sm">Très réactive sur les validations. Intéressée par l'offre Domination si les vues continuent de monter : à proposer fin novembre.</p></div>
+            <div class="card stack g-2"><div class="row between"><span class="row g-2 sm strong"><span class="av av-sm">CR</span>Camille</span><span class="xs subtle">21/08</span></div><p class="sm">Paiement d'août refusé (montant incomplet), régularisé le 23/08.</p></div>
+            <div class="composer"><label for="nint" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Nouvelle note</label><textarea id="nint" placeholder="Ajouter une note interne…" rows="1"></textarea><button class="btn btn-primary">Ajouter</button></div>
+          </section>
+        </sc-if>
+
+        <sc-if value="{{is.activite}}" hint-placeholder-val="{{false}}">
+          <section class="card" style="max-width: 820px"><div class="feed">
+            <div class="feed-item"><span class="av av-sm av-dark">TL</span><span class="grow"><b>Théo</b> a envoyé 2 clips à valider</span><span class="when">12 min</span></div>
+            <div class="feed-item"><span class="av av-sm">LM</span><span class="grow"><b>Léa</b> a envoyé live-20-oct-integral.mp4</span><span class="when">1 h</span></div>
+            <div class="feed-item"><span class="av av-sm">CR</span><span class="grow"><b>Camille</b> a validé le paiement PEAK-LM-2610</span><span class="when">1 h</span></div>
+            <div class="feed-item"><span class="av av-sm">LM</span><span class="grow"><b>Léa</b> a validé « Le moment où tout bascule »</span><span class="when">Hier</span></div>
+          </div></section>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"tab":{"editor":"enum","options":["profil","abonnement","paiements","equipe","videos","clips","comptes","demandes","notes","activite"],"default":"profil"},"$preview":{"width":1440,"height":1600}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { tab: null }; }
+  renderVals() {
+    const cur = this.state.tab ?? (this.props.tab ?? 'profil');
+    const defs = [['profil', 'Profil', ''], ['abonnement', 'Abonnement', ''], ['paiements', 'Paiements', '4'], ['equipe', 'Équipe', '2'], ['videos', 'Vidéos', '12'], ['clips', 'Clips', '145'], ['comptes', 'Comptes', '3'], ['demandes', 'Demandes', '2'], ['notes', 'Notes internes', '2'], ['activite', 'Activité', '']];
+    const is = {};
+    defs.forEach(([k]) => { is[k] = k === cur; });
+    return {
+      is,
+      tabs: defs.map(([k, label, n]) => ({ label, n, cls: k === cur ? 'on' : '', sel: k === cur ? 'true' : 'false', pick: () => this.setState({ tab: k }) }))
+    };
+  }
+}
+</script>
+</body>
+</html>

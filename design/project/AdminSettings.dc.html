@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Admin — paramètres</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="admin" active="settings" hint-size="100%,1000px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Configuration" crumb="Paramètres" initials="AD" hint-size="100%,69px"></dc-import>
+      <div class="page-head"><h1 class="h1">Paramètres</h1></div>
+      <div class="page-body">
+        <div class="row g-8" style="align-items: flex-start">
+          <nav class="toc stack hide-m" style="flex: 0 0 200px; gap: 0" aria-label="Sections"><a class="on" href="#ent">Entreprise</a><a href="#bank">Banque</a><a href="#rem">Délais de rappel</a><a href="#lang">Langues</a></nav>
+          <div class="stack g-6 grow" style="flex: 1 1 520px; max-width: 860px">
+            <section class="card stack g-5" id="ent" style="padding: 24px" aria-labelledby="s1">
+              <div class="stack g-1"><h2 id="s1" class="h2">Entreprise</h2><p class="sm subtle">Utilisé sur les factures, les mentions légales et les e-mails.</p></div>
+              <div class="grid-2" style="gap: 14px">
+                <div class="field"><label class="label" for="e1">Raison sociale</label><input id="e1" class="input" placeholder="[Raison sociale]"></div>
+                <div class="field"><label class="label" for="e2">SIRET</label><input id="e2" class="input" placeholder="[000 000 000 00000]"></div>
+                <div class="field"><label class="label" for="e3">N° TVA intracommunautaire</label><input id="e3" class="input" placeholder="[FR00 000000000]"></div>
+                <div class="field"><label class="label" for="e4">E-mail de contact</label><input id="e4" class="input" type="email" placeholder="[contact@domaine.fr]"></div>
+              </div>
+              <div class="field"><label class="label" for="e5">Adresse</label><input id="e5" class="input" placeholder="[Adresse du siège]"></div>
+              <div class="row g-4"><div style="width: 56px; height: 56px; border-radius: 12px; background: #19261F; color: #B6C2AA; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 268 594" width="15" height="34" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M0 0H143L268 126L143 250H89V554L45 594L0 554ZM89 75H134L184 126L134 175H89Z"/></svg></div><div class="stack g-1"><span class="label">Logo des factures</span><button class="btn btn-secondary btn-sm"><span class="ic ic-sm ic-upload"></span>Remplacer</button></div></div>
+            </section>
+
+            <section class="card stack g-5" id="bank" style="padding: 24px" aria-labelledby="s2">
+              <div class="row between g-3"><div class="stack g-1"><h2 id="s2" class="h2">Banque</h2><p class="sm subtle">Coordonnées affichées aux clients sur la page de paiement.</p></div><span class="badge plain t-amber"><span class="ic ic-sm ic-lock" style="width: 12px; height: 12px"></span>Sensible · 2FA requise</span></div>
+              <div class="grid-2" style="gap: 14px">
+                <div class="field"><label class="label" for="b1">Titulaire du compte</label><input id="b1" class="input" placeholder="[Raison sociale]"></div>
+                <div class="field"><label class="label" for="b2">Banque</label><input id="b2" class="input" placeholder="[Nom de la banque]"></div>
+                <div class="field"><label class="label" for="b3">IBAN</label><input id="b3" class="input mono" placeholder="FR76 …"></div>
+                <div class="field"><label class="label" for="b4">BIC</label><input id="b4" class="input mono" placeholder="XXXXFRPPXXX"></div>
+              </div>
+              <div class="field"><label class="label" for="b5">Format de la référence de virement</label><input id="b5" class="input mono" value="PEAK-{INITIALES}-{AAMM}"><span class="hint">Aperçu : <b class="mono">PEAK-LM-2610</b> pour Léa Martin, octobre 2026.</span></div>
+              <div class="callout callout-warn" style="font-size: 13px"><span class="ic ic-sm ic-alert"></span><span>Tout changement d'IBAN est notifié par e-mail à tous les administrateurs et journalisé.</span></div>
+            </section>
+
+            <section class="card stack g-5" id="rem" style="padding: 24px" aria-labelledby="s3">
+              <div class="stack g-1"><h2 id="s3" class="h2">Délais de rappel</h2><p class="sm subtle">Notifications automatiques envoyées par la plateforme.</p></div>
+              <div class="stack" style="gap: 0">
+                <sc-for list="{{rules}}" as="r" hint-placeholder-count="6">
+                  <div class="row g-4" style="padding: 14px 0; border-top: 1px solid #EBEFE6; flex-wrap: wrap">
+                    <span class="switch {{r.on}}" aria-hidden="true"></span>
+                    <div class="stack grow" style="gap: 2px; min-width: 220px"><span class="strong">{{r.t}}</span><span class="xs subtle">{{r.d}}</span></div>
+                    <div class="row g-2" style="flex-wrap: nowrap"><input class="input num" aria-label="{{r.t}} — valeur" value="{{r.v}}" style="width: 72px; text-align: center"><span class="sm muted" style="width: 120px">{{r.u}}</span></div>
+                  </div>
+                </sc-for>
+              </div>
+            </section>
+
+            <section class="card stack g-4" id="lang" style="padding: 24px" aria-labelledby="s4">
+              <h2 id="s4" class="h2">Langues</h2>
+              <div class="grid-2" style="gap: 14px"><div class="field"><label class="label" for="l1">Langue par défaut</label><select id="l1" class="select"><option>Français</option><option>English</option></select></div><div class="field"><label class="label" for="l2">Détection automatique</label><select id="l2" class="select"><option>Selon le navigateur</option><option>Toujours la langue par défaut</option></select></div></div>
+            </section>
+            <div class="row g-2" style="justify-content: flex-end"><button class="btn btn-ghost">Annuler</button><button class="btn btn-primary">Enregistrer les paramètres</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1600}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { rules: [
+      { on: 'on', t: 'Rappel avant échéance', d: 'E-mail au client avec IBAN et référence', v: '5', u: 'jours avant' },
+      { on: 'on', t: 'Relance paiement en retard', d: 'Puis bascule en lecture seule', v: '3', u: 'jours après' },
+      { on: 'on', t: 'Validation automatique des clips', d: 'Si le client ne répond pas', v: '48', u: 'heures' },
+      { on: 'on', t: 'Relance d’un prospect', d: 'Le prospect réapparaît dans « Relances »', v: '4', u: 'jours sans réponse' },
+      { on: 'on', t: 'Alerte tâche en retard', d: 'Notification à l’assigné et au propriétaire', v: '0', u: 'jours après échéance' },
+      { on: '', t: 'Rappel demande sans réponse', d: 'Notification à l’équipe', v: '24', u: 'heures' }
+    ] };
+  }
+}
+</script>
+</body>
+</html>

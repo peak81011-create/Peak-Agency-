@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Page légale — gabarit</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #FBFCFA">
+  <dc-import name="SiteHeader" active="" hint-size="100%,80px"></dc-import>
+  <section style="background: #EBEFE6; padding: 56px 0 0">
+    <div class="wrap stack g-6">
+      <div class="stack g-3"><span class="eyebrow subtle">Informations légales</span><h1 class="d2">Conditions générales de vente</h1><p class="muted">Dernière mise à jour : [JJ/MM/AAAA]</p></div>
+      <nav class="tabs" aria-label="Documents légaux" style="border-bottom-color: #C3CCB9">
+        <a class="tab" href="#">Mentions légales</a>
+        <a class="tab on" href="#" aria-current="page">CGV</a>
+        <a class="tab" href="#">Confidentialité</a>
+        <a class="tab" href="#">Cookies</a>
+      </nav>
+    </div>
+  </section>
+  <section style="padding: 56px 0 96px">
+    <div class="wrap row g-12" style="align-items: flex-start">
+      <aside class="toc stack hide-m" style="flex: 0 0 240px; gap: 0" aria-label="Sommaire">
+        <span class="label-caps" style="padding: 0 12px 10px">Sommaire</span>
+        <a class="on" href="#art1">1. Objet</a><a href="#art2">2. Offres et prix</a><a href="#art3">3. Paiement par virement</a><a href="#art4">4. Livraison des clips</a><a href="#art5">5. Comptes de diffusion</a><a href="#art6">6. Résiliation</a><a href="#art7">7. Responsabilité</a><a href="#art8">8. Droit applicable</a>
+      </aside>
+      <article class="prose grow" style="min-width: 0">
+        <div class="callout callout-warn"><span class="ic ic-info"></span><span>Gabarit de mise en page : le texte juridique est à fournir par votre conseil. Les titres ci-dessous montrent la hiérarchie et la longueur de ligne cible (≈ 70 caractères).</span></div>
+        <h2 id="art1">1. Objet</h2>
+        <p>[Texte de l'article : définition du service de clipping fourni par Peak Clipping Agency, parties au contrat, acceptation des présentes conditions.]</p>
+        <h2 id="art2">2. Offres et prix</h2>
+        <p>[Description des offres, prix HT/TTC, modalités de changement d'offre.]</p>
+        <h2 id="art3">3. Paiement par virement</h2>
+        <p>[Modalités : IBAN, référence unique obligatoire, dépôt de la preuve de virement, délai de vérification, conséquences d'un paiement refusé.]</p>
+        <h2 id="art4">4. Livraison des clips</h2>
+        <p>[Délais par offre, procédure de validation et de demande de modification.]</p>
+        <h2 id="art5">5. Comptes de diffusion</h2>
+        <p>[Création, propriété et transfert éventuel des comptes créés pour le client.]</p>
+        <h2 id="art6">6. Résiliation</h2>
+        <p>[Conditions, préavis, accès en lecture seule après expiration.]</p>
+        <h2 id="art7">7. Responsabilité</h2>
+        <p>[Limites de responsabilité, contenus fournis par le client, règles des plateformes.]</p>
+        <h2 id="art8">8. Droit applicable</h2>
+        <p>[Droit applicable et juridiction compétente.]</p>
+      </article>
+    </div>
+  </section>
+  <dc-import name="SiteFooter" hint-size="100%,420px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2300}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

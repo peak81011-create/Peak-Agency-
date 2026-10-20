@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>AppTopbar — barre supérieure</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk-c" style="font-family: Inter, system-ui, sans-serif; color: #19261F">
+  <header class="topbar">
+    <div class="crumb grow"><span>{{section}}</span><span class="ic ic-sm ic-chev-r"></span><b>{{crumb}}</b></div>
+    <label class="search"><span class="ic ic-sm ic-search"></span><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Rechercher</span><input type="search" placeholder="Rechercher un client, un clip…"><span class="kbd">⌘K</span></label>
+    <div class="seg lang" role="group" aria-label="Langue"><button class="on" aria-pressed="true">FR</button><button aria-pressed="false">EN</button></div>
+    <button class="btn btn-icon btn-ghost bell" aria-label="Notifications, 3 non lues"><span class="ic ic-bell"></span><span class="count">3</span></button>
+    <span class="av av-sm av-dark" aria-hidden="true">{{initials}}</span>
+  </header>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"section":{"editor":"text","default":"Admin"},"crumb":{"editor":"text","default":"Vue d’ensemble"},"initials":{"editor":"text","default":"AD"},"$preview":{"width":1200,"height":72}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      section: this.props.section ?? 'Admin',
+      crumb: this.props.crumb ?? 'Vue d’ensemble',
+      initials: this.props.initials ?? 'AD'
+    };
+  }
+}
+</script>
+</body>
+</html>

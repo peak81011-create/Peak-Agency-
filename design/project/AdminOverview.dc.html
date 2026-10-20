@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Admin — vue d'ensemble</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="admin" active="overview" hint-size="100%,1000px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Admin" crumb="Vue d’ensemble" initials="AD" hint-size="100%,69px"></dc-import>
+      <div class="page-head">
+        <div class="stack g-1"><span class="sm subtle">Mardi 20 octobre 2026</span><h1 class="h1">Vue d'ensemble</h1></div>
+        <div class="row g-2"><div class="seg" role="group" aria-label="Période"><button>Semaine</button><button class="on">Mois</button><button>Année</button></div><a class="btn btn-primary" href="AdminTasks.dc.html"><span class="ic ic-sm ic-plus"></span>Tâche</a></div>
+      </div>
+      <div class="page-body">
+        <div class="split" style="grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr)">
+          <section class="card card-dark stack g-4 notch" style="padding: 24px" aria-labelledby="pv">
+            <div class="row between g-3"><div class="row g-3"><span class="ic-box" style="background: #2E4436; color: #B6C2AA"><span class="ic ic-bank"></span></span><h2 id="pv" class="h2" style="color: #FFFFFF">3 paiements à vérifier</h2></div><a class="btn btn-sage" href="AdminPayments.dc.html">Vérifier<span class="ic ic-sm ic-chev-r"></span></a></div>
+            <div class="stack" style="gap: 0">
+              <sc-for list="{{pay}}" as="p" hint-placeholder-count="3">
+                <a href="AdminPayments.dc.html" class="row g-3" style="padding: 12px 0; border-top: 1px solid #2E4436; text-decoration: none; color: #EBEFE6; flex-wrap: nowrap">
+                  <span class="av av-sm">{{p.ini}}</span>
+                  <div class="stack grow" style="gap: 0; min-width: 0"><span class="strong trunc">{{p.n}}</span><span class="xs mono" style="color: #9AAA8C">{{p.ref}}</span></div>
+                  <span class="strong num">{{p.amt}}</span>
+                  <span class="xs hide-m" style="color: #9AAA8C; width: 88px; text-align: right">{{p.when}}</span>
+                </a>
+              </sc-for>
+            </div>
+          </section>
+          <div class="grid-2" style="gap: 16px">
+            <div class="card stat"><span class="stat-label"><span class="ic ic-sm ic-euro"></span>CA d'octobre</span><span class="stat-value">9 360 €</span><span class="delta"><span class="ic ic-sm ic-trend"></span>+12 % vs sept.</span></div>
+            <div class="card stat"><span class="stat-label"><span class="ic ic-sm ic-users"></span>Clients actifs</span><span class="stat-value">24</span><span class="sm subtle">+3 ce mois · 2 expirés</span></div>
+            <a class="card stat" href="AdminTasks.dc.html" style="text-decoration: none; color: #19261F; border-color: #E4B4AD"><span class="stat-label"><span class="ic ic-sm ic-alert" style="color: #94271C"></span>Tâches en retard</span><span class="stat-value" style="color: #94271C">2</span><span class="sm subtle">Voir les tâches →</span></a>
+            <a class="card stat" href="AdminInbox.dc.html" style="text-decoration: none; color: #19261F"><span class="stat-label"><span class="ic ic-sm ic-inbox"></span>Demandes ouvertes</span><span class="stat-value">5</span><span class="sm subtle">dont 2 sans réponse</span></a>
+          </div>
+        </div>
+
+        <div class="split">
+          <section class="card" aria-labelledby="cw">
+            <div class="card-head"><div class="stack g-1"><h2 id="cw" class="h3">Clips de la semaine</h2><span class="sm subtle">86 clips · 19 → 25 oct.</span></div><a class="sm" href="AdminClips.dc.html">Kanban des clips</a></div>
+            <div class="row g-2" style="flex-wrap: wrap; margin-bottom: 18px"><span class="badge st-publie">Publiés · 31</span><span class="badge st-programme">Programmés · 22</span><span class="badge st-avalider">À valider · 9</span><span class="badge st-montage">En montage · 18</span><span class="badge st-rejete">Rejetés · 2</span><span class="badge st-planifie">Planifiés · 4</span></div>
+            <div class="row" style="gap: 10px; align-items: flex-end; height: 180px; flex-wrap: nowrap" role="img" aria-label="Clips par jour : lundi 15, mardi 16, mercredi 12, jeudi 14, vendredi 11, samedi 9, dimanche 9">
+              <sc-for list="{{week}}" as="d" hint-placeholder-count="7">
+                <div class="stack grow" style="gap: 6px; align-items: center; height: 100%; justify-content: flex-end">
+                  <span class="xs strong num">{{d.n}}</span>
+                  <div style="width: 100%; max-width: 48px; height: {{d.h}}; border-radius: 6px 6px 2px 2px; background: {{d.bg}}"></div>
+                  <span class="xs subtle">{{d.l}}</span>
+                </div>
+              </sc-for>
+            </div>
+            <p class="xs subtle" style="margin-top: 10px">Forêt : publiés · Sauge : programmés / à venir</p>
+          </section>
+          <section class="card" aria-labelledby="pp">
+            <div class="card-head"><h2 id="pp" class="h3">Pipeline de prospection</h2><a class="sm" href="AdminProspecting.dc.html">Ouvrir</a></div>
+            <div class="stack g-3">
+              <sc-for list="{{pipe}}" as="p" hint-placeholder-count="8">
+                <div class="row g-3" style="flex-wrap: nowrap"><span class="badge st-{{p.k}}" style="width: 118px; flex: none">{{p.l}}</span><div class="bar grow" style="height: 10px"><span style="width: {{p.w}}; background: {{p.c}}"></span></div><span class="sm strong num" style="width: 36px; text-align: right">{{p.n}}</span></div>
+              </sc-for>
+            </div>
+            <div class="hr" style="margin: 16px 0 12px"></div>
+            <div class="row between sm"><span class="subtle">Taux de signature (30 j)</span><span class="strong">4,8 %</span></div>
+          </section>
+        </div>
+
+        <div class="split">
+          <section class="card" aria-labelledby="act">
+            <div class="card-head"><h2 id="act" class="h3">Activité récente de l'équipe</h2><a class="sm" href="AdminTeam.dc.html">Équipe</a></div>
+            <div class="feed">
+              <sc-for list="{{feed}}" as="f" hint-placeholder-count="6">
+                <div class="feed-item"><span class="av av-sm {{f.dark}}">{{f.ini}}</span><span class="grow"><b>{{f.who}}</b> {{f.what}}</span><span class="when">{{f.when}}</span></div>
+              </sc-for>
+            </div>
+          </section>
+          <section class="card" aria-labelledby="late">
+            <div class="card-head"><h2 id="late" class="h3">Tâches en retard</h2><span class="badge st-retard">2</span></div>
+            <div class="stack g-3">
+              <div class="kcard" style="box-shadow: none; border-color: #E4B4AD"><span class="t">Relancer Hugo Vasseur pour le virement d'octobre</span><div class="m"><span class="row g-2"><span class="av av-sm">CR</span>Camille</span><span style="color: #94271C; font-weight: 600">Échue hier</span></div></div>
+              <div class="kcard" style="box-shadow: none; border-color: #E4B4AD"><span class="t">Créer le compte TikTok de Nora K.</span><div class="m"><span class="row g-2"><span class="av av-sm">CR</span>Camille</span><span style="color: #94271C; font-weight: 600">Échue le 17/10</span></div></div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const wk = [['Lun', 15, 1], ['Mar', 16, 1], ['Mer', 12, 0], ['Jeu', 14, 0], ['Ven', 11, 0], ['Sam', 9, 0], ['Dim', 9, 0]];
+    const pipe = [['acontacter', 'À contacter', 412], ['contacte', 'Contacté', 238], ['relance', 'Relancé', 121], ['repondu', 'A répondu', 64], ['interesse', 'Intéressé', 27], ['appel', 'Appel prévu', 9], ['signe', 'Signé', 6], ['refus', 'Refus', 48]];
+    const colors = { acontacter: '#9AAA8C', contacte: '#1D4A86', relance: '#853A0A', repondu: '#135650', interesse: '#563290', appel: '#323A94', signe: '#19261F', refus: '#94271C' };
+    return {
+      pay: [
+        { ini: 'HV', n: 'Hugo Vasseur', ref: 'PEAK-HV-2610', amt: '[190] €', when: 'il y a 25 min' },
+        { ini: 'NK', n: 'Nora K.', ref: 'PEAK-NK-2610', amt: '[390] €', when: 'il y a 3 h' },
+        { ini: 'SB', n: 'Studio Bastien', ref: 'PEAK-SB-2610', amt: '[790] €', when: 'hier' }
+      ],
+      week: wk.map(([l, n, past]) => ({ l, n, h: Math.round(n / 16 * 130) + 'px', bg: past ? '#19261F' : '#B6C2AA' })),
+      pipe: pipe.map(([k, l, n]) => ({ k, l, n, w: Math.max(2, Math.round(n / 412 * 100)) + '%', c: colors[k] })),
+      feed: [
+        { ini: 'TL', dark: 'av-dark', who: 'Théo', what: 'a envoyé 3 clips à valider pour Léa Martin', when: '12 min' },
+        { ini: 'YB', dark: '', who: 'Yanis', what: 'a passé @kevin.irl en « Appel prévu »', when: '40 min' },
+        { ini: 'CR', dark: 'av-dark', who: 'Camille', what: 'a validé le paiement de Léa Martin (PEAK-LM-2610)', when: '1 h' },
+        { ini: 'TL', dark: 'av-dark', who: 'Théo', what: 'a publié 4 clips sur @hugolive.best', when: '2 h' },
+        { ini: 'MS', dark: '', who: 'Mehdi', what: 'a contacté 32 prospects (objectif 40)', when: '3 h' },
+        { ini: 'CR', dark: 'av-dark', who: 'Camille', what: 'a répondu à la demande #R-208', when: '3 h' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

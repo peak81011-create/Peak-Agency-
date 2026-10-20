@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Monteur — clip à monter</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="monteur" active="clip" hint-size="100%,800px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Mes clips à faire" crumb="Best-of live du 14/10" initials="TL" hint-size="100%,69px"></dc-import>
+      <div class="page-head">
+        <div class="stack g-2">
+          <a class="sm row g-1" href="EditorHome.dc.html" style="text-decoration: none"><span class="ic ic-sm ic-chev-l"></span>Mes clips à faire</a>
+          <h1 class="h1">Best-of live du 14/10</h1>
+          <div class="row g-2"><span class="badge st-{{st}}">{{stL}}</span><span class="sm subtle">Léa Martin · à livrer aujourd'hui 18:00</span></div>
+        </div>
+      </div>
+      <div class="page-body">
+        <div class="split" style="grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); align-items: start">
+          <div class="stack g-5">
+            <section class="card stack g-4" aria-labelledby="src">
+              <h2 id="src" class="h3">Vidéo source</h2>
+              <div class="file-row"><span class="file-ic"><span class="ic ic-film"></span></span><div class="stack grow" style="gap: 2px; min-width: 0"><span class="sm strong trunc">live-14-oct-integral.mp4</span><span class="xs subtle">9,8 Go · 2:48:30 · 1080p60</span></div></div>
+              <a class="btn btn-primary btn-lg btn-block" href="#"><span class="ic ic-download"></span>Télécharger la source</a>
+              <div class="stack g-2"><span class="label">Passages à utiliser</span>
+                <div class="row between sm" style="padding: 10px 12px; background: #F4F6F1; border-radius: 8px"><span class="mono">1:05:00 → 1:06:10</span><span class="subtle">fou rire</span></div>
+                <div class="row between sm" style="padding: 10px 12px; background: #F4F6F1; border-radius: 8px"><span class="mono">1:42:15 → 1:42:58</span><span class="subtle">réaction du chat</span></div>
+              </div>
+            </section>
+            <section class="card stack g-3" aria-labelledby="nc">
+              <h2 id="nc" class="h3">Notes du client</h2>
+              <div class="callout callout-info"><span class="ic ic-msg"></span><span>« Gros fou rire vers 1:05:00. Éviter la partie sponsor (0:40 → 0:52). »</span></div>
+              <ul class="incl sm"><li><span class="ic ic-sm ic-alert" style="color: #94271C"></span>Ne pas montrer sa sœur (profil client)</li><li><span class="ic ic-sm ic-info"></span>Sous-titres FR incrustés, style maison</li></ul>
+            </section>
+          </div>
+
+          <section class="card stack g-5" style="padding: 24px" aria-labelledby="dl">
+            <h2 id="dl" class="h2">Livrer le clip</h2>
+            <sc-if value="{{noFile}}" hint-placeholder-val="{{true}}">
+              <div class="drop" style="padding: 28px 20px"><span class="ic-box" style="width: 48px; height: 48px; background: #FFFFFF"><span class="ic ic-upload"></span></span><div class="stack g-1"><span class="h3">Clip fini au format 9:16</span><span class="sm muted">MP4 · 1080×1920 · 3 min max</span></div><button class="btn btn-primary" onClick="{{upload}}">Choisir le fichier</button></div>
+            </sc-if>
+            <sc-if value="{{hasFile}}" hint-placeholder-val="{{false}}">
+              <div class="file-row"><div class="thumb th-2" style="width: 44px; padding: 0; border-radius: 6px; flex: none"></div><div class="stack grow g-2"><div class="row between g-2"><span class="sm strong trunc">bestof-1410-v1.mp4</span><span class="xs num" style="color: #1C5A30">Envoyé · 84 Mo</span></div><div class="bar ok"><span style="width: 100%"></span></div></div><button class="btn btn-ghost btn-sm">Remplacer</button></div>
+            </sc-if>
+            <div class="field"><label class="label" for="t1">Titre interne</label><input id="t1" class="input" value="Best-of live du 14/10"></div>
+            <div class="field"><label class="label" for="t2">Accroche (texte à l'écran)</label><input id="t2" class="input" value="Le fou rire qui a fait planter le live"><span class="hint">39 / 50 caractères · affichée les 3 premières secondes</span></div>
+            <div class="field"><label class="label" for="t3">Légende</label><textarea id="t3" class="textarea" style="min-height: 88px">Impossible de reprendre mon sérieux… Vous auriez tenu combien de temps ?</textarea></div>
+            <div class="field"><span class="label">Hashtags</span><div class="affix" style="flex-wrap: wrap; gap: 6px; padding: 6px 10px"><span class="badge plain">#fourire</span><span class="badge plain">#twitch</span><span class="badge plain">#live</span><input aria-label="Ajouter un hashtag" placeholder="Ajouter…" style="flex: 1; min-width: 100px; min-height: 32px"></div></div>
+            <div class="grid-2" style="gap: 14px">
+              <div class="field"><label class="label" for="t4">Compte cible</label><select id="t4" class="select"><option>TikTok · @leamrtn.clips</option><option>Reels · @lea.moments</option><option>Shorts · Léa Clips</option></select></div>
+              <div class="field"><label class="label" for="t5">Publication souhaitée</label><div class="affix"><span class="ic ic-sm ic-cal"></span><input id="t5" value="Ven. 23/10 · 19:00"></div></div>
+            </div>
+            <sc-if value="{{done}}" hint-placeholder-val="{{false}}"><div class="callout callout-ok" role="status"><span class="ic ic-check"></span><span>Envoyé à Léa pour validation. Vous serez notifié de sa réponse.</span></div></sc-if>
+            <button class="btn btn-primary btn-xl btn-block {{sendCls}}" onClick="{{send}}"><span class="ic ic-send"></span>Envoyer au client pour validation</button>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1600}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { file: false, done: false }; }
+  renderVals() {
+    const { file, done } = this.state;
+    return {
+      noFile: !file, hasFile: file, done,
+      upload: () => this.setState({ file: true }),
+      send: () => { if (file) this.setState({ done: true }); },
+      sendCls: file && !done ? '' : 'is-disabled',
+      st: done ? 'avalider' : 'montage', stL: done ? 'À valider' : 'En montage'
+    };
+  }
+}
+</script>
+</body>
+</html>

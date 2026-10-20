@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Détail d'un clip</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="client" active="clips" hint-size="100%,900px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Mes clips" crumb="Le pire conseil qu’on m’ait donné" initials="LM" hint-size="100%,69px"></dc-import>
+      <div class="page-head">
+        <div class="stack g-2">
+          <a class="sm row g-1" href="ClientClips.dc.html" style="text-decoration: none"><span class="ic ic-sm ic-chev-l"></span>Mes clips</a>
+          <h1 class="h1">Le pire conseil qu'on m'ait donné</h1>
+          <div class="row g-2"><span class="badge st-{{st}}">{{stLabel}}</span><span class="sm subtle">Clip #C-1042 · tiré du live du 14/10</span></div>
+        </div>
+      </div>
+      <div class="page-body">
+        <div class="row g-8" style="align-items: flex-start">
+          <!-- LECTEUR -->
+          <div class="stack g-3" style="flex: 0 1 360px; min-width: 260px; margin-inline: auto">
+            <div class="player" role="region" aria-label="Lecteur vidéo">
+              <div class="row between" style="padding: 14px"><span class="plat plat-ig">Reels</span><span class="xs" style="background: rgba(0,0,0,.5); padding: 3px 8px; border-radius: 4px">0:41</span></div>
+              <div class="stack g-4" style="align-items: center"><button class="btn btn-icon" aria-label="Lire" style="width: 72px; height: 72px; border-radius: 50%; background: rgba(255,255,255,.92); color: #19261F"><span class="ic ic-lg ic-play"></span></button><span class="hook" style="font-family: Archivo, sans-serif; font-stretch: 110%; font-weight: 800; font-size: 22px; line-height: 1.1; text-transform: uppercase; background: #FFFFFF; color: #19261F; padding: 6px 10px; max-width: 80%; text-align: center">Le pire conseil qu'on m'ait donné</span></div>
+              <div class="ctrl"><span class="xs num">0:12</span><div class="timeline"><span style="width: 30%"></span></div><span class="xs num">0:41</span></div>
+            </div>
+            <a class="btn btn-ghost btn-sm" href="#" style="align-self: center"><span class="ic ic-sm ic-download"></span>Télécharger le clip</a>
+          </div>
+
+          <!-- PANNEAU -->
+          <div class="stack g-5" style="flex: 1 1 420px; min-width: 0">
+            <sc-if value="{{isPending}}" hint-placeholder-val="{{true}}">
+              <section class="card card-alert stack g-4" aria-labelledby="dec">
+                <div class="stack g-1"><h2 id="dec" class="h3">Ce clip attend votre validation</h2><p class="sm muted">Publication prévue mer. 21/10 à 12:30. Sans réponse, il sera validé automatiquement le 21/10 à 10:00.</p></div>
+                <sc-if value="{{showForm}}" hint-placeholder-val="{{false}}">
+                  <div class="field"><label class="label" for="mod">Que faut-il modifier ?</label><textarea id="mod" class="textarea" placeholder="Ex. couper les 3 premières secondes, changer l'accroche…"></textarea><span class="hint">Astuce : indiquez un horodatage (ex. 0:12).</span></div>
+                  <div class="row g-2"><button class="btn btn-primary" onClick="{{sendMod}}">Envoyer la demande</button><button class="btn btn-ghost" onClick="{{cancelMod}}">Annuler</button></div>
+                </sc-if>
+                <sc-if value="{{showActions}}" hint-placeholder-val="{{true}}">
+                  <div class="row g-3"><button class="btn btn-primary btn-lg" onClick="{{validate}}"><span class="ic ic-check"></span>Valider</button><button class="btn btn-secondary btn-lg" onClick="{{openMod}}"><span class="ic ic-edit"></span>Demander une modification</button></div>
+                </sc-if>
+              </section>
+            </sc-if>
+            <sc-if value="{{toast}}" hint-placeholder-val="{{false}}"><div class="callout callout-ok" role="status"><span class="ic ic-check"></span><span>{{toast}}</span></div></sc-if>
+
+            <section class="card" aria-labelledby="inf">
+              <h2 id="inf" class="h3" style="margin-bottom: 14px">Informations</h2>
+              <dl class="dl" style="margin: 0">
+                <dt>Plateforme</dt><dd><span class="plat plat-ig">Instagram Reels</span></dd>
+                <dt>Compte</dt><dd>@lea.moments</dd>
+                <dt>Publication</dt><dd>Mer. 21 octobre 2026 · 12:30</dd>
+                <dt>Vidéo source</dt><dd><a href="ClientUpload.dc.html">live-14-oct-integral.mp4</a> · 1:12:40 → 1:13:21</dd>
+                <dt>Légende</dt><dd style="font-weight: 400">On m'a dit de tout arrêter… heureusement que je n'ai pas écouté. Et vous, le pire conseil ?</dd>
+                <dt>Hashtags</dt><dd class="row g-2"><span class="badge plain">#creatrice</span><span class="badge plain">#conseil</span><span class="badge plain">#live</span></dd>
+                <dt>Monteur</dt><dd class="row g-2"><span class="av av-sm">TL</span>Théo</dd>
+              </dl>
+            </section>
+
+            <section class="card" aria-labelledby="sts">
+              <div class="card-head" style="margin-bottom: 12px"><h2 id="sts" class="h3">Statistiques</h2><span class="xs subtle">{{statsNote}}</span></div>
+              <div class="grid-4" style="gap: 12px">
+                <div class="stat" style="padding: 12px; background: #F4F6F1; border-radius: 10px"><span class="stat-label">Vues</span><span class="h2 num">{{s.v}}</span></div>
+                <div class="stat" style="padding: 12px; background: #F4F6F1; border-radius: 10px"><span class="stat-label">J'aime</span><span class="h2 num">{{s.l}}</span></div>
+                <div class="stat" style="padding: 12px; background: #F4F6F1; border-radius: 10px"><span class="stat-label">Partages</span><span class="h2 num">{{s.s}}</span></div>
+                <div class="stat" style="padding: 12px; background: #F4F6F1; border-radius: 10px"><span class="stat-label">Abonnés gagnés</span><span class="h2 num">{{s.f}}</span></div>
+              </div>
+            </section>
+
+            <section class="card stack g-4" aria-labelledby="com">
+              <h2 id="com" class="h3">Commentaires</h2>
+              <div class="thread">
+                <div class="msg"><span class="av av-sm av-dark">TL</span><div class="stack"><span class="meta">Théo · monteur · hier 17:42</span><div class="bubble">J'ai gardé la réaction du chat à 0:28, ça porte bien la chute. Dis-moi si tu préfères l'accroche « On m'a dit d'arrêter ».</div></div></div>
+                <div class="msg me"><span class="av av-sm">LM</span><div class="stack" style="align-items: flex-end"><span class="meta">Vous · 09:10</span><div class="bubble">Top ! Je garde l'accroche actuelle.</div></div></div>
+              </div>
+              <div class="composer"><label for="cm" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Votre commentaire</label><textarea id="cm" placeholder="Écrire un commentaire…" rows="1"></textarea><button class="btn btn-primary btn-icon" aria-label="Envoyer"><span class="ic ic-send"></span></button></div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"etat":{"editor":"enum","options":["avalider","publie"],"default":"avalider"},"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { form: false, done: '' }; }
+  renderVals() {
+    const etat = this.state.done === 'valide' ? 'valide' : this.state.done === 'mod' ? 'montage' : (this.props.etat ?? 'avalider');
+    const labels = { avalider: 'À valider', publie: 'Publié', valide: 'Validé', montage: 'En montage' };
+    const pending = etat === 'avalider';
+    const pub = etat === 'publie';
+    return {
+      st: etat, stLabel: labels[etat], isPending: pending,
+      showForm: pending && this.state.form, showActions: pending && !this.state.form,
+      openMod: () => this.setState({ form: true }), cancelMod: () => this.setState({ form: false }),
+      sendMod: () => this.setState({ form: false, done: 'mod', toast: 'Demande envoyée à Théo. Le clip repasse en montage.' }),
+      validate: () => this.setState({ done: 'valide', toast: 'Clip validé. Il sera publié mer. 21/10 à 12:30.' }),
+      toast: this.state.toast || '',
+      statsNote: pub ? 'Mis à jour il y a 1 h' : 'Disponibles après publication',
+      s: pub ? { v: '58,1 k', l: '4 210', s: '386', f: '+212' } : { v: '—', l: '—', s: '—', f: '—' }
+    };
+  }
+}
+</script>
+</body>
+</html>

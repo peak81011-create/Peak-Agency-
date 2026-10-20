@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Espace client — mobile</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk-c" style="font-family: Inter, system-ui, sans-serif; color: #19261F; width: 4580px; background: #E4E9DF; padding: 48px; display: flex; gap: 64px; align-items: flex-start">
+  <div class="phone"><span class="phone-cap">Onboarding</span><div class="phone-frame"><dc-import name="ClientOnboarding" hint-size="390px,2200px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Paiement par virement</span><div class="phone-frame"><dc-import name="ClientPayment" hint-size="390px,2300px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Espace verrouillé</span><div class="phone-frame"><dc-import name="ClientLocked" hint-size="390px,1900px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Tableau de bord</span><div class="phone-frame"><dc-import name="ClientDashboard" hint-size="390px,2600px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Mes clips</span><div class="phone-frame"><dc-import name="ClientClips" hint-size="390px,2600px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Détail d'un clip</span><div class="phone-frame"><dc-import name="ClientClipDetail" hint-size="390px,2600px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Envoyer une vidéo</span><div class="phone-frame"><dc-import name="ClientUpload" hint-size="390px,2400px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Mes comptes</span><div class="phone-frame"><dc-import name="ClientAccounts" hint-size="390px,1700px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Mes demandes</span><div class="phone-frame"><dc-import name="ClientRequests" hint-size="390px,1900px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Abonnement &amp; factures</span><div class="phone-frame"><dc-import name="ClientBilling" hint-size="390px,1900px"></dc-import></div></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":4580,"height":4700}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

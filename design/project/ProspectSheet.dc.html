@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Fiche prospect</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="prospecteur" active="prospect" hint-size="100%,800px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Prospecteur" crumb="@kenzo.plays" initials="YB" hint-size="100%,69px"></dc-import>
+      <div class="page-body" style="max-width: 760px; width: 100%; margin-inline: auto; padding-top: 24px">
+        <div class="row between g-2"><a class="sm row g-1" href="ProspectorHome.dc.html" style="text-decoration: none; min-height: 44px"><span class="ic ic-sm ic-chev-l"></span>Aujourd'hui</a><span class="sm subtle num">Prospect 31 / 40</span></div>
+
+        <section class="card stack g-4" aria-labelledby="who">
+          <div class="row g-4" style="flex-wrap: nowrap"><span class="av av-lg">KZ</span><div class="stack grow" style="gap: 4px; min-width: 0"><h1 id="who" class="h1 trunc">@kenzo.plays</h1><div class="row g-2"><span class="badge st-{{st}}">{{stL}}</span><span class="sm subtle">Twitch · Gaming</span></div></div></div>
+          <div class="grid-3" style="gap: 10px; grid-template-columns: repeat(3, minmax(0, 1fr))">
+            <div class="stack" style="gap: 0; padding: 10px 12px; background: #F4F6F1; border-radius: 10px"><span class="xs subtle">Abonnés</span><span class="h3 num">38 k</span></div>
+            <div class="stack" style="gap: 0; padding: 10px 12px; background: #F4F6F1; border-radius: 10px"><span class="xs subtle">Viewers moy.</span><span class="h3 num">~420</span></div>
+            <div class="stack" style="gap: 0; padding: 10px 12px; background: #F4F6F1; border-radius: 10px"><span class="xs subtle">Dernier live</span><span class="h3">Hier</span></div>
+          </div>
+          <a class="btn btn-secondary btn-lg btn-block" href="#"><span class="ic ic-ext"></span>Ouvrir son profil</a>
+        </section>
+
+        <section class="card stack g-4" aria-labelledby="msg">
+          <div class="row between g-2"><h2 id="msg" class="h3">Message à envoyer</h2><select class="select" aria-label="Modèle de message" style="width: auto; min-height: 40px; padding-top: 6px; padding-bottom: 6px; font-size: 13px"><option>Premier contact · Gaming</option><option>Relance J+4</option></select></div>
+          <label for="tx" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Message pré-rempli</label>
+          <textarea id="tx" class="textarea" style="min-height: 180px; font-size: 16px; line-height: 1.55">Salut Kenzo ! Je suis tombé sur ton live d'hier, le passage sur le boss final était énorme. On gère des comptes de clips pour des streamers comme toi : on découpe tes lives et on publie chaque jour sur TikTok, Reels et Shorts pour t'amener de nouveaux viewers. Ça te dit que je t'envoie 2-3 exemples ?</textarea>
+          <span class="xs subtle">Personnalisez la 2e phrase avec un détail de son dernier live.</span>
+          <button class="btn btn-primary btn-xl btn-block" onClick="{{copy}}"><span class="ic {{copyIcon}}"></span>{{copyLabel}}</button>
+          <button class="btn btn-xl btn-block {{sentCls}}" onClick="{{markSent}}" aria-disabled="{{sentDisabled}}"><span class="ic ic-send"></span>{{sentLabel}}</button>
+          <sc-if value="{{sent}}" hint-placeholder-val="{{false}}"><div class="callout callout-ok" role="status" style="align-items: center"><span class="ic ic-check"></span><span class="grow">Passé en « Contacté ». Relance prévue le 24/10.</span><a class="btn btn-primary btn-sm" href="ProspectorHome.dc.html">Suivant<span class="ic ic-sm ic-chev-r"></span></a></div></sc-if>
+        </section>
+
+        <section class="card stack g-3" aria-labelledby="sts">
+          <h2 id="sts" class="h3">Changer le statut</h2>
+          <div class="toolbar"><button class="chip">A répondu</button><button class="chip">Intéressé</button><button class="chip">Appel prévu</button><button class="chip">Refus</button></div>
+        </section>
+
+        <section class="card stack g-3" aria-labelledby="hist">
+          <h2 id="hist" class="h3">Historique</h2>
+          <div class="feed">
+            <sc-if value="{{sent}}" hint-placeholder-val="{{false}}"><div class="feed-item"><span class="ic ic-sm ic-send" style="color: #1D4A86"></span><span class="grow sm"><b>Message envoyé</b> par Yanis (Twitch)</span><span class="when">À l'instant</span></div></sc-if>
+            <div class="feed-item"><span class="ic ic-sm ic-user subtle"></span><span class="grow sm">Attribué à <b>Yanis</b></span><span class="when">Aujourd'hui 09:02</span></div>
+            <div class="feed-item"><span class="ic ic-sm ic-upload subtle"></span><span class="grow sm">Importé depuis <b>prospects-gaming-oct.csv</b></span><span class="when">19/10</span></div>
+          </div>
+          <div class="composer"><label for="nt" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Note</label><textarea id="nt" placeholder="Ajouter une note…" rows="1"></textarea><button class="btn btn-secondary">Ajouter</button></div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1400}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { copied: false, sent: false }; }
+  renderVals() {
+    const { copied, sent } = this.state;
+    return {
+      copy: () => this.setState({ copied: true }),
+      copyLabel: copied ? 'Message copié' : 'Copier le message', copyIcon: copied ? 'ic-check' : 'ic-copy',
+      markSent: () => { if (copied) this.setState({ sent: true }); },
+      sentLabel: sent ? 'Envoi enregistré' : 'J’ai envoyé le message',
+      sentCls: sent ? 'btn-secondary' : copied ? 'btn-sage' : 'btn-sage is-disabled',
+      sentDisabled: copied && !sent ? 'false' : 'true',
+      sent, st: sent ? 'contacte' : 'acontacter', stL: sent ? 'Contacté' : 'À contacter'
+    };
+  }
+}
+</script>
+</body>
+</html>

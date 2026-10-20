@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Admin — clips</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="admin" active="clips" hint-size="100%,1000px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Admin" crumb="Clips" initials="AD" hint-size="100%,69px"></dc-import>
+      <div class="page-head">
+        <div class="stack g-1"><h1 class="h1">Clips</h1><span class="sm subtle">Tous clients · 86 cette semaine</span></div>
+        <div class="row g-2"><div class="seg" role="group" aria-label="Affichage"><button class="{{vK}}" onClick="{{goK}}"><span class="ic ic-sm ic-kanban"></span>Kanban</button><button class="{{vL}}" onClick="{{goL}}"><span class="ic ic-sm ic-list"></span>Liste</button></div><button class="btn btn-primary"><span class="ic ic-sm ic-plus"></span>Planifier un clip</button></div>
+      </div>
+      <div class="page-body">
+        <div class="toolbar">
+          <label class="affix" style="min-height: 40px; width: 240px"><span class="ic ic-sm ic-search"></span><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Rechercher</span><input type="search" placeholder="Titre, client…" style="min-height: 38px"></label>
+          <select class="select" aria-label="Client" style="width: auto; min-height: 40px; padding-top: 6px; padding-bottom: 6px; font-size: 13px"><option>Tous les clients</option></select>
+          <select class="select" aria-label="Monteur" style="width: auto; min-height: 40px; padding-top: 6px; padding-bottom: 6px; font-size: 13px"><option>Tous les monteurs</option></select>
+          <button class="chip on">Toutes plateformes</button><button class="chip">TikTok</button><button class="chip">Reels</button><button class="chip">Shorts</button>
+          <button class="chip"><span class="ic ic-sm ic-clock"></span>Échéance &lt; 48 h</button>
+        </div>
+
+        <sc-if value="{{isK}}" hint-placeholder-val="{{true}}">
+          <div class="kanban">
+            <sc-for list="{{cols}}" as="col" hint-placeholder-count="7">
+              <div class="kcol" style="flex-basis: 248px">
+                <div class="kcol-head"><span class="badge st-{{col.k}}">{{col.l}}</span><span class="n">{{col.n}}</span></div>
+                <sc-for list="{{col.cards}}" as="c" hint-placeholder-count="2">
+                  <div class="kcard">
+                    <div class="row g-3" style="flex-wrap: nowrap; align-items: flex-start"><div class="thumb {{c.th}}" style="width: 40px; padding: 0; border-radius: 6px; flex: none"></div><span class="t">{{c.t}}</span></div>
+                    <div class="m"><span class="plat {{c.pc}}">{{c.p}}</span><span class="row g-1" style="color: {{c.dueC}}; font-weight: 600"><span class="ic ic-sm ic-clock"></span>{{c.due}}</span></div>
+                    <div class="m"><span class="trunc">{{c.client}}</span><span class="av av-sm {{c.avc}}">{{c.ed}}</span></div>
+                  </div>
+                </sc-for>
+                <button class="btn btn-ghost btn-sm" style="justify-content: flex-start"><span class="ic ic-sm ic-plus"></span>Ajouter</button>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{isL}}" hint-placeholder-val="{{false}}">
+          <div class="tbl-wrap tbl-cards">
+            <table class="tbl">
+              <thead><tr><th><input type="checkbox" aria-label="Tout sélectionner" style="width: 18px; height: 18px; accent-color: #19261F"></th><th>Clip</th><th>Client</th><th>Plateforme</th><th>Monteur</th><th>Échéance</th><th>Statut</th></tr></thead>
+              <tbody>
+                <sc-for list="{{rows}}" as="c" hint-placeholder-count="10">
+                  <tr><td class="hm"><input type="checkbox" aria-label="Sélectionner" style="width: 18px; height: 18px; accent-color: #19261F"></td><td class="first strong">{{c.t}}</td><td>{{c.client}}</td><td><span class="plat {{c.pc}}">{{c.p}}</span></td><td><span class="row g-2"><span class="av av-sm {{c.avc}}">{{c.ed}}</span></span></td><td style="color: {{c.dueC}}; font-weight: 600">{{c.due}}</td><td><span class="badge st-{{c.k}}">{{c.l}}</span></td></tr>
+                </sc-for>
+              </tbody>
+            </table>
+            <div class="pager"><span>1–14 sur 86</span><div class="row g-2"><button class="btn btn-secondary btn-sm">Changer le statut</button><button class="btn btn-secondary btn-sm">Réassigner</button></div></div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"view":{"editor":"enum","options":["kanban","liste"],"default":"kanban"},"$preview":{"width":1440,"height":1400}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { view: null }; }
+  renderVals() {
+    const v = this.state.view ?? (this.props.view ?? 'kanban');
+    const P = { tt: ['TikTok', 'plat-tt'], ig: ['Reels', 'plat-ig'], yt: ['Shorts', 'plat-yt'] };
+    const mk = (t, client, p, ed, due, late, th) => ({ t, client, p: P[p][0], pc: P[p][1], ed, avc: ed === 'TL' ? 'av-dark' : '', due, dueC: late ? '#94271C' : '#5C685F', th: 'th-' + th });
+    const cols = [
+      { k: 'planifie', l: 'Planifié', n: 4, cards: [mk('Live du 24/10 (à découper)', 'Léa Martin', 'yt', 'TL', '26/10', false, 1), mk('Podcast ép. 43', 'Studio Bastien', 'tt', 'SN', '27/10', false, 3)] },
+      { k: 'montage', l: 'En montage', n: 18, cards: [mk('Best-of live du 14/10', 'Léa Martin', 'tt', 'TL', 'Demain', false, 2), mk('Rage quit sur Elden Ring', 'Hugo Vasseur', 'tt', 'SN', 'Aujourd’hui', true, 5), mk('Mes 5 apps préférées', 'Léa Martin', 'ig', 'TL', '24/10', false, 6)] },
+      { k: 'avalider', l: 'À valider', n: 9, cards: [mk('Le pire conseil qu’on m’ait donné', 'Léa Martin', 'ig', 'TL', '21/10', false, 4), mk('Le débat qui a dérapé', 'Jules D.', 'yt', 'SN', '21/10', false, 2)] },
+      { k: 'valide', l: 'Validé', n: 3, cards: [mk('Le live le plus chaotique', 'Léa Martin', 'tt', 'TL', '22/10', false, 5)] },
+      { k: 'programme', l: 'Programmé', n: 22, cards: [mk('Quand le chat décide de mon menu', 'Léa Martin', 'tt', 'TL', '20/10 19:00', false, 1), mk('Je teste un burger à 50 €', 'Maxime Roux', 'tt', 'SN', '20/10 20:30', false, 3)] },
+      { k: 'publie', l: 'Publié', n: 31, cards: [mk('Personne ne s’y attendait', 'Léa Martin', 'ig', 'TL', '19/10', false, 5)] },
+      { k: 'rejete', l: 'Rejeté', n: 2, cards: [mk('Réaction au clash', 'Hugo Vasseur', 'tt', 'SN', '18/10', false, 6)] }
+    ];
+    const rows = [];
+    cols.forEach((c) => c.cards.forEach((card) => rows.push({ ...card, k: c.k, l: c.l })));
+    return { isK: v === 'kanban', isL: v === 'liste', vK: v === 'kanban' ? 'on' : '', vL: v === 'liste' ? 'on' : '', goK: () => this.setState({ view: 'kanban' }), goL: () => this.setState({ view: 'liste' }), cols, rows };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Tableau de bord client</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <sc-if value="{{viewas}}" hint-placeholder-val="{{false}}">
+    <div class="banner banner-view" role="status"><span class="ic ic-eye"></span><span class="grow">Vous voyez l'espace de <b>{{viewas}}</b> en lecture seule. Aucune action n'est possible dans ce mode.</span><a class="btn btn-primary btn-sm" href="AdminClientFile.dc.html"><span class="ic ic-sm ic-x"></span>Quitter ce mode</a></div>
+  </sc-if>
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="client" active="dash" hint-size="100%,900px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Espace client" crumb="Tableau de bord" initials="LM" hint-size="100%,69px"></dc-import>
+      <sc-if value="{{expire}}" hint-placeholder-val="{{false}}">
+        <div class="banner banner-warn" role="status"><span class="ic ic-lock"></span><span class="grow"><b>Lecture seule :</b> votre abonnement a expiré le 30/09. Vos clips et statistiques restent visibles, mais l'envoi de vidéos et les demandes sont suspendus.</span><a class="btn btn-primary btn-sm" href="ClientBilling.dc.html">Renouveler l'abonnement</a></div>
+      </sc-if>
+      <div class="page-head">
+        <div class="stack g-1"><span class="sm subtle">Mardi 20 octobre</span><h1 class="h1">Bonjour Léa</h1></div>
+        <div class="row g-2"><a class="btn btn-secondary" href="ClientRequests.dc.html"><span class="ic ic-sm ic-msg"></span>Nouvelle demande</a><a class="btn btn-primary {{disabledCls}}" href="ClientUpload.dc.html"><span class="ic ic-sm ic-upload"></span>Envoyer une vidéo</a></div>
+      </div>
+      <div class="page-body">
+        <a class="callout callout-warn" href="ClientClips.dc.html" style="text-decoration: none; align-items: center"><span class="ic ic-film"></span><span class="grow"><b>2 clips attendent votre validation</b> · sans retour de votre part, ils seront validés automatiquement sous [48 h].</span><span class="strong row g-1" style="color: #714405">Valider<span class="ic ic-sm ic-chev-r"></span></span></a>
+
+        <div class="grid-5">
+          <div class="card stat"><span class="stat-label"><span class="ic ic-sm ic-film"></span>Clips publiés</span><span class="stat-value">128</span><span class="delta"><span class="ic ic-sm ic-trend"></span>+24 ce mois</span></div>
+          <div class="card stat"><span class="stat-label"><span class="ic ic-sm ic-cal"></span>Clips à venir</span><span class="stat-value">14</span><span class="sm subtle">dont 3 cette semaine</span></div>
+          <div class="card stat"><span class="stat-label"><span class="ic ic-sm ic-at"></span>Comptes créés</span><span class="stat-value">3</span><span class="sm subtle">TikTok, Reels, Shorts</span></div>
+          <div class="card stat"><span class="stat-label"><span class="ic ic-sm ic-eye"></span>Vues totales</span><span class="stat-value">2,4 M</span><span class="delta"><span class="ic ic-sm ic-trend"></span>+18 % sur 30 j</span></div>
+          <div class="card stat"><span class="stat-label"><span class="ic ic-sm ic-users"></span>Abonnés gagnés</span><span class="stat-value">+9 820</span><span class="delta"><span class="ic ic-sm ic-trend"></span>+2 140 sur 30 j</span></div>
+        </div>
+
+        <section class="card" aria-labelledby="ch1">
+          <div class="card-head"><div class="stack g-1"><h2 id="ch1" class="h3">Vues par jour · 30 derniers jours</h2><span class="sm subtle">Tous comptes confondus</span></div><div class="seg" role="group" aria-label="Indicateur"><button class="on" aria-pressed="true">Vues</button><button aria-pressed="false">Abonnés</button></div></div>
+          <div class="row" style="align-items: stretch; gap: 12px; flex-wrap: nowrap">
+            <div class="stack xs subtle num" style="justify-content: space-between; padding: 0 0 22px; text-align: right; width: 40px; flex: none"><span>150 k</span><span>100 k</span><span>50 k</span><span>0</span></div>
+            <div class="stack grow g-2">
+              <svg viewBox="0 0 800 200" preserveAspectRatio="none" role="img" aria-label="Vues quotidiennes en hausse, de 41 000 à 158 000 sur 30 jours" style="width: 100%; height: 220px; display: block">
+                <line x1="0" y1="27.6" x2="800" y2="27.6" stroke="#EBEFE6" vector-effect="non-scaling-stroke"/>
+                <line x1="0" y1="85" x2="800" y2="85" stroke="#EBEFE6" vector-effect="non-scaling-stroke"/>
+                <line x1="0" y1="142.5" x2="800" y2="142.5" stroke="#EBEFE6" vector-effect="non-scaling-stroke"/>
+                <line x1="0" y1="199.5" x2="800" y2="199.5" stroke="#C3CCB9" vector-effect="non-scaling-stroke"/>
+                <path d="M0.0 152.9 L27.6 158.1 L55.2 151.5 L82.8 158.7 L110.3 154.8 L137.9 155.0 L165.5 162.6 L193.1 159.5 L220.7 139.1 L248.3 137.1 L275.9 143.9 L303.4 150.3 L331.0 148.9 L358.6 137.8 L386.2 143.3 L413.8 146.5 L441.4 140.1 L469.0 125.8 L496.6 120.0 L524.1 89.7 L551.7 73.2 L579.3 78.6 L606.9 64.6 L634.5 63.9 L662.1 66.6 L689.7 70.1 L717.2 40.4 L744.8 26.3 L772.4 27.1 L800.0 18.2 L800 200 L0 200 Z" fill="#DDE3D5" opacity=".7"/>
+                <path d="M0.0 152.9 L27.6 158.1 L55.2 151.5 L82.8 158.7 L110.3 154.8 L137.9 155.0 L165.5 162.6 L193.1 159.5 L220.7 139.1 L248.3 137.1 L275.9 143.9 L303.4 150.3 L331.0 148.9 L358.6 137.8 L386.2 143.3 L413.8 146.5 L441.4 140.1 L469.0 125.8 L496.6 120.0 L524.1 89.7 L551.7 73.2 L579.3 78.6 L606.9 64.6 L634.5 63.9 L662.1 66.6 L689.7 70.1 L717.2 40.4 L744.8 26.3 L772.4 27.1 L800.0 18.2" fill="none" stroke="#2E4436" stroke-width="2.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+              </svg>
+              <div class="row between xs subtle num"><span>21 sept.</span><span>28 sept.</span><span>5 oct.</span><span>12 oct.</span><span>19 oct.</span></div>
+            </div>
+            <div class="stack hide-m" style="flex: 0 0 180px; padding-left: 20px; border-left: 1px solid #EBEFE6; gap: 14px; justify-content: center">
+              <div class="stack" style="gap: 0"><span class="xs subtle">Hier</span><span class="h2 num">158 k</span></div>
+              <div class="stack" style="gap: 0"><span class="xs subtle">Moyenne / jour</span><span class="h2 num">80 k</span></div>
+              <div class="stack" style="gap: 0"><span class="xs subtle">Meilleur clip</span><a class="sm strong" href="ClientClipDetail.dc.html">« Personne ne s'y attendait »</a></div>
+            </div>
+          </div>
+        </section>
+
+        <div class="split">
+          <section class="card" aria-labelledby="lc">
+            <div class="card-head"><h2 id="lc" class="h3">Derniers clips publiés</h2><a class="sm" href="ClientClips.dc.html">Tout voir</a></div>
+            <div class="grid-5" style="gap: 12px">
+              <sc-for list="{{latest}}" as="c" hint-placeholder-count="5">
+                <a class="clip-card" href="ClientClipDetail.dc.html">
+                  <div class="thumb {{c.th}}"><div class="ph"><span class="ic ic-xl ic-play"></span></div><div class="top"><span class="plat {{c.pc}}">{{c.p}}</span><span class="dur">{{c.d}}</span></div><span class="hook" style="font-size: 12px">{{c.hook}}</span></div>
+                  <div class="clip-meta"><span class="row g-1"><span class="ic ic-sm ic-eye"></span><span class="num">{{c.v}}</span></span><span>{{c.when}}</span></div>
+                </a>
+              </sc-for>
+            </div>
+          </section>
+          <section class="card" aria-labelledby="nc">
+            <div class="card-head"><h2 id="nc" class="h3">Prochains clips</h2><a class="sm" href="ClientClips.dc.html">Calendrier</a></div>
+            <div class="stack" style="gap: 0">
+              <sc-for list="{{next}}" as="n" hint-placeholder-count="4">
+                <div class="row g-3" style="padding: 10px 0; border-bottom: 1px solid #EBEFE6; flex-wrap: nowrap">
+                  <div class="stack" style="width: 52px; flex: none; text-align: center; gap: 0; padding: 6px 0; border-radius: 8px; background: #F4F6F1"><span class="xs subtle" style="text-transform: uppercase">{{n.dow}}</span><span class="h3 num">{{n.day}}</span></div>
+                  <div class="stack grow" style="gap: 2px; min-width: 0"><span class="sm strong trunc">{{n.t}}</span><span class="xs subtle row g-2"><span class="plat {{n.pc}}" style="height: 18px; font-size: 10px">{{n.p}}</span>{{n.time}}</span></div>
+                  <span class="badge st-{{n.s}}">{{n.sl}}</span>
+                </div>
+              </sc-for>
+            </div>
+          </section>
+        </div>
+
+        <section class="card" aria-labelledby="rq">
+          <div class="card-head"><h2 id="rq" class="h3">Demandes en cours</h2><a class="sm" href="ClientRequests.dc.html">Mes demandes</a></div>
+          <div class="stack" style="gap: 0">
+            <a class="row g-4" href="ClientRequests.dc.html" style="padding: 12px 0; border-bottom: 1px solid #EBEFE6; text-decoration: none; color: #19261F"><span class="ic-box"><span class="ic ic-msg"></span></span><div class="stack grow" style="gap: 2px; min-width: 200px"><span class="strong">Ajouter des sous-titres en anglais sur les Shorts</span><span class="sm subtle">Camille a répondu il y a 2 h</span></div><span class="badge st-encours">En cours</span></a>
+            <a class="row g-4" href="ClientRequests.dc.html" style="padding: 12px 0; text-decoration: none; color: #19261F"><span class="ic-box"><span class="ic ic-msg"></span></span><div class="stack grow" style="gap: 2px; min-width: 200px"><span class="strong">Prioriser le live du 24 octobre</span><span class="sm subtle">Envoyée hier</span></div><span class="badge st-afaire">Reçue</span></a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"expire":{"editor":"boolean","default":false},"viewas":{"editor":"text","default":""},"$preview":{"width":1440,"height":1900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const expire = this.props.expire ?? false;
+    return {
+      expire, viewas: this.props.viewas ?? '', disabledCls: expire ? 'is-disabled' : '',
+      latest: [
+        { th: 'th-5', p: 'Reels', pc: 'plat-ig', d: '0:52', hook: 'Personne ne s’y attendait', v: '312 k', when: 'Hier' },
+        { th: 'th-2', p: 'TikTok', pc: 'plat-tt', d: '0:38', hook: 'Le moment où tout bascule', v: '84,2 k', when: 'Hier' },
+        { th: 'th-4', p: 'Shorts', pc: 'plat-yt', d: '0:29', hook: '3 erreurs que je regrette', v: '41,7 k', when: '18/10' },
+        { th: 'th-1', p: 'TikTok', pc: 'plat-tt', d: '0:44', hook: 'Mon chat en plein live', v: '126 k', when: '17/10' },
+        { th: 'th-6', p: 'Reels', pc: 'plat-ig', d: '0:31', hook: 'Ma routine du matin', v: '22,9 k', when: '16/10' }
+      ],
+      next: [
+        { dow: 'Mar', day: '20', t: 'Quand le chat décide de mon menu', p: 'TikTok', pc: 'plat-tt', time: '19:00 · @leamrtn.clips', s: 'programme', sl: 'Programmé' },
+        { dow: 'Mer', day: '21', t: 'Le pire conseil qu’on m’ait donné', p: 'Reels', pc: 'plat-ig', time: '12:30 · @lea.moments', s: 'avalider', sl: 'À valider' },
+        { dow: 'Jeu', day: '22', t: 'Réaction : mes vieux vlogs', p: 'Shorts', pc: 'plat-yt', time: '18:00 · Léa Clips', s: 'avalider', sl: 'À valider' },
+        { dow: 'Ven', day: '23', t: 'Best-of live du 14/10', p: 'TikTok', pc: 'plat-tt', time: '19:00 · @leamrtn.clips', s: 'montage', sl: 'En montage' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

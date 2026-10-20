@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Bibliothèque de composants</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <main class="wrap stack g-16" style="padding-top: 64px; padding-bottom: 96px">
+    <div class="stack g-2"><span class="eyebrow subtle">Bibliothèque</span><h1 class="d2">Composants</h1><p class="lead" style="max-width: 680px">Chaque bloc correspond à un composant shadcn/ui à styler avec les tokens (Button, Input, Badge, Card, Table, Tabs, Dialog, Sonner, DropdownMenu, Calendar, Progress, Skeleton).</p></div>
+
+    <!-- BOUTONS -->
+    <section class="stack g-5">
+      <h2 class="h2">Boutons</h2>
+      <div class="card stack g-6">
+        <div class="row g-3">
+          <button class="btn btn-primary">Valider le paiement</button>
+          <button class="btn btn-sage">Démarrer</button>
+          <button class="btn btn-secondary">Demander une modification</button>
+          <button class="btn btn-ghost">Annuler</button>
+          <button class="btn btn-danger">Refuser</button>
+          <button class="btn btn-danger-ghost">Supprimer</button>
+        </div>
+        <div class="row g-3">
+          <button class="btn btn-primary btn-sm"><span class="ic ic-sm ic-plus"></span>Petit</button>
+          <button class="btn btn-primary">Moyen</button>
+          <button class="btn btn-primary btn-lg">Grand</button>
+          <button class="btn btn-primary btn-xl"><span class="ic ic-copy"></span>Copier le message</button>
+          <button class="btn btn-secondary btn-icon" aria-label="Plus d'options"><span class="ic ic-more"></span></button>
+          <button class="btn btn-primary is-disabled" disabled>Désactivé</button>
+          <button class="btn btn-primary" aria-busy="true"><span class="spin"></span>Envoi…</button>
+        </div>
+        <div class="row g-3" style="background: #19261F; padding: 20px; border-radius: 12px">
+          <button class="btn btn-sage">Sur fond sombre</button>
+          <button class="btn btn-on-dark">Secondaire sombre</button>
+          <div class="seg seg-dark lang" role="group" aria-label="Langue"><button class="on">FR</button><button>EN</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAMPS -->
+    <section class="stack g-5">
+      <h2 class="h2">Champs de formulaire</h2>
+      <div class="card grid-3" style="gap: 24px">
+        <div class="field"><label class="label" for="c1">Nom de créateur</label><input id="c1" class="input" value="Léa Martin"><span class="hint">Tel qu'il apparaît sur vos chaînes.</span></div>
+        <div class="field"><label class="label" for="c2">Lien de la chaîne</label><div class="affix"><span class="ic ic-sm ic-link"></span><input id="c2" placeholder="https://twitch.tv/…"></div></div>
+        <div class="field"><label class="label" for="c3">E-mail</label><input id="c3" class="input is-error" value="lea@exemple"><span class="error-text"><span class="ic ic-sm ic-alert"></span>Adresse e-mail incomplète.</span></div>
+        <div class="field"><label class="label" for="c4">Niche</label><select id="c4" class="select"><option>Gaming</option><option>Business</option></select></div>
+        <div class="field"><label class="label" for="c5">Notes pour le monteur <span class="opt">(facultatif)</span></label><textarea id="c5" class="textarea" placeholder="Moments forts, mots à éviter…"></textarea></div>
+        <div class="stack g-4">
+          <label class="check"><input type="checkbox" checked>J'accepte les CGV</label>
+          <label class="check"><input type="radio" name="r" checked>Priorité normale</label>
+          <div class="row g-3"><span class="switch on" aria-hidden="true"></span><span class="sm">Rappels automatiques activés</span></div>
+          <div class="seg" role="group" aria-label="Vue"><button class="on"><span class="ic ic-sm ic-grid"></span>Grille</button><button><span class="ic ic-sm ic-list"></span>Liste</button><button><span class="ic ic-sm ic-cal"></span>Calendrier</button></div>
+        </div>
+        <div class="field"><span class="label">Code 2FA</span><div class="otp"><input value="4" aria-label="Chiffre 1"><input value="8" aria-label="Chiffre 2"><input value="1" aria-label="Chiffre 3"><input aria-label="Chiffre 4"><input aria-label="Chiffre 5"><input aria-label="Chiffre 6"></div></div>
+        <div class="field"><label class="label" for="c6">Recherche</label><div class="affix"><span class="ic ic-sm ic-search"></span><input id="c6" type="search" placeholder="Rechercher…"></div></div>
+        <div class="toolbar"><button class="chip on">Tous</button><button class="chip">TikTok</button><button class="chip">Reels</button><button class="chip">Shorts</button><button class="chip"><span class="ic ic-sm ic-filter"></span>Filtres</button></div>
+      </div>
+    </section>
+
+    <!-- BADGES -->
+    <section class="stack g-5">
+      <h2 class="h2">Badges de statut, priorité, plateformes</h2>
+      <div class="card stack g-5">
+        <div class="row g-2"><span class="label-caps" style="width: 100px">Clips</span><span class="badge st-planifie">Planifié</span><span class="badge st-montage">En montage</span><span class="badge st-avalider">À valider</span><span class="badge st-valide">Validé</span><span class="badge st-programme">Programmé</span><span class="badge st-publie">Publié</span><span class="badge st-rejete">Rejeté</span></div>
+        <div class="row g-2"><span class="label-caps" style="width: 100px">Paiements</span><span class="badge st-attente">En attente</span><span class="badge st-averifier">À vérifier</span><span class="badge st-paye">Validé</span><span class="badge st-refuse">Refusé</span></div>
+        <div class="row g-2"><span class="label-caps" style="width: 100px">Tâches</span><span class="badge st-afaire">À faire</span><span class="badge st-encours">En cours</span><span class="badge st-enrevue">En revue</span><span class="badge st-terminee">Terminée</span><span class="badge st-retard">En retard</span></div>
+        <div class="row g-2"><span class="label-caps" style="width: 100px">Prospects</span><span class="badge st-acontacter">À contacter</span><span class="badge st-contacte">Contacté</span><span class="badge st-relance">Relancé</span><span class="badge st-repondu">A répondu</span><span class="badge st-interesse">Intéressé</span><span class="badge st-appel">Appel prévu</span><span class="badge st-signe">Signé</span><span class="badge st-refus">Refus</span></div>
+        <div class="row g-4"><span class="label-caps" style="width: 100px">Priorité</span><span class="prio prio-haute"><i></i>Haute</span><span class="prio prio-normale"><i></i>Normale</span><span class="prio prio-basse"><i></i>Basse</span></div>
+        <div class="row g-2"><span class="label-caps" style="width: 100px">Plateformes</span><span class="plat plat-tt">TikTok</span><span class="plat plat-ig">Instagram</span><span class="plat plat-yt">YouTube</span></div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stack g-5">
+      <h2 class="h2">Cartes de statistiques</h2>
+      <div class="grid-4">
+        <div class="card stat"><span class="stat-label"><span class="ic ic-sm ic-film"></span>Clips publiés</span><span class="stat-value">128</span><span class="delta"><span class="ic ic-sm ic-trend"></span>+24 ce mois</span></div>
+        <div class="card stat"><span class="stat-label"><span class="ic ic-sm ic-eye"></span>Vues totales</span><span class="stat-value">2,4 M</span><span class="delta"><span class="ic ic-sm ic-trend"></span>+18 % vs mois dernier</span></div>
+        <div class="card stat"><span class="stat-label"><span class="ic ic-sm ic-users"></span>Abonnés gagnés</span><span class="stat-value">+9 820</span><span class="delta down">−3 % vs mois dernier</span></div>
+        <div class="card card-dark stat notch"><span class="stat-label" style="color: #CBD4C1"><span class="ic ic-sm ic-bank"></span>Paiements à vérifier</span><span class="stat-value" style="color: #FFFFFF">3</span><a href="AdminPayments.dc.html" class="sm" style="color: #B6C2AA">Vérifier maintenant →</a></div>
+      </div>
+    </section>
+
+    <!-- TABLE -->
+    <section class="stack g-5">
+      <h2 class="h2">Tableau</h2>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th>Client</th><th>Offre</th><th>Statut paiement</th><th class="r">Clips ce mois</th><th class="r">Vues</th><th><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Actions</span></th></tr></thead>
+          <tbody>
+            <tr><td><div class="cell-main"><span class="av av-sm">LM</span><div class="stack" style="gap: 0"><span class="t">Léa Martin</span><span class="s">@leamrtn · Lifestyle</span></div></div></td><td>Croissance</td><td><span class="badge st-paye">Validé</span></td><td class="r num">32</td><td class="r num">812 k</td><td class="r"><button class="btn btn-ghost btn-icon btn-sm" aria-label="Actions"><span class="ic ic-more"></span></button></td></tr>
+            <tr><td><div class="cell-main"><span class="av av-sm">HV</span><div class="stack" style="gap: 0"><span class="t">Hugo Vasseur</span><span class="s">@hugolive · Gaming</span></div></div></td><td>Starter</td><td><span class="badge st-averifier">À vérifier</span></td><td class="r num">12</td><td class="r num">148 k</td><td class="r"><button class="btn btn-ghost btn-icon btn-sm" aria-label="Actions"><span class="ic ic-more"></span></button></td></tr>
+          </tbody>
+        </table>
+        <div class="pager"><span>1–2 sur 24</span><div class="row g-2"><button class="btn btn-secondary btn-sm btn-icon" aria-label="Page précédente"><span class="ic ic-sm ic-chev-l"></span></button><button class="btn btn-secondary btn-sm btn-icon" aria-label="Page suivante"><span class="ic ic-sm ic-chev-r"></span></button></div></div>
+      </div>
+    </section>
+
+    <!-- TABS / AVATARS / THUMB -->
+    <section class="stack g-5">
+      <h2 class="h2">Onglets, avatars, miniature de clip</h2>
+      <div class="split">
+        <div class="card stack g-6">
+          <div class="tabs" role="tablist">
+            <sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+              <button class="tab {{t.cls}}" role="tab" aria-selected="{{t.sel}}" onClick="{{t.pick}}">{{t.label}}<sc-if value="{{t.n}}" hint-placeholder-val="{{true}}"><span class="cnt">{{t.n}}</span></sc-if></button>
+            </sc-for>
+          </div>
+          <p class="sm muted">Onglet actif : <b>{{activeTab}}</b>. Les onglets défilent horizontalement sur mobile.</p>
+          <div class="row g-4"><span class="av av-xl">LM</span><span class="av av-lg av-dark">AD</span><span class="av">CR</span><span class="av av-sm">TL</span><div class="av-stack"><span class="av av-sm">YB</span><span class="av av-sm av-dark">TL</span><span class="av av-sm">CR</span></div></div>
+        </div>
+        <div class="card row g-4" style="align-items: flex-start">
+          <a class="clip-card" href="ClientClipDetail.dc.html" style="width: 150px">
+            <div class="thumb th-2"><div class="ph"><span class="ic ic-xl ic-play"></span></div><div class="top"><span class="plat plat-tt">TikTok</span><span class="dur">0:42</span></div><span class="hook">Il a vraiment dit ça en live</span></div>
+            <div class="clip-meta"><span class="trunc">@leamrtn.clips</span><span class="num">84,2 k</span></div>
+          </a>
+          <div class="stack g-2 grow"><h3 class="h3">Miniature 9:16</h3><p class="sm muted">Placeholder de vignette vidéo : plateforme, durée, accroche incrustée. En production, l'image vient du clip ; garder l'accroche en surimpression.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KANBAN + CAL -->
+    <section class="stack g-5">
+      <h2 class="h2">Kanban &amp; calendrier</h2>
+      <div class="split">
+        <div class="kanban">
+          <div class="kcol">
+            <div class="kcol-head"><span class="badge st-montage">En montage</span><span class="n">3</span></div>
+            <div class="kcard"><span class="t">Réaction au clash Twitch du 14/10</span><div class="m"><span class="plat plat-tt">TikTok</span><span class="row g-1"><span class="ic ic-sm ic-clock"></span>Demain</span></div><div class="m"><span>Léa Martin</span><span class="av av-sm">TL</span></div></div>
+            <div class="kcard drag"><span class="t">Best-of tournoi — partie 2</span><div class="m"><span class="plat plat-yt">YouTube</span><span>Ven.</span></div></div>
+          </div>
+          <div class="kcol">
+            <div class="kcol-head"><span class="badge st-avalider">À valider</span><span class="n">1</span></div>
+            <div class="kdrop">Déposer ici</div>
+            <div class="kcard"><span class="t">« J'ai tout perdu en 10 min »</span><div class="m"><span class="plat plat-ig">Instagram</span><span class="prio prio-haute"><i></i>Haute</span></div></div>
+          </div>
+        </div>
+        <div class="stack g-3">
+          <div class="row between"><span class="h3">Octobre 2026</span><div class="row g-2"><button class="btn btn-secondary btn-sm btn-icon" aria-label="Mois précédent"><span class="ic ic-sm ic-chev-l"></span></button><button class="btn btn-secondary btn-sm btn-icon" aria-label="Mois suivant"><span class="ic ic-sm ic-chev-r"></span></button></div></div>
+          <div class="cal">
+            <div class="cal-h">Lun</div><div class="cal-h">Mar</div><div class="cal-h">Mer</div><div class="cal-h">Jeu</div><div class="cal-h">Ven</div><div class="cal-h">Sam</div><div class="cal-h">Dim</div>
+            <div class="cal-d"><span class="n">19</span><span class="cal-ev st-publie">18:00 TikTok</span></div>
+            <div class="cal-d today"><span class="n">20</span><span class="cal-ev st-programme">12:30 Reels</span><span class="cal-ev st-programme">19:00 TikTok</span></div>
+            <div class="cal-d"><span class="n">21</span><span class="cal-ev st-avalider">Shorts</span></div>
+            <div class="cal-d"><span class="n">22</span></div>
+            <div class="cal-d"><span class="n">23</span><span class="cal-ev st-montage">TikTok</span></div>
+            <div class="cal-d out"><span class="n">24</span></div>
+            <div class="cal-d out"><span class="n">25</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- UPLOAD -->
+    <section class="stack g-5">
+      <h2 class="h2">Zone d'upload avec progression</h2>
+      <div class="split">
+        <div class="drop over">
+          <span class="ic-box" style="width: 56px; height: 56px; background: #FFFFFF"><span class="ic ic-lg ic-upload"></span></span>
+          <div class="stack g-1"><span class="h3">Glissez votre vidéo ici</span><span class="sm muted">MP4, MOV ou MKV · jusqu'à 20 Go · reprise automatique si la connexion coupe</span></div>
+          <button class="btn btn-primary">Choisir un fichier</button>
+        </div>
+        <div class="stack g-3">
+          <div class="file-row"><span class="file-ic"><span class="ic ic-film"></span></span><div class="stack grow g-2"><div class="row between"><span class="sm strong trunc">live-14-oct-integral.mp4</span><span class="xs subtle num">6,1 / 9,8 Go · 62 %</span></div><div class="bar"><span style="width: 62%"></span></div><span class="xs subtle">≈ 11 min restantes</span></div><button class="btn btn-ghost btn-icon btn-sm" aria-label="Annuler l'envoi"><span class="ic ic-sm ic-x"></span></button></div>
+          <div class="file-row"><span class="file-ic"><span class="ic ic-film"></span></span><div class="stack grow g-2"><div class="row between"><span class="sm strong trunc">podcast-ep42.mov</span><span class="xs num" style="color: #1C5A30">Envoyé</span></div><div class="bar ok"><span style="width: 100%"></span></div></div><span class="ic ic-check" style="color: #1C5A30"></span></div>
+          <div class="file-row" style="border-color: #E4B4AD"><span class="file-ic" style="background: #94271C; color: #FFFFFF"><span class="ic ic-alert"></span></span><div class="stack grow g-2"><div class="row between"><span class="sm strong trunc">vlog-japon.mkv</span><span class="xs num" style="color: #94271C">Échec à 34 %</span></div><div class="bar err"><span style="width: 34%"></span></div></div><button class="btn btn-secondary btn-sm">Reprendre</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OVERLAYS -->
+    <section class="stack g-5">
+      <h2 class="h2">Modale, toasts, notifications</h2>
+      <div class="split">
+        <div class="scrim">
+          <div class="modal" role="dialog" aria-labelledby="mt">
+            <div class="modal-head"><div class="stack g-1"><h3 id="mt" class="h2">Refuser ce paiement ?</h3><p class="sm muted">Le client sera notifié et pourra déposer une nouvelle preuve.</p></div><button class="btn btn-ghost btn-icon btn-sm" aria-label="Fermer"><span class="ic ic-sm ic-x"></span></button></div>
+            <div class="modal-body"><div class="field"><label class="label" for="m1">Motif du refus</label><select id="m1" class="select"><option>Montant incorrect</option><option>Référence absente</option><option>Capture illisible</option></select></div><div class="field"><label class="label" for="m2">Message au client <span class="opt">(facultatif)</span></label><textarea id="m2" class="textarea">Le montant reçu est de 290 € au lieu de 390 €.</textarea></div></div>
+            <div class="modal-foot"><button class="btn btn-ghost">Annuler</button><button class="btn btn-danger">Refuser le paiement</button></div>
+          </div>
+        </div>
+        <div class="stack g-4">
+          <div class="toast toast-ok" role="status"><span class="ic ic-check"></span><div class="stack g-1"><b>Référence copiée</b><span class="sm" style="color: #CBD4C1">PEAK-LM-2610 est dans le presse-papiers.</span></div></div>
+          <div class="toast toast-err" role="alert"><span class="ic ic-alert"></span><div class="stack g-1"><b>Envoi interrompu</b><span class="sm">La connexion a coupé. L'envoi reprendra automatiquement.</span></div></div>
+          <div class="menu">
+            <div class="menu-head"><span class="h3">Notifications</span><button class="btn btn-ghost btn-sm">Tout marquer comme lu</button></div>
+            <div class="notif unread"><span class="dotu"></span><div class="stack g-1 grow"><span><b>3 clips</b> attendent votre validation</span><span class="xs subtle">Il y a 12 min</span></div></div>
+            <div class="notif unread"><span class="dotu"></span><div class="stack g-1 grow"><span>Paiement d'octobre <b>validé</b></span><span class="xs subtle">Il y a 2 h</span></div></div>
+            <div class="notif"><span style="width: 8px"></span><div class="stack g-1 grow"><span>Nouveau compte créé : <b>@leamrtn.clips</b> sur TikTok</span><span class="xs subtle">Hier</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ÉTATS -->
+    <section class="stack g-5">
+      <h2 class="h2">État vide, chargement, erreur</h2>
+      <div class="grid-3">
+        <div class="card empty"><div class="empty-art"><span class="ic ic-xl ic-film"></span></div><span class="h3">Aucun clip pour l'instant</span><span class="sm muted">Envoyez votre première vidéo : vos premiers clips arrivent sous [48 h].</span><a class="btn btn-primary" href="ClientUpload.dc.html">Envoyer une vidéo</a></div>
+        <div class="card stack g-4" aria-busy="true"><div class="sk" style="height: 18px; width: 50%"></div><div class="sk" style="height: 40px; width: 70%"></div><div class="sk" style="height: 120px"></div><div class="row g-3"><div class="sk" style="height: 14px; width: 30%"></div><div class="sk" style="height: 14px; width: 20%"></div></div></div>
+        <div class="card empty"><div class="err-art"><span class="ic ic-xl ic-alert"></span></div><span class="h3">Impossible de charger les données</span><span class="sm muted">Vérifiez votre connexion puis réessayez. Si le problème continue, contactez-nous.</span><button class="btn btn-secondary"><span class="ic ic-sm ic-refresh"></span>Réessayer</button></div>
+      </div>
+    </section>
+
+    <!-- BANDEAUX -->
+    <section class="stack g-5">
+      <h2 class="h2">Bandeaux &amp; messages</h2>
+      <div class="stack g-3" style="border-radius: 14px; overflow: hidden; border: 1px solid #DCE2D5">
+        <div class="banner banner-warn" style="padding-inline: 20px"><span class="ic ic-lock"></span><span class="grow"><b>Lecture seule.</b> Votre abonnement a expiré le 30 sept. Vos clips restent visibles, mais l'envoi et les demandes sont suspendus.</span><a class="btn btn-primary btn-sm" href="ClientBilling.dc.html">Renouveler</a></div>
+        <div class="banner banner-view" style="padding-inline: 20px"><span class="ic ic-eye"></span><span class="grow">Vous voyez l'espace de <b>Léa Martin</b> en lecture seule.</span><a class="btn btn-primary btn-sm" href="AdminClientFile.dc.html">Quitter ce mode</a></div>
+      </div>
+      <div class="grid-2">
+        <div class="callout callout-warn"><span class="ic ic-alert"></span><span><b>Vérifiez votre compte bancaire avant de valider.</b> Une capture peut être falsifiée.</span></div>
+        <div class="callout callout-info"><span class="ic ic-info"></span><span>Le virement peut prendre 1 à 3 jours ouvrés à apparaître.</span></div>
+        <div class="callout callout-ok"><span class="ic ic-check"></span><span>Paiement validé. Votre espace est débloqué.</span></div>
+        <div class="callout callout-err"><span class="ic ic-x"></span><span><b>Paiement refusé :</b> montant incorrect.</span></div>
+      </div>
+    </section>
+
+    <!-- EN STRESS TEST -->
+    <section class="stack g-5">
+      <div class="stack g-1"><h2 class="h2">Test de longueur — anglais (+20 %)</h2><p class="sm muted">Mêmes composants avec les libellés anglais : rien ne doit tronquer ni passer à la ligne de travers.</p></div>
+      <div class="card stack g-5">
+        <div class="row g-3"><button class="btn btn-primary">Approve payment</button><button class="btn btn-secondary">Request a change</button><button class="btn btn-sage">Get started</button><button class="btn btn-primary btn-xl"><span class="ic ic-copy"></span>Copy the message</button></div>
+        <div class="row g-2"><span class="badge st-avalider">Awaiting approval</span><span class="badge st-averifier">To be verified</span><span class="badge st-appel">Call scheduled</span><span class="badge st-relance">Followed up</span><span class="badge st-retard">Overdue</span></div>
+        <div class="tabs"><button class="tab on">Profile</button><button class="tab">Subscription</button><button class="tab">Payments</button><button class="tab">Team</button><button class="tab">Videos</button><button class="tab">Clips</button><button class="tab">Accounts</button><button class="tab">Requests</button><button class="tab">Internal notes</button><button class="tab">Activity</button></div>
+        <div class="grid-4"><div class="card stat"><span class="stat-label">Published clips</span><span class="stat-value">128</span></div><div class="card stat"><span class="stat-label">Upcoming clips</span><span class="stat-value">14</span></div><div class="card stat"><span class="stat-label">Accounts created</span><span class="stat-value">4</span></div><div class="card stat"><span class="stat-label">Followers gained</span><span class="stat-value">+9,820</span></div></div>
+      </div>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4800}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { tab: 'profil' }; }
+  renderVals() {
+    const defs = [ { k: 'profil', label: 'Profil', n: '' }, { k: 'clips', label: 'Clips', n: '128' }, { k: 'demandes', label: 'Demandes', n: '2' }, { k: 'notes', label: 'Notes internes', n: '5' } ];
+    const tabs = defs.map((t) => ({ ...t, cls: t.k === this.state.tab ? 'on' : '', sel: t.k === this.state.tab ? 'true' : 'false', pick: () => this.setState({ tab: t.k }) }));
+    const activeTab = defs.find((t) => t.k === this.state.tab).label;
+    return { tabs, activeTab };
+  }
+}
+</script>
+</body>
+</html>

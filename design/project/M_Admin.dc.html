@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Espace admin — mobile</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk-c" style="font-family: Inter, system-ui, sans-serif; color: #19261F; width: 5940px; background: #E4E9DF; padding: 48px; display: flex; gap: 64px; align-items: flex-start">
+  <div class="phone"><span class="phone-cap">Vue d'ensemble</span><div class="phone-frame"><dc-import name="AdminOverview" hint-size="390px,2800px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Clients</span><div class="phone-frame"><dc-import name="AdminClients" hint-size="390px,2400px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Fiche client</span><div class="phone-frame"><dc-import name="AdminClientFile" hint-size="390px,1900px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Paiements à vérifier</span><div class="phone-frame"><dc-import name="AdminPayments" hint-size="390px,2100px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Clips</span><div class="phone-frame"><dc-import name="AdminClips" hint-size="390px,1400px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Comptes de diffusion</span><div class="phone-frame"><dc-import name="AdminAccounts" hint-size="390px,2200px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Demandes clients</span><div class="phone-frame"><dc-import name="AdminInbox" hint-size="390px,2000px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Équipe</span><div class="phone-frame"><dc-import name="AdminTeam" hint-size="390px,1900px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Tâches · création</span><div class="phone-frame"><dc-import name="AdminTasks" modal="{{yes}}" hint-size="390px,1500px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Prospection</span><div class="phone-frame"><dc-import name="AdminProspecting" hint-size="390px,1800px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Rôles &amp; permissions</span><div class="phone-frame"><dc-import name="AdminRoles" hint-size="390px,1800px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Offres &amp; tarifs</span><div class="phone-frame"><dc-import name="AdminOffers" hint-size="390px,2200px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Paramètres</span><div class="phone-frame"><dc-import name="AdminSettings" hint-size="390px,2600px"></dc-import></div></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":5940,"height":4700}}'>
+class Component extends DCLogic {
+  renderVals() { return { yes: true }; }
+}
+</script>
+</body>
+</html>

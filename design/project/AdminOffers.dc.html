@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Admin — offres et tarifs</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="admin" active="offers" hint-size="100%,1000px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Configuration" crumb="Offres &amp; tarifs" initials="AD" hint-size="100%,69px"></dc-import>
+      <div class="page-head"><div class="stack g-1"><h1 class="h1">Offres &amp; tarifs</h1><span class="sm subtle">Ce qui s'affiche sur la page Tarifs et dans l'onboarding client.</span></div><div class="row g-2"><a class="btn btn-secondary" href="Pricing.dc.html"><span class="ic ic-sm ic-eye"></span>Voir la page Tarifs</a><button class="btn btn-primary"><span class="ic ic-sm ic-plus"></span>Nouvelle offre</button></div></div>
+      <div class="page-body">
+        <div class="row g-5" style="align-items: flex-start">
+          <section class="stack g-3" style="flex: 1 1 260px; max-width: 320px" aria-label="Liste des offres">
+            <div class="card row g-3" style="padding: 14px; flex-wrap: nowrap"><span class="ic ic-sm ic-more subtle" aria-hidden="true" style="transform: rotate(90deg)"></span><div class="stack grow" style="gap: 0"><span class="strong">Starter</span><span class="xs subtle">[XXX] € · 9 clients</span></div><span class="badge plain t-green">Visible</span></div>
+            <div class="card row g-3" style="padding: 14px; flex-wrap: nowrap; border: 2px solid #19261F"><span class="ic ic-sm ic-more subtle" aria-hidden="true" style="transform: rotate(90deg)"></span><div class="stack grow" style="gap: 0"><span class="strong">Croissance</span><span class="xs subtle">[XXX] € · 14 clients</span></div><span class="badge plain t-forest">Mise en avant</span></div>
+            <div class="card row g-3" style="padding: 14px; flex-wrap: nowrap"><span class="ic ic-sm ic-more subtle" aria-hidden="true" style="transform: rotate(90deg)"></span><div class="stack grow" style="gap: 0"><span class="strong">Domination</span><span class="xs subtle">[XXX] € · 4 clients</span></div><span class="badge plain t-green">Visible</span></div>
+            <p class="xs subtle">Glissez pour réordonner l'affichage.</p>
+          </section>
+
+          <section class="card stack g-5" style="flex: 999 1 480px; min-width: 0; padding: 24px" aria-labelledby="ed">
+            <div class="row between"><h2 id="ed" class="h2">Modifier « Croissance »</h2><button class="btn btn-danger-ghost btn-sm"><span class="ic ic-sm ic-trash"></span>Archiver</button></div>
+            <div class="grid-2" style="gap: 14px">
+              <div class="field"><label class="label" for="n1">Nom · FR</label><input id="n1" class="input" value="Croissance"></div>
+              <div class="field"><label class="label" for="n2">Nom · EN</label><input id="n2" class="input" value="Growth"></div>
+              <div class="field"><label class="label" for="a1">Accroche · FR</label><input id="a1" class="input" value="Pour publier partout, tous les jours."></div>
+              <div class="field"><label class="label" for="a2">Accroche · EN</label><input id="a2" class="input" value="Post everywhere, every single day."><span class="hint">48 / 60 caractères</span></div>
+            </div>
+            <div class="hr"></div>
+            <div class="grid-4" style="gap: 14px">
+              <div class="field"><label class="label" for="p1">Prix HT / mois</label><div class="affix"><input id="p1" value="[XXX]" style="padding-right: 0"><span style="padding-right: 12px">€</span></div></div>
+              <div class="field"><label class="label" for="p2">Clips / mois</label><input id="p2" class="input" value="[XX]"></div>
+              <div class="field"><label class="label" for="p3">Comptes créés</label><input id="p3" class="input" value="3"></div>
+              <div class="field"><label class="label" for="p4">Délai de livraison</label><select id="p4" class="select"><option>48 h</option></select></div>
+            </div>
+            <fieldset class="row g-4" style="border: 0; padding: 0; margin: 0"><legend class="label" style="margin-bottom: 8px">Plateformes</legend><label class="check"><input type="checkbox" checked>TikTok</label><label class="check"><input type="checkbox" checked>Instagram Reels</label><label class="check"><input type="checkbox" checked>YouTube Shorts</label></fieldset>
+            <div class="stack g-2"><span class="label">Inclus (affiché en liste)</span>
+              <div class="row g-2" style="flex-wrap: nowrap"><input class="input" aria-label="Élément inclus 1" value="Validation avant publication"><button class="btn btn-ghost btn-icon" aria-label="Retirer"><span class="ic ic-sm ic-x"></span></button></div>
+              <div class="row g-2" style="flex-wrap: nowrap"><input class="input" aria-label="Élément inclus 2" value="Tableau de bord des vues et abonnés"><button class="btn btn-ghost btn-icon" aria-label="Retirer"><span class="ic ic-sm ic-x"></span></button></div>
+              <div class="row g-2" style="flex-wrap: nowrap"><input class="input" aria-label="Élément inclus 3" value="Demandes prioritaires"><button class="btn btn-ghost btn-icon" aria-label="Retirer"><span class="ic ic-sm ic-x"></span></button></div>
+              <button class="btn btn-ghost btn-sm" style="align-self: flex-start"><span class="ic ic-sm ic-plus"></span>Ajouter</button>
+            </div>
+            <div class="stack g-3">
+              <div class="row g-3"><span class="switch on" aria-hidden="true"></span><span class="sm"><b>Mettre en avant</b> · badge « Le plus choisi » (une seule offre)</span></div>
+              <div class="row g-3"><span class="switch on" aria-hidden="true"></span><span class="sm"><b>Visible sur le site</b></span></div>
+              <div class="row g-3"><span class="switch" aria-hidden="true"></span><span class="sm"><b>Afficher la section témoignages</b> sur l'accueil</span></div>
+            </div>
+            <div class="callout callout-info" style="font-size: 13px"><span class="ic ic-sm ic-info"></span><span>Un changement de prix s'applique aux nouvelles échéances. Les 14 clients actuels gardent leur tarif jusqu'au renouvellement.</span></div>
+            <div class="row g-2" style="justify-content: flex-end"><button class="btn btn-ghost">Annuler</button><button class="btn btn-primary">Enregistrer</button></div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

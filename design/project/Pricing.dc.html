@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Tarifs — Peak Clipping Agency</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #FBFCFA">
+  <dc-import name="SiteHeader" active="pricing" hint-size="100%,80px"></dc-import>
+
+  <section style="background: #19261F; color: #DDE3D5; padding: 72px 0 140px">
+    <div class="wrap stack g-4" style="align-items: center; text-align: center">
+      <span class="eyebrow" style="color: #B6C2AA">Offres</span>
+      <h1 class="d2" style="color: #FFFFFF; max-width: 820px">Un abonnement mensuel, des clips tous les jours</h1>
+      <p class="lead" style="color: #CBD4C1; max-width: 640px">Montage, création des comptes, publication et suivi des résultats inclus. Paiement par virement, sans engagement caché.</p>
+    </div>
+  </section>
+
+  <section style="margin-top: -96px; padding-bottom: 80px">
+    <div class="wrap grid-3" style="align-items: stretch">
+      <sc-for list="{{plans}}" as="p" hint-placeholder-count="3">
+        <article class="price-card {{p.cls}}">
+          <sc-if value="{{p.featured}}" hint-placeholder-val="{{false}}"><span class="price-tag">Le plus choisi</span></sc-if>
+          <div class="stack g-2"><h2 class="h1">{{p.name}}</h2><p class="muted">{{p.pitch}}</p></div>
+          <div class="row g-2" style="align-items: baseline"><span class="price">{{p.price}}</span><span class="muted">€ HT / mois</span></div>
+          <a class="btn btn-lg btn-block {{p.btn}}" href="ClientOnboarding.dc.html">Choisir {{p.name}}</a>
+          <div class="hr" style="background: {{p.line}}"></div>
+          <ul class="incl">
+            <li><span class="ic ic-film"></span><span><b>{{p.clips}}</b> clips par mois</span></li>
+            <li><span class="ic ic-at"></span><span><b>{{p.accounts}}</b> créé(s) pour vous</span></li>
+            <li><span class="ic ic-phone"></span><span>{{p.platforms}}</span></li>
+            <li><span class="ic ic-clock"></span><span>Livraison sous <b>{{p.delay}}</b></span></li>
+            <li><span class="ic ic-check"></span><span>Validation avant publication</span></li>
+            <li><span class="ic ic-chart"></span><span>Tableau de bord des vues et abonnés</span></li>
+            <sc-if value="{{p.extra}}" hint-placeholder-val="{{false}}"><li><span class="ic ic-msg"></span><span>{{p.extra}}</span></li></sc-if>
+          </ul>
+        </article>
+      </sc-for>
+    </div>
+    <p class="wrap xs subtle" style="margin-top: 20px; text-align: center">Les valeurs entre crochets sont à renseigner dans Admin → Offres &amp; tarifs.</p>
+  </section>
+
+  <section class="section-paper" style="padding: 80px 0; background: #F3F5F0">
+    <div class="wrap stack g-8">
+      <h2 class="h1">Comparer les offres</h2>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th style="width: 34%">Inclus</th><th>Starter</th><th style="background: #DDE3D5; color: #19261F">Croissance</th><th>Domination</th></tr></thead>
+          <tbody>
+            <tr><td class="strong">Clips par mois</td><td>[XX]</td><td style="background: #F4F6F1">[XX]</td><td>[XXX]</td></tr>
+            <tr><td class="strong">Comptes créés</td><td>1</td><td style="background: #F4F6F1">3</td><td>[X]</td></tr>
+            <tr><td class="strong">Plateformes</td><td>1 au choix</td><td style="background: #F4F6F1">TikTok, Reels, Shorts</td><td>TikTok, Reels, Shorts</td></tr>
+            <tr><td class="strong">Délai de livraison</td><td>[72 h]</td><td style="background: #F4F6F1">[48 h]</td><td>[24 h]</td></tr>
+            <tr><td class="strong">Envoi de vidéos illimité</td><td><span class="ic ic-check" style="color: #1C5A30" aria-label="Oui"></span></td><td style="background: #F4F6F1"><span class="ic ic-check" style="color: #1C5A30" aria-label="Oui"></span></td><td><span class="ic ic-check" style="color: #1C5A30" aria-label="Oui"></span></td></tr>
+            <tr><td class="strong">Demandes de modification</td><td>[X] / clip</td><td style="background: #F4F6F1">[X] / clip</td><td>Illimitées</td></tr>
+            <tr><td class="strong">Interlocuteur dédié</td><td><span class="subtle">—</span></td><td style="background: #F4F6F1"><span class="subtle">—</span></td><td><span class="ic ic-check" style="color: #1C5A30" aria-label="Oui"></span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-info"><span class="ic ic-bank"></span><span><b>Paiement par virement bancaire.</b> Après votre choix, vous recevez l'IBAN et une référence unique. Votre espace est débloqué dès la vérification du virement.</span></div>
+    </div>
+  </section>
+
+  <dc-import name="SiteFooter" hint-size="100%,420px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2700}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { plans: [
+      { name: 'Starter', pitch: 'Pour tester le clipping sur une plateforme.', price: '[XXX]', cls: '', featured: false, btn: 'btn-secondary', line: '#DCE2D5', clips: '[XX]', accounts: '1 compte', platforms: '1 plateforme au choix', delay: '[72 h]', extra: '' },
+      { name: 'Croissance', pitch: 'Pour publier partout, tous les jours.', price: '[XXX]', cls: 'featured', featured: true, btn: 'btn-sage', line: '#2E4436', clips: '[XX]', accounts: '3 comptes', platforms: 'TikTok, Reels et Shorts', delay: '[48 h]', extra: 'Demandes prioritaires' },
+      { name: 'Domination', pitch: 'Pour les créateurs à fort volume de lives.', price: '[XXX]', cls: '', featured: false, btn: 'btn-secondary', line: '#DCE2D5', clips: '[XXX]', accounts: '[X] comptes', platforms: 'TikTok, Reels et Shorts', delay: '[24 h]', extra: 'Interlocuteur dédié' }
+    ] };
+  }
+}
+</script>
+</body>
+</html>

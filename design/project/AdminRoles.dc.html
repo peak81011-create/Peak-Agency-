@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Admin — rôles et permissions</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="admin" active="roles" hint-size="100%,1000px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Configuration" crumb="Rôles &amp; permissions" initials="AD" hint-size="100%,69px"></dc-import>
+      <div class="page-head"><div class="stack g-1"><h1 class="h1">Rôles &amp; permissions</h1><span class="sm subtle">Le propriétaire a toujours tous les droits.</span></div><button class="btn btn-secondary"><span class="ic ic-sm ic-plus"></span>Nouveau rôle</button></div>
+      <div class="page-body">
+        <sc-if value="{{dirty}}" hint-placeholder-val="{{false}}">
+          <div class="callout callout-warn" style="align-items: center"><span class="ic ic-info"></span><span class="grow">{{dirty}} modification(s) non enregistrée(s).</span><button class="btn btn-ghost btn-sm" onClick="{{reset}}">Annuler</button><button class="btn btn-primary btn-sm" onClick="{{save}}">Enregistrer</button></div>
+        </sc-if>
+        <div class="tbl-wrap">
+          <table class="tbl perm">
+            <thead><tr><th style="min-width: 280px">Permission</th><th class="c" style="text-align: center">Propriétaire</th><th style="text-align: center">Assistante</th><th style="text-align: center">Prospecteur</th><th style="text-align: center">Monteur</th><th style="text-align: center">Client</th></tr></thead>
+            <tbody>
+              <sc-for list="{{rows}}" as="r" hint-placeholder-count="20">
+                <sc-if value="{{r.isGroup}}" hint-placeholder-val="{{false}}"><tr class="grp"><td colspan="6">{{r.label}}</td></tr></sc-if>
+                <sc-if value="{{r.isPerm}}" hint-placeholder-val="{{true}}">
+                  <tr>
+                    <td><div class="stack" style="gap: 0"><span class="strong">{{r.label}}</span><span class="xs subtle">{{r.hint}}</span></div></td>
+                    <td class="c"><span class="ic ic-sm ic-lock subtle" aria-label="Toujours autorisé"></span></td>
+                    <sc-for list="{{r.cells}}" as="c" hint-placeholder-count="4">
+                      <td class="c"><input type="checkbox" checked="{{c.on}}" onChange="{{c.toggle}}" aria-label="{{c.aria}}"></td>
+                    </sc-for>
+                  </tr>
+                </sc-if>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1400}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { over: {} }; }
+  renderVals() {
+    const roles = ['Assistante', 'Prospecteur', 'Monteur', 'Client'];
+    const G = (label) => ({ isGroup: true, isPerm: false, label });
+    const P = (id, label, hint, d) => ({ id, label, hint, d });
+    const defs = [
+      G('Clients'), P('cl.view', 'Voir la liste des clients', 'Fiches et coordonnées', [1, 0, 0, 0]), P('cl.edit', 'Modifier une fiche client', '', [1, 0, 0, 0]), P('cl.viewas', 'Voir en tant que', 'Lecture seule de l’espace client', [1, 0, 0, 0]), P('cl.notes', 'Notes internes', '', [1, 0, 1, 0]),
+      G('Paiements'), P('pay.verify', 'Valider / refuser un paiement', '', [1, 0, 0, 0]), P('pay.deposit', 'Déposer une preuve de virement', '', [0, 0, 0, 1]),
+      G('Clips & vidéos'), P('clip.upload', 'Envoyer une vidéo', '', [1, 0, 0, 1]), P('clip.edit', 'Monter et livrer un clip', '', [0, 0, 1, 0]), P('clip.validate', 'Valider un clip', '', [1, 0, 0, 1]), P('clip.publish', 'Programmer / publier', '', [1, 0, 1, 0]),
+      G('Demandes'), P('req.answer', 'Répondre aux demandes', '', [1, 0, 0, 0]), P('req.create', 'Créer une demande', '', [0, 0, 0, 1]),
+      G('Équipe & prospection'), P('task.manage', 'Créer et assigner des tâches', '', [1, 0, 0, 0]), P('pr.work', 'Traiter ses prospects', '', [0, 1, 0, 0]), P('pr.import', 'Importer des prospects (CSV)', '', [1, 0, 0, 0]), P('pay.own', 'Voir sa propre rémunération', '', [1, 1, 1, 0]),
+      G('Configuration'), P('cfg.offers', 'Modifier les offres et tarifs', '', [0, 0, 0, 0]), P('cfg.bank', 'Modifier les coordonnées bancaires', 'Sensible', [0, 0, 0, 0])
+    ];
+    const over = this.state.over;
+    let dirty = 0;
+    const rows = defs.map((r) => {
+      if (r.isGroup) return r;
+      const cells = roles.map((role, i) => {
+        const key = r.id + '|' + i;
+        const base = !!r.d[i];
+        const on = key in over ? over[key] : base;
+        if (on !== base) dirty++;
+        return { on, aria: r.label + ' — ' + role, toggle: () => this.setState({ over: { ...this.state.over, [key]: !on } }) };
+      });
+      return { ...r, isGroup: false, isPerm: true, cells };
+    });
+    return { rows, dirty: dirty || '', reset: () => this.setState({ over: {} }), save: () => this.setState({ over: {} }) };
+  }
+}
+</script>
+</body>
+</html>

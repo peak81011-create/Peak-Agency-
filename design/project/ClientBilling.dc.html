@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Abonnement et factures</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="client" active="billing" hint-size="100%,900px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Espace client" crumb="Abonnement &amp; factures" initials="LM" hint-size="100%,69px"></dc-import>
+      <sc-if value="{{expire}}" hint-placeholder-val="{{false}}">
+        <div class="banner banner-warn" role="status"><span class="ic ic-lock"></span><span class="grow"><b>Lecture seule :</b> votre abonnement a expiré le 30/09. Renouvelez pour reprendre les publications.</span><a class="btn btn-primary btn-sm" href="ClientPayment.dc.html">Renouveler</a></div>
+      </sc-if>
+      <div class="page-head"><div class="stack g-1"><h1 class="h1">Abonnement &amp; factures</h1></div></div>
+      <div class="page-body">
+        <div class="split" style="align-items: start">
+          <section class="card card-dark stack g-5" style="padding: 28px" aria-labelledby="ab">
+            <div class="row between"><span class="eyebrow" style="color: #B6C2AA">Offre actuelle</span><span class="badge {{planTone}}">{{planState}}</span></div>
+            <div class="row between g-4" style="align-items: flex-end"><h2 id="ab" class="d2" style="color: #FFFFFF; font-size: 44px">Croissance</h2><div class="stack" style="gap: 0; text-align: right"><span class="price" style="color: #FFFFFF; font-size: 32px">[XXX] €</span><span class="sm" style="color: #B6C2AA">HT / mois</span></div></div>
+            <div class="grid-3" style="gap: 12px">
+              <div class="stack" style="gap: 2px; padding: 14px; background: #223329; border-radius: 10px"><span class="xs" style="color: #9AAA8C">{{dueLabel}}</span><span class="strong" style="color: #FFFFFF">{{dueDate}}</span></div>
+              <div class="stack" style="gap: 2px; padding: 14px; background: #223329; border-radius: 10px"><span class="xs" style="color: #9AAA8C">Clips ce mois</span><span class="strong" style="color: #FFFFFF">24 / [40]</span></div>
+              <div class="stack" style="gap: 2px; padding: 14px; background: #223329; border-radius: 10px"><span class="xs" style="color: #9AAA8C">Client depuis</span><span class="strong" style="color: #FFFFFF">juillet 2026</span></div>
+            </div>
+            <div class="row g-3"><a class="btn btn-sage" href="ClientPayment.dc.html">{{payCta}}</a><a class="btn btn-on-dark" href="Pricing.dc.html">Changer d'offre</a><button class="btn btn-on-dark" style="border: 0; margin-left: auto">Résilier</button></div>
+          </section>
+          <section class="card stack g-4" aria-labelledby="fi">
+            <div class="row between"><h2 id="fi" class="h3">Informations de facturation</h2><button class="btn btn-ghost btn-sm"><span class="ic ic-sm ic-edit"></span>Modifier</button></div>
+            <dl class="dl" style="margin: 0"><dt>Titulaire</dt><dd>Léa Martin EI</dd><dt>Adresse</dt><dd>[Adresse de facturation]</dd><dt>N° TVA</dt><dd class="subtle">Non renseigné</dd><dt>E-mail</dt><dd>lea.martin@exemple.fr</dd></dl>
+            <div class="callout callout-info" style="font-size: 13px"><span class="ic ic-sm ic-bank"></span><span>Paiement par virement. Votre référence permanente : <b class="mono">PEAK-LM</b> + mois.</span></div>
+          </section>
+        </div>
+
+        <section class="stack g-3" aria-labelledby="hist">
+          <h2 id="hist" class="h2">Paiements &amp; factures</h2>
+          <div class="tbl-wrap tbl-cards">
+            <table class="tbl">
+              <thead><tr><th>Période</th><th>Référence</th><th class="r">Montant</th><th>Paiement</th><th>Déposé le</th><th class="r">Facture</th></tr></thead>
+              <tbody>
+                <sc-for list="{{rows}}" as="r" hint-placeholder-count="4">
+                  <tr><td class="first strong">{{r.m}}</td><td class="mono sm">{{r.ref}}</td><td class="r num">{{r.amt}}</td><td><span class="badge st-{{r.s}}">{{r.sl}}</span></td><td class="subtle">{{r.d}}</td><td class="r"><sc-if value="{{r.inv}}" hint-placeholder-val="{{true}}"><a class="btn btn-ghost btn-sm" href="#"><span class="ic ic-sm ic-download"></span>PDF</a></sc-if><sc-if value="{{r.noInv}}" hint-placeholder-val="{{false}}"><span class="xs subtle">Après validation</span></sc-if></td></tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"expire":{"editor":"boolean","default":false},"$preview":{"width":1440,"height":1400}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const ex = this.props.expire ?? false;
+    const rows = [
+      { m: 'Novembre 2026', ref: 'PEAK-LM-2611', amt: '[XXX,00] €', s: 'attente', sl: 'En attente', d: '—' },
+      { m: 'Octobre 2026', ref: 'PEAK-LM-2610', amt: '[XXX,00] €', s: 'paye', sl: 'Validé', d: '20/10/2026' },
+      { m: 'Septembre 2026', ref: 'PEAK-LM-2609', amt: '[XXX,00] €', s: 'paye', sl: 'Validé', d: '22/09/2026' },
+      { m: 'Août 2026', ref: 'PEAK-LM-2608', amt: '[XXX,00] €', s: 'refuse', sl: 'Refusé', d: '21/08/2026' },
+      { m: 'Août 2026', ref: 'PEAK-LM-2608', amt: '[XXX,00] €', s: 'paye', sl: 'Validé', d: '23/08/2026' }
+    ].map((r) => ({ ...r, inv: r.s === 'paye', noInv: r.s !== 'paye' }));
+    return {
+      expire: ex, rows,
+      planState: ex ? 'Expirée' : 'Active', planTone: ex ? 't-red' : 't-green',
+      dueLabel: ex ? 'Expirée le' : 'Prochaine échéance', dueDate: ex ? '30/09/2026' : '25/11/2026',
+      payCta: ex ? 'Renouveler par virement' : 'Payer novembre'
+    };
+  }
+}
+</script>
+</body>
+</html>

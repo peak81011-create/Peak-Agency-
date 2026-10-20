@@ -1,0 +1,191 @@
+{
+  "meta": {
+    "siteName": "Peak Clipping Agency",
+    "description": "Vos lives et vidéos longues transformés en clips verticaux, publiés chaque jour sur des comptes dédiés."
+  },
+  "common": {
+    "wordmark": "Clipping Agency",
+    "homeAria": "Peak Clipping Agency — accueil",
+    "language": "Langue",
+    "languageShort": { "fr": "FR", "en": "EN" },
+    "languageLong": { "fr": "Français", "en": "English" },
+    "login": "Se connecter",
+    "logout": "Se déconnecter",
+    "signup": "Créer un compte",
+    "start": "Démarrer",
+    "mySpace": "Mon espace",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "notifications": "Notifications",
+    "save": "Enregistrer",
+    "saved": "Modifications enregistrées.",
+    "cancel": "Annuler",
+    "back": "Retour",
+    "continue": "Continuer",
+    "loading": "Chargement…",
+    "comingSoon": "Cette section arrive dans une prochaine phase.",
+    "skipToContent": "Aller au contenu"
+  },
+  "nav": {
+    "how": "Comment ça marche",
+    "pricing": "Offres",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "mainNav": "Navigation du site",
+    "appNav": "Navigation principale",
+    "mobileNav": "Navigation mobile",
+    "dashboard": "Tableau de bord",
+    "overview": "Vue d’ensemble",
+    "account": "Mon compte",
+    "groups": { "steering": "Pilotage", "team": "Équipe", "settings": "Configuration" }
+  },
+  "footer": {
+    "tagline": "Vos lives et vidéos longues transformés en clips verticaux, publiés chaque jour sur des comptes dédiés.",
+    "agency": "Agence",
+    "space": "Espace",
+    "legal": "Légal",
+    "legalNotice": "Mentions légales",
+    "terms": "CGV",
+    "privacy": "Confidentialité",
+    "copyright": "© {year} Peak Clipping Agency"
+  },
+  "roles": {
+    "owner": "Propriétaire",
+    "assistant": "Assistante",
+    "prospector": "Prospecteur",
+    "editor": "Monteur",
+    "client": "Client"
+  },
+  "areas": {
+    "owner": "Admin · contrôle total",
+    "assistant": "Assistante",
+    "prospector": "Prospecteur",
+    "editor": "Monteur",
+    "client": "Espace client"
+  },
+  "status": {
+    "client": {
+      "inscrit": "Inscrit",
+      "attente_paiement": "En attente de paiement",
+      "paiement_a_verifier": "Paiement à vérifier",
+      "actif": "Actif",
+      "grace": "Délai de grâce",
+      "lecture_seule": "Lecture seule",
+      "suspendu": "Suspendu",
+      "archive": "Archivé"
+    },
+    "payment": {
+      "en_attente": "En attente",
+      "a_verifier": "À vérifier",
+      "valide": "Validé",
+      "refuse": "Refusé"
+    }
+  },
+  "home": {
+    "eyebrow": "Agence de clipping",
+    "title": "Vos lives deviennent des clips qui font grandir votre audience.",
+    "lead": "Nous récupérons vos vidéos longues et vos lives, les découpons en clips verticaux et les publions sur des comptes TikTok, Reels et Shorts dédiés.",
+    "ctaPrimary": "Commencer",
+    "ctaSecondary": "J’ai déjà un compte"
+  },
+  "auth": {
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "newPassword": "Nouveau mot de passe",
+    "fullName": "Nom complet",
+    "creatorName": "Nom de créateur",
+    "passwordHint": "12 caractères minimum, avec au moins un chiffre et un symbole.",
+    "backToLogin": "Retour à la connexion",
+    "login": {
+      "eyebrow": "Connexion",
+      "title": "Bon retour",
+      "lead": "Clients et équipe utilisent le même accès.",
+      "forgot": "Mot de passe oublié ?",
+      "submit": "Se connecter",
+      "noAccount": "Pas encore client ?",
+      "createAccount": "Créer un compte"
+    },
+    "signup": {
+      "eyebrow": "Inscription",
+      "title": "Créer votre espace",
+      "lead": "Vous choisirez votre offre juste après.",
+      "acceptTerms": "J’accepte les <terms>CGV</terms> et la <privacy>politique de confidentialité</privacy>.",
+      "submit": "Créer mon compte",
+      "hasAccount": "Déjà un compte ?",
+      "loginLink": "Se connecter"
+    },
+    "checkEmail": {
+      "eyebrow": "Vérification",
+      "title": "Vérifiez votre boîte mail",
+      "lead": "Nous venons d’envoyer un lien de confirmation. Cliquez dessus pour activer votre compte, puis connectez-vous."
+    },
+    "forgot": {
+      "eyebrow": "Mot de passe oublié",
+      "title": "Réinitialiser",
+      "lead": "Entrez votre e-mail : vous recevrez un lien pour choisir un nouveau mot de passe.",
+      "submit": "Envoyer le lien",
+      "sent": "Si un compte existe pour cette adresse, un e-mail vient d’être envoyé. Pensez à vérifier vos spams."
+    },
+    "reset": {
+      "eyebrow": "Nouveau mot de passe",
+      "title": "Choisir un mot de passe",
+      "lead": "Il remplacera l’ancien immédiatement.",
+      "submit": "Enregistrer le mot de passe",
+      "done": "Mot de passe modifié."
+    },
+    "mfa": {
+      "eyebrow": "Double authentification",
+      "challengeTitle": "Entrez votre code",
+      "challengeLead": "Code à 6 chiffres de votre application d’authentification.",
+      "enrollTitle": "Activez la double authentification",
+      "enrollLead": "Obligatoire pour le compte propriétaire. Scannez ce QR code avec une application d’authentification (Google Authenticator, 1Password, Bitwarden…), puis saisissez le code affiché.",
+      "secretLabel": "Ou saisissez cette clé manuellement",
+      "code": "Code à 6 chiffres",
+      "submit": "Vérifier",
+      "lost": "Plus accès à votre application ? Un autre propriétaire (ou le support Supabase) peut réinitialiser votre double authentification."
+    },
+    "errors": {
+      "invalidCredentials": "E-mail ou mot de passe incorrect.",
+      "emailNotConfirmed": "Votre e-mail n’est pas encore confirmé. Cliquez sur le lien reçu par e-mail.",
+      "rateLimited": "Trop de tentatives. Réessayez dans quelques minutes.",
+      "generic": "Une erreur est survenue. Réessayez.",
+      "invalidCode": "Code incorrect ou expiré.",
+      "linkInvalid": "Ce lien n’est plus valide. Demandez-en un nouveau.",
+      "accountDisabled": "Ce compte est désactivé. Contactez l’agence."
+    }
+  },
+  "validation": {
+    "required": "Champ obligatoire.",
+    "email": "Adresse e-mail invalide.",
+    "passwordTooShort": "12 caractères minimum.",
+    "passwordDigit": "Ajoutez au moins un chiffre.",
+    "passwordSymbol": "Ajoutez au moins un symbole.",
+    "termsRequired": "Vous devez accepter les CGV et la politique de confidentialité.",
+    "tooLong": "Texte trop long.",
+    "code": "Le code contient 6 chiffres."
+  },
+  "dashboard": {
+    "welcome": "Bonjour {name}",
+    "clientLockedTitle": "Votre espace sera débloqué après validation du paiement",
+    "clientLockedLead": "Complétez votre profil, choisissez une offre et effectuez le virement. Dès que l’agence a vérifié la réception, tout votre espace s’ouvre.",
+    "clientStatus": "Statut de votre compte",
+    "staffLead": "Voici votre espace de travail. Les modules arrivent au fil des phases de construction.",
+    "permissionsTitle": "Vos permissions"
+  },
+  "account": {
+    "title": "Mon compte",
+    "profile": "Profil",
+    "language": "Langue de l’interface et des e-mails",
+    "security": "Sécurité",
+    "mfaEnabled": "Double authentification activée.",
+    "mfaDisabled": "Double authentification non activée.",
+    "mfaEnable": "Activer la double authentification"
+  },
+  "errors": {
+    "notFoundTitle": "Page introuvable",
+    "notFoundLead": "Le lien est peut-être incorrect, ou la page a été déplacée.",
+    "forbiddenTitle": "Accès refusé",
+    "forbiddenLead": "Vous n’avez pas la permission d’accéder à cette page.",
+    "backHome": "Revenir à l’accueil"
+  }
+}

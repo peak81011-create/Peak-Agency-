@@ -1,0 +1,83 @@
+-- =============================================================================
+-- Données de référence (pas des données de démo) : catalogue des permissions,
+-- permissions par défaut des rôles, paramètres par défaut (champs légaux vides).
+-- Le catalogue doit rester identique à src/lib/auth/permission-catalog.ts.
+-- =============================================================================
+
+insert into public.permissions (key, grp, sort_order) values
+  ('clients.read', 'clients', 10),
+  ('clients.read_all', 'clients', 20),
+  ('clients.create', 'clients', 30),
+  ('clients.update', 'clients', 40),
+  ('clients.manage_subscription', 'clients', 50),
+  ('clients.internal_notes', 'clients', 60),
+  ('clients.view_as', 'clients', 70),
+  ('payments.read', 'payments', 80),
+  ('payments.validate', 'payments', 90),
+  ('payments.submit_proof', 'payments', 100),
+  ('videos.read', 'content', 110),
+  ('videos.upload', 'content', 120),
+  ('clips.read', 'content', 130),
+  ('clips.create', 'content', 140),
+  ('clips.validate', 'content', 150),
+  ('clips.publish', 'content', 160),
+  ('accounts.read', 'accounts', 170),
+  ('accounts.manage', 'accounts', 180),
+  ('stats.write', 'accounts', 190),
+  ('requests.read', 'requests', 200),
+  ('requests.create', 'requests', 210),
+  ('requests.manage', 'requests', 220),
+  ('tasks.assign', 'team', 230),
+  ('tasks.read_all', 'team', 240),
+  ('users.invite', 'team', 250),
+  ('users.manage', 'team', 260),
+  ('permissions.manage', 'team', 270),
+  ('prospects.work', 'prospecting', 280),
+  ('prospects.assign', 'prospecting', 290),
+  ('prospects.import', 'prospecting', 300),
+  ('prospects.read_all', 'prospecting', 310),
+  ('templates.manage', 'prospecting', 320),
+  ('payouts.read_own', 'money', 330),
+  ('payouts.manage', 'money', 340),
+  ('plans.manage', 'admin', 350),
+  ('content.update', 'admin', 360),
+  ('settings.update', 'admin', 370),
+  ('reports.view_all', 'admin', 380),
+  ('activity.read', 'admin', 390),
+  ('api_keys.manage', 'admin', 400);
+
+insert into public.role_permissions (role, permission) values
+  ('assistant', 'clients.read'),
+  ('assistant', 'clients.internal_notes'),
+  ('assistant', 'videos.read'),
+  ('assistant', 'clips.read'),
+  ('assistant', 'accounts.read'),
+  ('assistant', 'stats.write'),
+  ('assistant', 'requests.read'),
+  ('assistant', 'requests.manage'),
+  ('assistant', 'payouts.read_own'),
+  ('prospector', 'prospects.work'),
+  ('prospector', 'payouts.read_own'),
+  ('editor', 'clients.read'),
+  ('editor', 'clients.internal_notes'),
+  ('editor', 'videos.read'),
+  ('editor', 'clips.read'),
+  ('editor', 'clips.create'),
+  ('editor', 'clips.publish'),
+  ('editor', 'accounts.read'),
+  ('editor', 'stats.write'),
+  ('editor', 'payouts.read_own'),
+  ('client', 'payments.submit_proof'),
+  ('client', 'videos.upload'),
+  ('client', 'requests.create'),
+  ('client', 'clips.validate');
+
+-- Paramètres : tout est modifiable par l'admin. Rien n'est supposé
+-- (SIRET, adresse, TVA, IBAN restent vides tant que l'admin ne les a pas saisis).
+insert into public.settings (key, value) values
+  ('company', '{"legal_name": "", "trade_name": "Peak Clipping Agency", "legal_form": "", "siret": "", "address": "", "vat_number": "", "vat_mention": "", "email": "", "phone": "", "publication_director": "", "host": ""}'),
+  ('bank', '{"holder": "", "iban": "", "bic": "", "bank_name": ""}'),
+  ('billing', '{"payment_reference_prefix": "PEAK", "invoice_prefix": "F", "grace_days": 7, "reminder_days_before": 7, "currency": "EUR"}'),
+  ('notifications', '{"admin_email": ""}'),
+  ('uploads', '{"max_video_bytes": 10737418240}'),
+  ('prospecting', '{"follow_up_days": 3}');

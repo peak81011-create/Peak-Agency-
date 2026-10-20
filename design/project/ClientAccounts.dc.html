@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Mes comptes</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="client" active="accounts" hint-size="100%,900px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Espace client" crumb="Mes comptes" initials="LM" hint-size="100%,69px"></dc-import>
+      <div class="page-head"><div class="stack g-1"><h1 class="h1">Mes comptes</h1><span class="sm subtle">Comptes créés et animés par l'agence pour diffuser vos clips.</span></div></div>
+      <div class="page-body">
+        <div class="grid-3">
+          <sc-for list="{{accounts}}" as="a" hint-placeholder-count="3">
+            <article class="card stack g-5" style="padding: 24px">
+              <div class="row between"><span class="plat {{a.pc}}" style="height: 26px; font-size: 12px">{{a.p}}</span><span class="badge {{a.tone}}">{{a.state}}</span></div>
+              <div class="row g-3"><span class="av av-lg av-dark">{{a.ini}}</span><div class="stack" style="gap: 0; min-width: 0"><span class="h2 trunc">{{a.handle}}</span><span class="sm subtle">Créé le {{a.created}}</span></div></div>
+              <div class="grid-2" style="gap: 12px">
+                <div class="stack" style="gap: 0; padding: 12px; background: #F4F6F1; border-radius: 10px"><span class="xs subtle">Abonnés</span><span class="h2 num">{{a.subs}}</span><span class="delta">{{a.delta}}</span></div>
+                <div class="stack" style="gap: 0; padding: 12px; background: #F4F6F1; border-radius: 10px"><span class="xs subtle">Clips postés</span><span class="h2 num">{{a.clips}}</span><span class="xs subtle">{{a.views}} vues</span></div>
+              </div>
+              <div class="row g-2"><a class="btn btn-secondary btn-sm grow" href="#"><span class="ic ic-sm ic-ext"></span>Ouvrir le compte</a><a class="btn btn-ghost btn-sm grow" href="ClientClips.dc.html">Voir les clips</a></div>
+            </article>
+          </sc-for>
+        </div>
+        <div class="callout callout-info"><span class="ic ic-info"></span><span>Les identifiants de ces comptes sont gérés par l'agence. Pour un changement de nom, de photo ou de bio, faites une <a href="ClientRequests.dc.html">demande</a>.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1200}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { accounts: [
+      { p: 'TikTok', pc: 'plat-tt', handle: '@leamrtn.clips', ini: 'TT', created: '02/07/2026', subs: '48,2 k', delta: '+1 320 / 30 j', clips: '64', views: '1,6 M', state: 'Actif', tone: 't-green' },
+      { p: 'Instagram', pc: 'plat-ig', handle: '@lea.moments', ini: 'IG', created: '02/07/2026', subs: '21,7 k', delta: '+610 / 30 j', clips: '41', views: '588 k', state: 'Actif', tone: 't-green' },
+      { p: 'YouTube', pc: 'plat-yt', handle: 'Léa Clips', ini: 'YT', created: '15/08/2026', subs: '6 940', delta: '+210 / 30 j', clips: '23', views: '214 k', state: 'Actif', tone: 't-green' }
+    ] };
+  }
+}
+</script>
+</body>
+</html>

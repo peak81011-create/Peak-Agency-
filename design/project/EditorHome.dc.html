@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Monteur — mes clips à faire</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="monteur" active="todo" hint-size="100%,800px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Monteur" crumb="Mes clips à faire" initials="TL" hint-size="100%,69px"></dc-import>
+      <div class="page-head"><div class="stack g-1"><span class="sm subtle">6 clips à livrer · triés par échéance</span><h1 class="h1">Mes clips à faire</h1></div></div>
+      <div class="page-body">
+        <div class="grid-3">
+          <div class="card stat"><span class="stat-label">Livrés ce mois</span><span class="stat-value">84</span></div>
+          <div class="card stat"><span class="stat-label">Livrés à l'heure</span><span class="stat-value">98 %</span></div>
+          <div class="card stat"><span class="stat-label">Rejetés à reprendre</span><span class="stat-value" style="color: #94271C">1</span></div>
+        </div>
+        <sc-for list="{{groups}}" as="g" hint-placeholder-count="3">
+          <section class="stack g-3">
+            <h2 class="h3 row g-2" style="color: {{g.c}}"><span class="ic ic-sm {{g.icon}}"></span>{{g.t}}<span class="xs subtle" style="font-weight: 500">· {{g.n}}</span></h2>
+            <div class="card card-pad-0">
+              <sc-for list="{{g.items}}" as="c" hint-placeholder-count="2">
+                <a class="row g-4" href="EditorClip.dc.html" style="padding: 14px 18px; border-bottom: 1px solid #EBEFE6; text-decoration: none; color: #19261F; flex-wrap: nowrap; min-height: 72px">
+                  <div class="thumb {{c.th}}" style="width: 40px; padding: 0; border-radius: 6px; flex: none"></div>
+                  <div class="stack grow" style="gap: 4px; min-width: 0"><span class="strong trunc">{{c.t}}</span><div class="row g-2 xs subtle"><span>{{c.client}}</span><span class="plat {{c.pc}}" style="height: 18px; font-size: 10px">{{c.p}}</span><span class="hide-m">{{c.src}}</span></div></div>
+                  <span class="badge st-{{c.s}} hide-m">{{c.sl}}</span>
+                  <span class="sm strong" style="color: {{g.c}}; white-space: nowrap">{{c.due}}</span>
+                  <span class="ic ic-chev-r subtle"></span>
+                </a>
+              </sc-for>
+            </div>
+          </section>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const C = (t, client, p, pc, src, s, sl, due, th) => ({ t, client, p, pc, src, s, sl, due, th: 'th-' + th });
+    return { groups: [
+      { t: 'À reprendre', icon: 'ic-refresh', c: '#94271C', n: 1, items: [C('Réaction au clash', 'Hugo Vasseur', 'TikTok', 'plat-tt', 'Live du 12/10 · 0:42:10', 'rejete', 'Rejeté', 'Aujourd’hui', 6)] },
+      { t: 'Aujourd’hui', icon: 'ic-clock', c: '#19261F', n: 2, items: [C('Best-of live du 14/10', 'Léa Martin', 'TikTok', 'plat-tt', 'live-14-oct · 1:05:00', 'montage', 'En montage', '18:00', 2), C('Mes 5 apps préférées', 'Léa Martin', 'Reels', 'plat-ig', 'podcast-ep42 · 0:12:30', 'montage', 'En montage', '20:00', 4)] },
+      { t: 'Cette semaine', icon: 'ic-cal', c: '#435047', n: 3, items: [C('Le setup à 300 €', 'TechGuy', 'Shorts', 'plat-yt', 'Live du 18/10', 'planifie', 'Planifié', 'Jeu. 22', 3), C('Je teste un burger à 50 €', 'Maxime Roux', 'TikTok', 'plat-tt', 'Vlog 17/10', 'planifie', 'Planifié', 'Ven. 23', 1), C('Live du 24/10 (à découper)', 'Léa Martin', 'Shorts', 'plat-yt', 'À venir', 'planifie', 'Planifié', 'Lun. 26', 5)] }
+    ] };
+  }
+}
+</script>
+</body>
+</html>

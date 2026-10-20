@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Mes clips</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="client" active="clips" hint-size="100%,900px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Espace client" crumb="Mes clips" initials="LM" hint-size="100%,69px"></dc-import>
+      <div class="page-head">
+        <div class="stack g-1"><h1 class="h1">Mes clips</h1><span class="sm subtle">128 publiés · 14 à venir</span></div>
+        <a class="btn btn-primary" href="ClientUpload.dc.html"><span class="ic ic-sm ic-upload"></span>Envoyer une vidéo</a>
+      </div>
+      <div class="page-body">
+        <div class="tabs" role="tablist">
+          <button class="tab {{tabPub}}" role="tab" aria-selected="{{selPub}}" onClick="{{goPub}}">Publiés<span class="cnt">128</span></button>
+          <button class="tab {{tabUp}}" role="tab" aria-selected="{{selUp}}" onClick="{{goUp}}">À venir<span class="cnt">14</span></button>
+        </div>
+
+        <div class="row between g-3">
+          <div class="toolbar">
+            <button class="chip on">Toutes plateformes</button><button class="chip">TikTok</button><button class="chip">Reels</button><button class="chip">Shorts</button>
+            <select class="select" aria-label="Compte" style="width: auto; min-height: 36px; padding-top: 6px; padding-bottom: 6px; font-size: 13px"><option>Tous les comptes</option></select>
+          </div>
+          <sc-if value="{{isUp}}" hint-placeholder-val="{{false}}">
+            <div class="seg" role="group" aria-label="Affichage"><button class="{{vList}}" onClick="{{goList}}"><span class="ic ic-sm ic-list"></span>Liste</button><button class="{{vCal}}" onClick="{{goCal}}"><span class="ic ic-sm ic-cal"></span>Calendrier</button></div>
+          </sc-if>
+          <sc-if value="{{isPub}}" hint-placeholder-val="{{true}}">
+            <select class="select" aria-label="Trier" style="width: auto; min-height: 36px; padding-top: 6px; padding-bottom: 6px; font-size: 13px"><option>Plus récents</option><option>Plus vus</option></select>
+          </sc-if>
+        </div>
+
+        <sc-if value="{{isPub}}" hint-placeholder-val="{{true}}">
+          <div style="display: grid; gap: 20px 16px; grid-template-columns: repeat(auto-fill, minmax(min(150px, 100%), 1fr))">
+            <sc-for list="{{published}}" as="c" hint-placeholder-count="12">
+              <a class="clip-card" href="ClientClipDetail.dc.html">
+                <div class="thumb {{c.th}}"><div class="ph"><span class="ic ic-xl ic-play"></span></div><div class="top"><span class="plat {{c.pc}}">{{c.p}}</span><span class="dur">{{c.d}}</span></div><span class="hook" style="font-size: 12px">{{c.hook}}</span></div>
+                <div class="stack" style="gap: 2px">
+                  <span class="xs subtle trunc">{{c.acc}}</span>
+                  <div class="clip-meta"><span class="row g-1 strong" style="color: #19261F"><span class="ic ic-sm ic-eye"></span><span class="num">{{c.v}}</span></span><span>{{c.date}}</span></div>
+                </div>
+              </a>
+            </sc-for>
+          </div>
+          <div class="row" style="justify-content: center"><button class="btn btn-secondary">Charger plus de clips</button></div>
+        </sc-if>
+
+        <sc-if value="{{showList}}" hint-placeholder-val="{{false}}">
+          <div class="tbl-wrap tbl-cards">
+            <table class="tbl">
+              <thead><tr><th>Publication</th><th>Clip</th><th>Plateforme</th><th>Compte</th><th>Statut</th><th class="r">Action</th></tr></thead>
+              <tbody>
+                <sc-for list="{{upcoming}}" as="u" hint-placeholder-count="7">
+                  <tr>
+                    <td class="num"><b>{{u.date}}</b> <span class="subtle">{{u.time}}</span></td>
+                    <td class="first"><a class="strong" href="ClientClipDetail.dc.html" style="color: #19261F; text-decoration: none">{{u.t}}</a></td>
+                    <td><span class="plat {{u.pc}}">{{u.p}}</span></td>
+                    <td class="subtle">{{u.acc}}</td>
+                    <td><span class="badge st-{{u.s}}">{{u.sl}}</span></td>
+                    <td class="r"><sc-if value="{{u.canValidate}}" hint-placeholder-val="{{false}}"><a class="btn btn-primary btn-sm" href="ClientClipDetail.dc.html">Valider</a></sc-if><sc-if value="{{u.noAction}}" hint-placeholder-val="{{true}}"><a class="btn btn-ghost btn-sm" href="ClientClipDetail.dc.html">Voir</a></sc-if></td>
+                  </tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{showCal}}" hint-placeholder-val="{{false}}">
+          <div class="stack g-3">
+            <div class="row between"><span class="h2">Octobre 2026</span><div class="row g-2"><button class="btn btn-secondary btn-sm btn-icon" aria-label="Mois précédent"><span class="ic ic-sm ic-chev-l"></span></button><button class="btn btn-secondary btn-sm">Aujourd'hui</button><button class="btn btn-secondary btn-sm btn-icon" aria-label="Mois suivant"><span class="ic ic-sm ic-chev-r"></span></button></div></div>
+            <div class="cal">
+              <div class="cal-h">Lun</div><div class="cal-h">Mar</div><div class="cal-h">Mer</div><div class="cal-h">Jeu</div><div class="cal-h">Ven</div><div class="cal-h">Sam</div><div class="cal-h">Dim</div>
+              <sc-for list="{{days}}" as="d" hint-placeholder-count="35">
+                <div class="cal-d {{d.cls}}"><span class="n">{{d.n}}</span><sc-for list="{{d.ev}}" as="e" hint-placeholder-count="0"><span class="cal-ev st-{{e.s}}">{{e.l}}</span></sc-for></div>
+              </sc-for>
+            </div>
+            <div class="row g-4 xs subtle"><span class="row g-2"><span class="badge st-programme">Programmé</span></span><span class="row g-2"><span class="badge st-avalider">À valider</span></span><span class="row g-2"><span class="badge st-montage">En montage</span></span><span class="row g-2"><span class="badge st-publie">Publié</span></span></div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"tab":{"editor":"enum","options":["publies","avenir"],"default":"publies"},"view":{"editor":"enum","options":["liste","calendrier"],"default":"liste"},"$preview":{"width":1440,"height":1900}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { tab: null, view: null }; }
+  renderVals() {
+    const tab = this.state.tab ?? (this.props.tab ?? 'publies');
+    const view = this.state.view ?? (this.props.view ?? 'liste');
+    const hooks = ['Personne ne s’y attendait', 'Le moment où tout bascule', '3 erreurs que je regrette', 'Mon chat en plein live', 'Ma routine du matin', 'Il a vraiment dit ça', 'Je teste le pire resto', 'Q&A : vos questions', 'Fou rire en direct', 'Le setup à 300 €', 'Je réponds aux haters', 'Ce que je gagne vraiment'];
+    const P = [['TikTok', 'plat-tt', '@leamrtn.clips'], ['Reels', 'plat-ig', '@lea.moments'], ['Shorts', 'plat-yt', 'Léa Clips']];
+    const views = ['312 k', '84,2 k', '41,7 k', '126 k', '22,9 k', '58,1 k', '203 k', '17,4 k', '96,3 k', '33,8 k', '71,0 k', '149 k'];
+    const published = hooks.map((h, i) => { const p = P[i % 3]; return { hook: h, p: p[0], pc: p[1], acc: p[2], th: 'th-' + ((i % 6) + 1), d: '0:' + (28 + (i * 7) % 30), v: views[i], date: (19 - i) + '/10' }; });
+    const upcoming = [
+      { date: 'Mar 20/10', time: '19:00', t: 'Quand le chat décide de mon menu', p: 'TikTok', pc: 'plat-tt', acc: '@leamrtn.clips', s: 'programme', sl: 'Programmé' },
+      { date: 'Mer 21/10', time: '12:30', t: 'Le pire conseil qu’on m’ait donné', p: 'Reels', pc: 'plat-ig', acc: '@lea.moments', s: 'avalider', sl: 'À valider' },
+      { date: 'Jeu 22/10', time: '18:00', t: 'Réaction : mes vieux vlogs', p: 'Shorts', pc: 'plat-yt', acc: 'Léa Clips', s: 'avalider', sl: 'À valider' },
+      { date: 'Jeu 22/10', time: '19:00', t: 'Le live le plus chaotique', p: 'TikTok', pc: 'plat-tt', acc: '@leamrtn.clips', s: 'valide', sl: 'Validé' },
+      { date: 'Ven 23/10', time: '19:00', t: 'Best-of live du 14/10', p: 'TikTok', pc: 'plat-tt', acc: '@leamrtn.clips', s: 'montage', sl: 'En montage' },
+      { date: 'Sam 24/10', time: '11:00', t: 'Mes 5 apps préférées', p: 'Reels', pc: 'plat-ig', acc: '@lea.moments', s: 'montage', sl: 'En montage' },
+      { date: 'Lun 26/10', time: '18:00', t: 'Live du 24/10 (à découper)', p: 'Shorts', pc: 'plat-yt', acc: 'Léa Clips', s: 'planifie', sl: 'Planifié' }
+    ].map((u) => ({ ...u, canValidate: u.s === 'avalider', noAction: u.s !== 'avalider' }));
+    const ev = { 14: [['publie', 'TikTok 19:00']], 15: [['publie', 'Reels 12:30']], 16: [['publie', 'Reels']], 17: [['publie', 'TikTok'], ['publie', 'Shorts']], 18: [['publie', 'Shorts']], 19: [['publie', 'TikTok'], ['publie', 'Reels']], 20: [['programme', '19:00 TikTok']], 21: [['avalider', '12:30 Reels']], 22: [['avalider', '18:00 Shorts'], ['valide', '19:00 TikTok']], 23: [['montage', '19:00 TikTok']], 24: [['montage', '11:00 Reels']], 26: [['planifie', '18:00 Shorts']], 28: [['planifie', 'TikTok']] };
+    const days = [];
+    for (let i = 0; i < 35; i++) {
+      const d = i - 2;
+      if (d < 1) days.push({ n: 28 + i, cls: 'out', ev: [] });
+      else if (d > 31) days.push({ n: d - 31, cls: 'out', ev: [] });
+      else days.push({ n: d, cls: d === 20 ? 'today' : '', ev: (ev[d] || []).map((e) => ({ s: e[0], l: e[1] })) });
+    }
+    return {
+      isPub: tab === 'publies', isUp: tab === 'avenir',
+      tabPub: tab === 'publies' ? 'on' : '', tabUp: tab === 'avenir' ? 'on' : '',
+      selPub: tab === 'publies' ? 'true' : 'false', selUp: tab === 'avenir' ? 'true' : 'false',
+      goPub: () => this.setState({ tab: 'publies' }), goUp: () => this.setState({ tab: 'avenir' }),
+      showList: tab === 'avenir' && view === 'liste', showCal: tab === 'avenir' && view === 'calendrier',
+      vList: view === 'liste' ? 'on' : '', vCal: view === 'calendrier' ? 'on' : '',
+      goList: () => this.setState({ view: 'liste' }), goCal: () => this.setState({ view: 'calendrier' }),
+      published, upcoming, days
+    };
+  }
+}
+</script>
+</body>
+</html>

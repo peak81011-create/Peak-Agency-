@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Mes gains</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="monteur" active="earnings" hint-size="100%,800px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Monteur" crumb="Mes gains" initials="TL" hint-size="100%,69px"></dc-import>
+      <div class="page-head"><div class="stack g-1"><h1 class="h1">Mes gains</h1><span class="sm subtle">Relevé mensuel · versé le 5 du mois suivant</span></div><div class="row g-2"><select class="select" aria-label="Mois" style="width: auto"><option>Octobre 2026</option><option>Septembre 2026</option></select><button class="btn btn-secondary"><span class="ic ic-sm ic-download"></span>Relevé PDF</button></div></div>
+      <div class="page-body">
+        <div class="split" style="align-items: stretch">
+          <section class="card card-dark stack g-4" style="padding: 24px" aria-labelledby="tot">
+            <div class="row between"><span class="eyebrow" style="color: #B6C2AA">Octobre · en cours</span><span class="badge" style="background: #2E4436; color: #DDE3D5">Clôture le 31/10</span></div>
+            <h2 id="tot" class="price num" style="color: #FFFFFF; font-size: 56px">1 260 €</h2>
+            <div class="grid-3" style="gap: 10px">
+              <div class="stack" style="gap: 2px; padding: 12px; background: #223329; border-radius: 10px"><span class="xs" style="color: #9AAA8C">Clips validés</span><span class="h3 num" style="color: #FFFFFF">84 × 14 €</span></div>
+              <div class="stack" style="gap: 2px; padding: 12px; background: #223329; border-radius: 10px"><span class="xs" style="color: #9AAA8C">Bonus délais</span><span class="h3 num" style="color: #FFFFFF">+84 €</span></div>
+              <div class="stack" style="gap: 2px; padding: 12px; background: #223329; border-radius: 10px"><span class="xs" style="color: #9AAA8C">En attente</span><span class="h3 num" style="color: #FFFFFF">6 clips</span></div>
+            </div>
+          </section>
+          <section class="card" aria-labelledby="hist">
+            <div class="card-head"><h2 id="hist" class="h3">Mois précédents</h2></div>
+            <div class="stack" style="gap: 0">
+              <div class="row between" style="padding: 12px 0; border-bottom: 1px solid #EBEFE6"><span class="strong">Septembre 2026</span><span class="row g-3"><span class="num strong">1 148 €</span><span class="badge st-paye">Versé le 05/10</span></span></div>
+              <div class="row between" style="padding: 12px 0; border-bottom: 1px solid #EBEFE6"><span class="strong">Août 2026</span><span class="row g-3"><span class="num strong">962 €</span><span class="badge st-paye">Versé le 05/09</span></span></div>
+              <div class="row between" style="padding: 12px 0"><span class="strong">Juillet 2026</span><span class="row g-3"><span class="num strong">804 €</span><span class="badge st-paye">Versé le 05/08</span></span></div>
+            </div>
+          </section>
+        </div>
+        <section class="stack g-3" aria-labelledby="det">
+          <h2 id="det" class="h2">Détail d'octobre</h2>
+          <div class="tbl-wrap tbl-cards">
+            <table class="tbl">
+              <thead><tr><th>Date</th><th>Clip</th><th>Client</th><th>Statut</th><th class="r">Montant</th></tr></thead>
+              <tbody>
+                <sc-for list="{{rows}}" as="r" hint-placeholder-count="7">
+                  <tr><td class="subtle num">{{r.d}}</td><td class="first strong">{{r.t}}</td><td>{{r.c}}</td><td><span class="badge st-{{r.s}}">{{r.sl}}</span></td><td class="r num strong" style="color: {{r.col}}">{{r.amt}}</td></tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1200}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const R = (d, t, c, s, sl, amt) => ({ d, t, c, s, sl, amt, col: s === 'rejete' ? '#94271C' : s === 'avalider' ? '#5C685F' : '#19261F' });
+    return { rows: [
+      R('20/10', 'Le pire conseil qu’on m’ait donné', 'Léa Martin', 'avalider', 'À valider', 'en attente'),
+      R('19/10', 'Personne ne s’y attendait', 'Léa Martin', 'publie', 'Publié', '14 €'),
+      R('19/10', 'Le moment où tout bascule', 'Léa Martin', 'publie', 'Publié', '14 €'),
+      R('18/10', 'Je teste un burger à 50 €', 'Maxime Roux', 'programme', 'Programmé', '14 €'),
+      R('18/10', 'Réaction au clash', 'Hugo Vasseur', 'rejete', 'Rejeté', '0 €'),
+      R('17/10', 'Le setup à 300 €', 'TechGuy', 'publie', 'Publié', '14 €'),
+      R('16/10', 'Ma routine du matin', 'Léa Martin', 'publie', 'Publié', '14 €')
+    ] };
+  }
+}
+</script>
+</body>
+</html>

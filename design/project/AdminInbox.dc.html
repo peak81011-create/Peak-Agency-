@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Admin — demandes clients</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="admin" active="inbox" hint-size="100%,1000px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Admin" crumb="Demandes clients" initials="AD" hint-size="100%,69px"></dc-import>
+      <div class="page-head"><div class="stack g-1"><h1 class="h1">Demandes clients</h1><span class="sm subtle">5 ouvertes · 2 sans réponse · délai de réponse moyen 3 h 40</span></div></div>
+      <div class="page-body">
+        <div class="toolbar"><button class="chip on">Ouvertes · 5</button><button class="chip">Sans réponse · 2</button><button class="chip">Assignées à moi · 1</button><button class="chip">En attente du client · 1</button><button class="chip">Résolues</button><select class="select" aria-label="Catégorie" style="width: auto; min-height: 36px; padding-top: 6px; padding-bottom: 6px; font-size: 13px"><option>Toutes catégories</option></select></div>
+        <div class="row g-5" style="align-items: stretch">
+          <section class="card card-pad-0 stack" style="flex: 1 1 320px; max-width: 400px; min-width: 0" aria-label="Boîte de réception">
+            <sc-for list="{{items}}" as="r" hint-placeholder-count="5">
+              <a href="#" class="stack" style="gap: 6px; padding: 14px 16px; border-bottom: 1px solid #EBEFE6; text-decoration: none; color: #19261F; background: {{r.bg}}; border-left: 3px solid {{r.bl}}">
+                <div class="row between g-2"><span class="row g-2 sm strong"><span class="av av-sm">{{r.ini}}</span>{{r.c}}</span><span class="xs subtle">{{r.when}}</span></div>
+                <span class="{{r.weight}}">{{r.t}}</span>
+                <div class="row between g-2"><span class="xs subtle">{{r.cat}}</span><span class="badge {{r.tone}}">{{r.s}}</span></div>
+              </a>
+            </sc-for>
+          </section>
+          <section class="card stack g-4" style="flex: 999 1 480px; min-width: 0" aria-labelledby="th">
+            <div class="row between g-3" style="align-items: flex-start"><div class="stack g-1"><span class="xs subtle">#R-211 · Planning · Léa Martin</span><h2 id="th" class="h2">Prioriser le live du 24 octobre</h2></div><a class="btn btn-ghost btn-sm" href="AdminClientFile.dc.html">Fiche client<span class="ic ic-sm ic-chev-r"></span></a></div>
+            <div class="row g-3">
+              <div class="field" style="flex: 1 1 180px"><label class="label" for="as">Assignée à</label><select id="as" class="select"><option>Camille Roux</option><option>Alexandre</option></select></div>
+              <div class="field" style="flex: 1 1 180px"><label class="label" for="ss">Statut</label><select id="ss" class="select"><option>Reçue</option><option>En cours</option><option>En attente du client</option><option>Résolue</option></select></div>
+              <div class="field" style="flex: 1 1 180px"><label class="label" for="ps">Priorité</label><select id="ps" class="select"><option>Normale</option><option>Haute</option></select></div>
+            </div>
+            <div class="hr"></div>
+            <div class="thread">
+              <div class="msg"><span class="av av-sm">LM</span><div class="stack"><span class="meta">Léa Martin · hier 21:14</span><div class="bubble">Le live du 24 sera long (invitée surprise). Est-ce qu'on peut le traiter en premier ? Les meilleurs moments sont entre 1:30 et 2:15.</div></div></div>
+              <div class="msg me"><span class="av av-sm av-dark">CR</span><div class="stack" style="align-items: flex-end"><span class="meta">Note interne · Camille · 08:40</span><div class="bubble" style="background: #FAEACB; color: #714405; border-color: #EED39B">Théo est chargé jusqu'à jeudi, voir si Sami peut prendre.</div></div></div>
+            </div>
+            <div class="stack g-2">
+              <div class="row g-2"><div class="seg" role="group" aria-label="Type de message"><button class="on">Réponse au client</button><button>Note interne</button></div><select class="select" aria-label="Réponse type" style="width: auto; min-height: 36px; padding-top: 6px; padding-bottom: 6px; font-size: 13px; margin-left: auto"><option>Réponses types…</option></select></div>
+              <div class="composer"><label for="rp2" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Réponse</label><button class="btn btn-ghost btn-icon" aria-label="Joindre un fichier"><span class="ic ic-file"></span></button><textarea id="rp2" placeholder="Répondre à Léa…" rows="2"></textarea><button class="btn btn-primary"><span class="ic ic-sm ic-send"></span>Envoyer</button></div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const R = (o, on) => ({ ...o, bg: on ? '#F4F6F1' : '#FFFFFF', bl: on ? '#19261F' : 'transparent', weight: o.unread ? 'strong' : '' });
+    return { items: [
+      R({ ini: 'LM', c: 'Léa Martin', when: 'Hier', t: 'Prioriser le live du 24 octobre', cat: 'Planning', s: 'Sans réponse', tone: 't-amber', unread: true }, true),
+      R({ ini: 'SB', c: 'Studio Bastien', when: '2 h', t: 'Changer l’accroche des clips podcast', cat: 'Montage', s: 'Sans réponse', tone: 't-amber', unread: true }),
+      R({ ini: 'LM', c: 'Léa Martin', when: '19/10', t: 'Sous-titres anglais sur les Shorts', cat: 'Montage', s: 'En cours', tone: 't-blue' }),
+      R({ ini: 'HV', c: 'Hugo Vasseur', when: '18/10', t: 'Facture au nom de ma SASU', cat: 'Paiement', s: 'En attente client', tone: 't-violet' }),
+      R({ ini: 'MX', c: 'Maxime Roux', when: '17/10', t: 'Ajouter un compte YouTube', cat: 'Comptes', s: 'En cours', tone: 't-blue' })
+    ] };
+  }
+}
+</script>
+</body>
+</html>

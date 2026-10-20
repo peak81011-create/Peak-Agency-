@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Espaces employés — mobile</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk-c" style="font-family: Inter, system-ui, sans-serif; color: #19261F; width: 2760px; background: #E4E9DF; padding: 48px; display: flex; gap: 64px; align-items: flex-start">
+  <div class="phone"><span class="phone-cap">Assistante · mes tâches</span><div class="phone-frame"><dc-import name="AssistantHome" hint-size="390px,2200px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Prospecteur · aujourd'hui</span><div class="phone-frame"><dc-import name="ProspectorHome" hint-size="390px,1900px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Fiche prospect</span><div class="phone-frame"><dc-import name="ProspectSheet" hint-size="390px,2000px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Monteur · clips à faire</span><div class="phone-frame"><dc-import name="EditorHome" hint-size="390px,1600px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Clip à monter</span><div class="phone-frame"><dc-import name="EditorClip" hint-size="390px,2300px"></dc-import></div></div>
+  <div class="phone"><span class="phone-cap">Mes gains</span><div class="phone-frame"><dc-import name="Earnings" hint-size="390px,1700px"></dc-import></div></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":2760,"height":4200}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

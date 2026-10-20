@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Admin — équipe</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="admin" active="team" hint-size="100%,1000px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Admin" crumb="Équipe" initials="AD" hint-size="100%,69px"></dc-import>
+      <div class="page-head"><div class="stack g-1"><h1 class="h1">Équipe</h1><span class="sm subtle">6 membres · masse salariale d'octobre (prévisionnelle) : 4 785 €</span></div><button class="btn btn-primary"><span class="ic ic-sm ic-plus"></span>Inviter un membre</button></div>
+      <div class="page-body">
+        <div class="row g-5" style="align-items: flex-start">
+          <div class="tbl-wrap tbl-cards" style="flex: 1 1 420px; min-width: 0">
+            <table class="tbl">
+              <thead><tr><th>Membre</th><th>Rôle</th><th class="r">Clients</th><th>Ce mois</th><th class="r">Rémunération</th></tr></thead>
+              <tbody>
+                <sc-for list="{{team}}" as="m" hint-placeholder-count="6">
+                  <tr style="background: {{m.bg}}"><td class="first"><div class="cell-main"><span class="av av-sm {{m.avc}}">{{m.ini}}</span><div class="stack" style="gap: 0"><span class="t">{{m.n}}</span><span class="s">{{m.status}}</span></div></div></td><td><span class="badge plain {{m.tone}}">{{m.role}}</span></td><td class="r num">{{m.clients}}</td><td class="sm">{{m.kpi}}</td><td class="r num strong">{{m.pay}}</td></tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </div>
+
+          <aside class="card stack g-5" style="flex: 1 1 380px; max-width: 460px; min-width: 0; padding: 24px" aria-labelledby="emp">
+            <div class="row g-4"><span class="av av-lg av-dark">TL</span><div class="stack grow" style="gap: 2px"><h2 id="emp" class="h2">Théo Lambert</h2><span class="sm subtle">theo@peak-agency · depuis mai 2026</span></div><button class="btn btn-ghost btn-icon btn-sm" aria-label="Plus d'actions"><span class="ic ic-more"></span></button></div>
+            <div class="field"><label class="label" for="rl">Rôle</label><select id="rl" class="select"><option>Monteur</option><option>Assistante</option><option>Prospecteur</option></select></div>
+            <div class="stack g-2"><div class="row between"><span class="label">Clients attribués</span><button class="btn btn-ghost btn-sm"><span class="ic ic-sm ic-plus"></span>Attribuer</button></div>
+              <div class="row g-2"><span class="badge plain t-neutral">Léa Martin</span><span class="badge plain t-neutral">Maxime Roux</span><span class="badge plain t-neutral">TechGuy</span><span class="badge plain t-neutral">Inès Rahmani</span><span class="badge plain t-neutral">Amel M.</span></div>
+            </div>
+            <div class="stack g-3" style="padding: 16px; border-radius: 12px; background: #F4F6F1">
+              <div class="row between"><span class="h3">Rémunération d'octobre</span><span class="badge plain t-blue">En cours</span></div>
+              <div class="row between sm"><span class="muted">84 clips validés × 14 €</span><span class="num strong">1 176 €</span></div>
+              <div class="row between sm"><span class="muted">Bonus délais tenus (≥ 95 %)</span><span class="num strong">84 €</span></div>
+              <div class="row between sm"><span class="muted">Clips rejetés (2)</span><span class="num" style="color: #94271C">non payés</span></div>
+              <div class="hr"></div>
+              <div class="row between"><span class="strong">Total prévisionnel</span><span class="h2 num">1 260 €</span></div>
+            </div>
+            <div class="stack g-2"><span class="label">Activité</span>
+              <div class="feed">
+                <div class="feed-item"><span class="ic ic-sm ic-send subtle"></span><span class="grow sm">3 clips envoyés à valider · Léa Martin</span><span class="when">12 min</span></div>
+                <div class="feed-item"><span class="ic ic-sm ic-check subtle"></span><span class="grow sm">4 clips publiés · Maxime Roux</span><span class="when">2 h</span></div>
+                <div class="feed-item"><span class="ic ic-sm ic-download subtle"></span><span class="grow sm">A téléchargé live-14-oct-integral.mp4</span><span class="when">Hier</span></div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const M = (ini, n, role, tone, clients, kpi, pay, status, on, dark) => ({ ini, n, role, tone, clients, kpi, pay, status, bg: on ? '#F4F6F1' : 'transparent', avc: dark ? 'av-dark' : '' });
+    return { team: [
+      M('AD', 'Alexandre', 'Propriétaire', 't-forest', '27', '—', '—', 'Admin', false, true),
+      M('CR', 'Camille Roux', 'Assistante', 't-violet', '27', '38 tâches · 11 paiements', '1 400 €', 'En ligne', false, false),
+      M('TL', 'Théo Lambert', 'Monteur', 't-blue', '5', '84 clips · 98 % à l’heure', '1 260 €', 'En ligne', true, true),
+      M('SN', 'Sami Nouri', 'Monteur', 't-blue', '6', '71 clips · 91 % à l’heure', '1 065 €', 'Hors ligne', false, false),
+      M('YB', 'Yanis Benali', 'Prospecteur', 't-orange', '—', '612 messages · 4 signés', '640 €', 'En ligne', false, false),
+      M('MS', 'Mehdi S.', 'Prospecteur', 't-orange', '—', '488 messages · 2 signés', '420 €', 'Hors ligne', false, false)
+    ] };
+  }
+}
+</script>
+</body>
+</html>

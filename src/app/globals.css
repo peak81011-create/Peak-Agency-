@@ -1,0 +1,131 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+/* Expose les tokens comme utilitaires Tailwind : bg-primary, text-text-2,
+   rounded-lg, shadow-2, font-display, bg-t-amber-bg… */
+@theme inline {
+  /* Espacements : échelle Tailwind (1 = 4 px), identique à la base 4 de la maquette. */
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-subtle-foreground: var(--subtle-foreground);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+  --color-destructive-hover: var(--destructive-hover);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-hover: var(--sidebar-hover);
+  --color-sidebar-active: var(--sidebar-active);
+  --color-sidebar-active-foreground: var(--sidebar-active-foreground);
+  --color-paper: var(--paper);
+  --color-placeholder: var(--placeholder);
+
+  --color-forest-950: var(--forest-950);
+  --color-forest-900: var(--forest-900);
+  --color-forest-800: var(--forest-800);
+  --color-forest-700: var(--forest-700);
+  --color-forest-600: var(--forest-600);
+  --color-forest-500: var(--forest-500);
+  --color-sage-600: var(--sage-600);
+  --color-sage-500: var(--sage-500);
+  --color-sage-400: var(--sage-400);
+  --color-sage-300: var(--sage-300);
+  --color-sage-200: var(--sage-200);
+  --color-sage-100: var(--sage-100);
+  --color-sage-50: var(--sage-50);
+  --color-text: var(--text);
+  --color-text-2: var(--text-2);
+  --color-text-3: var(--text-3);
+
+  --color-t-neutral-bg: var(--t-neutral-bg);
+  --color-t-neutral-fg: var(--t-neutral-fg);
+  --color-t-blue-bg: var(--t-blue-bg);
+  --color-t-blue-fg: var(--t-blue-fg);
+  --color-t-amber-bg: var(--t-amber-bg);
+  --color-t-amber-fg: var(--t-amber-fg);
+  --color-t-green-bg: var(--t-green-bg);
+  --color-t-green-fg: var(--t-green-fg);
+  --color-t-violet-bg: var(--t-violet-bg);
+  --color-t-violet-fg: var(--t-violet-fg);
+  --color-t-teal-bg: var(--t-teal-bg);
+  --color-t-teal-fg: var(--t-teal-fg);
+  --color-t-red-bg: var(--t-red-bg);
+  --color-t-red-fg: var(--t-red-fg);
+  --color-t-indigo-bg: var(--t-indigo-bg);
+  --color-t-indigo-fg: var(--t-indigo-fg);
+  --color-t-orange-bg: var(--t-orange-bg);
+  --color-t-orange-fg: var(--t-orange-fg);
+  --color-t-forest-bg: var(--t-forest-bg);
+  --color-t-forest-fg: var(--t-forest-fg);
+  --color-plat-tiktok: var(--plat-tiktok);
+  --color-plat-instagram: var(--plat-instagram);
+  --color-plat-youtube: var(--plat-youtube);
+
+  --font-sans: var(--font-ui);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-code);
+
+  --radius-xs: var(--r-xs);
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+  --radius-xl: var(--r-xl);
+
+  --shadow-1: var(--sh-1);
+  --shadow-2: var(--sh-2);
+  --shadow-3: var(--sh-3);
+
+  --breakpoint-md: 760px;
+  --breakpoint-lg: 1080px;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-ui);
+    font-size: 15px;
+    line-height: 1.55;
+    font-feature-settings: "cv11", "ss01";
+  }
+  a {
+    text-underline-offset: 3px;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  /* Champs en 16 px sur mobile : évite le zoom automatique d'iOS */
+  @media (max-width: 759px) {
+    input,
+    select,
+    textarea {
+      font-size: 16px;
+    }
+  }
+}
+
+/* Typographie de titres (Archivo étiré) */
+@utility font-stretch-display {
+  font-stretch: 112%;
+}
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}

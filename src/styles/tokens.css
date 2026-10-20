@@ -1,0 +1,95 @@
+/* ==========================================================================
+   DESIGN TOKENS — seul fichier à modifier pour changer l'apparence du site.
+   Source : design/project/peak.css (maquette Claude Design).
+   Les composants n'utilisent que ces variables (via les classes Tailwind
+   définies dans globals.css), jamais de couleur en dur.
+   ========================================================================== */
+:root {
+  /* — Marque — */
+  --forest-950: #111a15;
+  --forest-900: #19261f;
+  --forest-800: #223329;
+  --forest-700: #2e4436;
+  --forest-600: #3d5747;
+  --forest-500: #557060;
+  --sage-600: #7f906f;
+  --sage-500: #9aaa8c;
+  --sage-400: #b6c2aa;
+  --sage-300: #cbd4c1;
+  --sage-200: #dde3d5;
+  --sage-100: #ebefe6;
+  --sage-50: #f4f6f1;
+
+  /* — Neutres — */
+  --white: #ffffff;
+  --paper: #fbfcfa;
+  --bg: #f3f5f0;
+  --line: #dce2d5;
+  --line-strong: #c3ccb9;
+  --text: #19261f;
+  --text-2: #435047;
+  --text-3: #5c685f;
+  --placeholder: #75807a;
+
+  /* — Tons de statut (fond / texte, contraste ≥ 4.5:1) — */
+  --t-neutral-bg: #e8ebe4; --t-neutral-fg: #3a443d;
+  --t-blue-bg: #dce7f6;    --t-blue-fg: #1d4a86;
+  --t-amber-bg: #faeacb;   --t-amber-fg: #714405;
+  --t-green-bg: #d8eedc;   --t-green-fg: #1c5a30;
+  --t-violet-bg: #ebe2f7;  --t-violet-fg: #563290;
+  --t-teal-bg: #d3eeea;    --t-teal-fg: #135650;
+  --t-red-bg: #f8ddd9;     --t-red-fg: #94271c;
+  --t-indigo-bg: #e0e2f8;  --t-indigo-fg: #323a94;
+  --t-orange-bg: #fbe1cf;  --t-orange-fg: #853a0a;
+  --t-forest-bg: #19261f;  --t-forest-fg: #cfdbc4;
+
+  /* — Plateformes — */
+  --plat-tiktok: #111111;
+  --plat-instagram: #8b2e5a;
+  --plat-youtube: #a3221c;
+
+  /* — Rôles sémantiques (style shadcn/ui) — */
+  --background: var(--bg);
+  --foreground: var(--text);
+  --card: var(--white);
+  --card-foreground: var(--text);
+  --primary: var(--forest-900);
+  --primary-hover: var(--forest-700);
+  --primary-foreground: var(--white);
+  --accent: var(--sage-400);
+  --accent-hover: var(--sage-300);
+  --accent-foreground: var(--forest-900);
+  --muted: var(--sage-100);
+  --muted-foreground: var(--text-2);
+  --subtle-foreground: var(--text-3);
+  --border: var(--line);
+  --border-strong: var(--line-strong);
+  --input: var(--line-strong);
+  --ring: var(--forest-600);
+  --destructive: var(--t-red-fg);
+  --destructive-hover: #7a1f16;
+  --destructive-foreground: var(--white);
+  --sidebar: var(--forest-900);
+  --sidebar-foreground: var(--sage-300);
+  --sidebar-hover: var(--forest-800);
+  --sidebar-active: var(--sage-400);
+  --sidebar-active-foreground: var(--forest-900);
+
+  /* — Typo (les polices sont chargées dans src/app/fonts.ts) — */
+  --font-display: var(--font-archivo), "Arial Narrow", Arial, sans-serif;
+  --font-ui: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-code: var(--font-jetbrains), ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* — Rayons — */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+  --r-pill: 999px;
+
+  /* — Ombres — */
+  --sh-1: 0 1px 2px rgba(25, 38, 31, 0.06), 0 1px 1px rgba(25, 38, 31, 0.04);
+  --sh-2: 0 4px 12px -2px rgba(25, 38, 31, 0.1), 0 2px 4px rgba(25, 38, 31, 0.05);
+  --sh-3: 0 18px 44px -10px rgba(25, 38, 31, 0.28), 0 4px 10px rgba(25, 38, 31, 0.06);
+}

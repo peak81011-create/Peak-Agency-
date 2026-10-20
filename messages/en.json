@@ -1,0 +1,191 @@
+{
+  "meta": {
+    "siteName": "Peak Clipping Agency",
+    "description": "Your streams and long videos turned into vertical clips, published every day on dedicated accounts."
+  },
+  "common": {
+    "wordmark": "Clipping Agency",
+    "homeAria": "Peak Clipping Agency — home",
+    "language": "Language",
+    "languageShort": { "fr": "FR", "en": "EN" },
+    "languageLong": { "fr": "Français", "en": "English" },
+    "login": "Log in",
+    "logout": "Log out",
+    "signup": "Create an account",
+    "start": "Get started",
+    "mySpace": "My space",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "notifications": "Notifications",
+    "save": "Save",
+    "saved": "Changes saved.",
+    "cancel": "Cancel",
+    "back": "Back",
+    "continue": "Continue",
+    "loading": "Loading…",
+    "comingSoon": "This section is coming in a later phase.",
+    "skipToContent": "Skip to content"
+  },
+  "nav": {
+    "how": "How it works",
+    "pricing": "Plans",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "mainNav": "Site navigation",
+    "appNav": "Main navigation",
+    "mobileNav": "Mobile navigation",
+    "dashboard": "Dashboard",
+    "overview": "Overview",
+    "account": "My account",
+    "groups": { "steering": "Steering", "team": "Team", "settings": "Settings" }
+  },
+  "footer": {
+    "tagline": "Your streams and long videos turned into vertical clips, published every day on dedicated accounts.",
+    "agency": "Agency",
+    "space": "Account",
+    "legal": "Legal",
+    "legalNotice": "Legal notice",
+    "terms": "Terms of sale",
+    "privacy": "Privacy",
+    "copyright": "© {year} Peak Clipping Agency"
+  },
+  "roles": {
+    "owner": "Owner",
+    "assistant": "Assistant",
+    "prospector": "Prospector",
+    "editor": "Editor",
+    "client": "Client"
+  },
+  "areas": {
+    "owner": "Admin · full control",
+    "assistant": "Assistant",
+    "prospector": "Prospector",
+    "editor": "Editor",
+    "client": "Client space"
+  },
+  "status": {
+    "client": {
+      "inscrit": "Signed up",
+      "attente_paiement": "Awaiting payment",
+      "paiement_a_verifier": "Payment under review",
+      "actif": "Active",
+      "grace": "Grace period",
+      "lecture_seule": "Read-only",
+      "suspendu": "Suspended",
+      "archive": "Archived"
+    },
+    "payment": {
+      "en_attente": "Pending",
+      "a_verifier": "To review",
+      "valide": "Approved",
+      "refuse": "Rejected"
+    }
+  },
+  "home": {
+    "eyebrow": "Clipping agency",
+    "title": "Your streams become clips that grow your audience.",
+    "lead": "We take your long videos and streams, cut them into vertical clips and publish them on dedicated TikTok, Reels and Shorts accounts.",
+    "ctaPrimary": "Get started",
+    "ctaSecondary": "I already have an account"
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "newPassword": "New password",
+    "fullName": "Full name",
+    "creatorName": "Creator name",
+    "passwordHint": "At least 12 characters, including a number and a symbol.",
+    "backToLogin": "Back to log in",
+    "login": {
+      "eyebrow": "Log in",
+      "title": "Welcome back",
+      "lead": "Clients and team members use the same login.",
+      "forgot": "Forgot your password?",
+      "submit": "Log in",
+      "noAccount": "Not a client yet?",
+      "createAccount": "Create an account"
+    },
+    "signup": {
+      "eyebrow": "Sign up",
+      "title": "Create your space",
+      "lead": "You will pick your plan right after.",
+      "acceptTerms": "I accept the <terms>terms of sale</terms> and the <privacy>privacy policy</privacy>.",
+      "submit": "Create my account",
+      "hasAccount": "Already have an account?",
+      "loginLink": "Log in"
+    },
+    "checkEmail": {
+      "eyebrow": "Verification",
+      "title": "Check your inbox",
+      "lead": "We just sent you a confirmation link. Click it to activate your account, then log in."
+    },
+    "forgot": {
+      "eyebrow": "Forgot password",
+      "title": "Reset",
+      "lead": "Enter your email: you will receive a link to choose a new password.",
+      "submit": "Send the link",
+      "sent": "If an account exists for this address, an email has just been sent. Remember to check your spam folder."
+    },
+    "reset": {
+      "eyebrow": "New password",
+      "title": "Choose a password",
+      "lead": "It replaces the old one immediately.",
+      "submit": "Save password",
+      "done": "Password updated."
+    },
+    "mfa": {
+      "eyebrow": "Two-factor authentication",
+      "challengeTitle": "Enter your code",
+      "challengeLead": "6-digit code from your authenticator app.",
+      "enrollTitle": "Turn on two-factor authentication",
+      "enrollLead": "Required for the owner account. Scan this QR code with an authenticator app (Google Authenticator, 1Password, Bitwarden…), then enter the code it shows.",
+      "secretLabel": "Or type this key manually",
+      "code": "6-digit code",
+      "submit": "Verify",
+      "lost": "Lost access to your app? Another owner (or Supabase support) can reset your two-factor authentication."
+    },
+    "errors": {
+      "invalidCredentials": "Incorrect email or password.",
+      "emailNotConfirmed": "Your email is not confirmed yet. Click the link we emailed you.",
+      "rateLimited": "Too many attempts. Try again in a few minutes.",
+      "generic": "Something went wrong. Please try again.",
+      "invalidCode": "Incorrect or expired code.",
+      "linkInvalid": "This link is no longer valid. Request a new one.",
+      "accountDisabled": "This account is disabled. Please contact the agency."
+    }
+  },
+  "validation": {
+    "required": "Required field.",
+    "email": "Invalid email address.",
+    "passwordTooShort": "At least 12 characters.",
+    "passwordDigit": "Add at least one number.",
+    "passwordSymbol": "Add at least one symbol.",
+    "termsRequired": "You must accept the terms of sale and the privacy policy.",
+    "tooLong": "Text too long.",
+    "code": "The code has 6 digits."
+  },
+  "dashboard": {
+    "welcome": "Hello {name}",
+    "clientLockedTitle": "Your space unlocks once your payment is confirmed",
+    "clientLockedLead": "Complete your profile, pick a plan and make the bank transfer. As soon as the agency has confirmed receipt, your whole space opens up.",
+    "clientStatus": "Account status",
+    "staffLead": "This is your workspace. Modules are added as each build phase ships.",
+    "permissionsTitle": "Your permissions"
+  },
+  "account": {
+    "title": "My account",
+    "profile": "Profile",
+    "language": "Language for the interface and emails",
+    "security": "Security",
+    "mfaEnabled": "Two-factor authentication is on.",
+    "mfaDisabled": "Two-factor authentication is off.",
+    "mfaEnable": "Turn on two-factor authentication"
+  },
+  "errors": {
+    "notFoundTitle": "Page not found",
+    "notFoundLead": "The link may be wrong, or the page has moved.",
+    "forbiddenTitle": "Access denied",
+    "forbiddenLead": "You do not have permission to access this page.",
+    "backHome": "Back to home"
+  }
+}

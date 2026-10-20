@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>AppNav — navigation de l'application</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk-c" style="font-family: Inter, system-ui, sans-serif; color: #DDE3D5; background: #19261F; height: 100%; min-height: 100%">
+  <nav class="side" aria-label="Navigation principale">
+    <div class="side-brand stack" style="gap: 0">
+      <a class="logo" href="{{homeHref}}" aria-label="Peak Clipping Agency — accueil" style="color: #CBD4C1">
+        <svg viewBox="0 0 268 594" width="16" height="36" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M0 0H143L268 126L143 250H89V554L45 594L0 554ZM89 75H134L184 126L134 175H89Z"/></svg>
+        <span class="logo-word" style="color: #DDE3D5">Clipping Agency</span>
+      </a>
+      <span class="side-role"><span class="ic ic-sm {{roleIcon}}"></span>{{roleLabel}}</span>
+    </div>
+    <div class="side-nav">
+      <sc-for list="{{items}}" as="it" hint-placeholder-count="6">
+        <sc-if value="{{it.isGroup}}" hint-placeholder-val="{{false}}">
+          <div class="grp">{{it.label}}</div>
+        </sc-if>
+        <sc-if value="{{it.isLink}}" hint-placeholder-val="{{true}}">
+          <a href="{{it.href}}" class="{{it.cls}}" aria-current="{{it.current}}"><span class="ic {{it.icon}}"></span><span>{{it.label}}</span><sc-if value="{{it.cnt}}" hint-placeholder-val="{{false}}"><span class="cnt">{{it.cnt}}</span></sc-if></a>
+        </sc-if>
+      </sc-for>
+    </div>
+    <div class="side-user">
+      <span class="av av-sm">{{initials}}</span>
+      <div class="stack grow" style="gap: 0"><span class="who trunc">{{userName}}</span><span class="what trunc">{{userWhat}}</span></div>
+      <a class="btn btn-icon btn-sm btn-on-dark" href="Auth.dc.html" aria-label="Se déconnecter" style="border: 0"><span class="ic ic-sm ic-logout"></span></a>
+    </div>
+  </nav>
+
+  <nav class="mnav" aria-label="Navigation mobile">
+    <div class="mnav-top">
+      <a class="logo" href="{{homeHref}}" aria-label="Accueil" style="color: #B6C2AA; min-height: 44px; min-width: 32px; justify-content: center">
+        <svg viewBox="0 0 268 594" width="13" height="28" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M0 0H143L268 126L143 250H89V554L45 594L0 554ZM89 75H134L184 126L134 175H89Z"/></svg>
+      </a>
+      <span class="grow trunc" style="font-family: Archivo, sans-serif; font-stretch: 110%; font-weight: 700; font-size: 17px; color: #FFFFFF">{{activeLabel}}</span>
+      <div class="seg seg-dark lang" role="group" aria-label="Langue"><button class="on" aria-pressed="true">FR</button><button aria-pressed="false">EN</button></div>
+      <button class="btn btn-icon btn-on-dark bell" aria-label="Notifications, 3 non lues" style="border: 0"><span class="ic ic-bell"></span><span class="count" style="border-color: #19261F">3</span></button>
+    </div>
+    <div class="mnav-tabs">
+      <sc-for list="{{links}}" as="it" hint-placeholder-count="5">
+        <a href="{{it.href}}" class="{{it.cls}}"><span class="ic ic-sm {{it.icon}}"></span>{{it.label}}<sc-if value="{{it.cnt}}" hint-placeholder-val="{{false}}"><span style="font-size: 11px; font-weight: 700">· {{it.cnt}}</span></sc-if></a>
+      </sc-for>
+    </div>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"role":{"editor":"enum","options":["client","admin","assistante","prospecteur","monteur"],"default":"admin"},"active":{"editor":"text","default":"overview"},"$preview":{"width":264,"height":1000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const role = this.props.role ?? 'admin';
+    const active = this.props.active ?? 'overview';
+    const L = (k, label, icon, href, cnt) => ({ k, label, icon, href, cnt: cnt || '' });
+    const G = (label) => ({ isGroup: true, label });
+    const cfg = {
+      client: { label: 'Espace client', icon: 'ic-user', user: 'Léa Martin', what: 'Offre Croissance', ini: 'LM', home: 'ClientDashboard.dc.html', items: [
+        L('dash', 'Tableau de bord', 'ic-home', 'ClientDashboard.dc.html'),
+        L('clips', 'Mes clips', 'ic-film', 'ClientClips.dc.html'),
+        L('upload', 'Envoyer une vidéo', 'ic-upload', 'ClientUpload.dc.html'),
+        L('accounts', 'Mes comptes', 'ic-at', 'ClientAccounts.dc.html'),
+        L('requests', 'Mes demandes', 'ic-msg', 'ClientRequests.dc.html', '1'),
+        L('billing', 'Abonnement & factures', 'ic-card', 'ClientBilling.dc.html')
+      ]},
+      admin: { label: 'Admin · contrôle total', icon: 'ic-shield', user: 'Alexandre', what: 'Propriétaire', ini: 'AD', home: 'AdminOverview.dc.html', items: [
+        G('Pilotage'),
+        L('overview', 'Vue d’ensemble', 'ic-chart', 'AdminOverview.dc.html'),
+        L('clients', 'Clients', 'ic-users', 'AdminClients.dc.html'),
+        L('payments', 'Paiements', 'ic-bank', 'AdminPayments.dc.html', '3'),
+        L('clips', 'Clips', 'ic-film', 'AdminClips.dc.html'),
+        L('accounts', 'Comptes de diffusion', 'ic-at', 'AdminAccounts.dc.html'),
+        L('inbox', 'Demandes clients', 'ic-inbox', 'AdminInbox.dc.html', '5'),
+        G('Équipe'),
+        L('team', 'Équipe', 'ic-user', 'AdminTeam.dc.html'),
+        L('tasks', 'Tâches', 'ic-checklist', 'AdminTasks.dc.html', '2'),
+        L('prospecting', 'Prospection', 'ic-target', 'AdminProspecting.dc.html'),
+        G('Configuration'),
+        L('roles', 'Rôles & permissions', 'ic-shield', 'AdminRoles.dc.html'),
+        L('offers', 'Offres & tarifs', 'ic-tag', 'AdminOffers.dc.html'),
+        L('settings', 'Paramètres', 'ic-sliders', 'AdminSettings.dc.html')
+      ]},
+      assistante: { label: 'Assistante', icon: 'ic-checklist', user: 'Camille Roux', what: 'Assistante', ini: 'CR', home: 'AssistantHome.dc.html', items: [
+        L('tasks', 'Mes tâches', 'ic-checklist', 'AssistantHome.dc.html', '4'),
+        L('clients', 'Clients', 'ic-users', 'AdminClients.dc.html'),
+        L('payments', 'Paiements', 'ic-bank', 'AdminPayments.dc.html', '3'),
+        L('inbox', 'Demandes clients', 'ic-inbox', 'AdminInbox.dc.html', '5'),
+        L('earnings', 'Mes gains', 'ic-euro', 'Earnings.dc.html')
+      ]},
+      prospecteur: { label: 'Prospecteur', icon: 'ic-target', user: 'Yanis Benali', what: 'Prospecteur', ini: 'YB', home: 'ProspectorHome.dc.html', items: [
+        L('today', 'Aujourd’hui', 'ic-target', 'ProspectorHome.dc.html'),
+        L('prospect', 'Fiche prospect', 'ic-user', 'ProspectSheet.dc.html'),
+        L('earnings', 'Mes gains', 'ic-euro', 'Earnings.dc.html')
+      ]},
+      monteur: { label: 'Monteur', icon: 'ic-scissors', user: 'Théo Lambert', what: 'Monteur', ini: 'TL', home: 'EditorHome.dc.html', items: [
+        L('todo', 'Mes clips à faire', 'ic-scissors', 'EditorHome.dc.html', '6'),
+        L('clip', 'Clip en cours', 'ic-film', 'EditorClip.dc.html'),
+        L('earnings', 'Mes gains', 'ic-euro', 'Earnings.dc.html')
+      ]}
+    };
+    const c = cfg[role] || cfg.admin;
+    let activeLabel = '';
+    const items = c.items.map((it) => {
+      if (it.isGroup) return { ...it, isLink: false };
+      const on = it.k === active;
+      if (on) activeLabel = it.label;
+      return { ...it, isGroup: false, isLink: true, cls: on ? 'on' : '', current: on ? 'page' : 'false' };
+    });
+    const links = items.filter((i) => i.isLink);
+    return {
+      items, links, activeLabel: activeLabel || c.label,
+      roleLabel: c.label, roleIcon: c.icon, userName: c.user, userWhat: c.what, initials: c.ini, homeHref: c.home
+    };
+  }
+}
+</script>
+</body>
+</html>

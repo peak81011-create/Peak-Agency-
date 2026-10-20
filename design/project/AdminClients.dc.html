@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Admin — clients</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="admin" active="clients" hint-size="100%,1000px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Admin" crumb="Clients" initials="AD" hint-size="100%,69px"></dc-import>
+      <div class="page-head">
+        <div class="stack g-1"><h1 class="h1">Clients</h1><span class="sm subtle">24 actifs · 2 expirés · 1 en attente de paiement</span></div>
+        <div class="row g-2"><button class="btn btn-secondary"><span class="ic ic-sm ic-download"></span>Exporter</button><button class="btn btn-primary"><span class="ic ic-sm ic-plus"></span>Ajouter un client</button></div>
+      </div>
+      <div class="page-body">
+        <div class="row between g-3">
+          <div class="toolbar">
+            <label class="affix" style="min-height: 40px; width: 260px"><span class="ic ic-sm ic-search"></span><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Rechercher un client</span><input type="search" placeholder="Nom, @, référence…" style="min-height: 38px"></label>
+            <button class="chip on">Tous · 27</button><button class="chip">Actifs · 24</button><button class="chip">Paiement à vérifier · 3</button><button class="chip">Expirés · 2</button>
+          </div>
+          <div class="toolbar"><select class="select" aria-label="Offre" style="width: auto; min-height: 40px; padding-top: 6px; padding-bottom: 6px; font-size: 13px"><option>Toutes les offres</option></select><select class="select" aria-label="Monteur" style="width: auto; min-height: 40px; padding-top: 6px; padding-bottom: 6px; font-size: 13px"><option>Tous les monteurs</option></select></div>
+        </div>
+        <div class="tbl-wrap tbl-cards">
+          <table class="tbl">
+            <thead><tr><th>Client</th><th>Offre</th><th>Abonnement</th><th>Paiement d'oct.</th><th class="r">Clips (mois)</th><th class="r">Vues 30 j</th><th>Équipe</th><th>Échéance</th><th class="r"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Actions</span></th></tr></thead>
+            <tbody>
+              <sc-for list="{{clients}}" as="c" hint-placeholder-count="10">
+                <tr>
+                  <td class="first"><a class="cell-main" href="AdminClientFile.dc.html" style="text-decoration: none; color: #19261F"><span class="av av-sm">{{c.ini}}</span><div class="stack" style="gap: 0"><span class="t">{{c.n}}</span><span class="s">{{c.h}} · {{c.niche}}</span></div></a></td>
+                  <td>{{c.plan}}</td>
+                  <td><span class="badge plain {{c.subTone}}">{{c.sub}}</span></td>
+                  <td><span class="badge st-{{c.pay}}">{{c.payL}}</span></td>
+                  <td class="r num">{{c.clips}}</td>
+                  <td class="r num">{{c.views}}</td>
+                  <td class="hm"><div class="av-stack"><span class="av av-sm av-dark">TL</span><span class="av av-sm">CR</span></div></td>
+                  <td class="subtle num">{{c.due}}</td>
+                  <td class="r"><div class="row g-1" style="justify-content: flex-end; flex-wrap: nowrap"><a class="btn btn-ghost btn-sm btn-icon" href="Banners.dc.html" aria-label="Voir en tant que {{c.n}}"><span class="ic ic-sm ic-eye"></span></a><a class="btn btn-ghost btn-sm btn-icon" href="AdminClientFile.dc.html" aria-label="Ouvrir la fiche"><span class="ic ic-sm ic-chev-r"></span></a></div></td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+          <div class="pager"><span>1–10 sur 27</span><div class="row g-2"><button class="btn btn-secondary btn-sm btn-icon" aria-label="Page précédente"><span class="ic ic-sm ic-chev-l"></span></button><button class="btn btn-secondary btn-sm btn-icon" aria-label="Page suivante"><span class="ic ic-sm ic-chev-r"></span></button></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const C = (ini, n, h, niche, plan, sub, pay, clips, views, due) => {
+      const subTone = sub === 'Actif' ? 't-green' : sub === 'Expiré' ? 't-red' : 't-amber';
+      const payL = { paye: 'Validé', averifier: 'À vérifier', attente: 'En attente', refuse: 'Refusé' }[pay];
+      return { ini, n, h, niche, plan, sub, subTone, pay, payL, clips, views, due };
+    };
+    return { clients: [
+      C('LM', 'Léa Martin', '@leamrtn', 'Lifestyle', 'Croissance', 'Actif', 'paye', '24', '2,4 M', '25/11'),
+      C('HV', 'Hugo Vasseur', '@hugolive', 'Gaming', 'Starter', 'Actif', 'averifier', '9', '412 k', '20/10'),
+      C('NK', 'Nora K.', '@nora.k', 'Beauté', 'Croissance', 'En attente', 'averifier', '0', '—', '22/10'),
+      C('SB', 'Studio Bastien', '@bastien.pod', 'Business', 'Domination', 'Actif', 'averifier', '61', '5,1 M', '28/10'),
+      C('MX', 'Maxime Roux', '@maxou.irl', 'Humour', 'Croissance', 'Actif', 'paye', '27', '1,8 M', '02/11'),
+      C('IR', 'Inès Rahmani', '@ines.fit', 'Sport', 'Starter', 'Actif', 'paye', '11', '236 k', '05/11'),
+      C('TG', 'TechGuy', '@techguy.fr', 'Tech', 'Croissance', 'Actif', 'paye', '22', '948 k', '08/11'),
+      C('CP', 'Chloé P.', '@chloe.cuisine', 'Cuisine', 'Starter', 'Expiré', 'refuse', '0', '58 k', '30/09'),
+      C('JD', 'Jules D.', '@julesdebate', 'Débat', 'Croissance', 'Actif', 'paye', '19', '1,1 M', '12/11'),
+      C('AM', 'Amel M.', '@amel.voyage', 'Voyage', 'Starter', 'Actif', 'attente', '8', '167 k', '15/11')
+    ] };
+  }
+}
+</script>
+</body>
+</html>

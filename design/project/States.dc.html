@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>États vides, chargement, erreur</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <main class="wrap stack g-12" style="padding-top: 64px; padding-bottom: 96px">
+    <div class="stack g-2"><span class="eyebrow subtle">États système</span><h1 class="d2">Vide, chargement, erreur</h1><p class="lead" style="max-width: 720px">Pour chaque écran principal. Le chargement reprend la forme du contenu attendu (squelettes), l'état vide donne toujours l'action suivante, l'erreur dit quoi faire.</p></div>
+    <sc-for list="{{screens}}" as="s" hint-placeholder-count="6">
+      <section class="stack g-4">
+        <div class="row between"><h2 class="h2">{{s.title}}</h2><span class="xs mono subtle">{{s.who}}</span></div>
+        <div class="grid-3">
+          <div class="card empty" style="min-height: 300px; justify-content: center">
+            <div class="empty-art"><span class="ic ic-xl {{s.icon}}"></span></div>
+            <span class="h3">{{s.emptyTitle}}</span>
+            <span class="sm muted" style="max-width: 300px">{{s.emptyText}}</span>
+            <sc-if value="{{s.cta}}" hint-placeholder-val="{{true}}"><a class="btn btn-primary" href="{{s.href}}">{{s.cta}}</a></sc-if>
+          </div>
+          <div class="card stack g-4" aria-busy="true" aria-label="Chargement" style="min-height: 300px">
+            <sc-if value="{{s.skStats}}" hint-placeholder-val="{{false}}">
+              <div class="grid-2" style="gap: 12px"><div class="sk" style="height: 84px"></div><div class="sk" style="height: 84px"></div><div class="sk" style="height: 84px"></div><div class="sk" style="height: 84px"></div></div>
+              <div class="sk" style="height: 92px"></div>
+            </sc-if>
+            <sc-if value="{{s.skThumbs}}" hint-placeholder-val="{{false}}">
+              <div class="grid-3" style="gap: 10px; grid-template-columns: repeat(3, minmax(0, 1fr))"><div class="sk" style="aspect-ratio: 9/16"></div><div class="sk" style="aspect-ratio: 9/16"></div><div class="sk" style="aspect-ratio: 9/16"></div></div>
+              <div class="sk" style="height: 14px; width: 60%"></div>
+            </sc-if>
+            <sc-if value="{{s.skRows}}" hint-placeholder-val="{{true}}">
+              <div class="sk" style="height: 36px"></div>
+              <div class="row g-3"><div class="sk" style="width: 32px; height: 32px; border-radius: 50%"></div><div class="stack g-2 grow"><div class="sk" style="height: 12px; width: 70%"></div><div class="sk" style="height: 10px; width: 40%"></div></div><div class="sk" style="width: 72px; height: 22px; border-radius: 999px"></div></div>
+              <div class="row g-3"><div class="sk" style="width: 32px; height: 32px; border-radius: 50%"></div><div class="stack g-2 grow"><div class="sk" style="height: 12px; width: 60%"></div><div class="sk" style="height: 10px; width: 30%"></div></div><div class="sk" style="width: 72px; height: 22px; border-radius: 999px"></div></div>
+              <div class="row g-3"><div class="sk" style="width: 32px; height: 32px; border-radius: 50%"></div><div class="stack g-2 grow"><div class="sk" style="height: 12px; width: 75%"></div><div class="sk" style="height: 10px; width: 45%"></div></div><div class="sk" style="width: 72px; height: 22px; border-radius: 999px"></div></div>
+              <div class="row g-3"><div class="sk" style="width: 32px; height: 32px; border-radius: 50%"></div><div class="stack g-2 grow"><div class="sk" style="height: 12px; width: 55%"></div><div class="sk" style="height: 10px; width: 35%"></div></div><div class="sk" style="width: 72px; height: 22px; border-radius: 999px"></div></div>
+            </sc-if>
+          </div>
+          <div class="card empty" style="min-height: 300px; justify-content: center">
+            <div class="err-art"><span class="ic ic-xl ic-alert"></span></div>
+            <span class="h3">{{s.errTitle}}</span>
+            <span class="sm muted" style="max-width: 300px">{{s.errText}}</span>
+            <div class="row g-2" style="justify-content: center"><button class="btn btn-secondary"><span class="ic ic-sm ic-refresh"></span>Réessayer</button><a class="btn btn-ghost" href="Contact.dc.html">Signaler</a></div>
+          </div>
+        </div>
+      </section>
+    </sc-for>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2700}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const S = (o) => ({ skStats: false, skThumbs: false, skRows: false, ...o });
+    return { screens: [
+      S({ title: 'Tableau de bord client', who: 'ClientDashboard', icon: 'ic-chart', skStats: true, emptyTitle: 'Vos stats arrivent bientôt', emptyText: 'Dès la publication de vos premiers clips, vous verrez ici vos vues et abonnés gagnés.', cta: 'Envoyer une vidéo', href: 'ClientUpload.dc.html', errTitle: 'Statistiques indisponibles', errText: 'Les plateformes ne répondent pas pour le moment. Vos clips ne sont pas affectés.' }),
+      S({ title: 'Mes clips', who: 'ClientClips', icon: 'ic-film', skThumbs: true, emptyTitle: 'Aucun clip publié', emptyText: 'Envoyez un live ou une vidéo longue : on s’occupe du découpage et de la publication.', cta: 'Envoyer une vidéo', href: 'ClientUpload.dc.html', errTitle: 'Impossible d’afficher vos clips', errText: 'Vérifiez votre connexion puis réessayez.' }),
+      S({ title: 'Paiements à vérifier', who: 'AdminPayments', icon: 'ic-bank', skRows: true, emptyTitle: 'Tout est vérifié', emptyText: 'Aucun virement en attente de vérification. Les nouveaux dépôts apparaîtront ici.', cta: '', href: '', errTitle: 'Liste des paiements indisponible', errText: 'Les captures n’ont pas pu être chargées. Réessayez dans un instant.' }),
+      S({ title: 'Tâches', who: 'AdminTasks · AssistantHome', icon: 'ic-checklist', skRows: true, emptyTitle: 'Rien à faire aujourd’hui', emptyText: 'Aucune tâche ne vous est assignée pour aujourd’hui.', cta: 'Créer une tâche', href: 'AdminTasks.dc.html', errTitle: 'Tâches non chargées', errText: 'Un problème est survenu. Vos tâches n’ont pas été modifiées.' }),
+      S({ title: 'Prospects du jour', who: 'ProspectorHome', icon: 'ic-target', skRows: true, emptyTitle: 'Objectif du jour atteint', emptyText: 'Plus aucun prospect à contacter ni à relancer. De nouveaux prospects seront importés demain.', cta: '', href: '', errTitle: 'Prospects non chargés', errText: 'Réessayez. Les messages déjà marqués comme envoyés sont enregistrés.' }),
+      S({ title: 'Clips à monter', who: 'EditorHome', icon: 'ic-scissors', skRows: true, emptyTitle: 'Aucun clip à monter', emptyText: 'Vous êtes à jour. Les nouveaux clips assignés apparaîtront ici, triés par échéance.', cta: '', href: '', errTitle: 'Liste indisponible', errText: 'Impossible de récupérer vos clips. Vos envois en cours continuent.' })
+    ] };
+  }
+}
+</script>
+</body>
+</html>

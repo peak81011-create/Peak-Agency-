@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Admin — prospection</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="admin" active="prospecting" hint-size="100%,1000px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Admin" crumb="Prospection" initials="AD" hint-size="100%,69px"></dc-import>
+      <div class="page-head">
+        <div class="stack g-1"><h1 class="h1">Prospection</h1><span class="sm subtle">925 prospects · 6 signés ce mois</span></div>
+        <div class="row g-2"><button class="btn btn-secondary"><span class="ic ic-sm ic-upload"></span>Importer un CSV</button><button class="btn btn-primary"><span class="ic ic-sm ic-plus"></span>Ajouter un prospect</button></div>
+      </div>
+      <div class="page-body">
+        <div class="split">
+          <section class="card" aria-labelledby="lb">
+            <div class="card-head"><h2 id="lb" class="h3">Classement des prospecteurs · octobre</h2><div class="seg" role="group" aria-label="Période"><button>Semaine</button><button class="on">Mois</button></div></div>
+            <div class="tbl-wrap" style="border: 0; border-radius: 0">
+              <table class="tbl">
+                <thead><tr><th>#</th><th>Prospecteur</th><th class="r">Messages</th><th class="r">Réponses</th><th class="r">Appels</th><th class="r">Signés</th><th>Objectif du jour</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="ic-box" style="width: 28px; height: 28px; background: #19261F; color: #B6C2AA; font-weight: 700; font-size: 13px">1</span></td><td><span class="row g-2"><span class="av av-sm">YB</span><b>Yanis</b></span></td><td class="r num">612</td><td class="r num">71 · 11,6 %</td><td class="r num">7</td><td class="r num strong">4</td><td><div class="row g-2" style="flex-wrap: nowrap"><div class="bar grow" style="min-width: 80px"><span style="width: 75%"></span></div><span class="xs num">30/40</span></div></td></tr>
+                  <tr><td><span class="ic-box" style="width: 28px; height: 28px; font-weight: 700; font-size: 13px">2</span></td><td><span class="row g-2"><span class="av av-sm">MS</span><b>Mehdi</b></span></td><td class="r num">488</td><td class="r num">43 · 8,8 %</td><td class="r num">2</td><td class="r num strong">2</td><td><div class="row g-2" style="flex-wrap: nowrap"><div class="bar grow" style="min-width: 80px"><span style="width: 80%"></span></div><span class="xs num">32/40</span></div></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section class="card stack g-3" aria-labelledby="imp">
+            <h2 id="imp" class="h3">Import CSV</h2>
+            <div class="drop" style="padding: 20px"><span class="ic ic-lg ic-file"></span><span class="sm"><b>prospects-gaming-oct.csv</b> · 214 lignes</span></div>
+            <div class="stack g-2 sm">
+              <div class="row between"><span class="muted">Colonne « pseudo » →</span><span class="strong">Nom du créateur</span></div>
+              <div class="row between"><span class="muted">Colonne « url » →</span><span class="strong">Lien du profil</span></div>
+              <div class="row between"><span class="muted">Colonne « abonnes » →</span><span class="strong">Abonnés</span></div>
+              <div class="row between"><span class="muted">Doublons détectés</span><span class="strong" style="color: #714405">12 ignorés</span></div>
+            </div>
+            <div class="field"><label class="label" for="ad">Répartir entre</label><select id="ad" class="select"><option>Yanis et Mehdi (équitable)</option></select></div>
+            <button class="btn btn-primary">Importer 202 prospects</button>
+          </section>
+        </div>
+
+        <section class="stack g-3" aria-labelledby="pk">
+          <div class="row between"><h2 id="pk" class="h2">Pipeline</h2><div class="toolbar"><select class="select" aria-label="Prospecteur" style="width: auto; min-height: 36px; padding-top: 6px; padding-bottom: 6px; font-size: 13px"><option>Tous les prospecteurs</option></select><select class="select" aria-label="Niche" style="width: auto; min-height: 36px; padding-top: 6px; padding-bottom: 6px; font-size: 13px"><option>Toutes niches</option></select></div></div>
+          <div class="kanban">
+            <sc-for list="{{cols}}" as="col" hint-placeholder-count="8">
+              <div class="kcol" style="flex-basis: 230px">
+                <div class="kcol-head"><span class="badge st-{{col.k}}">{{col.l}}</span><span class="n">{{col.n}}</span></div>
+                <sc-for list="{{col.cards}}" as="c" hint-placeholder-count="2">
+                  <a class="kcard" href="ProspectSheet.dc.html" style="text-decoration: none; color: #19261F">
+                    <div class="row g-2" style="flex-wrap: nowrap"><span class="av av-sm">{{c.ini}}</span><div class="stack" style="gap: 0; min-width: 0"><span class="t trunc">{{c.h}}</span><span class="xs subtle">{{c.plat}} · {{c.subs}}</span></div></div>
+                    <div class="m"><span>{{c.niche}}</span><span class="row g-1">{{c.when}}<span class="av av-sm" style="width: 22px; height: 22px; font-size: 9px">{{c.by}}</span></span></div>
+                  </a>
+                </sc-for>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const C = (ini, h, plat, subs, niche, when, by) => ({ ini, h, plat, subs, niche, when, by });
+    return { cols: [
+      { k: 'acontacter', l: 'À contacter', n: 412, cards: [C('KZ', '@kenzo.plays', 'Twitch', '38 k', 'Gaming', 'Importé', 'YB'), C('LB', '@laura.bakes', 'YouTube', '112 k', 'Cuisine', 'Importé', 'MS')] },
+      { k: 'contacte', l: 'Contacté', n: 238, cards: [C('RT', '@rayan.talks', 'Twitch', '21 k', 'Talk', 'Hier', 'YB'), C('EM', '@emma.fit', 'Instagram', '64 k', 'Sport', 'Hier', 'MS')] },
+      { k: 'relance', l: 'Relancé', n: 121, cards: [C('DV', '@dav.speedrun', 'Twitch', '17 k', 'Gaming', '18/10', 'YB')] },
+      { k: 'repondu', l: 'A répondu', n: 64, cards: [C('SO', '@sofia.mkp', 'TikTok', '240 k', 'Beauté', '2 h', 'MS')] },
+      { k: 'interesse', l: 'Intéressé', n: 27, cards: [C('PL', '@paulo.live', 'Kick', '45 k', 'IRL', 'Hier', 'YB')] },
+      { k: 'appel', l: 'Appel prévu', n: 9, cards: [C('KV', '@kevin.irl', 'Twitch', '96 k', 'Humour', 'Jeu. 14:00', 'YB')] },
+      { k: 'signe', l: 'Signé', n: 6, cards: [C('NK', '@nora.k', 'YouTube', '81 k', 'Beauté', '15/10', 'MS')] },
+      { k: 'refus', l: 'Refus', n: 48, cards: [C('GT', '@gaetan.tv', 'Twitch', '9 k', 'Gaming', '12/10', 'YB')] }
+    ] };
+  }
+}
+</script>
+</body>
+</html>

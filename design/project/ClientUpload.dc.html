@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Envoyer une vidéo</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="client" active="upload" hint-size="100%,900px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Espace client" crumb="Envoyer une vidéo" initials="LM" hint-size="100%,69px"></dc-import>
+      <div class="page-head"><div class="stack g-1"><h1 class="h1">Envoyer une vidéo</h1><span class="sm subtle">Lives, podcasts, vlogs : on s'occupe d'en tirer les meilleurs clips.</span></div></div>
+      <div class="page-body">
+        <div class="split" style="align-items: start">
+          <section class="card stack g-5" style="padding: 24px" aria-labelledby="up1">
+            <div class="row between g-3"><h2 id="up1" class="h2">Nouvelle vidéo</h2><div class="seg" role="group" aria-label="Source"><button class="{{mFile}}" onClick="{{goFile}}"><span class="ic ic-sm ic-upload"></span>Fichier</button><button class="{{mLink}}" onClick="{{goLink}}"><span class="ic ic-sm ic-link"></span>Lien</button></div></div>
+
+            <sc-if value="{{isFile}}" hint-placeholder-val="{{true}}">
+              <div class="drop">
+                <span class="ic-box" style="width: 56px; height: 56px; background: #FFFFFF"><span class="ic ic-lg ic-upload"></span></span>
+                <div class="stack g-1"><span class="h3">Glissez votre vidéo ici</span><span class="sm muted">MP4, MOV, MKV · jusqu'à 20 Go · l'envoi reprend tout seul si la connexion coupe</span></div>
+                <button class="btn btn-primary">Choisir un fichier</button>
+              </div>
+              <div class="file-row"><span class="file-ic"><span class="ic ic-film"></span></span><div class="stack grow g-2"><div class="row between g-2"><span class="sm strong trunc">live-20-oct-integral.mp4</span><span class="xs subtle num">6,1 / 9,8 Go · 62 %</span></div><div class="bar bar-lg" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100" aria-label="Progression de l'envoi"><span style="width: 62%"></span></div><div class="row between xs subtle"><span>48 Mo/s · ≈ 1 min 20 restantes</span><span>Ne fermez pas cet onglet</span></div></div><button class="btn btn-ghost btn-icon btn-sm" aria-label="Mettre en pause"><span class="ic ic-sm ic-clock"></span></button><button class="btn btn-ghost btn-icon btn-sm" aria-label="Annuler l'envoi"><span class="ic ic-sm ic-x"></span></button></div>
+            </sc-if>
+            <sc-if value="{{isLink}}" hint-placeholder-val="{{false}}">
+              <div class="field"><label class="label" for="lk">Lien de la vidéo</label><div class="input-group"><div class="affix grow" style="border-top-right-radius: 0; border-bottom-right-radius: 0"><span class="ic ic-sm ic-link"></span><input id="lk" value="https://www.twitch.tv/videos/2290001234"></div><button class="btn btn-secondary">Vérifier</button></div><span class="hint">Twitch, YouTube, Kick, Google Drive, Dropbox, WeTransfer.</span></div>
+              <div class="file-row" style="background: #F4F6F1"><span class="file-ic"><span class="ic ic-check"></span></span><div class="stack grow" style="gap: 2px"><span class="sm strong">Live du 20/10 · « Q&amp;A spécial 100k »</span><span class="xs subtle">Twitch · 3 h 12 min · lien accessible</span></div></div>
+            </sc-if>
+
+            <div class="field"><label class="label" for="nt">Titre <span class="opt">(facultatif)</span></label><input id="nt" class="input" value="Live Q&amp;A spécial 100k"></div>
+            <div class="field"><label class="label" for="nn">Notes pour les monteurs</label><textarea id="nn" class="textarea" placeholder="Moments forts avec horodatage, sujets à éviter, invités à mettre en avant…">Gros fou rire vers 1:05:00. Éviter la partie sponsor (0:40 → 0:52).</textarea></div>
+            <fieldset class="stack g-2" style="border: 0; padding: 0; margin: 0"><legend class="label" style="margin-bottom: 8px">Priorité</legend>
+              <div class="seg" role="radiogroup" aria-label="Priorité" style="align-self: flex-start"><button role="radio" aria-checked="false"><span class="prio prio-basse"><i></i></span>Basse</button><button class="on" role="radio" aria-checked="true"><span class="prio prio-normale"><i></i></span>Normale</button><button role="radio" aria-checked="false"><span class="prio prio-haute"><i></i></span>Haute</button></div>
+              <span class="hint">« Haute » passe la vidéo en tête de file (dans la limite de votre offre).</span>
+            </fieldset>
+            <div class="row between g-3"><span class="sm subtle">Notifié dès les premiers clips à valider.</span><button class="btn btn-primary btn-lg"><span class="ic ic-send"></span>Envoyer la vidéo</button></div>
+          </section>
+
+          <aside class="card card-sage stack g-4">
+            <h2 class="h3">Ce mois-ci</h2>
+            <div class="stack g-2"><div class="row between sm"><span>Clips utilisés</span><span class="strong num">24 / [40]</span></div><div class="bar"><span style="width: 60%"></span></div></div>
+            <ul class="incl sm"><li><span class="ic ic-sm ic-check"></span>Vidéos longues de préférence (&gt; 30 min)</li><li><span class="ic ic-sm ic-check"></span>Qualité 1080p minimum</li><li><span class="ic ic-sm ic-check"></span>Horodatez les moments forts dans les notes</li></ul>
+          </aside>
+        </div>
+
+        <section class="stack g-3" aria-labelledby="mv">
+          <h2 id="mv" class="h2">Mes vidéos</h2>
+          <div class="tbl-wrap tbl-cards">
+            <table class="tbl">
+              <thead><tr><th>Vidéo</th><th>Envoyée</th><th>Durée</th><th>Priorité</th><th class="r">Clips tirés</th><th>Statut</th></tr></thead>
+              <tbody>
+                <sc-for list="{{videos}}" as="v" hint-placeholder-count="5">
+                  <tr>
+                    <td class="first"><div class="cell-main"><span class="file-ic" style="width: 36px; height: 36px"><span class="ic ic-sm {{v.ic}}"></span></span><div class="stack" style="gap: 0; min-width: 0"><span class="t trunc">{{v.t}}</span><span class="s">{{v.src}}</span></div></div></td>
+                    <td class="subtle">{{v.date}}</td><td class="num">{{v.dur}}</td><td><span class="prio prio-{{v.p}}"><i></i>{{v.pl}}</span></td><td class="r num strong">{{v.clips}}</td><td><span class="badge {{v.tone}}">{{v.s}}</span></td>
+                  </tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </div>
+          <p class="xs subtle">Statuts vidéo : Envoi en cours · Reçue · En découpage · Terminée · Erreur.</p>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1700}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { mode: 'file' }; }
+  renderVals() {
+    const m = this.state.mode;
+    return {
+      isFile: m === 'file', isLink: m === 'link', mFile: m === 'file' ? 'on' : '', mLink: m === 'link' ? 'on' : '',
+      goFile: () => this.setState({ mode: 'file' }), goLink: () => this.setState({ mode: 'link' }),
+      videos: [
+        { t: 'live-20-oct-integral.mp4', src: 'Fichier · 9,8 Go', ic: 'ic-upload', date: 'Aujourd’hui', dur: '3:12:04', p: 'normale', pl: 'Normale', clips: '—', s: 'Envoi en cours · 62 %', tone: 't-blue' },
+        { t: 'Live du 14/10', src: 'Lien Twitch', ic: 'ic-link', date: '15/10', dur: '2:48:30', p: 'haute', pl: 'Haute', clips: '9', s: 'En découpage', tone: 't-violet' },
+        { t: 'podcast-ep42.mov', src: 'Fichier · 4,2 Go', ic: 'ic-film', date: '09/10', dur: '1:22:15', p: 'normale', pl: 'Normale', clips: '12', s: 'Terminée', tone: 't-green' },
+        { t: 'vlog-japon.mkv', src: 'Fichier · 2,8 Go', ic: 'ic-film', date: '07/10', dur: '0:41:52', p: 'basse', pl: 'Basse', clips: '—', s: 'Erreur · fichier illisible', tone: 't-red' },
+        { t: 'Live du 02/10', src: 'Lien YouTube', ic: 'ic-link', date: '03/10', dur: '2:05:11', p: 'normale', pl: 'Normale', clips: '14', s: 'Terminée', tone: 't-green' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

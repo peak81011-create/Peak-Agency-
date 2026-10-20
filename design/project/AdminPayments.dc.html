@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Admin — vérification des paiements</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0; position: relative">
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="admin" active="payments" hint-size="100%,1000px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Admin" crumb="Paiements" initials="AD" hint-size="100%,69px"></dc-import>
+      <div class="page-head"><div class="stack g-1"><h1 class="h1">Vérification des paiements</h1><span class="sm subtle">3 virements à vérifier · 1 en attente de dépôt</span></div></div>
+      <div class="page-body">
+        <div class="tabs" role="tablist"><button class="tab on" role="tab" aria-selected="true">À vérifier<span class="cnt">3</span></button><button class="tab" role="tab" aria-selected="false">En attente de dépôt<span class="cnt">1</span></button><button class="tab" role="tab" aria-selected="false">Historique</button></div>
+        <div class="row g-5" style="align-items: flex-start">
+          <section class="card card-pad-0" style="flex: 1 1 280px; max-width: 340px; min-width: 0" aria-label="File de vérification">
+            <sc-for list="{{queue}}" as="q" hint-placeholder-count="3">
+              <button class="stack" onClick="{{q.pick}}" style="width: 100%; gap: 6px; padding: 14px 16px; border: 0; border-bottom: 1px solid #EBEFE6; text-align: left; cursor: pointer; background: {{q.bg}}; border-left: 3px solid {{q.bl}}">
+                <div class="row between g-2"><span class="row g-2 strong"><span class="av av-sm">{{q.ini}}</span>{{q.n}}</span><span class="strong num">{{q.amt}}</span></div>
+                <div class="row between g-2"><span class="xs mono subtle">{{q.ref}}</span><span class="xs subtle">{{q.when}}</span></div>
+              </button>
+            </sc-for>
+          </section>
+
+          <section class="card stack g-5" style="flex: 999 1 560px; min-width: 0; padding: 24px" aria-labelledby="pd">
+            <div class="row between g-3"><div class="stack g-1"><h2 id="pd" class="h2">{{cur.n}} · octobre 2026</h2><span class="sm subtle">Offre {{cur.plan}} · déposé {{cur.when}}</span></div><span class="badge {{statusCls}}">{{statusL}}</span></div>
+            <div class="callout callout-warn" role="note"><span class="ic ic-alert"></span><span><b>Vérifiez votre compte bancaire avant de valider.</b> Une capture d'écran ne prouve pas que l'argent est arrivé.</span></div>
+            <div class="row g-5" style="align-items: stretch">
+              <figure class="stack g-2" style="flex: 1 1 280px; margin: 0; min-width: 0">
+                <div style="flex: 1; min-height: 360px; border-radius: 12px; border: 1px solid #DCE2D5; background: #F4F6F1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: #5C685F; padding: 20px; text-align: center"><span class="ic ic-xl ic-image"></span><span class="sm strong">Capture déposée par le client</span><span class="xs">{{cur.file}} · cliquer pour agrandir</span></div>
+                <figcaption class="row between xs subtle"><span>Aperçu</span><span class="row g-2"><button class="btn btn-ghost btn-sm">Zoom</button><a class="btn btn-ghost btn-sm" href="#"><span class="ic ic-sm ic-download"></span>Télécharger</a></span></figcaption>
+              </figure>
+              <div class="stack g-4" style="flex: 1 1 280px; min-width: 0">
+                <div class="stack g-1" style="padding: 16px; border-radius: 12px; background: #19261F; color: #DDE3D5"><span class="label-caps" style="color: #9AAA8C">Montant attendu</span><span class="price num" style="color: #FFFFFF; font-size: 40px">{{cur.amt}}</span></div>
+                <div class="stack g-1" style="padding: 16px; border-radius: 12px; border: 2px solid #19261F; background: #EBEFE6"><span class="label-caps" style="color: #19261F">Référence attendue</span><span class="mono" style="font-size: 24px; font-weight: 600; letter-spacing: .06em">{{cur.ref}}</span></div>
+                <fieldset class="stack g-2" style="border: 0; padding: 0; margin: 0"><legend class="label" style="margin-bottom: 6px">Contrôles</legend>
+                  <label class="check"><input type="checkbox" checked>Le montant de la capture correspond</label>
+                  <label class="check"><input type="checkbox" checked>La référence apparaît dans le libellé</label>
+                  <label class="check"><input type="checkbox">Virement reçu sur le compte bancaire</label>
+                </fieldset>
+              </div>
+            </div>
+            <sc-if value="{{toast}}" hint-placeholder-val="{{false}}"><div class="callout callout-ok" role="status"><span class="ic ic-check"></span><span>{{toast}}</span></div></sc-if>
+            <div class="row g-3" style="justify-content: flex-end; border-top: 1px solid #DCE2D5; padding-top: 18px">
+              <button class="btn btn-danger-ghost btn-lg" onClick="{{openRefuse}}"><span class="ic ic-x"></span>Refuser</button>
+              <button class="btn btn-primary btn-lg" onClick="{{validate}}"><span class="ic ic-check"></span>Valider le paiement</button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <sc-if value="{{refuse}}" hint-placeholder-val="{{false}}">
+    <div class="scrim" style="position: absolute; inset: 0; border-radius: 0; align-items: flex-start; padding-top: 160px">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="rf">
+        <div class="modal-head"><div class="stack g-1"><h2 id="rf" class="h2">Refuser ce paiement ?</h2><p class="sm muted">{{cur.n}} sera notifié et pourra déposer une nouvelle preuve.</p></div><button class="btn btn-ghost btn-icon btn-sm" aria-label="Fermer" onClick="{{closeRefuse}}"><span class="ic ic-sm ic-x"></span></button></div>
+        <div class="modal-body">
+          <div class="field"><label class="label" for="rm">Motif</label><select id="rm" class="select"><option>Montant incorrect</option><option>Référence absente ou erronée</option><option>Capture illisible</option><option>Virement non reçu</option><option>Autre</option></select></div>
+          <div class="field"><label class="label" for="rt">Message au client</label><textarea id="rt" class="textarea">Le montant reçu ne correspond pas au montant attendu. Merci de compléter le virement avec la même référence.</textarea></div>
+        </div>
+        <div class="modal-foot"><button class="btn btn-ghost" onClick="{{closeRefuse}}">Annuler</button><button class="btn btn-danger" onClick="{{confirmRefuse}}">Refuser le paiement</button></div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1400}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { sel: 0, refuse: false, toast: '', done: {} }; }
+  renderVals() {
+    const items = [
+      { ini: 'HV', n: 'Hugo Vasseur', ref: 'PEAK-HV-2610', amt: '[190,00] €', plan: 'Starter', when: 'il y a 25 min', file: 'IMG_4821.png' },
+      { ini: 'NK', n: 'Nora K.', ref: 'PEAK-NK-2610', amt: '[390,00] €', plan: 'Croissance', when: 'il y a 3 h', file: 'virement.pdf' },
+      { ini: 'SB', n: 'Studio Bastien', ref: 'PEAK-SB-2610', amt: '[790,00] €', plan: 'Domination', when: 'hier, 18:12', file: 'capture-banque.jpg' }
+    ];
+    const s = this.state.sel;
+    const cur = items[s];
+    const d = this.state.done[s];
+    return {
+      cur,
+      queue: items.map((q, i) => ({ ...q, bg: i === s ? '#F4F6F1' : '#FFFFFF', bl: i === s ? '#19261F' : 'transparent', pick: () => this.setState({ sel: i, toast: '' }) })),
+      statusCls: d === 'ok' ? 'st-paye' : d === 'ko' ? 'st-refuse' : 'st-averifier',
+      statusL: d === 'ok' ? 'Validé' : d === 'ko' ? 'Refusé' : 'À vérifier',
+      refuse: this.state.refuse, toast: this.state.toast,
+      openRefuse: () => this.setState({ refuse: true }), closeRefuse: () => this.setState({ refuse: false }),
+      confirmRefuse: () => this.setState({ refuse: false, done: { ...this.state.done, [s]: 'ko' }, toast: 'Paiement refusé. Le client a été notifié.' }),
+      validate: () => this.setState({ done: { ...this.state.done, [s]: 'ok' }, toast: 'Paiement validé. L’espace de ' + cur.n + ' est débloqué.' })
+    };
+  }
+}
+</script>
+</body>
+</html>

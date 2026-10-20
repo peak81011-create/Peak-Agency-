@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Connexion, inscription, mot de passe, 2FA</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #B6C2AA">
+  <header class="wrap row between g-4" style="padding-top: 24px; padding-bottom: 24px">
+    <a class="logo" href="Home.dc.html" aria-label="Retour au site" style="color: #19261F"><svg viewBox="0 0 268 594" width="17" height="38" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M0 0H143L268 126L143 250H89V554L45 594L0 554ZM89 75H134L184 126L134 175H89Z"/></svg><span class="logo-word">Clipping Agency</span></a>
+    <div class="seg lang" role="group" aria-label="Langue" style="background: #CBD4C1; border-color: #9AAA8C"><button class="on" aria-pressed="true">FR</button><button aria-pressed="false">EN</button></div>
+  </header>
+
+  <main class="wrap stack g-8" style="padding-bottom: 80px">
+    <p class="xs strong" style="text-transform: uppercase; letter-spacing: .12em">4 écrans · même gabarit centré en production (une carte par page)</p>
+    <div class="grid-2" style="gap: 32px; justify-items: center; align-items: start">
+
+      <!-- CONNEXION -->
+      <section class="auth-card" aria-labelledby="a1">
+        <div class="stack g-2"><span class="eyebrow subtle">Connexion</span><h1 id="a1" class="h1">Bon retour</h1><p class="sm muted">Clients et équipe utilisent le même accès.</p></div>
+        <div class="field"><label class="label" for="l1">E-mail</label><input id="l1" class="input" type="email" autocomplete="email" value="lea.martin@exemple.fr"></div>
+        <div class="field"><div class="row between"><label class="label" for="l2">Mot de passe</label><a class="sm" href="#forgot">Mot de passe oublié ?</a></div><input id="l2" class="input" type="password" autocomplete="current-password" value="motdepasse"></div>
+        <label class="check"><input type="checkbox" checked>Rester connecté</label>
+        <a class="btn btn-primary btn-lg btn-block" href="#twofa">Se connecter</a>
+        <p class="sm muted" style="text-align: center">Pas encore client ? <a href="#signup">Créer un compte</a></p>
+      </section>
+
+      <!-- INSCRIPTION -->
+      <section class="auth-card" id="signup" aria-labelledby="a2">
+        <div class="stack g-2"><span class="eyebrow subtle">Inscription</span><h1 id="a2" class="h1">Créer votre espace</h1><p class="sm muted">Vous choisirez votre offre juste après.</p></div>
+        <div class="grid-2" style="gap: 12px"><div class="field"><label class="label" for="s1">Prénom</label><input id="s1" class="input" autocomplete="given-name"></div><div class="field"><label class="label" for="s2">Nom</label><input id="s2" class="input" autocomplete="family-name"></div></div>
+        <div class="field"><label class="label" for="s3">E-mail</label><input id="s3" class="input" type="email" autocomplete="email"></div>
+        <div class="field"><label class="label" for="s4">Mot de passe</label><input id="s4" class="input" type="password" autocomplete="new-password" value="Peak2026!"><div class="row g-2" aria-hidden="true"><span style="flex: 1; height: 4px; border-radius: 4px; background: #1C5A30"></span><span style="flex: 1; height: 4px; border-radius: 4px; background: #1C5A30"></span><span style="flex: 1; height: 4px; border-radius: 4px; background: #1C5A30"></span><span style="flex: 1; height: 4px; border-radius: 4px; background: #DDE3D5"></span></div><span class="hint">Solide · 12 caractères minimum, avec un chiffre et un symbole.</span></div>
+        <label class="check"><input type="checkbox">J'accepte les <a href="Legal.dc.html">CGV</a> et la <a href="Legal.dc.html">politique de confidentialité</a>.</label>
+        <a class="btn btn-primary btn-lg btn-block" href="ClientOnboarding.dc.html">Créer mon compte</a>
+        <p class="sm muted" style="text-align: center">Déjà un compte ? <a href="#">Se connecter</a></p>
+      </section>
+
+      <!-- MOT DE PASSE OUBLIÉ -->
+      <section class="auth-card" id="forgot" aria-labelledby="a3">
+        <a class="sm row g-1" href="#" style="text-decoration: none"><span class="ic ic-sm ic-chev-l"></span>Retour à la connexion</a>
+        <div class="stack g-2"><span class="eyebrow subtle">Mot de passe oublié</span><h1 id="a3" class="h1">Réinitialiser</h1><p class="sm muted">Entrez votre e-mail : vous recevrez un lien valable 30 minutes.</p></div>
+        <div class="field"><label class="label" for="p1">E-mail</label><input id="p1" class="input" type="email" value="lea.martin@exemple.fr"></div>
+        <button class="btn btn-primary btn-lg btn-block">Envoyer le lien</button>
+        <div class="callout callout-ok"><span class="ic ic-mail"></span><span>Si un compte existe pour cette adresse, un e-mail vient d'être envoyé. Pensez à vérifier vos spams.</span></div>
+      </section>
+
+      <!-- 2FA -->
+      <section class="auth-card" id="twofa" aria-labelledby="a4">
+        <div class="ic-box" style="width: 48px; height: 48px; background: #19261F; color: #B6C2AA"><span class="ic ic-lg ic-shield"></span></div>
+        <div class="stack g-2"><span class="eyebrow subtle">Double authentification</span><h1 id="a4" class="h1">Entrez votre code</h1><p class="sm muted">Code à 6 chiffres de votre application d'authentification. Obligatoire pour l'équipe, recommandé pour les clients.</p></div>
+        <div class="otp" role="group" aria-label="Code à 6 chiffres"><input value="4" inputmode="numeric" aria-label="Chiffre 1"><input value="8" inputmode="numeric" aria-label="Chiffre 2"><input value="1" inputmode="numeric" aria-label="Chiffre 3"><input inputmode="numeric" aria-label="Chiffre 4"><input inputmode="numeric" aria-label="Chiffre 5"><input inputmode="numeric" aria-label="Chiffre 6"></div>
+        <label class="check"><input type="checkbox">Faire confiance à cet appareil 30 jours</label>
+        <a class="btn btn-primary btn-lg btn-block" href="AdminOverview.dc.html">Vérifier</a>
+        <p class="sm muted" style="text-align: center">Pas accès à l'application ? <a href="#">Utiliser un code de secours</a></p>
+      </section>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2000}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

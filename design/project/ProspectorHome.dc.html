@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Prospecteur — aujourd'hui</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="prospecteur" active="today" hint-size="100%,800px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Prospecteur" crumb="Aujourd’hui" initials="YB" hint-size="100%,69px"></dc-import>
+      <div class="page-head"><div class="stack g-1"><span class="sm subtle">Mardi 20 octobre</span><h1 class="h1">Allez Yanis, 10 de plus</h1></div></div>
+      <div class="page-body">
+        <section class="card card-dark stack g-4" style="padding: 24px" aria-labelledby="obj">
+          <div class="row between g-3" style="align-items: flex-end"><div class="stack g-1"><span class="eyebrow" style="color: #B6C2AA">Objectif du jour</span><h2 id="obj" class="price" style="color: #FFFFFF; font-size: 48px">30 <span style="font-size: 24px; color: #9AAA8C">/ 40 messages</span></h2></div><span class="badge" style="background: #B6C2AA; color: #19261F">75 %</span></div>
+          <div class="bar bar-lg" style="background: #2E4436; height: 14px" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="40" aria-label="Objectif du jour"><span style="width: 75%; background: #B6C2AA"></span></div>
+          <div class="row g-6 sm" style="color: #CBD4C1"><span><b style="color: #FFFFFF">4</b> réponses aujourd'hui</span><span><b style="color: #FFFFFF">6</b> relances à faire</span><span><b style="color: #FFFFFF">1</b> appel jeudi</span></div>
+        </section>
+
+        <div class="split" style="align-items: start">
+          <section class="card card-pad-0" aria-labelledby="tc">
+            <div class="row between" style="padding: 14px 18px; border-bottom: 1px solid #EBEFE6"><h2 id="tc" class="h3">À contacter</h2><span class="badge st-acontacter">10 restants</span></div>
+            <sc-for list="{{todo}}" as="p" hint-placeholder-count="5">
+              <a class="row g-3" href="ProspectSheet.dc.html" style="padding: 12px 18px; border-bottom: 1px solid #EBEFE6; text-decoration: none; color: #19261F; flex-wrap: nowrap; min-height: 64px">
+                <span class="av">{{p.ini}}</span>
+                <div class="stack grow" style="gap: 2px; min-width: 0"><span class="strong trunc">{{p.h}}</span><span class="xs subtle">{{p.plat}} · {{p.subs}} · {{p.niche}}</span></div>
+                <span class="btn btn-secondary btn-sm" aria-hidden="true">Ouvrir<span class="ic ic-sm ic-chev-r"></span></span>
+              </a>
+            </sc-for>
+          </section>
+          <section class="card card-pad-0" aria-labelledby="rl">
+            <div class="row between" style="padding: 14px 18px; border-bottom: 1px solid #EBEFE6"><h2 id="rl" class="h3">Relances du jour</h2><span class="badge st-relance">6</span></div>
+            <sc-for list="{{follow}}" as="p" hint-placeholder-count="4">
+              <a class="row g-3" href="ProspectSheet.dc.html" style="padding: 12px 18px; border-bottom: 1px solid #EBEFE6; text-decoration: none; color: #19261F; flex-wrap: nowrap; min-height: 64px">
+                <span class="av">{{p.ini}}</span>
+                <div class="stack grow" style="gap: 2px; min-width: 0"><span class="strong trunc">{{p.h}}</span><span class="xs subtle">Contacté {{p.when}} · {{p.plat}}</span></div>
+                <span class="badge st-{{p.s}}">{{p.sl}}</span>
+              </a>
+            </sc-for>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1400}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      todo: [
+        { ini: 'KZ', h: '@kenzo.plays', plat: 'Twitch', subs: '38 k', niche: 'Gaming' },
+        { ini: 'AL', h: '@alix.asmr', plat: 'Twitch', subs: '22 k', niche: 'ASMR' },
+        { ini: 'BN', h: '@benji.chess', plat: 'YouTube', subs: '67 k', niche: 'Échecs' },
+        { ini: 'CF', h: '@clem.foot', plat: 'Kick', subs: '14 k', niche: 'Sport' },
+        { ini: 'JS', h: '@jess.studio', plat: 'Twitch', subs: '31 k', niche: 'Art' }
+      ],
+      follow: [
+        { ini: 'DV', h: '@dav.speedrun', when: 'il y a 4 j', plat: 'Twitch', s: 'contacte', sl: 'Contacté' },
+        { ini: 'RT', h: '@rayan.talks', when: 'il y a 4 j', plat: 'Twitch', s: 'contacte', sl: 'Contacté' },
+        { ini: 'LN', h: '@luna.draws', when: 'il y a 8 j', plat: 'Instagram', s: 'relance', sl: 'Relancé' },
+        { ini: 'PL', h: '@paulo.live', when: 'hier', plat: 'Kick', s: 'interesse', sl: 'Intéressé' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

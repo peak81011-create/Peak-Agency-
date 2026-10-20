@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Contact — Peak Clipping Agency</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <dc-import name="SiteHeader" active="contact" hint-size="100%,80px"></dc-import>
+  <section style="padding: 80px 0">
+    <div class="wrap split-r" style="gap: 64px; align-items: start">
+      <div class="stack g-6">
+        <span class="eyebrow subtle">Contact</span>
+        <h1 class="d2">Parlons de votre chaîne</h1>
+        <p class="lead">Dites-nous où vous publiez et ce que vous visez. On revient vers vous sous [24 h ouvrées].</p>
+        <div class="stack g-3">
+          <a class="card row g-4" href="Contact.dc.html" style="text-decoration: none; color: #19261F"><span class="ic-box"><span class="ic ic-mail"></span></span><div class="stack" style="gap: 0"><span class="sm subtle">E-mail</span><span class="strong">[contact@domaine.fr]</span></div></a>
+          <div class="card row g-4"><span class="ic-box"><span class="ic ic-clock"></span></span><div class="stack" style="gap: 0"><span class="sm subtle">Disponibilité</span><span class="strong">[Lun–ven, 9 h–19 h]</span></div></div>
+        </div>
+      </div>
+      <form class="card stack g-5" style="padding: 32px; border-radius: 20px" aria-label="Formulaire de contact">
+        <div class="grid-2" style="gap: 16px">
+          <div class="field"><label class="label" for="f1">Nom</label><input id="f1" class="input" autocomplete="name"></div>
+          <div class="field"><label class="label" for="f2">E-mail</label><input id="f2" class="input" type="email" autocomplete="email"></div>
+        </div>
+        <div class="field"><label class="label" for="f3">Lien de votre chaîne principale</label><div class="affix"><span class="ic ic-sm ic-link"></span><input id="f3" placeholder="https://"></div></div>
+        <div class="grid-2" style="gap: 16px">
+          <div class="field"><label class="label" for="f4">Je suis</label><select id="f4" class="select"><option>Créateur de contenu</option><option>Agence / manager</option><option>Autre</option></select></div>
+          <div class="field"><label class="label" for="f5">Offre qui m'intéresse</label><select id="f5" class="select"><option>Je ne sais pas encore</option><option>Starter</option><option>Croissance</option><option>Domination</option></select></div>
+        </div>
+        <div class="field"><label class="label" for="f6">Votre message</label><textarea id="f6" class="textarea" placeholder="Fréquence de vos lives, plateformes visées, objectifs…"></textarea></div>
+        <label class="check"><input type="checkbox">J'accepte que mes données soient utilisées pour me recontacter (<a href="Legal.dc.html">confidentialité</a>).</label>
+        <button class="btn btn-primary btn-lg" type="button"><span class="ic ic-send"></span>Envoyer le message</button>
+      </form>
+    </div>
+  </section>
+  <dc-import name="SiteFooter" hint-size="100%,420px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

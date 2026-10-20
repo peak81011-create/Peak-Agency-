@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Mes demandes</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0; position: relative">
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="client" active="requests" hint-size="100%,900px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Espace client" crumb="Mes demandes" initials="LM" hint-size="100%,69px"></dc-import>
+      <div class="page-head"><div class="stack g-1"><h1 class="h1">Mes demandes</h1><span class="sm subtle">Une question, un changement de planning, une idée de clip : écrivez-nous ici.</span></div><button class="btn btn-primary" onClick="{{open}}"><span class="ic ic-sm ic-plus"></span>Nouvelle demande</button></div>
+      <div class="page-body">
+        <div class="row g-5" style="align-items: stretch">
+          <section class="card card-pad-0 stack" style="flex: 1 1 320px; max-width: 420px; min-width: 0" aria-label="Liste des demandes">
+            <div style="padding: 12px; border-bottom: 1px solid #DCE2D5"><div class="toolbar"><button class="chip on">Ouvertes · 2</button><button class="chip">Résolues · 7</button></div></div>
+            <sc-for list="{{reqs}}" as="r" hint-placeholder-count="4">
+              <a href="#" class="stack" style="gap: 6px; padding: 14px 16px; border-bottom: 1px solid #EBEFE6; text-decoration: none; color: #19261F; background: {{r.bg}}; border-left: 3px solid {{r.bl}}">
+                <div class="row between g-2"><span class="xs subtle">{{r.cat}} · {{r.date}}</span><span class="badge {{r.tone}}">{{r.s}}</span></div>
+                <span class="strong">{{r.t}}</span>
+                <span class="sm subtle trunc">{{r.last}}</span>
+              </a>
+            </sc-for>
+          </section>
+
+          <section class="card stack g-5" style="flex: 999 1 480px; min-width: 0" aria-labelledby="rd">
+            <div class="row between g-3" style="align-items: flex-start">
+              <div class="stack g-1"><span class="xs subtle">Demande #R-208 · Montage · ouverte le 19/10</span><h2 id="rd" class="h2">Ajouter des sous-titres en anglais sur les Shorts</h2></div>
+              <span class="badge t-blue">En cours</span>
+            </div>
+            <div class="row g-4 sm subtle"><span class="row g-2"><span class="av av-sm av-dark">CR</span>Suivie par Camille</span><span class="row g-2"><span class="ic ic-sm ic-link"></span>Compte : Léa Clips (YouTube)</span></div>
+            <div class="hr"></div>
+            <div class="thread">
+              <div class="msg me"><span class="av av-sm">LM</span><div class="stack" style="align-items: flex-end"><span class="meta">Vous · 19/10 14:02</span><div class="bubble">Hello ! Une bonne partie de mon audience YouTube est anglophone. Est-ce qu'on peut mettre les sous-titres en anglais sur les Shorts à partir de maintenant ?</div></div></div>
+              <div class="msg"><span class="av av-sm av-dark">CR</span><div class="stack"><span class="meta">Camille · assistante · 19/10 16:40</span><div class="bubble">Bonne idée ! Je vois ça avec les monteurs. On peut le faire sur tous les nouveaux Shorts dès lundi. On garde le français sur TikTok et Reels ?</div></div></div>
+              <div class="msg me"><span class="av av-sm">LM</span><div class="stack" style="align-items: flex-end"><span class="meta">Vous · 20/10 09:15</span><div class="bubble">Oui parfait, uniquement les Shorts.</div></div></div>
+              <div class="msg"><span class="av av-sm av-dark">CR</span><div class="stack"><span class="meta">Camille · il y a 2 h</span><div class="bubble">C'est noté ✓ Premier Short sous-titré en anglais : jeudi 22/10.</div><div class="row g-2" style="margin-top: 6px"><span class="file-row" style="padding: 6px 10px; gap: 8px"><span class="ic ic-sm ic-file"></span><span class="xs strong">exemple-sous-titres-en.mp4</span></span></div></div></div>
+            </div>
+            <div class="composer"><label for="rp" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Votre réponse</label><button class="btn btn-ghost btn-icon" aria-label="Joindre un fichier"><span class="ic ic-file"></span></button><textarea id="rp" placeholder="Écrire une réponse…" rows="1"></textarea><button class="btn btn-primary"><span class="ic ic-sm ic-send"></span>Envoyer</button></div>
+            <button class="btn btn-ghost btn-sm" style="align-self: flex-start"><span class="ic ic-sm ic-check"></span>Marquer comme résolue</button>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <sc-if value="{{modal}}" hint-placeholder-val="{{false}}">
+    <div class="scrim" style="position: absolute; inset: 0; border-radius: 0; align-items: flex-start; padding-top: 120px">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="nd">
+        <div class="modal-head"><div class="stack g-1"><h2 id="nd" class="h2">Nouvelle demande</h2><p class="sm muted">Réponse sous [24 h ouvrées].</p></div><button class="btn btn-ghost btn-icon btn-sm" aria-label="Fermer" onClick="{{close}}"><span class="ic ic-sm ic-x"></span></button></div>
+        <div class="modal-body">
+          <div class="field"><label class="label" for="nc">Catégorie</label><select id="nc" class="select"><option>Montage d'un clip</option><option>Planning de publication</option><option>Comptes</option><option>Paiement / facture</option><option>Autre</option></select></div>
+          <div class="field"><label class="label" for="ns">Sujet</label><input id="ns" class="input" placeholder="En une phrase"></div>
+          <div class="field"><label class="label" for="nm">Message</label><textarea id="nm" class="textarea" placeholder="Donnez-nous un maximum de détails"></textarea></div>
+          <div class="field"><span class="label">Pièce jointe <span class="opt">(facultatif)</span></span><div class="drop" style="padding: 18px; flex-direction: row; gap: 10px"><span class="ic ic-upload"></span><span class="sm">Glissez un fichier ou <b>parcourez</b></span></div></div>
+        </div>
+        <div class="modal-foot"><button class="btn btn-ghost" onClick="{{close}}">Annuler</button><button class="btn btn-primary" onClick="{{close}}">Envoyer la demande</button></div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"modal":{"editor":"boolean","default":false},"$preview":{"width":1440,"height":1400}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { modal: null }; }
+  renderVals() {
+    const modal = this.state.modal ?? (this.props.modal ?? false);
+    const R = (o, on) => ({ ...o, bg: on ? '#F4F6F1' : '#FFFFFF', bl: on ? '#19261F' : 'transparent' });
+    return {
+      modal, open: () => this.setState({ modal: true }), close: () => this.setState({ modal: false }),
+      reqs: [
+        R({ cat: 'Montage', date: '19/10', t: 'Ajouter des sous-titres en anglais sur les Shorts', last: 'Camille : C’est noté, premier Short jeudi 22/10.', s: 'En cours', tone: 't-blue' }, true),
+        R({ cat: 'Planning', date: 'Hier', t: 'Prioriser le live du 24 octobre', last: 'Vous : Le live sera long, il y a un invité…', s: 'Reçue', tone: 't-neutral' }),
+        R({ cat: 'Comptes', date: '02/10', t: 'Changer la photo de @lea.moments', last: 'Camille : Fait ! Dites-moi si ça vous va.', s: 'Résolue', tone: 't-green' }),
+        R({ cat: 'Paiement', date: '28/09', t: 'Facture au nom de ma société', last: 'Alexandre : Facture corrigée en pièce jointe.', s: 'Résolue', tone: 't-green' })
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

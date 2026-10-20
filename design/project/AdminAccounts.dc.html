@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Admin — comptes de diffusion</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <div class="app">
+    <div class="app-side"><dc-import name="AppNav" role="admin" active="accounts" hint-size="100%,1000px"></dc-import></div>
+    <div class="app-main">
+      <dc-import name="AppTopbar" section="Admin" crumb="Comptes de diffusion" initials="AD" hint-size="100%,69px"></dc-import>
+      <div class="page-head">
+        <div class="stack g-1"><h1 class="h1">Comptes de diffusion</h1><span class="sm subtle">68 comptes · 24 clients · 3 plateformes</span></div>
+        <button class="btn btn-primary"><span class="ic ic-sm ic-plus"></span>Ajouter un compte</button>
+      </div>
+      <div class="page-body">
+        <div class="grid-4">
+          <div class="card stat"><span class="stat-label">Abonnés cumulés</span><span class="stat-value">1,92 M</span><span class="delta"><span class="ic ic-sm ic-trend"></span>+48 k sur 30 j</span></div>
+          <div class="card stat"><span class="stat-label"><span class="plat plat-tt">TikTok</span></span><span class="stat-value">31</span><span class="sm subtle">comptes</span></div>
+          <div class="card stat"><span class="stat-label"><span class="plat plat-ig">Instagram</span></span><span class="stat-value">22</span><span class="sm subtle">comptes</span></div>
+          <div class="card stat"><span class="stat-label"><span class="plat plat-yt">YouTube</span></span><span class="stat-value">15</span><span class="sm subtle">comptes</span></div>
+        </div>
+        <div class="toolbar">
+          <label class="affix" style="min-height: 40px; width: 240px"><span class="ic ic-sm ic-search"></span><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Rechercher</span><input type="search" placeholder="@compte, client…" style="min-height: 38px"></label>
+          <button class="chip on">Tous</button><button class="chip">TikTok</button><button class="chip">Instagram</button><button class="chip">YouTube</button><button class="chip"><span class="ic ic-sm ic-alert"></span>À surveiller · 2</button>
+        </div>
+        <div class="tbl-wrap tbl-cards">
+          <table class="tbl">
+            <thead><tr><th>Compte</th><th>Plateforme</th><th>Client</th><th class="r">Abonnés</th><th class="r">Δ 30 j</th><th class="r">Clips postés</th><th>Dernier post</th><th>Statut</th><th class="r"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Actions</span></th></tr></thead>
+            <tbody>
+              <sc-for list="{{rows}}" as="a" hint-placeholder-count="10">
+                <tr><td class="first strong">{{a.h}}</td><td><span class="plat {{a.pc}}">{{a.p}}</span></td><td>{{a.c}}</td><td class="r num">{{a.subs}}</td><td class="r num" style="color: {{a.dc}}; font-weight: 600">{{a.d}}</td><td class="r num">{{a.clips}}</td><td class="subtle">{{a.last}}</td><td><span class="badge plain {{a.tone}}">{{a.s}}</span></td><td class="r"><a class="btn btn-ghost btn-sm btn-icon" href="#" aria-label="Ouvrir le compte"><span class="ic ic-sm ic-ext"></span></a></td></tr>
+              </sc-for>
+            </tbody>
+          </table>
+          <div class="pager"><span>1–10 sur 68</span><div class="row g-2"><button class="btn btn-secondary btn-sm btn-icon" aria-label="Page précédente"><span class="ic ic-sm ic-chev-l"></span></button><button class="btn btn-secondary btn-sm btn-icon" aria-label="Page suivante"><span class="ic ic-sm ic-chev-r"></span></button></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const P = { tt: ['TikTok', 'plat-tt'], ig: ['Instagram', 'plat-ig'], yt: ['YouTube', 'plat-yt'] };
+    const A = (h, p, c, subs, d, clips, last, s) => ({ h, p: P[p][0], pc: P[p][1], c, subs, d, dc: d.startsWith('−') ? '#94271C' : '#1C5A30', clips, last, s, tone: s === 'Actif' ? 't-green' : s === 'En création' ? 't-blue' : 't-amber' });
+    return { rows: [
+      A('@leamrtn.clips', 'tt', 'Léa Martin', '48,2 k', '+1 320', '64', 'Hier 19:00', 'Actif'),
+      A('@lea.moments', 'ig', 'Léa Martin', '21,7 k', '+610', '41', 'Hier 12:30', 'Actif'),
+      A('Léa Clips', 'yt', 'Léa Martin', '6 940', '+210', '23', '18/10', 'Actif'),
+      A('@bastien.pod.clips', 'tt', 'Studio Bastien', '182 k', '+9 400', '211', 'Aujourd’hui 08:00', 'Actif'),
+      A('@bastien.best', 'ig', 'Studio Bastien', '96,4 k', '+3 870', '160', 'Aujourd’hui 09:00', 'Actif'),
+      A('@hugolive.best', 'tt', 'Hugo Vasseur', '12,1 k', '−140', '38', 'Il y a 2 h', 'À surveiller'),
+      A('@maxou.irl.clips', 'tt', 'Maxime Roux', '74,8 k', '+5 120', '97', 'Hier 20:30', 'Actif'),
+      A('@techguy.shorts', 'yt', 'TechGuy', '31,5 k', '+1 090', '52', '19/10', 'Actif'),
+      A('@nora.k.clips', 'tt', 'Nora K.', '—', '—', '0', '—', 'En création'),
+      A('@chloe.cuisine.best', 'ig', 'Chloé P.', '8 200', '−320', '30', '28/09', 'À surveiller')
+    ] };
+  }
+}
+</script>
+</body>
+</html>

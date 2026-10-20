@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Onboarding client</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+  <header style="background: #19261F; color: #DDE3D5">
+    <div class="wrap row between g-4" style="min-height: 72px">
+      <span class="logo" style="color: #B6C2AA"><svg viewBox="0 0 268 594" width="15" height="34" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M0 0H143L268 126L143 250H89V554L45 594L0 554ZM89 75H134L184 126L134 175H89Z"/></svg><span class="logo-word hide-m" style="color: #EBEFE6">Clipping Agency</span></span>
+      <div class="row g-3" style="flex-wrap: nowrap"><div class="seg seg-dark lang" role="group" aria-label="Langue"><button class="on" aria-pressed="true">FR</button><button aria-pressed="false">EN</button></div><a class="btn btn-on-dark btn-sm hide-m" href="Auth.dc.html" style="border: 0">Se déconnecter</a></div>
+    </div>
+  </header>
+
+  <main class="wrap-narrow stack g-8" style="max-width: 880px; padding-top: 40px; padding-bottom: 80px">
+    <div class="steps" aria-label="Étapes">
+      <span class="step {{s1}}"><span class="n">{{n1}}</span>Profil créateur</span><span class="step-sep hide-m"></span>
+      <span class="step {{s2}}"><span class="n">2</span>Choix de l'offre</span><span class="step-sep hide-m"></span>
+      <span class="step"><span class="n">3</span>Paiement</span>
+    </div>
+
+    <sc-if value="{{isStep1}}" hint-placeholder-val="{{true}}">
+      <div class="stack g-2"><h1 class="h1">Parlez-nous de vous</h1><p class="muted">Ces infos guident nos monteurs : ton, moments forts, plateformes.</p></div>
+      <section class="card stack g-6" style="padding: 28px">
+        <div class="row g-5">
+          <span class="av av-xl">LM</span>
+          <div class="stack g-2"><span class="label">Photo de profil</span><div class="row g-2"><button class="btn btn-secondary btn-sm"><span class="ic ic-sm ic-upload"></span>Importer</button><button class="btn btn-ghost btn-sm">Retirer</button></div></div>
+        </div>
+        <div class="grid-2" style="gap: 16px">
+          <div class="field"><label class="label" for="o1">Nom de créateur</label><input id="o1" class="input" value="Léa Martin"></div>
+          <div class="field"><label class="label" for="o2">Pseudo principal</label><div class="affix"><span>@</span><input id="o2" value="leamrtn"></div></div>
+        </div>
+        <div class="stack g-3">
+          <span class="label">Liens de vos chaînes</span>
+          <div class="row g-2" style="flex-wrap: nowrap"><select class="select" aria-label="Plateforme" style="width: 150px; flex: none"><option>Twitch</option></select><div class="affix grow"><span class="ic ic-sm ic-link"></span><input aria-label="Lien Twitch" value="twitch.tv/leamrtn"></div><button class="btn btn-ghost btn-icon" aria-label="Retirer ce lien"><span class="ic ic-sm ic-x"></span></button></div>
+          <div class="row g-2" style="flex-wrap: nowrap"><select class="select" aria-label="Plateforme" style="width: 150px; flex: none"><option>YouTube</option></select><div class="affix grow"><span class="ic ic-sm ic-link"></span><input aria-label="Lien YouTube" value="youtube.com/@leamrtn"></div><button class="btn btn-ghost btn-icon" aria-label="Retirer ce lien"><span class="ic ic-sm ic-x"></span></button></div>
+          <button class="btn btn-ghost btn-sm" style="align-self: flex-start"><span class="ic ic-sm ic-plus"></span>Ajouter une chaîne</button>
+        </div>
+        <fieldset class="stack g-3" style="border: 0; padding: 0; margin: 0">
+          <legend class="label" style="margin-bottom: 10px">Niche</legend>
+          <div class="toolbar"><button class="chip">Gaming</button><button class="chip on">Lifestyle</button><button class="chip">Business</button><button class="chip">Humour</button><button class="chip">Sport</button><button class="chip">Tech</button><button class="chip">Beauté</button><button class="chip"><span class="ic ic-sm ic-plus"></span>Autre</button></div>
+        </fieldset>
+        <fieldset class="stack g-3" style="border: 0; padding: 0; margin: 0">
+          <legend class="label" style="margin-bottom: 10px">Objectifs <span class="opt">(plusieurs choix)</span></legend>
+          <div class="grid-2" style="gap: 10px">
+            <label class="check card card-flat" style="padding: 14px; border-color: #19261F"><input type="checkbox" checked>Gagner des abonnés sur ma chaîne principale</label>
+            <label class="check card card-flat" style="padding: 14px; border-color: #19261F"><input type="checkbox" checked>Faire découvrir mes lives</label>
+            <label class="check card card-flat" style="padding: 14px"><input type="checkbox">Monétiser les comptes de clips</label>
+            <label class="check card card-flat" style="padding: 14px"><input type="checkbox">Tester un nouveau format</label>
+          </div>
+        </fieldset>
+        <div class="grid-2" style="gap: 16px">
+          <div class="field"><label class="label" for="o3">Fréquence de vos lives / vidéos</label><select id="o3" class="select"><option>3 à 5 par semaine</option></select></div>
+          <div class="field"><label class="label" for="o4">Objectif d'abonnés à 3 mois <span class="opt">(facultatif)</span></label><input id="o4" class="input" placeholder="Ex. 50 000"></div>
+        </div>
+        <div class="field"><label class="label" for="o5">À éviter dans les clips <span class="opt">(facultatif)</span></label><textarea id="o5" class="textarea" style="min-height: 88px" placeholder="Sujets sensibles, personnes à ne pas montrer…"></textarea></div>
+      </section>
+      <div class="row between g-3"><span class="sm subtle">Modifiable plus tard dans votre profil.</span><button class="btn btn-primary btn-lg" onClick="{{next}}">Continuer<span class="ic ic-chev-r"></span></button></div>
+    </sc-if>
+
+    <sc-if value="{{isStep2}}" hint-placeholder-val="{{false}}">
+      <div class="stack g-2"><h1 class="h1">Choisissez votre offre</h1><p class="muted">Changement d'offre possible chaque mois.</p></div>
+      <div class="grid-3" style="gap: 16px" role="radiogroup" aria-label="Offre">
+        <sc-for list="{{plans}}" as="p" hint-placeholder-count="3">
+          <button class="opt-card {{p.cls}}" role="radio" aria-checked="{{p.sel}}" onClick="{{p.pick}}">
+            <div class="row between"><span class="h2">{{p.name}}</span><span class="radio-dot"></span></div>
+            <div class="row g-1" style="align-items: baseline"><span class="price" style="font-size: 32px">{{p.price}}</span><span class="sm muted">€ HT / mois</span></div>
+            <ul class="incl sm" style="gap: 8px"><li><span class="ic ic-sm ic-film"></span>{{p.clips}} clips / mois</li><li><span class="ic ic-sm ic-at"></span>{{p.accounts}}</li><li><span class="ic ic-sm ic-clock"></span>Livraison {{p.delay}}</li></ul>
+          </button>
+        </sc-for>
+      </div>
+      <div class="card card-sage row between g-4"><div class="stack g-1"><span class="sm muted">Total mensuel</span><span class="h2">Offre {{selName}} · [XXX] € HT</span></div><span class="sm muted" style="max-width: 360px">Paiement par virement. Votre espace sera débloqué après vérification.</span></div>
+      <div class="row between g-3"><button class="btn btn-ghost btn-lg" onClick="{{prev}}"><span class="ic ic-chev-l"></span>Retour</button><a class="btn btn-primary btn-lg" href="ClientPayment.dc.html">Continuer vers le paiement<span class="ic ic-chev-r"></span></a></div>
+    </sc-if>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"step":{"editor":"enum","options":["1","2"],"default":"1"},"$preview":{"width":1440,"height":1700}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { step: null, plan: 'croissance' }; }
+  renderVals() {
+    const step = this.state.step ?? (this.props.step ?? '1');
+    const defs = [
+      { k: 'starter', name: 'Starter', price: '[XXX]', clips: '[XX]', accounts: '1 compte, 1 plateforme', delay: '[72 h]' },
+      { k: 'croissance', name: 'Croissance', price: '[XXX]', clips: '[XX]', accounts: '3 comptes, 3 plateformes', delay: '[48 h]' },
+      { k: 'domination', name: 'Domination', price: '[XXX]', clips: '[XXX]', accounts: '[X] comptes, 3 plateformes', delay: '[24 h]' }
+    ];
+    const plans = defs.map((p) => ({ ...p, cls: p.k === this.state.plan ? 'on' : '', sel: p.k === this.state.plan ? 'true' : 'false', pick: () => this.setState({ plan: p.k }) }));
+    return {
+      isStep1: step === '1', isStep2: step === '2',
+      s1: step === '1' ? 'on' : 'done', n1: step === '1' ? '1' : '✓', s2: step === '2' ? 'on' : '',
+      next: () => this.setState({ step: '2' }), prev: () => this.setState({ step: '1' }),
+      plans, selName: defs.find((p) => p.k === this.state.plan).name
+    };
+  }
+}
+</script>
+</body>
+</html>

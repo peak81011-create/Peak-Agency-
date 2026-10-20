@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Design tokens — Peak Clipping Agency</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0">
+
+  <header class="hero" style="padding: 72px 0 64px">
+    <div class="wrap stack g-8">
+      <div class="row between g-6" style="align-items: flex-end">
+        <div class="stack g-4" style="max-width: 720px">
+          <span class="eyebrow" style="color: #B6C2AA">Design system · v1.0 · octobre 2026</span>
+          <h1 class="d2" style="color: #FFFFFF">Peak Clipping Agency</h1>
+          <p class="lead" style="color: #CBD4C1">Tokens, typographie et règles de statut pour la plateforme : site public, espace client, admin et espaces employés. Toutes les valeurs ci-dessous existent dans <span class="mono">peak.css</span>, à reporter dans <span class="mono">tailwind.config</span> et les variables shadcn/ui.</p>
+        </div>
+        <div class="row g-3">
+          <span class="badge plain t-forest" style="background: #2E4436">Next.js</span>
+          <span class="badge plain t-forest" style="background: #2E4436">Tailwind</span>
+          <span class="badge plain t-forest" style="background: #2E4436">shadcn/ui</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap stack g-16" style="padding-top: 64px; padding-bottom: 96px">
+
+    <!-- LOGO -->
+    <section class="stack g-6">
+      <div class="stack g-2"><span class="eyebrow subtle">01 — Logo</span><h2 class="h1">Le monogramme P</h2><p class="muted" style="max-width: 640px">Vectorisé depuis le fichier fourni (aucune modification de forme). Verrouillage vertical pour les grands formats, horizontal pour les en-têtes. Zone de protection : la largeur du fût du P tout autour.</p></div>
+      <div class="grid-3">
+        <div class="stack" style="align-items: center; justify-content: center; gap: 28px; background: #B6C2AA; border-radius: 20px; min-height: 340px; color: #19261F">
+          <svg viewBox="0 0 268 594" width="76" height="168" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M0 0H143L268 126L143 250H89V554L45 594L0 554ZM89 75H134L184 126L134 175H89Z"/></svg>
+          <span class="logo-word" style="font-size: 14px">Clipping Agency</span>
+        </div>
+        <div class="stack" style="align-items: center; justify-content: center; gap: 28px; background: #19261F; border-radius: 20px; min-height: 340px; color: #B6C2AA">
+          <svg viewBox="0 0 268 594" width="76" height="168" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M0 0H143L268 126L143 250H89V554L45 594L0 554ZM89 75H134L184 126L134 175H89Z"/></svg>
+          <span class="logo-word" style="font-size: 14px">Clipping Agency</span>
+        </div>
+        <div class="stack g-4" style="justify-content: center; background: #FFFFFF; border: 1px solid #DCE2D5; border-radius: 20px; min-height: 340px; padding: 32px">
+          <span class="label-caps">Horizontal — en-tête</span>
+          <span class="logo" style="color: #19261F"><svg viewBox="0 0 268 594" width="16" height="36" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M0 0H143L268 126L143 250H89V554L45 594L0 554ZM89 75H134L184 126L134 175H89Z"/></svg><span class="logo-word">Clipping Agency</span></span>
+          <div class="hr"></div>
+          <span class="label-caps">Favicon / avatar d'app</span>
+          <div class="row g-4">
+            <div style="width: 64px; height: 64px; border-radius: 14px; background: #19261F; color: #B6C2AA; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 268 594" width="18" height="40" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M0 0H143L268 126L143 250H89V554L45 594L0 554ZM89 75H134L184 126L134 175H89Z"/></svg></div>
+            <div style="width: 40px; height: 40px; border-radius: 10px; background: #B6C2AA; color: #19261F; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 268 594" width="11" height="24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M0 0H143L268 126L143 250H89V554L45 594L0 554ZM89 75H134L184 126L134 175H89Z"/></svg></div>
+            <div style="width: 24px; height: 24px; border-radius: 6px; background: #19261F; color: #B6C2AA; display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 268 594" width="7" height="15" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M0 0H143L268 126L143 250H89V554L45 594L0 554ZM89 75H134L184 126L134 175H89Z"/></svg></div>
+          </div>
+          <p class="xs subtle">Taille mini du monogramme : 16 px de haut à l'écran.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- COULEURS -->
+    <section class="stack g-6">
+      <div class="stack g-2"><span class="eyebrow subtle">02 — Couleurs</span><h2 class="h1">Forêt &amp; sauge</h2><p class="muted" style="max-width: 640px">Deux couleurs de marque, déclinées en échelles. Le forêt porte le texte, la navigation et les actions principales ; la sauge sert les états actifs, les surfaces de marque et la mise en avant.</p></div>
+      <div class="stack g-3">
+        <span class="label-caps">Forêt</span>
+        <div class="grid-auto" style="grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr))">
+          <sc-for list="{{forest}}" as="c" hint-placeholder-count="7">
+            <div class="stack" style="border-radius: 12px; overflow: hidden; border: 1px solid #DCE2D5; background: #FFFFFF">
+              <div style="height: 88px; background: {{c.hex}}"></div>
+              <div class="stack" style="padding: 10px 12px; gap: 2px"><span class="sm strong">{{c.name}}</span><span class="xs mono subtle">{{c.hex}}</span><span class="xs subtle">{{c.use}}</span></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div class="stack g-3">
+        <span class="label-caps">Sauge</span>
+        <div class="grid-auto" style="grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr))">
+          <sc-for list="{{sage}}" as="c" hint-placeholder-count="7">
+            <div class="stack" style="border-radius: 12px; overflow: hidden; border: 1px solid #DCE2D5; background: #FFFFFF">
+              <div style="height: 88px; background: {{c.hex}}"></div>
+              <div class="stack" style="padding: 10px 12px; gap: 2px"><span class="sm strong">{{c.name}}</span><span class="xs mono subtle">{{c.hex}}</span><span class="xs subtle">{{c.use}}</span></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div class="stack g-3">
+        <span class="label-caps">Neutres &amp; texte</span>
+        <div class="grid-auto" style="grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr))">
+          <sc-for list="{{neutral}}" as="c" hint-placeholder-count="7">
+            <div class="stack" style="border-radius: 12px; overflow: hidden; border: 1px solid #DCE2D5; background: #FFFFFF">
+              <div style="height: 64px; background: {{c.hex}}; border-bottom: 1px solid #DCE2D5"></div>
+              <div class="stack" style="padding: 10px 12px; gap: 2px"><span class="sm strong">{{c.name}}</span><span class="xs mono subtle">{{c.hex}}</span><span class="xs subtle">{{c.use}}</span></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATUTS -->
+    <section class="stack g-6">
+      <div class="stack g-2"><span class="eyebrow subtle">03 — Statuts</span><h2 class="h1">Une couleur par statut, partout</h2><p class="muted" style="max-width: 680px">Chaque statut est un badge (pastille + libellé) : la couleur n'est jamais le seul signal. Même sens = même ton d'une famille à l'autre (gris = pas commencé, bleu = en cours, ambre = action attendue, rouge = bloqué). Le statut final positif de chaque famille est le seul en forêt plein.</p></div>
+      <div class="grid-2">
+        <sc-for list="{{families}}" as="f" hint-placeholder-count="4">
+          <div class="card stack g-4">
+            <div class="row between"><h3 class="h3">{{f.title}}</h3><span class="xs mono subtle">{{f.key}}</span></div>
+            <div class="stack" style="gap: 0">
+              <sc-for list="{{f.items}}" as="s" hint-placeholder-count="5">
+                <div class="row between" style="padding: 10px 0; border-top: 1px solid #EBEFE6; gap: 8px">
+                  <span class="badge st-{{s.k}}">{{s.fr}}</span>
+                  <span class="xs subtle" style="flex: 1 1 120px; min-width: 0">{{s.en}}</span>
+                  <span class="xs mono subtle">.st-{{s.k}} · {{s.tone}}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- TYPO -->
+    <section class="stack g-6">
+      <div class="stack g-2"><span class="eyebrow subtle">04 — Typographie</span><h2 class="h1">Archivo élargi + Inter</h2><p class="muted" style="max-width: 680px">Archivo en largeur 108–120 % reprend l'espacement large du logotype pour les titres et les chiffres. Inter porte toute l'interface et les données (chiffres tabulaires). JetBrains Mono est réservé aux IBAN, références et codes. Taille mini : 12 px, champs de saisie en 16 px sur mobile.</p></div>
+      <div class="card card-pad-0">
+        <sc-for list="{{type}}" as="t" hint-placeholder-count="9">
+          <div class="row g-6" style="padding: 18px 24px; border-bottom: 1px solid #EBEFE6; align-items: baseline">
+            <div class="stack" style="width: 200px; flex: none; gap: 2px"><span class="sm strong">{{t.name}}</span><span class="xs mono subtle">{{t.spec}}</span></div>
+            <div class="{{t.cls}} grow" style="min-width: 240px">{{t.sample}}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- ESPACES / RAYONS / OMBRES -->
+    <section class="stack g-6">
+      <div class="stack g-2"><span class="eyebrow subtle">05 — Espacements, rayons, ombres</span><h2 class="h1">Grille de 4 px</h2></div>
+      <div class="grid-3">
+        <div class="card stack g-3">
+          <h3 class="h3">Espacements</h3>
+          <sc-for list="{{space}}" as="s" hint-placeholder-count="12">
+            <div class="row g-3"><span class="xs mono subtle" style="width: 56px">{{s.k}}</span><span style="height: 12px; width: {{s.v}}; background: #3D5747; border-radius: 2px"></span><span class="xs mono">{{s.v}}</span></div>
+          </sc-for>
+        </div>
+        <div class="card stack g-4">
+          <h3 class="h3">Rayons</h3>
+          <sc-for list="{{radii}}" as="r" hint-placeholder-count="6">
+            <div class="row g-4"><span style="width: 56px; height: 40px; background: #CBD4C1; border: 2px solid #19261F; border-radius: {{r.v}}"></span><div class="stack" style="gap: 0"><span class="sm strong">{{r.k}} · {{r.v}}</span><span class="xs subtle">{{r.use}}</span></div></div>
+          </sc-for>
+        </div>
+        <div class="card stack g-5">
+          <h3 class="h3">Ombres</h3>
+          <sc-for list="{{shadows}}" as="s" hint-placeholder-count="3">
+            <div class="row g-4"><span style="width: 72px; height: 48px; background: #FFFFFF; border-radius: 10px; box-shadow: {{s.v}}"></span><div class="stack" style="gap: 0"><span class="sm strong">{{s.k}}</span><span class="xs subtle">{{s.use}}</span></div></div>
+          </sc-for>
+          <div class="hr"></div>
+          <h3 class="h3">Focus clavier</h3>
+          <div class="row g-4"><button class="btn btn-primary" style="box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 5px #3D5747">Bouton focus</button><span class="xs subtle">Anneau 2 px forêt-600 décalé de 3 px</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESPONSIVE + I18N -->
+    <section class="stack g-6">
+      <div class="stack g-2"><span class="eyebrow subtle">06 — Règles de construction</span><h2 class="h1">Responsive, langues, accessibilité</h2></div>
+      <div class="grid-3">
+        <div class="card stack g-3">
+          <span class="ic-box"><span class="ic ic-phone"></span></span>
+          <h3 class="h3">Points de rupture</h3>
+          <dl class="dl"><dt>Mobile</dt><dd>&lt; 760 px — nav en barre + onglets défilants, 1 colonne, cibles ≥ 44 px</dd><dt>Tablette</dt><dd>760–1080 px — grilles 2 colonnes</dd><dt>Desktop</dt><dd>&gt; 1080 px — sidebar 256 px, contenu max 1200 px</dd></dl>
+        </div>
+        <div class="card stack g-3">
+          <span class="ic-box"><span class="ic ic-globe"></span></span>
+          <h3 class="h3">FR / EN</h3>
+          <p class="sm muted">Sélecteur de langue dans chaque en-tête (site, sidebar mobile, topbar). Aucun libellé ne doit être à largeur fixe : boutons, onglets et badges s'adaptent à un anglais ~20 % plus long. Les tableaux défilent horizontalement plutôt que de tronquer.</p>
+        </div>
+        <div class="card stack g-3">
+          <span class="ic-box"><span class="ic ic-eye"></span></span>
+          <h3 class="h3">Accessibilité</h3>
+          <p class="sm muted">Texte ≥ 4.5:1 (gris le plus clair : #5C685F à 5.9:1). Statuts doublés d'un libellé. Cibles tactiles ≥ 44 px sur mobile. Éléments interactifs = vrais &lt;button&gt;, &lt;a&gt;, &lt;input&gt; avec &lt;label&gt;.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      forest: [
+        { name: 'forest-950', hex: '#111A15', use: 'Footer, lecteur' },
+        { name: 'forest-900', hex: '#19261F', use: 'Encre, logo, CTA' },
+        { name: 'forest-800', hex: '#223329', use: 'Survol sidebar' },
+        { name: 'forest-700', hex: '#2E4436', use: 'Survol CTA, barres' },
+        { name: 'forest-600', hex: '#3D5747', use: 'Focus, icônes' },
+        { name: 'forest-500', hex: '#557060', use: 'Bordure active' }
+      ],
+      sage: [
+        { name: 'sage-600', hex: '#7F906F', use: 'Bordure upload' },
+        { name: 'sage-500', hex: '#9AAA8C', use: 'Pointillés' },
+        { name: 'sage-400', hex: '#B6C2AA', use: 'Marque, nav active' },
+        { name: 'sage-300', hex: '#CBD4C1', use: 'Avatars' },
+        { name: 'sage-200', hex: '#DDE3D5', use: 'Pistes de barres' },
+        { name: 'sage-100', hex: '#EBEFE6', use: 'Colonnes Kanban' },
+        { name: 'sage-50', hex: '#F4F6F1', use: 'En-têtes de tableau' }
+      ],
+      neutral: [
+        { name: 'white', hex: '#FFFFFF', use: 'Cartes' },
+        { name: 'paper', hex: '#FBFCFA', use: 'Topbar, pieds de modale' },
+        { name: 'bg', hex: '#F3F5F0', use: 'Fond d’app' },
+        { name: 'line', hex: '#DCE2D5', use: 'Bordures' },
+        { name: 'line-strong', hex: '#C3CCB9', use: 'Champs' },
+        { name: 'text-2', hex: '#435047', use: 'Texte secondaire' },
+        { name: 'text-3', hex: '#5C685F', use: 'Légendes (5.9:1)' }
+      ],
+      families: [
+        { title: 'Clips', key: 'clip.status', items: [
+          { k: 'planifie', fr: 'Planifié', en: 'Planned', tone: 'neutral' },
+          { k: 'montage', fr: 'En montage', en: 'In editing', tone: 'blue' },
+          { k: 'avalider', fr: 'À valider', en: 'Awaiting approval', tone: 'amber' },
+          { k: 'valide', fr: 'Validé', en: 'Approved', tone: 'teal' },
+          { k: 'programme', fr: 'Programmé', en: 'Scheduled', tone: 'violet' },
+          { k: 'publie', fr: 'Publié', en: 'Published', tone: 'forest' },
+          { k: 'rejete', fr: 'Rejeté', en: 'Rejected', tone: 'red' }
+        ]},
+        { title: 'Paiements', key: 'payment.status', items: [
+          { k: 'attente', fr: 'En attente', en: 'Pending', tone: 'neutral' },
+          { k: 'averifier', fr: 'À vérifier', en: 'To be verified', tone: 'amber' },
+          { k: 'paye', fr: 'Validé', en: 'Approved', tone: 'green' },
+          { k: 'refuse', fr: 'Refusé', en: 'Declined', tone: 'red' }
+        ]},
+        { title: 'Tâches', key: 'task.status', items: [
+          { k: 'afaire', fr: 'À faire', en: 'To do', tone: 'neutral' },
+          { k: 'encours', fr: 'En cours', en: 'In progress', tone: 'blue' },
+          { k: 'enrevue', fr: 'En revue', en: 'In review', tone: 'violet' },
+          { k: 'terminee', fr: 'Terminée', en: 'Done', tone: 'green' },
+          { k: 'retard', fr: 'En retard', en: 'Overdue', tone: 'red' }
+        ]},
+        { title: 'Prospects', key: 'prospect.status', items: [
+          { k: 'acontacter', fr: 'À contacter', en: 'To contact', tone: 'neutral' },
+          { k: 'contacte', fr: 'Contacté', en: 'Contacted', tone: 'blue' },
+          { k: 'relance', fr: 'Relancé', en: 'Followed up', tone: 'orange' },
+          { k: 'repondu', fr: 'A répondu', en: 'Replied', tone: 'teal' },
+          { k: 'interesse', fr: 'Intéressé', en: 'Interested', tone: 'violet' },
+          { k: 'appel', fr: 'Appel prévu', en: 'Call scheduled', tone: 'indigo' },
+          { k: 'signe', fr: 'Signé', en: 'Signed', tone: 'forest' },
+          { k: 'refus', fr: 'Refus', en: 'Declined', tone: 'red' }
+        ]}
+      ],
+      type: [
+        { name: 'Display 1', spec: 'Archivo 800 · wdth 118 · 76/0.98', cls: 'd1', sample: 'Vos lives, en clips.' },
+        { name: 'Display 2', spec: 'Archivo 750 · wdth 115 · 52/1.02', cls: 'd2', sample: 'Plus de vues, chaque jour' },
+        { name: 'Titre 1', spec: 'Archivo 700 · wdth 110 · 30/1.15', cls: 'h1', sample: 'Tableau de bord' },
+        { name: 'Titre 2', spec: 'Archivo 700 · wdth 108 · 22/1.2', cls: 'h2', sample: 'Clips de la semaine' },
+        { name: 'Titre 3', spec: 'Inter 600 · 16/1.35', cls: 'h3', sample: 'Paiements à vérifier' },
+        { name: 'Chapô', spec: 'Inter 400 · 19/1.55', cls: 'lead', sample: 'On découpe vos vidéos longues en clips verticaux et on les publie pour vous.' },
+        { name: 'Corps', spec: 'Inter 400 · 15/1.55 (16 mobile)', cls: 'body', sample: 'Votre clip est prêt. Validez-le ou demandez une modification.' },
+        { name: 'Petit', spec: 'Inter 400 · 13/1.45', cls: 'sm', sample: 'Publié il y a 2 h sur @leamrtn.clips' },
+        { name: 'Sur-titre', spec: 'Archivo 600 · 12 · +0.2em · CAPS', cls: 'eyebrow', sample: 'Comment ça marche' },
+        { name: 'Mono', spec: 'JetBrains Mono 500 · 16', cls: 'mono', sample: 'PEAK-LM-2610' }
+      ],
+      space: [
+        { k: 's-1', v: '4px' }, { k: 's-2', v: '8px' }, { k: 's-3', v: '12px' }, { k: 's-4', v: '16px' },
+        { k: 's-5', v: '20px' }, { k: 's-6', v: '24px' }, { k: 's-8', v: '32px' }, { k: 's-10', v: '40px' },
+        { k: 's-12', v: '48px' }, { k: 's-16', v: '64px' }, { k: 's-20', v: '80px' }, { k: 's-24', v: '96px' }
+      ],
+      radii: [
+        { k: 'xs', v: '4px', use: 'Plateformes, kbd' },
+        { k: 'sm', v: '6px', use: 'Boutons, champs' },
+        { k: 'md', v: '10px', use: 'Cartes Kanban, miniatures' },
+        { k: 'lg', v: '14px', use: 'Cartes, tableaux' },
+        { k: 'xl', v: '20px', use: 'Modales, offres, lecteur' },
+        { k: 'pill', v: '999px', use: 'Badges, chips' }
+      ],
+      shadows: [
+        { k: 'sh-1', v: '0 1px 2px rgba(25,38,31,.06), 0 1px 1px rgba(25,38,31,.04)', use: 'Cartes au repos' },
+        { k: 'sh-2', v: '0 4px 12px -2px rgba(25,38,31,.10), 0 2px 4px rgba(25,38,31,.05)', use: 'Survol, formulaires' },
+        { k: 'sh-3', v: '0 18px 44px -10px rgba(25,38,31,.28), 0 4px 10px rgba(25,38,31,.06)', use: 'Modales, menus, toasts' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

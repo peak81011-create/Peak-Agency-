@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Paiement par virement</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./peak.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="pk" style="font-family: Inter, system-ui, sans-serif; color: #19261F; background: #F3F5F0; position: relative">
+  <header style="background: #19261F; color: #DDE3D5">
+    <div class="wrap row between g-4" style="min-height: 72px">
+      <span class="logo" style="color: #B6C2AA"><svg viewBox="0 0 268 594" width="15" height="34" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M0 0H143L268 126L143 250H89V554L45 594L0 554ZM89 75H134L184 126L134 175H89Z"/></svg><span class="logo-word hide-m" style="color: #EBEFE6">Clipping Agency</span></span>
+      <div class="row g-3" style="flex-wrap: nowrap"><div class="seg seg-dark lang" role="group" aria-label="Langue"><button class="on" aria-pressed="true">FR</button><button aria-pressed="false">EN</button></div><button class="btn btn-icon btn-on-dark bell" aria-label="Notifications" style="border: 0"><span class="ic ic-bell"></span></button></div>
+    </div>
+  </header>
+
+  <main class="wrap stack g-8" style="max-width: 1120px; padding-top: 40px; padding-bottom: 80px">
+    <div class="steps" aria-label="Étapes"><span class="step done"><span class="n">✓</span>Profil créateur</span><span class="step-sep hide-m"></span><span class="step done"><span class="n">✓</span>Choix de l'offre</span><span class="step-sep hide-m"></span><span class="step on"><span class="n">3</span>Paiement</span></div>
+
+    <div class="row between g-4" style="align-items: flex-end">
+      <div class="stack g-2"><h1 class="h1">Paiement par virement</h1><p class="muted">Offre Croissance · mensualité d'octobre 2026</p></div>
+      <span class="badge {{badgeCls}}" style="height: 30px; font-size: 13px; padding: 0 14px 0 12px">{{badgeLabel}}</span>
+    </div>
+
+    <sc-if value="{{isRefuse}}" hint-placeholder-val="{{false}}">
+      <div class="callout callout-err" role="alert" style="padding: 18px 20px"><span class="ic ic-lg ic-x"></span><div class="stack g-1"><b style="font-size: 16px">Paiement refusé : montant incorrect</b><span>Nous avons reçu 290,00 € au lieu de [390,00] €. Complétez le virement avec la même référence, puis déposez la nouvelle capture.</span><span class="xs">Vérifié par Camille, le 21/10 à 10:14</span></div></div>
+    </sc-if>
+
+    <div class="split" style="grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: start">
+      <!-- COORDONNÉES -->
+      <section class="card stack g-5" style="padding: 28px" aria-labelledby="pay1">
+        <div class="row between"><h2 id="pay1" class="h2">1 · Faites le virement</h2><span class="ic-box"><span class="ic ic-bank"></span></span></div>
+        <div class="stack g-1"><span class="label-caps">Montant à virer</span><span class="price num" style="font-size: 44px">[390,00] €</span><span class="sm subtle">TTC · à régler avant le [25/10/2026]</span></div>
+        <div class="ref-box">
+          <div class="stack g-1"><span class="label-caps" style="color: #19261F">Référence obligatoire</span><span class="v">PEAK-LM-2610</span><span class="sm" style="color: #2E4436">À copier dans le libellé du virement, sinon il ne pourra pas être rattaché.</span></div>
+          <button class="btn btn-primary btn-lg" onClick="{{copyRef}}"><span class="ic {{refIcon}}"></span>{{refLabel}}</button>
+        </div>
+        <div class="stack g-2">
+          <div class="copy-row"><div class="stack g-1" style="min-width: 0"><span class="k">Bénéficiaire</span><span class="v" style="font-family: Inter, sans-serif; font-weight: 600">[RAISON SOCIALE]</span></div></div>
+          <div class="copy-row"><div class="stack g-1" style="min-width: 0"><span class="k">IBAN</span><span class="v">FR76 [XXXX XXXX XXXX XXXX XXXX XXX]</span></div><button class="btn btn-secondary btn-sm" onClick="{{copyIban}}" aria-label="Copier l'IBAN"><span class="ic ic-sm {{ibanIcon}}"></span>{{ibanLabel}}</button></div>
+          <div class="copy-row"><div class="stack g-1" style="min-width: 0"><span class="k">BIC</span><span class="v">[XXXXFRPPXXX]</span></div><button class="btn btn-secondary btn-sm" onClick="{{copyBic}}" aria-label="Copier le BIC"><span class="ic ic-sm {{bicIcon}}"></span>{{bicLabel}}</button></div>
+        </div>
+        <div class="callout callout-info"><span class="ic ic-info"></span><span>Un virement peut mettre 1 à 3 jours ouvrés à arriver. Le virement instantané accélère le déblocage.</span></div>
+      </section>
+
+      <!-- DÉPÔT -->
+      <section class="card stack g-5" style="padding: 28px" aria-labelledby="pay2">
+        <h2 id="pay2" class="h2">2 · Déposez la preuve</h2>
+
+        <sc-if value="{{isAttente}}" hint-placeholder-val="{{true}}">
+          <p class="sm muted">Capture d'écran ou PDF de l'ordre de virement, où l'on voit le montant, la date et la référence.</p>
+          <div class="drop" style="padding: 40px 20px">
+            <span class="ic-box" style="width: 56px; height: 56px; background: #FFFFFF"><span class="ic ic-lg ic-image"></span></span>
+            <div class="stack g-1"><span class="h3">Glissez la capture ici</span><span class="sm muted">PNG, JPG ou PDF · 10 Mo max.</span></div>
+            <button class="btn btn-primary">Choisir un fichier</button>
+            <span class="xs subtle show-m">ou prenez une photo de l'écran de votre banque</span>
+          </div>
+          <div class="stack g-3" style="padding-top: 4px">
+            <div class="row g-3 sm"><span class="step on"><span class="n" style="width: 24px; height: 24px; font-size: 12px">1</span></span><span>En attente de dépôt</span></div>
+            <div class="row g-3 sm subtle"><span class="step"><span class="n" style="width: 24px; height: 24px; font-size: 12px">2</span></span><span>Vérification par l'équipe · [24 h ouvrées]</span></div>
+            <div class="row g-3 sm subtle"><span class="step"><span class="n" style="width: 24px; height: 24px; font-size: 12px">3</span></span><span>Espace débloqué</span></div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{isVerif}}" hint-placeholder-val="{{false}}">
+          <div class="file-row"><div style="width: 56px; height: 72px; border-radius: 6px; background: #EBEFE6; border: 1px solid #DCE2D5; display: flex; align-items: center; justify-content: center; color: #557060"><span class="ic ic-image"></span></div><div class="stack g-1 grow"><span class="sm strong trunc">virement-octobre.png</span><span class="xs subtle">Déposé le 20/10 à 18:02 · 412 Ko</span><a class="xs" href="#">Voir la capture</a></div><span class="ic ic-check" style="color: #1C5A30"></span></div>
+          <div class="stack g-3">
+            <div class="row g-3 sm"><span class="step done"><span class="n" style="width: 24px; height: 24px; font-size: 12px">✓</span></span><span>Capture déposée</span></div>
+            <div class="row g-3 sm strong"><span class="step on"><span class="n" style="width: 24px; height: 24px; font-size: 12px"><span class="spin" style="width: 12px; height: 12px; border-width: 2px"></span></span></span><span>En cours de vérification</span></div>
+            <div class="row g-3 sm subtle"><span class="step"><span class="n" style="width: 24px; height: 24px; font-size: 12px">3</span></span><span>Espace débloqué</span></div>
+          </div>
+          <div class="callout callout-warn"><span class="ic ic-clock"></span><span>On vérifie la réception sur notre compte. Délai habituel : <b>[24 h ouvrées]</b>. Vous serez notifié par e-mail.</span></div>
+          <button class="btn btn-ghost btn-sm" style="align-self: flex-start"><span class="ic ic-sm ic-refresh"></span>Remplacer la capture</button>
+        </sc-if>
+
+        <sc-if value="{{isRefuse}}" hint-placeholder-val="{{false}}">
+          <div class="file-row" style="border-color: #E4B4AD; background: #FDF6F5"><div style="width: 56px; height: 72px; border-radius: 6px; background: #F8DDD9; display: flex; align-items: center; justify-content: center; color: #94271C"><span class="ic ic-image"></span></div><div class="stack g-1 grow"><span class="sm strong trunc">virement-octobre.png</span><span class="xs" style="color: #94271C">Refusée · montant incorrect</span></div></div>
+          <div class="drop" style="padding: 32px 20px">
+            <span class="ic-box" style="width: 48px; height: 48px; background: #FFFFFF"><span class="ic ic-upload"></span></span>
+            <div class="stack g-1"><span class="h3">Déposer une nouvelle capture</span><span class="sm muted">Montrez le virement complémentaire ou le virement corrigé.</span></div>
+            <button class="btn btn-primary">Choisir un fichier</button>
+          </div>
+          <a class="btn btn-secondary" href="ClientRequests.dc.html"><span class="ic ic-sm ic-msg"></span>Contester ou poser une question</a>
+        </sc-if>
+      </section>
+    </div>
+  </main>
+
+  <sc-if value="{{toast}}" hint-placeholder-val="{{false}}">
+    <div class="toast toast-ok" role="status" style="position: absolute; right: 24px; bottom: 24px"><span class="ic ic-check"></span><div class="stack g-1"><b>{{toast}}</b><span class="sm" style="color: #CBD4C1">Copié dans le presse-papiers.</span></div></div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"etat":{"editor":"enum","options":["attente","verification","refuse"],"default":"attente"},"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { copied: '' }; }
+  copy(k, label) {
+    this.setState({ copied: k, toast: label });
+    clearTimeout(this._t);
+    this._t = setTimeout(() => this.setState({ copied: '', toast: '' }), 2200);
+  }
+  componentWillUnmount() { clearTimeout(this._t); }
+  renderVals() {
+    const e = this.props.etat ?? 'attente';
+    const map = { attente: ['st-attente', 'En attente de dépôt'], verification: ['st-averifier', 'En cours de vérification'], refuse: ['st-refuse', 'Refusé · à redéposer'] };
+    const c = this.state.copied;
+    const lab = (k, idle) => (c === k ? 'Copié' : idle);
+    const ico = (k) => (c === k ? 'ic-check' : 'ic-copy');
+    return {
+      isAttente: e === 'attente', isVerif: e === 'verification', isRefuse: e === 'refuse',
+      badgeCls: map[e][0], badgeLabel: map[e][1],
+      refLabel: lab('ref', 'Copier la référence'), refIcon: ico('ref'),
+      ibanLabel: lab('iban', 'Copier'), ibanIcon: ico('iban'),
+      bicLabel: lab('bic', 'Copier'), bicIcon: ico('bic'),
+      copyRef: () => this.copy('ref', 'Référence copiée'),
+      copyIban: () => this.copy('iban', 'IBAN copié'),
+      copyBic: () => this.copy('bic', 'BIC copié'),
+      toast: this.state.toast || ''
+    };
+  }
+}
+</script>
+</body>
+</html>
