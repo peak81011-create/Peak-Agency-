@@ -33,11 +33,18 @@ export function CommentForm({
       className="flex flex-col gap-2"
       onSubmit={(e) => {
         e.preventDefault();
+        // Le champ est vidé tout de suite : un nouveau message peut être saisi
+        // pendant l'envoi sans être effacé ; il est restauré en cas d'erreur.
+        const sent = body;
+        setBody("");
         startTransition(async () => {
           setError(undefined);
-          const res = await addCommentAction(entityType, entityId, body, internal);
-          if (res.ok) setBody("");
-          else setError(res.error);
+          const res = await addCommentAction(entityType, entityId, sent, internal);
+          if (res.ok) setInternal(entityType === "client");
+          else {
+            setBody(sent);
+            setError(res.error);
+          }
         });
       }}
     >
