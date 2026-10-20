@@ -1,5 +1,6 @@
 "use server";
 
+import { logError } from "@/lib/log";
 import { getLocale } from "next-intl/server";
 import type { ActionResult } from "@/lib/auth/actions";
 import { emailAddress, notifyPermission } from "@/lib/notifications";
@@ -22,6 +23,7 @@ export async function sendContactAction(input: ContactInput): Promise<ActionResu
   const { error } = await createSupabaseAdminClient()
     .from("contact_messages")
     .insert({ name: v.name, email: v.email, channel_url: v.channelUrl || null, message: v.message, locale: await getLocale() });
+  logError("contact.insert", error);
   if (error) return { ok: false, error: "generic" };
 
   const payload = { name: v.name, email: v.email, message: v.message.slice(0, 500) };

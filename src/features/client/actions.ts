@@ -1,5 +1,6 @@
 "use server";
 
+import { logError } from "@/lib/log";
 import { getLocale } from "next-intl/server";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
@@ -51,6 +52,7 @@ export async function saveCreatorProfileAction(input: CreatorProfileInput, onboa
       ...(ctx.client.profileCompleted ? {} : { profile_completed_at: new Date().toISOString() }),
     })
     .eq("id", ctx.client.id);
+  logError("client.profile", error);
   if (error) return { ok: false, error: "generic" };
 
   revalidatePath("/", "layout");
@@ -66,6 +68,7 @@ export async function choosePlanAction(planId: string): Promise<ActionResult> {
 
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.rpc("client_choose_plan", { p_plan_id: planId });
+  logError("client.choose_plan", error);
   if (error) return { ok: false, error: error.message.includes("état") ? "planLocked" : "generic" };
 
   revalidatePath("/", "layout");
@@ -97,6 +100,7 @@ export async function createProofUploadAction(
 
   const path = `${payment.client_id}/${payment.id}/${Date.now()}-${safeFileName(parsed.data.fileName)}`;
   const { data, error } = await createSupabaseAdminClient().storage.from("payment-proofs").createSignedUploadUrl(path);
+  logError("client.proof_upload_url", error);
   if (error || !data) return { ok: false, error: "generic" };
   return { ok: true, data: { path: data.path, token: data.token } };
 }
@@ -119,6 +123,7 @@ export async function submitProofAction(input: {
     p_path: input.path,
     p_mime: input.mimeType,
   });
+  logError("client.submit_proof", error);
   if (error) return { ok: false, error: "generic" };
 
   const { data: payment } = await supabase

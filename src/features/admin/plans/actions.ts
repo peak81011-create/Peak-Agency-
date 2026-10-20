@@ -1,5 +1,6 @@
 "use server";
 
+import { logError } from "@/lib/log";
 import { getLocale } from "next-intl/server";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
@@ -49,6 +50,7 @@ export async function savePlanAction(planId: string | null, input: PlanFormInput
   const { data, error } = planId
     ? await supabase.from("plans").update(row).eq("id", planId).select("id").single()
     : await supabase.from("plans").insert(row).select("id").single();
+  logError("plans.save", error);
   if (error || !data) return { ok: false, error: "generic" };
 
   await logActivity({

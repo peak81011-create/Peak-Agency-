@@ -1,5 +1,6 @@
 "use server";
 
+import { logError } from "@/lib/log";
 import { revalidatePath } from "next/cache";
 import { logActivity } from "@/lib/activity";
 import type { ActionResult } from "@/lib/auth/actions";
@@ -35,6 +36,7 @@ export async function saveSettingsAction(key: SettingsFormKey, values: Record<st
   // Session de l'utilisateur : la RLS (settings.update) s'applique aussi en base.
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.from("settings").upsert({ key, value });
+  logError("settings.save", error);
   if (error) return { ok: false, error: "generic" };
 
   // Les coordonnées bancaires sont sensibles : le journal garde la trace du changement.

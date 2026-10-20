@@ -1,5 +1,6 @@
 "use server";
 
+import { logError } from "@/lib/log";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { logActivity } from "@/lib/activity";
@@ -31,6 +32,7 @@ export async function saveContentAction(key: string, valueFr: string, valueEn: s
   const { error } = await supabase
     .from("site_content")
     .upsert({ key, value_fr: valueFr, value_en: valueEn }, { onConflict: "key" });
+  logError("content.save", error);
   if (error) return { ok: false, error: "generic" };
 
   await logActivity({ actorId: auth.user.id, action: "content.updated", entityType: "site_content", metadata: { key } });

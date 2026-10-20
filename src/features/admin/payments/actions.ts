@@ -1,5 +1,6 @@
 "use server";
 
+import { logError } from "@/lib/log";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import type { ActionResult } from "@/lib/auth/actions";
@@ -31,6 +32,7 @@ export async function validatePaymentAction(paymentId: string): Promise<ActionRe
 
   const supabase = await createSupabaseServerClient();
   const { data: invoiceId, error } = await supabase.rpc("validate_payment", { p_payment_id: paymentId });
+  logError("payments.validate", error);
   if (error || typeof invoiceId !== "string") {
     return { ok: false, error: error?.message.includes("déjà") ? "alreadyValidated" : "generic" };
   }
@@ -66,6 +68,7 @@ export async function refusePaymentAction(paymentId: string, reason: string): Pr
 
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.rpc("refuse_payment", { p_payment_id: parsed.data.paymentId, p_reason: parsed.data.reason });
+  logError("payments.refuse", error);
   if (error) return { ok: false, error: "generic" };
 
   const info = await clientUserOf(paymentId);
