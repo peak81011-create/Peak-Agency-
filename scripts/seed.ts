@@ -166,7 +166,7 @@ async function seedAgencyData(clientId: string, ids: Record<keyof typeof DEMO_US
       .insert([
         { client_id: clientId, platform: "tiktok", handle: "@lea.clips.demo", url: "https://www.tiktok.com/@lea.clips.demo", owner_employee_id: ids.editor, created_on: isoDate(new Date()), followers_count: 4820 },
         { client_id: clientId, platform: "youtube", handle: "Léa Clips (démo)", url: "https://www.youtube.com/@leaclipsdemo", owner_employee_id: ids.editor, created_on: isoDate(new Date()), followers_count: 690 },
-      ])
+      ], { defaultToNull: false })
       .select("id, platform"),
   );
   await run(
@@ -202,7 +202,7 @@ async function seedAgencyData(clientId: string, ids: Record<keyof typeof DEMO_US
         { client_id: clientId, source_video_id: video.id, social_account_id: tiktok, editor_id: ids.editor, title: "Le fou rire du live", hook: "Impossible de garder mon sérieux", status: "publie", published_at: day(-2), published_url: "https://www.tiktok.com/@lea.clips.demo", created_by: ids.owner },
         { client_id: clientId, source_video_id: video.id, social_account_id: tiktok, editor_id: ids.editor, title: "La réaction du chat", hook: "Il n'a rien compris", status: "a_valider", scheduled_at: day(2), due_at: day(1), created_by: ids.owner },
         { client_id: clientId, source_video_id: video.id, social_account_id: tiktok, editor_id: ids.editor, title: "Trois conseils pour débuter", status: "en_montage", due_at: day(3), created_by: ids.owner },
-      ])
+      ], { defaultToNull: false })
       .select("id, status"),
   );
   const published = clips.find((c) => c.status === "publie")!.id;
