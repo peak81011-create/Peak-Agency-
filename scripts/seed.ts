@@ -110,7 +110,7 @@ async function ensurePlans(): Promise<string[]> {
       sort_order: 30,
     },
   ].map((r) => ({ ...r, is_demo: true, currency: "EUR", billing_period: "mensuel" }));
-  const inserted = await check("plans", db.from("plans").insert(rows).select("id").order("sort_order"));
+  const inserted = await check("plans", db.from("plans").insert(rows).select("id, sort_order").order("sort_order"));
   return inserted.map((p) => p.id);
 }
 
