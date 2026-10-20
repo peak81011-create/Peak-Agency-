@@ -4,7 +4,7 @@ export default defineConfig({
   resolve: { tsconfigPaths: true },
   test: {
     environment: "node",
-    include: ["src/**/*.test.ts", "tests/db/**/*.test.ts"],
+    include: ["src/**/*.test.{ts,tsx}", "tests/db/**/*.test.ts"],
     // Les tests base de données partagent un serveur Postgres : pas de parallélisme entre fichiers.
     fileParallelism: false,
     testTimeout: 30_000,

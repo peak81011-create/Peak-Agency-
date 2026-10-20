@@ -1,6 +1,7 @@
 "use server";
 
 import { getLocale } from "next-intl/server";
+import { z } from "zod";
 import { redirect } from "@/i18n/navigation";
 import type { ActionResult } from "@/lib/auth/actions";
 import { logActivity } from "@/lib/activity";
@@ -63,7 +64,7 @@ export async function loginAction(input: LoginInput, next?: string): Promise<Act
   return { ok: true };
 }
 
-export async function signupAction(input: SignupInput): Promise<ActionResult> {
+export async function signupAction(input: SignupInput, intendedPlan?: string): Promise<ActionResult> {
   const parsed = signupSchema.safeParse(input);
   if (!parsed.success) return { ok: false, error: "validation", fieldErrors: fieldErrors(parsed.error) };
   if (!(await rateLimit("signup", RATE_LIMITS.signup.max, RATE_LIMITS.signup.windowSeconds))) {
@@ -77,7 +78,13 @@ export async function signupAction(input: SignupInput): Promise<ActionResult> {
     password: parsed.data.password,
     options: {
       // Seules ces métadonnées « utilisateur » sont lues ; le rôle n'en vient jamais.
-      data: { full_name: parsed.data.fullName, creator_name: parsed.data.creatorName, locale },
+      data: {
+        full_name: parsed.data.fullName,
+        creator_name: parsed.data.creatorName,
+        locale,
+        // Offre repérée sur la vitrine, proposée par défaut à l'étape « offre »
+        intended_plan: intendedPlan && z.uuid().safeParse(intendedPlan).success ? intendedPlan : null,
+      },
     },
   });
   if (error) {

@@ -7,8 +7,14 @@
     "wordmark": "Clipping Agency",
     "homeAria": "Peak Clipping Agency — home",
     "language": "Language",
-    "languageShort": { "fr": "FR", "en": "EN" },
-    "languageLong": { "fr": "Français", "en": "English" },
+    "languageShort": {
+      "fr": "FR",
+      "en": "EN"
+    },
+    "languageLong": {
+      "fr": "Français",
+      "en": "English"
+    },
     "login": "Log in",
     "logout": "Log out",
     "signup": "Create an account",
@@ -24,7 +30,9 @@
     "continue": "Continue",
     "loading": "Loading…",
     "comingSoon": "This section is coming in a later phase.",
-    "skipToContent": "Skip to content"
+    "skipToContent": "Skip to content",
+    "copy": "Copy",
+    "copied": "Copied"
   },
   "nav": {
     "how": "How it works",
@@ -37,7 +45,19 @@
     "dashboard": "Dashboard",
     "overview": "Overview",
     "account": "My account",
-    "groups": { "steering": "Steering", "team": "Team", "settings": "Settings" }
+    "groups": {
+      "steering": "Steering",
+      "team": "Team",
+      "settings": "Settings"
+    },
+    "creatorProfile": "Creator profile",
+    "choosePlan": "Plan",
+    "payment": "Payment",
+    "billing": "Subscription & invoices",
+    "payments": "Payments",
+    "plans": "Plans & pricing",
+    "content": "Site content",
+    "settings": "Settings"
   },
   "footer": {
     "tagline": "Your streams and long videos turned into vertical clips, published every day on dedicated accounts.",
@@ -82,11 +102,23 @@
     }
   },
   "home": {
-    "eyebrow": "Clipping agency",
-    "title": "Your streams become clips that grow your audience.",
-    "lead": "We take your long videos and streams, cut them into vertical clips and publish them on dedicated TikTok, Reels and Shorts accounts.",
-    "ctaPrimary": "Get started",
-    "ctaSecondary": "I already have an account"
+    "ctaPrimary": "See our plans",
+    "ctaSecondary": "How it works",
+    "ctaContact": "Contact us",
+    "howEyebrow": "How it works",
+    "statsEyebrow": "Results",
+    "statsTitle": "The agency in numbers",
+    "plansEyebrow": "Plans",
+    "plansTitle": "Choose your pace",
+    "plansCompare": "Compare plans",
+    "featured": "Most popular",
+    "choose": "Choose this plan",
+    "noPlans": "Plans will be available soon. Write to us to learn more.",
+    "testimonialsEyebrow": "Testimonials",
+    "testimonialsTitle": "They publish with us",
+    "faqEyebrow": "FAQ",
+    "faqTitle": "Frequently asked questions",
+    "faqMore": "Another question? <link>Write to us</link>."
   },
   "auth": {
     "email": "Email",
@@ -151,7 +183,14 @@
       "generic": "Something went wrong. Please try again.",
       "invalidCode": "Incorrect or expired code.",
       "linkInvalid": "This link is no longer valid. Request a new one.",
-      "accountDisabled": "This account is disabled. Please contact the agency."
+      "accountDisabled": "This account is disabled. Please contact the agency.",
+      "forbidden": "You do not have permission to do this.",
+      "unauthenticated": "Your session has expired. Please log in again.",
+      "planLocked": "The plan can no longer be changed: your payment is being reviewed.",
+      "uploadFailed": "The upload failed. Check your connection and try again.",
+      "alreadyValidated": "This payment has already been approved.",
+      "reasonRequired": "Enter the reason for rejecting.",
+      "tooLong": "Text too long."
     }
   },
   "validation": {
@@ -162,7 +201,18 @@
     "passwordSymbol": "Add at least one symbol.",
     "termsRequired": "You must accept the terms of sale and the privacy policy.",
     "tooLong": "Text too long.",
-    "code": "The code has 6 digits."
+    "code": "The code has 6 digits.",
+    "url": "Invalid web address (it must start with https://).",
+    "channelRequired": "Add at least one channel.",
+    "proofType": "Accepted formats: PNG, JPG, WEBP or PDF.",
+    "proofSize": "The file is larger than 10 MB.",
+    "number": "Whole number expected.",
+    "price": "Invalid amount (example: 890 or 890.50).",
+    "siret": "A SIRET number has 14 digits.",
+    "iban": "Invalid IBAN (check what you typed).",
+    "bic": "Invalid BIC (8 or 11 characters).",
+    "prefix": "Letters and numbers only, no spaces.",
+    "messageTooShort": "Your message is a bit short (10 characters minimum)."
   },
   "dashboard": {
     "welcome": "Hello {name}",
@@ -187,5 +237,442 @@
     "forbiddenTitle": "Access denied",
     "forbiddenLead": "You do not have permission to access this page.",
     "backHome": "Back to home"
+  },
+  "plans": {
+    "clips": "{count, plural, =1 {1 clip} other {# clips}} per period",
+    "accounts": "{count, plural, =1 {1 account} other {# accounts}} created for you",
+    "delivery": "Delivered within {count, plural, =1 {1 day} other {# days}}",
+    "platformNames": {
+      "tiktok": "TikTok",
+      "instagram": "Instagram Reels",
+      "youtube": "YouTube Shorts"
+    },
+    "periods": {
+      "mensuel": "/ month",
+      "trimestriel": "/ quarter",
+      "annuel": "/ year",
+      "unique": "one-off"
+    }
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Let’s talk about your channel",
+    "name": "Name",
+    "email": "Email",
+    "channelUrl": "Link to your channel",
+    "optional": "(optional)",
+    "message": "Message",
+    "submit": "Send",
+    "sent": "Thank you, your message has been sent. We will reply by email."
+  },
+  "legal": {
+    "nav": "Legal pages",
+    "missing": "To be completed",
+    "titles": {
+      "notice": "Legal notice",
+      "terms": "Terms of sale",
+      "privacy": "Privacy policy"
+    },
+    "company": {
+      "legal_name": "Publisher (company name)",
+      "legal_form": "Legal form",
+      "address": "Address",
+      "siret": "SIRET",
+      "vat_number": "VAT number",
+      "email": "Email",
+      "phone": "Phone",
+      "publication_director": "Publication director",
+      "host": "Hosting provider"
+    }
+  },
+  "client": {
+    "onboarding": {
+      "steps": {
+        "profile": "Creator profile",
+        "plan": "Choose a plan",
+        "payment": "Payment"
+      }
+    },
+    "profile": {
+      "eyebrow": "Client space",
+      "title": "Your creator profile",
+      "lead": "This information guides our editors: tone, highlights, platforms.",
+      "creatorName": "Creator name",
+      "niche": "Niche",
+      "niches": {
+        "gaming": "Gaming",
+        "lifestyle": "Lifestyle",
+        "business": "Business",
+        "humour": "Comedy",
+        "sport": "Sports",
+        "tech": "Tech",
+        "beaute": "Beauty",
+        "education": "Education",
+        "autre": "Other"
+      },
+      "language": "Language of your content",
+      "languages": {
+        "fr": "French",
+        "en": "English",
+        "other": "Other"
+      },
+      "channels": "Links to your channels",
+      "channelsHint": "At least one link.",
+      "channelNames": {
+        "youtube": "YouTube",
+        "twitch": "Twitch",
+        "tiktok": "TikTok",
+        "instagram": "Instagram",
+        "kick": "Kick",
+        "other": "Other"
+      },
+      "optional": "(optional)",
+      "goals": "Goals",
+      "goalsHint": "Example: get people to discover my streams, grow followers on my main channel.",
+      "liveAvailability": "Your streams and videos",
+      "liveAvailabilityHint": "Usual frequency and times, for example “3 streams a week, in the evening”.",
+      "billingAddress": "Billing address",
+      "billingAddressHint": "Required if you are invoiced as a business.",
+      "editableLater": "You can change this later in your profile."
+    },
+    "plan": {
+      "eyebrow": "Client space",
+      "title": "Choose your plan",
+      "lead": "You can change it at each renewal.",
+      "locked": "Your payment is being reviewed: the plan cannot be changed for now.",
+      "none": "No plan is available at the moment. Please contact the agency.",
+      "summary": "{name} plan · {price}",
+      "summaryHint": "Payment by bank transfer. Your space unlocks after review.",
+      "submit": "Continue to payment"
+    },
+    "payment": {
+      "eyebrow": "Client space",
+      "eyebrowRenewal": "Renewal",
+      "title": "Payment by bank transfer",
+      "refusedTitle": "Your proof of payment was rejected",
+      "refusedHelp": "Correct the transfer if needed, then upload a new proof below.",
+      "step1": "1 · Make the transfer",
+      "planLine": "{plan} plan",
+      "amount": "Amount to transfer",
+      "reference": "Required reference",
+      "referenceHelp": "Copy it into the transfer description, otherwise it cannot be matched.",
+      "holder": "Beneficiary",
+      "iban": "IBAN",
+      "bic": "BIC",
+      "bankMissing": "The agency has not entered its bank details yet. Come back a little later or write to us.",
+      "delayHint": "A transfer can take 1 to 3 business days to arrive. An instant transfer speeds up unlocking.",
+      "step2": "2 · Upload the proof",
+      "proofHelp": "Screenshot or PDF of the transfer order, showing the amount, date and reference.",
+      "uploading": "Uploading…",
+      "dropTitle": "Drop the screenshot here",
+      "dropHint": "PNG, JPG, WEBP or PDF · 10 MB maximum",
+      "chooseFile": "Choose a file",
+      "reviewTitle": "Proof received, review in progress",
+      "reviewLead": "We are checking that the transfer has reached our account. You will be notified by email.",
+      "timeline": {
+        "uploaded": "Proof uploaded on {date}",
+        "review": "Review by the team",
+        "unlocked": "Space unlocked"
+      },
+      "questions": "A question about your payment? <link>Contact us</link>."
+    },
+    "billing": {
+      "title": "Subscription & invoices",
+      "currentPlan": "Current plan",
+      "plan": "Plan",
+      "period": "Current period",
+      "payNow": "See the payment to make",
+      "history": "Payments and invoices",
+      "empty": "No payments yet.",
+      "cols": {
+        "reference": "Reference",
+        "period": "Period",
+        "amount": "Amount",
+        "status": "Status",
+        "invoice": "Invoice"
+      },
+      "afterValidation": "After approval"
+    },
+    "banners": {
+      "grace": "Your subscription ended on {end}. Grace period until {until}: renew to avoid read-only mode.",
+      "readOnly": "Your subscription expired on {end}. Your space is read-only: renew to resume uploads and requests.",
+      "renew": "Renew"
+    },
+    "dashboard": {
+      "suspended": "Your account is currently suspended. Please contact the agency for more information.",
+      "reviewTitle": "Welcome {name}, we are checking your transfer",
+      "checklist": "Where are you?",
+      "done": {
+        "profile": "Creator profile completed",
+        "plan": "Plan chosen",
+        "proof": "Proof of transfer uploaded"
+      },
+      "reviewing": "Review in progress by the agency",
+      "seePayment": "See my payment",
+      "afterUnlock": "Available after approval",
+      "features": {
+        "dashboard": {
+          "title": "Dashboard",
+          "body": "views, followers gained and upcoming clips."
+        },
+        "upload": {
+          "title": "Send a video",
+          "body": "large files or a link, with your notes."
+        },
+        "clips": {
+          "title": "My clips",
+          "body": "approval and publishing calendar."
+        },
+        "accounts": {
+          "title": "My accounts",
+          "body": "the accounts created for you."
+        }
+      },
+      "periodLine": "{plan} plan · current period until {end}."
+    }
+  },
+  "admin": {
+    "payments": {
+      "title": "Payment review",
+      "export": "Export (CSV)",
+      "companyMissing": "Company details (name, legal form, SIRET, address, VAT statement) are incomplete: they must appear on invoices.",
+      "goToSettings": "Complete the settings",
+      "tabs": {
+        "review": "To review",
+        "pending": "Awaiting proof",
+        "history": "History"
+      },
+      "empty": "Nothing in this list.",
+      "kindInitial": "First subscription",
+      "kindRenewal": "Renewal",
+      "submitted": "uploaded on {date}",
+      "bankReminder": "Check your bank account before approving. A screenshot does not prove the money has arrived.",
+      "expectedAmount": "Expected amount",
+      "expectedReference": "Expected reference",
+      "refusalReason": "Reason for rejection",
+      "invoice": "Invoice",
+      "proof": "Proof uploaded by the client",
+      "proofAlt": "Proof of transfer for reference {reference}",
+      "downloadProof": "Download the proof",
+      "noProof": "No proof uploaded yet.",
+      "review": {
+        "checks": "Checks",
+        "checkAmount": "The amount on the proof matches",
+        "checkReference": "The reference appears in the description",
+        "checkReceived": "The transfer has reached the bank account",
+        "validate": "Approve payment",
+        "refuse": "Reject",
+        "reason": "Reason",
+        "reasons": {
+          "amount": "Wrong amount",
+          "reference": "Missing or wrong reference",
+          "unreadable": "Unreadable proof",
+          "notReceived": "Transfer not received",
+          "other": "Other"
+        },
+        "messages": {
+          "amount": "The amount received does not match the expected amount. Please top up the transfer using the same reference.",
+          "reference": "The payment reference does not appear in the transfer description. Please write to us so we can match your transfer.",
+          "unreadable": "The proof is unreadable. Please upload a clearer screenshot.",
+          "notReceived": "We have not received your transfer yet. Please check it was sent, then upload a new proof."
+        },
+        "message": "Message to the client",
+        "messageHint": "The client will see this message and can upload a new proof.",
+        "cancel": "Cancel",
+        "confirmRefuse": "Reject payment",
+        "validated": "Payment approved: the client’s space is unlocked and the invoice has been issued.",
+        "refused": "Payment rejected: the client has been notified."
+      }
+    },
+    "plans": {
+      "title": "Plans & pricing",
+      "new": "New plan",
+      "editTitle": "Edit plan",
+      "edit": "Edit",
+      "demo": "Demo",
+      "featured": "Featured",
+      "hidden": "Hidden",
+      "empty": "No plans.",
+      "demoWarning": "Plans marked “Demo” are examples: replace them with your real plans (or hide them) before welcoming clients.",
+      "demoEditHint": "Demo plan: saving it turns it into a real plan.",
+      "form": {
+        "nameFr": "Name (French)",
+        "nameEn": "Name (English)",
+        "descriptionFr": "Description (French)",
+        "descriptionEn": "Description (English)",
+        "price": "Price in euros",
+        "billingPeriod": "Period",
+        "clipsPerPeriod": "Clips per period",
+        "accountsIncluded": "Accounts created",
+        "deliveryDays": "Delivery time (days)",
+        "sortOrder": "Display order",
+        "platforms": "Platforms",
+        "featuresFr": "Other benefits (French)",
+        "featuresEn": "Other benefits (English)",
+        "featuresHint": "One benefit per line.",
+        "isVisible": "Visible on the website",
+        "isFeatured": "Featured plan"
+      }
+    },
+    "settings": {
+      "title": "Settings",
+      "missingCompany": "Complete the company details: they appear on invoices and in the legal notice. Nothing is filled in for you.",
+      "company": {
+        "title": "Company",
+        "lead": "Mandatory details for invoices and the legal notice.",
+        "fields": {
+          "legal_name": "Company name",
+          "trade_name": "Trade name",
+          "legal_form": "Legal form",
+          "siret": "SIRET",
+          "vat_number": "EU VAT number",
+          "vat_mention": "VAT statement",
+          "address": "Address",
+          "email": "Contact email",
+          "phone": "Phone",
+          "publication_director": "Publication director",
+          "host": "Website host (name and address)"
+        },
+        "hints": {
+          "legal_form": "Example: micro-entreprise, EI, SAS with share capital of…",
+          "vat_mention": "Example for a micro-entreprise: “TVA non applicable, art. 293 B du CGI”. Decide with your accountant.",
+          "host": "Example: Vercel Inc. and its address, to be checked in Vercel’s terms."
+        }
+      },
+      "bank": {
+        "title": "Bank details",
+        "lead": "Shown to clients on the payment page. Every change is recorded in the activity log.",
+        "fields": {
+          "holder": "Account holder",
+          "bank_name": "Bank",
+          "iban": "IBAN",
+          "bic": "BIC"
+        }
+      },
+      "billing": {
+        "title": "Billing and subscriptions",
+        "lead": "Numbering and timings applied automatically.",
+        "fields": {
+          "payment_reference_prefix": "Payment reference prefix",
+          "invoice_prefix": "Invoice prefix",
+          "grace_days": "Grace period (days)",
+          "reminder_days_before": "Reminder before due date (days)"
+        },
+        "hints": {
+          "payment_reference_prefix": "Example: PEAK → PEAK-2026-0012",
+          "invoice_prefix": "Example: F → F-2026-0001 (continuous numbering per year)"
+        }
+      },
+      "notifications": {
+        "title": "Notifications",
+        "lead": "This address also receives messages from the contact form.",
+        "fields": {
+          "admin_email": "Agency notification email"
+        }
+      }
+    },
+    "content": {
+      "title": "Site content",
+      "lead": "Website texts and legal pages, in French and English. The “numbers” and “testimonials” sections stay hidden while empty.",
+      "groups": {
+        "home": "Home",
+        "pricing": "Pricing & contact",
+        "legal": "Legal pages"
+      },
+      "lang": {
+        "fr": "French",
+        "en": "English"
+      },
+      "emptyList": "Empty list: the section is not shown.",
+      "add": "Add",
+      "remove": "Remove",
+      "listFields": {
+        "title": "Title",
+        "body": "Text",
+        "value": "Value",
+        "label": "Label",
+        "quote": "Quote",
+        "name": "Name",
+        "handle": "Account / niche",
+        "q": "Question",
+        "a": "Answer"
+      },
+      "keys": {
+        "home_hero_eyebrow": "Home — eyebrow",
+        "home_hero_title": "Home — main title",
+        "home_hero_lead": "Home — tagline",
+        "home_how_title": "How it works — title",
+        "home_how_lead": "How it works — intro",
+        "home_steps": "How it works — steps",
+        "home_stats": "Agency numbers",
+        "home_testimonials": "Testimonials (real clients only)",
+        "home_faq": "FAQ",
+        "home_cta_title": "Final call to action",
+        "pricing_title": "Pricing — title",
+        "pricing_lead": "Pricing — intro",
+        "pricing_note": "Pricing — note below the plans",
+        "contact_lead": "Contact — intro",
+        "legal_notice": "Legal notice",
+        "legal_terms": "Terms of sale",
+        "legal_privacy": "Privacy policy"
+      }
+    }
+  },
+  "emails": {
+    "footer": "Peak Clipping Agency — automated email. You can choose which emails you receive in your space.",
+    "payment_proof_submitted": {
+      "subject": "Proof of transfer to review — {client}",
+      "title": "New proof of transfer",
+      "body": "{client} uploaded a proof of transfer of {amount} (reference {reference}). Check the bank account before approving.",
+      "cta": "Review the payment"
+    },
+    "payment_validated": {
+      "subject": "Payment approved — your space is open",
+      "title": "Your payment is approved",
+      "body": "We have received your transfer of {amount} (reference {reference}). Your space is unlocked and your invoice is available in “Subscription & invoices”.",
+      "cta": "Open my space"
+    },
+    "payment_refused": {
+      "subject": "Your proof of payment was rejected",
+      "title": "Payment to correct",
+      "body": "Your proof of payment for reference {reference} was rejected. Reason: {reason}",
+      "cta": "Upload a new proof"
+    },
+    "renewal_reminder": {
+      "subject": "Renewing your subscription — reference {reference}",
+      "title": "Your subscription is ending soon",
+      "body": "Your current period ends on {date}. To continue without interruption, transfer {amount} with the new reference {reference}, then upload the proof in your space.",
+      "cta": "See the payment"
+    },
+    "grace_started": {
+      "subject": "Your subscription has expired — grace period",
+      "title": "Grace period in progress",
+      "body": "Your subscription ended on {date}. Your space stays open for a few days: renew to avoid read-only mode.",
+      "cta": "Renew"
+    },
+    "read_only": {
+      "subject": "Your space is now read-only",
+      "title": "Read-only space",
+      "body": "Your subscription ended on {date} and the grace period is over. Your data remains viewable, but uploads and requests are paused until you renew.",
+      "cta": "Renew"
+    },
+    "client_grace_started": {
+      "subject": "Client in grace period — {client}",
+      "title": "A client is in their grace period",
+      "body": "{client}’s subscription has ended without an approved payment.",
+      "cta": "See payments"
+    },
+    "client_read_only": {
+      "subject": "Client now read-only — {client}",
+      "title": "A client is now read-only",
+      "body": "{client}’s grace period is over: their space is now read-only.",
+      "cta": "See payments"
+    },
+    "contact_received": {
+      "subject": "New contact message — {name}",
+      "title": "New contact message",
+      "body": "{name} ({email}) wrote: {message}",
+      "cta": "Open the admin space"
+    }
   }
 }

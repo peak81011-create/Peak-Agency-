@@ -71,3 +71,25 @@ export async function asUser<T>(
     await db.query("rollback");
   }
 }
+
+/** Comme asUser, mais valide la transaction (l'effet est conservé). */
+export async function commitAs(
+  db: Client,
+  userId: string,
+  sql: string,
+  params: unknown[] = [],
+  opts: { aal?: "aal1" | "aal2" } = {},
+): Promise<void> {
+  await db.query("begin");
+  try {
+    await db.query("select set_config('request.jwt.claims', $1, true)", [
+      JSON.stringify({ sub: userId, role: "authenticated", aal: opts.aal ?? "aal1" }),
+    ]);
+    await db.query("set local role authenticated");
+    await db.query(sql, params);
+    await db.query("commit");
+  } catch (err) {
+    await db.query("rollback");
+    throw err;
+  }
+}

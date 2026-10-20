@@ -13,7 +13,7 @@ import { signupSchema, type SignupInput } from "@/lib/validation/auth";
 import { signupAction } from "../actions";
 import { useErrorText } from "./use-translated-error";
 
-export function SignupForm() {
+export function SignupForm({ intendedPlan }: { intendedPlan?: string }) {
   const t = useTranslations("auth");
   const errorText = useErrorText();
   const [formError, setFormError] = useState<string>();
@@ -24,7 +24,7 @@ export function SignupForm() {
   const onSubmit = handleSubmit((values) =>
     startTransition(async () => {
       setFormError(undefined);
-      const res = await signupAction(values);
+      const res = await signupAction(values, intendedPlan);
       if (res && !res.ok) {
         for (const [field, key] of Object.entries(res.fieldErrors ?? {})) setError(field as keyof SignupInput, { message: key });
         if (!res.fieldErrors) setFormError(res.error);

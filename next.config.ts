@@ -17,6 +17,8 @@ const nextConfig: NextConfig = {
   // classique (voir DECISIONS.md).
   cacheComponents: false,
   poweredByHeader: false,
+  // Rendu des factures PDF côté serveur (bibliothèque chargée telle quelle par Node)
+  serverExternalPackages: ["@react-pdf/renderer"],
   turbopack: {
     rules: {
       "*.css": {

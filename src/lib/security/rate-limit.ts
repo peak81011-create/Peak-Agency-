@@ -30,4 +30,5 @@ export const RATE_LIMITS = {
   signup: { max: 5, windowSeconds: 60 * 60 },
   passwordReset: { max: 5, windowSeconds: 60 * 60 },
   mfa: { max: 10, windowSeconds: 15 * 60 },
+  contact: { max: 5, windowSeconds: 60 * 60 },
 } as const;

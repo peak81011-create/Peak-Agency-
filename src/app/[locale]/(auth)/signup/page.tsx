@@ -9,12 +9,19 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: t("eyebrow") };
 }
 
-export default async function SignupPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function SignupPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ plan?: string }>;
+}) {
   await initPageLocale(params);
+  const { plan } = await searchParams;
   const t = await getTranslations("auth.signup");
   return (
     <AuthCard eyebrow={t("eyebrow")} title={t("title")} lead={t("lead")}>
-      <SignupForm />
+      <SignupForm intendedPlan={plan} />
     </AuthCard>
   );
 }

@@ -26,7 +26,13 @@ export type SessionUser = {
   aal: "aal1" | "aal2";
   /** Permissions effectives calculées par la base (même règle que la RLS). */
   permissions: ReadonlySet<Permission>;
-  client: { id: string; status: ClientStatus; creatorName: string } | null;
+  client: {
+    id: string;
+    status: ClientStatus;
+    creatorName: string;
+    planId: string | null;
+    profileCompleted: boolean;
+  } | null;
 };
 
 // my_permissions() renvoie un ensemble de textes : PostgREST peut le livrer
@@ -53,10 +59,18 @@ export const getSessionUser = cache(async (): Promise<SessionUser | null> => {
   if (profile.role === "client") {
     const { data } = await supabase
       .from("clients")
-      .select("id, status, creator_name")
+      .select("id, status, creator_name, plan_id, profile_completed_at")
       .eq("profile_id", profile.id)
       .single();
-    if (data) client = { id: data.id, status: data.status as ClientStatus, creatorName: data.creator_name };
+    if (data) {
+      client = {
+        id: data.id,
+        status: data.status as ClientStatus,
+        creatorName: data.creator_name,
+        planId: data.plan_id,
+        profileCompleted: Boolean(data.profile_completed_at),
+      };
+    }
   }
 
   return {

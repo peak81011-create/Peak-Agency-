@@ -2,7 +2,7 @@
 
 Plateforme web de l'agence : site vitrine bilingue (FR/EN), espace client (paiement par virement, envoi de vidéos, suivi des clips), espace admin avec contrôle total, et espaces pour l'équipe (assistante, prospecteurs, monteurs).
 
-> **État : phase 1 terminée (fondations).** Voir [Avancement](#avancement-et-reste-à-faire).
+> **État : phases 1 et 2 terminées (fondations, site public et paiement par virement).** Voir [Avancement](#avancement-et-reste-à-faire).
 
 ---
 
@@ -39,7 +39,7 @@ Plateforme web de l'agence : site vitrine bilingue (FR/EN), espace client (paiem
 | **Supabase** (région UE) | Base de données Postgres, comptes utilisateurs, double authentification, petits fichiers |
 | **Row Level Security (RLS)** | Règles dans la base : chaque utilisateur ne peut lire et modifier que ce qui le concerne, même en appelant l'API Supabase directement |
 | **Cloudflare R2** | Stockage des vidéos (sources et clips), envoyées directement depuis le navigateur *(phase 3)* |
-| **Resend** | E-mails automatiques bilingues *(phase 2)* |
+| **Resend** | E-mails automatiques bilingues |
 | **Vercel** | Hébergement, mise en ligne automatique à chaque modification sur GitHub |
 
 Dossiers principaux :
@@ -127,11 +127,12 @@ Faites-le dans cet ordre. Gardez les clés dans un endroit sûr (votre gestionna
    ```
 10. **Créer votre compte owner** : inscrivez-vous sur le site, puis dans **Authentication → Users**, ouvrez votre utilisateur et modifiez son **App Metadata** en `{"role": "owner"}`. Enfin, dans **Table Editor → profiles**, passez votre ligne en `role = owner` et supprimez votre ligne dans **clients**. *(Un écran d'administration remplacera cette manipulation en phase 4.)*
 
-### 2. Resend (e-mails automatiques) — *utilisé à partir de la phase 2*
+### 2. Resend (e-mails automatiques)
 
 1. Créez un compte sur <https://resend.com>.
 2. **Domains → Add domain** : ajoutez votre domaine et choisissez la région **EU (Ireland)**. Copiez les enregistrements DNS indiqués chez votre fournisseur de domaine, puis attendez « Verified ».
 3. **API Keys → Create API key** (permission « Sending access ») → variable `RESEND_API_KEY` (secrète).
+   Renseignez aussi `EMAIL_FROM`, par exemple `Peak Clipping Agency <no-reply@votre-domaine.fr>` (adresse de votre domaine vérifié).
 4. Pour que les e-mails de Supabase (confirmation, mot de passe) partent aussi de votre domaine : Supabase → **Authentication → Emails → SMTP Settings** → activez *Custom SMTP* avec hôte `smtp.resend.com`, port `465`, utilisateur `resend`, mot de passe = votre clé API Resend.
 
 ### 3. Cloudflare R2 (vidéos) — *utilisé à partir de la phase 3*
@@ -145,7 +146,7 @@ Faites-le dans cet ordre. Gardez les clés dans un endroit sûr (votre gestionna
 
 1. Créez un compte sur <https://vercel.com> avec votre compte GitHub. Pour un usage commercial, passez à l'offre **Pro**.
 2. **Add New → Project** → importez ce dépôt GitHub. Framework : Next.js (détecté automatiquement).
-3. **Settings → Environment Variables** : saisissez chaque variable de `.env.example` avec ses vraies valeurs (`NEXT_PUBLIC_SITE_URL` = l'adresse finale du site).
+3. **Settings → Environment Variables** : saisissez chaque variable de `.env.example` avec ses vraies valeurs (`NEXT_PUBLIC_SITE_URL` = l'adresse finale du site). Pour `CRON_SECRET`, générez un long texte aléatoire avec votre gestionnaire de mots de passe : Vercel s'en sert pour lancer chaque jour la tâche des abonnements (rappels, délai de grâce, lecture seule), déclarée dans `vercel.json`.
 4. **Settings → Functions → Function Region** : choisissez **Paris (cdg1)** ou **Frankfurt (fra1)**, près de la base Supabase.
 5. **Settings → Domains** : ajoutez votre nom de domaine et suivez les instructions DNS.
 6. Chaque modification poussée sur GitHub est mise en ligne automatiquement. Chaque branche a sa propre adresse de prévisualisation.
@@ -160,8 +161,11 @@ La liste complète, commentée, est dans [`.env.example`](.env.example).
 | `NEXT_PUBLIC_SUPABASE_URL` | Supabase → Data API | Non |
 | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Supabase → API Keys | Non (la sécurité vient de la RLS) |
 | `SUPABASE_SECRET_KEY` | Supabase → API Keys | **Oui** |
+| `RESEND_API_KEY` | Resend → API Keys | **Oui** |
+| `EMAIL_FROM` | Une adresse de votre domaine vérifié dans Resend | Non |
+| `CRON_SECRET` | Texte aléatoire que vous générez | **Oui** |
 
-Les variables de Resend, R2 et des tâches planifiées seront ajoutées dans les phases concernées.
+Les variables de Cloudflare R2 seront ajoutées en phase 3.
 
 ## Commandes utiles
 
@@ -208,12 +212,22 @@ Les variables de Resend, R2 et des tâches planifiées seront ajoutées dans les
 - **Règles d'accès** (RLS) : `npm run test:db` avec Supabase local démarré. Ces tests vérifient par exemple qu'un client ne peut lire aucune donnée d'un autre client, même en appelant la base directement.
 - **Parcours** (Playwright) : `npm run build`, puis `npm run test:e2e` avec Supabase local démarré et le seed exécuté.
 
+## Premiers réglages dans l'admin (avant le premier client)
+
+Connecté en owner, dans le menu de gauche :
+
+1. **Paramètres → Entreprise** : raison sociale, forme juridique, SIRET, adresse, mention de TVA (à choisir avec votre comptable), hébergeur. Ces informations apparaissent sur les factures et dans les mentions légales. Rien n'est rempli à votre place.
+2. **Paramètres → Coordonnées bancaires** : titulaire, IBAN, BIC (l'IBAN est vérifié). Ils s'affichent aux clients sur la page de paiement.
+3. **Paramètres → Facturation** : préfixes des références et des factures, délai de grâce, jours de rappel avant échéance.
+4. **Offres & tarifs** : remplacez ou masquez les 3 offres marquées « Démo ».
+5. **Contenu du site** : relisez les textes de l'accueil, ajoutez vos questions fréquentes, et **complétez puis faites relire les pages légales** (ce sont des modèles).
+
 ## Avancement et reste à faire
 
 | Phase | Contenu | État |
 |---|---|---|
 | 1. Fondations | Next.js, design tokens, FR/EN, Supabase + RLS, authentification + 2FA, rôles et `can()`, seed, CI | ✅ |
-| 2. Site public + paiement | Vitrine, tarifs, contact, pages légales, parcours virement → validation → déblocage, factures PDF, e-mails | À faire |
+| 2. Site public + paiement | Vitrine, tarifs, contact, pages légales, parcours virement → validation → déblocage, factures PDF, e-mails, rappels de renouvellement | ✅ |
 | 3. Cœur de l'agence | Clients, vidéos (R2), clips (Kanban), comptes de diffusion, demandes, tableau de bord client | À faire |
 | 4. Équipe | Tâches, espaces assistante et monteur, rémunération, matrice des permissions, « voir en tant que », journal | À faire |
 | 5. Prospection | Prospects, pipeline, modèles de messages, import CSV, conversion, API pour agent IA | À faire |

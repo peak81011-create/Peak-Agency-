@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { PageBody, PageHeader } from "@/features/shell/app-shell";
-import { redirect } from "@/i18n/navigation";
 import { PERMISSIONS } from "@/lib/auth/permission-catalog";
-import { isStaff, requireUser } from "@/lib/auth/session";
+import { requireUser } from "@/lib/auth/session";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("nav");
@@ -14,7 +13,6 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function StaffHomePage() {
   const user = await requireUser();
-  if (!isStaff(user)) redirect({ href: "/app", locale: await getLocale() });
   const t = await getTranslations();
   const granted = PERMISSIONS.filter((p) => user.permissions.has(p));
 

@@ -7,8 +7,14 @@
     "wordmark": "Clipping Agency",
     "homeAria": "Peak Clipping Agency — accueil",
     "language": "Langue",
-    "languageShort": { "fr": "FR", "en": "EN" },
-    "languageLong": { "fr": "Français", "en": "English" },
+    "languageShort": {
+      "fr": "FR",
+      "en": "EN"
+    },
+    "languageLong": {
+      "fr": "Français",
+      "en": "English"
+    },
     "login": "Se connecter",
     "logout": "Se déconnecter",
     "signup": "Créer un compte",
@@ -24,7 +30,9 @@
     "continue": "Continuer",
     "loading": "Chargement…",
     "comingSoon": "Cette section arrive dans une prochaine phase.",
-    "skipToContent": "Aller au contenu"
+    "skipToContent": "Aller au contenu",
+    "copy": "Copier",
+    "copied": "Copié"
   },
   "nav": {
     "how": "Comment ça marche",
@@ -37,7 +45,19 @@
     "dashboard": "Tableau de bord",
     "overview": "Vue d’ensemble",
     "account": "Mon compte",
-    "groups": { "steering": "Pilotage", "team": "Équipe", "settings": "Configuration" }
+    "groups": {
+      "steering": "Pilotage",
+      "team": "Équipe",
+      "settings": "Configuration"
+    },
+    "creatorProfile": "Profil créateur",
+    "choosePlan": "Offre",
+    "payment": "Paiement",
+    "billing": "Abonnement & factures",
+    "payments": "Paiements",
+    "plans": "Offres & tarifs",
+    "content": "Contenu du site",
+    "settings": "Paramètres"
   },
   "footer": {
     "tagline": "Vos lives et vidéos longues transformés en clips verticaux, publiés chaque jour sur des comptes dédiés.",
@@ -82,11 +102,23 @@
     }
   },
   "home": {
-    "eyebrow": "Agence de clipping",
-    "title": "Vos lives deviennent des clips qui font grandir votre audience.",
-    "lead": "Nous récupérons vos vidéos longues et vos lives, les découpons en clips verticaux et les publions sur des comptes TikTok, Reels et Shorts dédiés.",
-    "ctaPrimary": "Commencer",
-    "ctaSecondary": "J’ai déjà un compte"
+    "ctaPrimary": "Voir les offres",
+    "ctaSecondary": "Comment ça marche",
+    "ctaContact": "Nous contacter",
+    "howEyebrow": "Comment ça marche",
+    "statsEyebrow": "Résultats",
+    "statsTitle": "Les chiffres de l’agence",
+    "plansEyebrow": "Offres",
+    "plansTitle": "Choisissez votre rythme",
+    "plansCompare": "Comparer les offres",
+    "featured": "Le plus choisi",
+    "choose": "Choisir cette offre",
+    "noPlans": "Les offres seront bientôt disponibles. Écrivez-nous pour en savoir plus.",
+    "testimonialsEyebrow": "Témoignages",
+    "testimonialsTitle": "Ils publient avec nous",
+    "faqEyebrow": "FAQ",
+    "faqTitle": "Questions fréquentes",
+    "faqMore": "Une autre question ? <link>Écrivez-nous</link>."
   },
   "auth": {
     "email": "E-mail",
@@ -151,7 +183,14 @@
       "generic": "Une erreur est survenue. Réessayez.",
       "invalidCode": "Code incorrect ou expiré.",
       "linkInvalid": "Ce lien n’est plus valide. Demandez-en un nouveau.",
-      "accountDisabled": "Ce compte est désactivé. Contactez l’agence."
+      "accountDisabled": "Ce compte est désactivé. Contactez l’agence.",
+      "forbidden": "Vous n’avez pas la permission de faire cette action.",
+      "unauthenticated": "Votre session a expiré. Reconnectez-vous.",
+      "planLocked": "L’offre ne peut plus être changée : votre paiement est en cours de vérification.",
+      "uploadFailed": "L’envoi du fichier a échoué. Vérifiez votre connexion et réessayez.",
+      "alreadyValidated": "Ce paiement a déjà été validé.",
+      "reasonRequired": "Indiquez le motif du refus.",
+      "tooLong": "Texte trop long."
     }
   },
   "validation": {
@@ -162,7 +201,18 @@
     "passwordSymbol": "Ajoutez au moins un symbole.",
     "termsRequired": "Vous devez accepter les CGV et la politique de confidentialité.",
     "tooLong": "Texte trop long.",
-    "code": "Le code contient 6 chiffres."
+    "code": "Le code contient 6 chiffres.",
+    "url": "Adresse web invalide (elle doit commencer par https://).",
+    "channelRequired": "Indiquez au moins une chaîne.",
+    "proofType": "Format accepté : PNG, JPG, WEBP ou PDF.",
+    "proofSize": "Le fichier dépasse 10 Mo.",
+    "number": "Nombre entier attendu.",
+    "price": "Montant invalide (exemple : 890 ou 890,50).",
+    "siret": "Le SIRET contient 14 chiffres.",
+    "iban": "IBAN invalide (vérifiez la saisie).",
+    "bic": "BIC invalide (8 ou 11 caractères).",
+    "prefix": "Lettres et chiffres uniquement, sans espace.",
+    "messageTooShort": "Votre message est un peu court (10 caractères minimum)."
   },
   "dashboard": {
     "welcome": "Bonjour {name}",
@@ -187,5 +237,442 @@
     "forbiddenTitle": "Accès refusé",
     "forbiddenLead": "Vous n’avez pas la permission d’accéder à cette page.",
     "backHome": "Revenir à l’accueil"
+  },
+  "plans": {
+    "clips": "{count, plural, =1 {1 clip} other {# clips}} par période",
+    "accounts": "{count, plural, =1 {1 compte créé} other {# comptes créés}} pour vous",
+    "delivery": "Livraison sous {count, plural, =1 {1 jour} other {# jours}}",
+    "platformNames": {
+      "tiktok": "TikTok",
+      "instagram": "Instagram Reels",
+      "youtube": "YouTube Shorts"
+    },
+    "periods": {
+      "mensuel": "/ mois",
+      "trimestriel": "/ trimestre",
+      "annuel": "/ an",
+      "unique": "une fois"
+    }
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Parlons de votre chaîne",
+    "name": "Nom",
+    "email": "E-mail",
+    "channelUrl": "Lien de votre chaîne",
+    "optional": "(facultatif)",
+    "message": "Message",
+    "submit": "Envoyer",
+    "sent": "Merci, votre message est bien envoyé. Nous vous répondons par e-mail."
+  },
+  "legal": {
+    "nav": "Pages légales",
+    "missing": "À compléter",
+    "titles": {
+      "notice": "Mentions légales",
+      "terms": "Conditions générales de vente",
+      "privacy": "Politique de confidentialité"
+    },
+    "company": {
+      "legal_name": "Éditeur (raison sociale)",
+      "legal_form": "Forme juridique",
+      "address": "Adresse",
+      "siret": "SIRET",
+      "vat_number": "N° de TVA",
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "publication_director": "Directeur de la publication",
+      "host": "Hébergeur"
+    }
+  },
+  "client": {
+    "onboarding": {
+      "steps": {
+        "profile": "Profil créateur",
+        "plan": "Choix de l’offre",
+        "payment": "Paiement"
+      }
+    },
+    "profile": {
+      "eyebrow": "Espace client",
+      "title": "Votre profil créateur",
+      "lead": "Ces informations guident nos monteurs : ton, moments forts, plateformes.",
+      "creatorName": "Nom de créateur",
+      "niche": "Niche",
+      "niches": {
+        "gaming": "Gaming",
+        "lifestyle": "Lifestyle",
+        "business": "Business",
+        "humour": "Humour",
+        "sport": "Sport",
+        "tech": "Tech",
+        "beaute": "Beauté",
+        "education": "Éducation",
+        "autre": "Autre"
+      },
+      "language": "Langue de vos contenus",
+      "languages": {
+        "fr": "Français",
+        "en": "Anglais",
+        "other": "Autre"
+      },
+      "channels": "Liens de vos chaînes",
+      "channelsHint": "Au moins un lien.",
+      "channelNames": {
+        "youtube": "YouTube",
+        "twitch": "Twitch",
+        "tiktok": "TikTok",
+        "instagram": "Instagram",
+        "kick": "Kick",
+        "other": "Autre"
+      },
+      "optional": "(facultatif)",
+      "goals": "Objectifs",
+      "goalsHint": "Exemple : faire découvrir mes lives, gagner des abonnés sur ma chaîne principale.",
+      "liveAvailability": "Vos lives et vidéos",
+      "liveAvailabilityHint": "Fréquence et horaires habituels, par exemple « 3 lives par semaine, le soir ».",
+      "billingAddress": "Adresse de facturation",
+      "billingAddressHint": "Nécessaire si vous facturez au nom d’une entreprise.",
+      "editableLater": "Modifiable plus tard dans votre profil."
+    },
+    "plan": {
+      "eyebrow": "Espace client",
+      "title": "Choisissez votre offre",
+      "lead": "Vous pourrez en changer à chaque renouvellement.",
+      "locked": "Votre paiement est en cours de vérification : l’offre ne peut plus être changée pour le moment.",
+      "none": "Aucune offre n’est disponible pour le moment. Contactez l’agence.",
+      "summary": "Offre {name} · {price}",
+      "summaryHint": "Paiement par virement. Votre espace est débloqué après vérification.",
+      "submit": "Continuer vers le paiement"
+    },
+    "payment": {
+      "eyebrow": "Espace client",
+      "eyebrowRenewal": "Renouvellement",
+      "title": "Paiement par virement",
+      "refusedTitle": "Votre preuve de paiement a été refusée",
+      "refusedHelp": "Corrigez le virement si besoin, puis déposez une nouvelle preuve ci-dessous.",
+      "step1": "1 · Faites le virement",
+      "planLine": "Offre {plan}",
+      "amount": "Montant à virer",
+      "reference": "Référence obligatoire",
+      "referenceHelp": "À copier dans le libellé du virement, sinon il ne pourra pas être rattaché.",
+      "holder": "Bénéficiaire",
+      "iban": "IBAN",
+      "bic": "BIC",
+      "bankMissing": "Les coordonnées bancaires n’ont pas encore été renseignées par l’agence. Revenez un peu plus tard ou écrivez-nous.",
+      "delayHint": "Un virement peut mettre 1 à 3 jours ouvrés à arriver. Le virement instantané accélère le déblocage.",
+      "step2": "2 · Déposez la preuve",
+      "proofHelp": "Capture d’écran ou PDF de l’ordre de virement, où l’on voit le montant, la date et la référence.",
+      "uploading": "Envoi en cours…",
+      "dropTitle": "Glissez la capture ici",
+      "dropHint": "PNG, JPG, WEBP ou PDF · 10 Mo maximum",
+      "chooseFile": "Choisir un fichier",
+      "reviewTitle": "Preuve reçue, vérification en cours",
+      "reviewLead": "Nous vérifions la réception du virement sur notre compte. Vous serez prévenu par e-mail.",
+      "timeline": {
+        "uploaded": "Preuve déposée le {date}",
+        "review": "Vérification par l’équipe",
+        "unlocked": "Espace débloqué"
+      },
+      "questions": "Une question sur votre paiement ? <link>Contactez-nous</link>."
+    },
+    "billing": {
+      "title": "Abonnement & factures",
+      "currentPlan": "Offre actuelle",
+      "plan": "Offre",
+      "period": "Période en cours",
+      "payNow": "Voir le paiement à effectuer",
+      "history": "Paiements et factures",
+      "empty": "Aucun paiement pour le moment.",
+      "cols": {
+        "reference": "Référence",
+        "period": "Période",
+        "amount": "Montant",
+        "status": "Statut",
+        "invoice": "Facture"
+      },
+      "afterValidation": "Après validation"
+    },
+    "banners": {
+      "grace": "Votre abonnement est arrivé à échéance le {end}. Délai de grâce jusqu’au {until} : renouvelez pour éviter le passage en lecture seule.",
+      "readOnly": "Votre abonnement a expiré le {end}. Votre espace est en lecture seule : renouvelez pour reprendre les envois et les demandes.",
+      "renew": "Renouveler"
+    },
+    "dashboard": {
+      "suspended": "Votre compte est actuellement suspendu. Contactez l’agence pour plus d’informations.",
+      "reviewTitle": "Bienvenue {name}, on vérifie votre virement",
+      "checklist": "Où en êtes-vous ?",
+      "done": {
+        "profile": "Profil créateur complété",
+        "plan": "Offre choisie",
+        "proof": "Preuve de virement déposée"
+      },
+      "reviewing": "Vérification en cours par l’agence",
+      "seePayment": "Voir mon paiement",
+      "afterUnlock": "Disponible après validation",
+      "features": {
+        "dashboard": {
+          "title": "Tableau de bord",
+          "body": "vues, abonnés gagnés et clips à venir."
+        },
+        "upload": {
+          "title": "Envoyer une vidéo",
+          "body": "fichiers lourds ou lien, avec vos notes."
+        },
+        "clips": {
+          "title": "Mes clips",
+          "body": "validation et calendrier de publication."
+        },
+        "accounts": {
+          "title": "Mes comptes",
+          "body": "les comptes créés pour vous."
+        }
+      },
+      "periodLine": "Offre {plan} · période en cours jusqu’au {end}."
+    }
+  },
+  "admin": {
+    "payments": {
+      "title": "Vérification des paiements",
+      "export": "Exporter (CSV)",
+      "companyMissing": "Les informations de l’entreprise (raison sociale, forme, SIRET, adresse, mention de TVA) sont incomplètes : elles doivent figurer sur les factures.",
+      "goToSettings": "Compléter les paramètres",
+      "tabs": {
+        "review": "À vérifier",
+        "pending": "En attente de dépôt",
+        "history": "Historique"
+      },
+      "empty": "Rien dans cette liste.",
+      "kindInitial": "Première souscription",
+      "kindRenewal": "Renouvellement",
+      "submitted": "déposé le {date}",
+      "bankReminder": "Vérifiez votre compte bancaire avant de valider. Une capture d’écran ne prouve pas que l’argent est arrivé.",
+      "expectedAmount": "Montant attendu",
+      "expectedReference": "Référence attendue",
+      "refusalReason": "Motif du refus",
+      "invoice": "Facture",
+      "proof": "Preuve déposée par le client",
+      "proofAlt": "Preuve de virement pour la référence {reference}",
+      "downloadProof": "Télécharger la preuve",
+      "noProof": "Aucune preuve déposée pour le moment.",
+      "review": {
+        "checks": "Contrôles",
+        "checkAmount": "Le montant de la preuve correspond",
+        "checkReference": "La référence apparaît dans le libellé",
+        "checkReceived": "Le virement est arrivé sur le compte bancaire",
+        "validate": "Valider le paiement",
+        "refuse": "Refuser",
+        "reason": "Motif",
+        "reasons": {
+          "amount": "Montant incorrect",
+          "reference": "Référence absente ou erronée",
+          "unreadable": "Preuve illisible",
+          "notReceived": "Virement non reçu",
+          "other": "Autre"
+        },
+        "messages": {
+          "amount": "Le montant reçu ne correspond pas au montant attendu. Merci de compléter le virement avec la même référence.",
+          "reference": "La référence de paiement n’apparaît pas dans le libellé du virement. Merci de nous écrire pour que nous rattachions votre virement.",
+          "unreadable": "La preuve déposée est illisible. Merci de déposer une capture plus nette.",
+          "notReceived": "Nous n’avons pas encore reçu votre virement. Merci de vérifier qu’il a bien été envoyé, puis de déposer une nouvelle preuve."
+        },
+        "message": "Message au client",
+        "messageHint": "Le client verra ce message et pourra déposer une nouvelle preuve.",
+        "cancel": "Annuler",
+        "confirmRefuse": "Refuser le paiement",
+        "validated": "Paiement validé : l’espace du client est débloqué et la facture est émise.",
+        "refused": "Paiement refusé : le client a été prévenu."
+      }
+    },
+    "plans": {
+      "title": "Offres & tarifs",
+      "new": "Nouvelle offre",
+      "editTitle": "Modifier l’offre",
+      "edit": "Modifier",
+      "demo": "Démo",
+      "featured": "Mise en avant",
+      "hidden": "Masquée",
+      "empty": "Aucune offre.",
+      "demoWarning": "Les offres marquées « Démo » sont des exemples : remplacez-les par vos vraies offres (ou masquez-les) avant d’accueillir des clients.",
+      "demoEditHint": "Offre de démonstration : en enregistrant, elle devient une offre réelle.",
+      "form": {
+        "nameFr": "Nom (français)",
+        "nameEn": "Nom (anglais)",
+        "descriptionFr": "Description (français)",
+        "descriptionEn": "Description (anglais)",
+        "price": "Prix en euros",
+        "billingPeriod": "Période",
+        "clipsPerPeriod": "Clips par période",
+        "accountsIncluded": "Comptes créés",
+        "deliveryDays": "Délai de livraison (jours)",
+        "sortOrder": "Ordre d’affichage",
+        "platforms": "Plateformes",
+        "featuresFr": "Autres avantages (français)",
+        "featuresEn": "Autres avantages (anglais)",
+        "featuresHint": "Un avantage par ligne.",
+        "isVisible": "Visible sur le site",
+        "isFeatured": "Offre mise en avant"
+      }
+    },
+    "settings": {
+      "title": "Paramètres",
+      "missingCompany": "Complétez les informations de l’entreprise : elles apparaissent sur les factures et dans les mentions légales. Rien n’est rempli à votre place.",
+      "company": {
+        "title": "Entreprise",
+        "lead": "Mentions obligatoires des factures et des mentions légales.",
+        "fields": {
+          "legal_name": "Raison sociale",
+          "trade_name": "Nom commercial",
+          "legal_form": "Forme juridique",
+          "siret": "SIRET",
+          "vat_number": "N° de TVA intracommunautaire",
+          "vat_mention": "Mention de TVA",
+          "address": "Adresse",
+          "email": "E-mail de contact",
+          "phone": "Téléphone",
+          "publication_director": "Directeur de la publication",
+          "host": "Hébergeur du site (nom et adresse)"
+        },
+        "hints": {
+          "legal_form": "Exemple : micro-entreprise, EI, SAS au capital de…",
+          "vat_mention": "Exemple pour une micro-entreprise : « TVA non applicable, art. 293 B du CGI ». À choisir avec votre comptable.",
+          "host": "Exemple : Vercel Inc. et son adresse, à vérifier dans les conditions de Vercel."
+        }
+      },
+      "bank": {
+        "title": "Coordonnées bancaires",
+        "lead": "Affichées aux clients sur la page de paiement. Chaque modification est inscrite au journal d’activité.",
+        "fields": {
+          "holder": "Titulaire du compte",
+          "bank_name": "Banque",
+          "iban": "IBAN",
+          "bic": "BIC"
+        }
+      },
+      "billing": {
+        "title": "Facturation et abonnements",
+        "lead": "Numérotation et délais appliqués automatiquement.",
+        "fields": {
+          "payment_reference_prefix": "Préfixe des références de paiement",
+          "invoice_prefix": "Préfixe des factures",
+          "grace_days": "Délai de grâce (jours)",
+          "reminder_days_before": "Rappel avant échéance (jours)"
+        },
+        "hints": {
+          "payment_reference_prefix": "Exemple : PEAK → PEAK-2026-0012",
+          "invoice_prefix": "Exemple : F → F-2026-0001 (numérotation continue par année)"
+        }
+      },
+      "notifications": {
+        "title": "Notifications",
+        "lead": "Adresse qui reçoit aussi les messages du formulaire de contact.",
+        "fields": {
+          "admin_email": "E-mail de notification de l’agence"
+        }
+      }
+    },
+    "content": {
+      "title": "Contenu du site",
+      "lead": "Textes de la vitrine et pages légales, en français et en anglais. Les sections « chiffres » et « témoignages » restent masquées tant qu’elles sont vides.",
+      "groups": {
+        "home": "Accueil",
+        "pricing": "Tarifs & contact",
+        "legal": "Pages légales"
+      },
+      "lang": {
+        "fr": "Français",
+        "en": "Anglais"
+      },
+      "emptyList": "Liste vide : la section n’est pas affichée.",
+      "add": "Ajouter",
+      "remove": "Retirer",
+      "listFields": {
+        "title": "Titre",
+        "body": "Texte",
+        "value": "Valeur",
+        "label": "Libellé",
+        "quote": "Citation",
+        "name": "Nom",
+        "handle": "Compte / niche",
+        "q": "Question",
+        "a": "Réponse"
+      },
+      "keys": {
+        "home_hero_eyebrow": "Accueil — sur-titre",
+        "home_hero_title": "Accueil — titre principal",
+        "home_hero_lead": "Accueil — accroche",
+        "home_how_title": "Comment ça marche — titre",
+        "home_how_lead": "Comment ça marche — introduction",
+        "home_steps": "Comment ça marche — étapes",
+        "home_stats": "Chiffres de l’agence",
+        "home_testimonials": "Témoignages (uniquement de vrais clients)",
+        "home_faq": "FAQ",
+        "home_cta_title": "Appel à l’action final",
+        "pricing_title": "Tarifs — titre",
+        "pricing_lead": "Tarifs — introduction",
+        "pricing_note": "Tarifs — note sous les offres",
+        "contact_lead": "Contact — introduction",
+        "legal_notice": "Mentions légales",
+        "legal_terms": "Conditions générales de vente",
+        "legal_privacy": "Politique de confidentialité"
+      }
+    }
+  },
+  "emails": {
+    "footer": "Peak Clipping Agency — e-mail automatique. Vous pouvez choisir les e-mails que vous recevez dans votre espace.",
+    "payment_proof_submitted": {
+      "subject": "Preuve de virement à vérifier — {client}",
+      "title": "Nouvelle preuve de virement",
+      "body": "{client} a déposé une preuve de virement de {amount} (référence {reference}). Vérifiez la réception sur le compte bancaire avant de valider.",
+      "cta": "Vérifier le paiement"
+    },
+    "payment_validated": {
+      "subject": "Paiement validé — votre espace est ouvert",
+      "title": "Votre paiement est validé",
+      "body": "Nous avons bien reçu votre virement de {amount} (référence {reference}). Votre espace est débloqué et votre facture est disponible dans « Abonnement & factures ».",
+      "cta": "Ouvrir mon espace"
+    },
+    "payment_refused": {
+      "subject": "Votre preuve de paiement a été refusée",
+      "title": "Paiement à corriger",
+      "body": "Votre preuve de paiement pour la référence {reference} a été refusée. Motif : {reason}",
+      "cta": "Déposer une nouvelle preuve"
+    },
+    "renewal_reminder": {
+      "subject": "Renouvellement de votre abonnement — référence {reference}",
+      "title": "Votre abonnement arrive à échéance",
+      "body": "Votre période en cours se termine le {date}. Pour continuer sans interruption, faites un virement de {amount} avec la nouvelle référence {reference}, puis déposez la preuve dans votre espace.",
+      "cta": "Voir le paiement"
+    },
+    "grace_started": {
+      "subject": "Votre abonnement a expiré — délai de grâce",
+      "title": "Délai de grâce en cours",
+      "body": "Votre abonnement a pris fin le {date}. Votre espace reste ouvert quelques jours : renouvelez pour éviter le passage en lecture seule.",
+      "cta": "Renouveler"
+    },
+    "read_only": {
+      "subject": "Votre espace est passé en lecture seule",
+      "title": "Espace en lecture seule",
+      "body": "Votre abonnement a pris fin le {date} et le délai de grâce est écoulé. Vos données restent consultables, mais l’envoi de vidéos et les demandes sont suspendus jusqu’au renouvellement.",
+      "cta": "Renouveler"
+    },
+    "client_grace_started": {
+      "subject": "Client en délai de grâce — {client}",
+      "title": "Un client est en délai de grâce",
+      "body": "L’abonnement de {client} est arrivé à échéance sans paiement validé.",
+      "cta": "Voir les paiements"
+    },
+    "client_read_only": {
+      "subject": "Client passé en lecture seule — {client}",
+      "title": "Un client est passé en lecture seule",
+      "body": "Le délai de grâce de {client} est écoulé : son espace est désormais en lecture seule.",
+      "cta": "Voir les paiements"
+    },
+    "contact_received": {
+      "subject": "Nouveau message de contact — {name}",
+      "title": "Nouveau message de contact",
+      "body": "{name} ({email}) a écrit : {message}",
+      "cta": "Ouvrir l’espace admin"
+    }
   }
 }

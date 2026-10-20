@@ -30,10 +30,18 @@ test.describe("Fondations", () => {
     await expect(page.getByText("Votre espace sera débloqué")).toHaveCount(0);
   });
 
-  test("un client qui n'a pas payé voit son espace verrouillé", async ({ page }) => {
+  test("un nouveau client est conduit à l'étape « profil créateur »", async ({ page }) => {
     await login(page, DEMO_USERS.clientNew.email);
+    await expectPath(page, /\/fr\/app\/profile$/);
+    await expect(page.getByRole("heading", { name: "Votre profil créateur" })).toBeVisible();
+  });
+
+  test("un client dont le virement est en vérification voit son espace verrouillé", async ({ page }) => {
+    await login(page, DEMO_USERS.clientPending.email);
     await expectPath(page, /\/fr\/app$/);
     await expect(page.getByText("Votre espace sera débloqué après validation du paiement")).toBeVisible();
+    await page.goto("/fr/app/billing");
+    await expectPath(page, /\/fr\/app$/);
   });
 
   test("un client ne peut pas ouvrir l'espace admin", async ({ page }) => {

@@ -232,6 +232,18 @@ async function main() {
     db.from("client_private_notes").upsert({ client_id: active, body: "Note interne de démonstration (jamais visible par le client)." }),
   );
 
+  // Coordonnées bancaires de démonstration (IBAN d'exemple officiel, invalide pour un vrai virement).
+  // Écrites seulement si aucune coordonnée réelle n'a été saisie.
+  const { data: bank } = await db.from("settings").select("value").eq("key", "bank").single();
+  if (!bank?.value?.iban) {
+    await run(
+      "banque de démo",
+      db.from("settings").update({
+        value: { holder: "DÉMO — à remplacer", iban: "FR7630006000011234567890189", bic: "AGRIFRPPXXX", bank_name: "Banque de démonstration" },
+      }).eq("key", "bank"),
+    );
+  }
+
   console.log("Seed terminé. Comptes de démonstration (mot de passe commun) :");
   for (const user of Object.values(DEMO_USERS)) console.log(`  ${user.role.padEnd(10)} ${user.email}`);
   console.log(`  mot de passe : ${password}`);
