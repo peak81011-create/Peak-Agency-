@@ -185,35 +185,31 @@ async function main() {
   );
   // Client 3 : vient de s'inscrire (statut par défaut « inscrit »)
 
-  const year = new Date().getFullYear();
-  await run(
-    "paiements",
-    db.from("payments").upsert(
-      [
-        {
-          client_id: active,
-          plan_id: growth,
-          amount_cents: 89000,
-          reference: `PEAK-${year}-0001`,
-          status: "valide",
-          submitted_at: start.toISOString(),
-          validated_by: ids.owner,
-          validated_at: start.toISOString(),
-          period_start: isoDate(start),
-          period_end: isoDate(end),
-        },
-        {
-          client_id: pending,
-          plan_id: starter,
-          amount_cents: 49000,
-          reference: `PEAK-${year}-0002`,
-          status: "a_verifier",
-          submitted_at: new Date().toISOString(),
-        },
-      ],
-      { onConflict: "reference", defaultToNull: false },
-    ),
-  );
+  // Paiements de démonstration : références tirées du compteur officiel, pour
+  // ne jamais entrer en collision avec celles des vrais clients.
+  const demoPayments = [
+    {
+      client_id: active,
+      plan_id: growth,
+      amount_cents: 89000,
+      status: "valide",
+      submitted_at: start.toISOString(),
+      validated_by: ids.owner,
+      validated_at: start.toISOString(),
+      period_start: isoDate(start),
+      period_end: isoDate(end),
+    },
+    { client_id: pending, plan_id: starter, amount_cents: 49000, status: "a_verifier", submitted_at: new Date().toISOString() },
+  ];
+  for (const payment of demoPayments) {
+    const existing = await check(
+      "paiements existants",
+      db.from("payments").select("id").eq("client_id", payment.client_id),
+    );
+    if (existing.length) continue;
+    const reference = await check("référence", db.rpc("new_payment_reference"));
+    await run("paiement de démo", db.from("payments").insert({ ...payment, reference }, { defaultToNull: false }));
+  }
 
   // Équipe : le monteur et l'assistante suivent le client actif ; l'assistante suit aussi le client 2.
   await run(

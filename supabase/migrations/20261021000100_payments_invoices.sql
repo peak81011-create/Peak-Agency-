@@ -563,6 +563,7 @@ to authenticated;
 grant execute on function public.plan_visible_to_me(uuid) to anon, authenticated;
 grant execute on function
   public.rate_limit_hit(text, integer, integer),
+  public.new_payment_reference(),
   public.run_subscription_lifecycle(date),
   public.users_with_permission(text)
 to service_role;

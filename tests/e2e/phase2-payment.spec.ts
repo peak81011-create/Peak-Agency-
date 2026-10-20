@@ -95,7 +95,7 @@ test.describe("Parcours de paiement par virement", () => {
     await expect(validate).toBeDisabled();
     for (const check of await detail.getByRole("checkbox").all()) await check.check();
     await validate.click();
-    await expect(detail.getByText("Paiement validé")).toBeVisible();
+    await expect(detail.getByText("Validé", { exact: true })).toBeVisible();
 
     // Côté client : espace débloqué, facture disponible
     const clientContext = await browser.newContext();
@@ -120,7 +120,8 @@ test.describe("Parcours de paiement par virement", () => {
     const detail = page.getByTestId("payment-detail");
     await detail.getByRole("button", { name: "Refuser" }).click();
     await detail.getByRole("button", { name: "Refuser le paiement" }).click();
-    await expect(detail.getByText("Paiement refusé")).toBeVisible();
+    await expect(detail.getByText("Refusé", { exact: true })).toBeVisible();
+    await expect(detail).toContainText("Le montant reçu ne correspond pas");
   });
 
   test("le client voit le motif du refus et peut redéposer une preuve", async ({ page }) => {
