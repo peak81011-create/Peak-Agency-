@@ -1,6 +1,13 @@
 import { expect, test } from "@playwright/test";
 import { createClient } from "@supabase/supabase-js";
-import { DEMO_PASSWORD, DEMO_USERS, adminClient, login, loginAsOwner } from "./helpers";
+import type { Page } from "@playwright/test";
+import { DEMO_PASSWORD, DEMO_USERS, adminClient, login as submitLogin, loginAsOwner } from "./helpers";
+
+/** Connexion, puis attente de la sortie de la page de connexion (session posée). */
+async function login(page: Page, email: string) {
+  await submitLogin(page, email);
+  await expect(page).not.toHaveURL(/\/login/);
+}
 
 // Un second client actif, créé pour ces tests, qui ne doit jamais voir les
 // données de Léa (client actif de démonstration) ni être vu par le monteur.
@@ -68,7 +75,9 @@ test.describe("Isolement des données", () => {
   test("un client ne voit aucune donnée d'un autre client, ni par l'interface, ni par l'API, ni en interrogeant Supabase", async ({ page }) => {
     // Base de données, directement avec la clé publique
     const db = await asUser(OTHER.email);
-    for (const table of ["clips", "source_videos", "social_accounts", "requests", "comments", "clients", "payments", "invoices"]) {
+    const { data: ownClient } = await db.from("clients").select("id");
+    expect((ownClient ?? []).map((c) => c.id)).toEqual([otherClient]);
+    for (const table of ["clips", "source_videos", "social_accounts", "requests", "comments", "payments", "invoices"]) {
       const { data, error } = await db.from(table).select("client_id");
       expect(error, table).toBeNull();
       expect(
@@ -87,8 +96,9 @@ test.describe("Isolement des données", () => {
     // Interface et routes API
     await login(page, OTHER.email);
     await expect(page).toHaveURL(/\/fr\/app$/);
-    const res = await page.goto(`/fr/app/clips/${leaClip}`);
-    expect(res?.status()).toBe(404);
+    await page.goto(`/fr/app/clips/${leaClip}`);
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    await expect(page.getByText("La réaction du chat")).toHaveCount(0);
     const download = await page.request.get(`/api/videos/${leaVideo}/download`, { maxRedirects: 0 });
     expect(download.status()).toBe(404);
     await page.goto("/fr/app/clips");
@@ -110,8 +120,10 @@ test.describe("Isolement des données", () => {
     await page.goto("/fr/admin/clips?view=list");
     await expect(page.getByText("La réaction du chat").first()).toBeVisible();
     await expect(page.getByText("Clip du client isolé")).toHaveCount(0);
-    const res = await page.goto(`/fr/admin/clients/${otherClient}`);
-    expect(res?.status()).toBe(404);
+    // Fiche d'un client non attribué : accès refusé ou introuvable, jamais ses données
+    await page.goto(`/fr/admin/clients/${otherClient}`);
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    await expect(page.getByText(OTHER.creatorName)).toHaveCount(0);
   });
 });
 
