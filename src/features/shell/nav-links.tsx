@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import type { NavItem } from "./nav";
+import { NAV_ICONS } from "./nav-icons";
 
 function isActive(pathname: string, href: string) {
   return href === "/app" || href === "/admin" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
@@ -18,7 +19,7 @@ export function SidebarLinks({ items }: { items: NavItem[] }) {
       {items.map((item, index) => {
         const showGroup = item.group && item.group !== items[index - 1]?.group;
         const active = isActive(pathname, item.href);
-        const Icon = item.icon;
+        const Icon = NAV_ICONS[item.icon];
         return (
           <div key={item.key} className="contents">
             {showGroup ? (
@@ -54,7 +55,7 @@ export function MobileTabs({ items }: { items: NavItem[] }) {
     <div className="flex gap-1.5 overflow-x-auto pb-0.5">
       {items.map((item) => {
         const active = isActive(pathname, item.href);
-        const Icon = item.icon;
+        const Icon = NAV_ICONS[item.icon];
         return (
           <Link
             key={item.key}
