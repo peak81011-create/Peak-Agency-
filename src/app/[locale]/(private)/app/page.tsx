@@ -5,7 +5,12 @@ import { buttonVariants } from "@/components/ui/button";
 import { Callout } from "@/components/ui/callout";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatusBadge } from "@/components/ui/status-badge";
+import { Stat } from "@/components/ui/stat";
+import { ClipCard } from "@/features/agency/components/clip-card";
+import { ViewsChart } from "@/features/agency/components/views-chart";
+import { dailyViews, latestViews, listAccounts, listClips, listRequests } from "@/features/agency/queries";
 import { getClientDetail } from "@/features/client/queries";
+import { formatCompact } from "@/lib/format-number";
 import { isUnlocked, nextOnboardingStep, STEP_PATHS } from "@/features/client/status";
 import { PageBody, PageHeader } from "@/features/shell/app-shell";
 import { Link, redirect } from "@/i18n/navigation";
@@ -90,24 +95,119 @@ export default async function ClientDashboardPage() {
     );
   }
 
-  const detail = await getClientDetail(client.id);
+  const [detail, published, upcoming, accounts, openRequests, chart] = await Promise.all([
+    getClientDetail(client.id),
+    listClips({ clientId: client.id, statuses: ["publie"], order: "published" }),
+    listClips({ clientId: client.id, statuses: ["planifie", "en_montage", "a_valider", "valide", "programme"], order: "upcoming" }),
+    listAccounts({ clientId: client.id }),
+    listRequests({ clientId: client.id, open: true }),
+    dailyViews(client.id, 30),
+  ]);
+  const views = await latestViews(published.map((c) => c.id));
+  const totalViews = [...views.values()].reduce((a, b) => a + b, 0);
+  const monthStart = new Date();
+  monthStart.setDate(1);
+  monthStart.setHours(0, 0, 0, 0);
+  const publishedThisMonth = published.filter((c) => c.published_at && new Date(c.published_at) >= monthStart).length;
+  const toValidate = upcoming.filter((c) => c.status === "a_valider");
+  const followers = accounts.reduce((a, b) => a + b.followers_count, 0);
+  const td = await getTranslations("client.dashboard");
+
   return (
     <>
-      <PageHeader eyebrow={t("areas.client")} title={t("dashboard.welcome", { name })} />
+      <PageHeader
+        eyebrow={formatDate(new Date(), locale)}
+        title={t("dashboard.welcome", { name })}
+        actions={
+          <div className="flex flex-wrap gap-2">
+            <Link href="/app/requests" className={buttonVariants({ variant: "secondary" })}>
+              {td("newRequest")}
+            </Link>
+            <Link href="/app/videos" className={buttonVariants()}>
+              {td("sendVideo")}
+            </Link>
+          </div>
+        }
+      />
       <PageBody>
+        {toValidate.length ? (
+          <Callout tone="warn">
+            {td("toValidate", { count: toValidate.length })}{" "}
+            <Link href={`/app/clips/${toValidate[0].id}`} className="font-semibold underline">
+              {td("validateNow")}
+            </Link>
+          </Callout>
+        ) : null}
+        <div className="grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-5">
+          <Stat testId="stat-published" label={td("stats.published")} value={published.length} detail={td("stats.thisMonth", { count: publishedThisMonth })} />
+          <Stat label={td("stats.upcoming")} value={upcoming.length} />
+          <Stat label={td("stats.accounts")} value={accounts.length} detail={[...new Set(accounts.map((a) => a.platform))].join(", ")} />
+          <Stat label={td("stats.views")} value={formatCompact(totalViews, locale)} />
+          <Stat label={td("stats.followers")} value={formatCompact(followers, locale)} />
+        </div>
         <Card>
           <CardHeader>
-            <CardTitle>{t("dashboard.clientStatus")}</CardTitle>
+            <CardTitle>{td("chartTitle")}</CardTitle>
             <StatusBadge type="client" value={client.status} />
           </CardHeader>
-          <p className="text-sm text-muted-foreground">
-            {t("client.dashboard.periodLine", {
+          <ViewsChart data={chart} locale={locale} label={td("stats.views")} />
+          <p className="mt-3 text-xs text-subtle-foreground">
+            {td("periodLine", {
               plan: detail?.plan ? (locale === "en" ? detail.plan.name_en : detail.plan.name_fr) : "—",
               end: formatDate(detail?.period_end ?? null, locale),
             })}
           </p>
-          <p className="mt-3 text-sm text-muted-foreground">{t("common.comingSoon")}</p>
         </Card>
+        <div className="grid gap-4 lg:grid-cols-3">
+          <Card className="lg:col-span-2">
+            <CardHeader>
+              <CardTitle>{td("latestPublished")}</CardTitle>
+              <Link href="/app/clips" className="text-sm font-semibold text-forest-700">
+                {td("seeAll")}
+              </Link>
+            </CardHeader>
+            {published.length === 0 ? <p className="text-sm text-muted-foreground">{td("noPublished")}</p> : null}
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+              {published.slice(0, 4).map((c) => (
+                <ClipCard key={c.id} clip={c} href={`/app/clips/${c.id}`} meta={formatDate(c.published_at, locale)} views={views.has(c.id) ? formatCompact(views.get(c.id)!, locale) : undefined} />
+              ))}
+            </div>
+          </Card>
+          <div className="flex flex-col gap-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>{td("nextClips")}</CardTitle>
+              </CardHeader>
+              <ul className="flex flex-col gap-3 text-sm">
+                {upcoming.slice(0, 5).map((c) => (
+                  <li key={c.id} className="flex items-center justify-between gap-2">
+                    <Link href={`/app/clips/${c.id}`} className="min-w-0 truncate font-medium text-inherit no-underline">
+                      {c.title}
+                    </Link>
+                    <StatusBadge type="clip" value={c.status} />
+                  </li>
+                ))}
+                {upcoming.length === 0 ? <li className="text-muted-foreground">{td("noUpcoming")}</li> : null}
+              </ul>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle>{td("openRequests")}</CardTitle>
+              </CardHeader>
+              <ul className="flex flex-col gap-3 text-sm">
+                {openRequests.slice(0, 4).map((r) => (
+                  <li key={r.id} className="flex items-center justify-between gap-2">
+                    <Link href={`/app/requests/${r.id}`} className="min-w-0 truncate font-medium text-inherit no-underline">
+                      {r.title}
+                    </Link>
+                    <StatusBadge type="request" value={r.status} />
+                  </li>
+                ))}
+                {openRequests.length === 0 ? <li className="text-muted-foreground">{td("noRequests")}</li> : null}
+              </ul>
+            </Card>
+          </div>
+        </div>
       </PageBody>
     </>
   );

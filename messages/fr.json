@@ -57,7 +57,13 @@
     "payments": "Paiements",
     "plans": "Offres & tarifs",
     "content": "Contenu du site",
-    "settings": "Paramètres"
+    "settings": "Paramètres",
+    "clips": "Clips",
+    "videos": "Vidéos reçues",
+    "sendVideo": "Envoyer une vidéo",
+    "accounts": "Comptes",
+    "requests": "Demandes",
+    "clients": "Clients"
   },
   "footer": {
     "tagline": "Vos lives et vidéos longues transformés en clips verticaux, publiés chaque jour sur des comptes dédiés.",
@@ -99,6 +105,35 @@
       "a_verifier": "À vérifier",
       "valide": "Validé",
       "refuse": "Refusé"
+    },
+    "clip": {
+      "planifie": "Planifié",
+      "en_montage": "En montage",
+      "a_valider": "À valider",
+      "valide": "Validé",
+      "programme": "Programmé",
+      "publie": "Publié",
+      "rejete": "Rejeté"
+    },
+    "video": {
+      "envoi": "Envoi en cours",
+      "recue": "Reçue",
+      "en_traitement": "En traitement",
+      "clips_extraits": "Clips extraits",
+      "archivee": "Archivée",
+      "erreur": "Erreur"
+    },
+    "request": {
+      "nouvelle": "Nouvelle",
+      "en_cours": "En cours",
+      "terminee": "Terminée",
+      "refusee": "Refusée"
+    },
+    "account": {
+      "actif": "Actif",
+      "en_croissance": "En croissance",
+      "bloque": "Bloqué",
+      "abandonne": "Abandonné"
     }
   },
   "home": {
@@ -190,7 +225,16 @@
       "uploadFailed": "L’envoi du fichier a échoué. Vérifiez votre connexion et réessayez.",
       "alreadyValidated": "Ce paiement a déjà été validé.",
       "reasonRequired": "Indiquez le motif du refus.",
-      "tooLong": "Texte trop long."
+      "tooLong": "Texte trop long.",
+      "readOnlyOrForbidden": "Action impossible : votre espace est en lecture seule ou vous n’avez pas l’autorisation.",
+      "readOnly": "Votre espace est en lecture seule : renouvelez votre abonnement pour agir.",
+      "storageMissing": "Le stockage des vidéos n’est pas encore configuré. Envoyez plutôt un lien.",
+      "videoType": "Format vidéo non accepté (MP4, MOV, WEBM, MKV ou AVI).",
+      "videoSize": "Le fichier dépasse la taille maximale autorisée.",
+      "feedbackRequired": "Précisez ce qu’il faut modifier.",
+      "emailExists": "Un compte existe déjà avec cette adresse e-mail.",
+      "timecodeOrder": "La fin doit être après le début.",
+      "price": "Montant invalide."
     }
   },
   "validation": {
@@ -212,7 +256,9 @@
     "iban": "IBAN invalide (vérifiez la saisie).",
     "bic": "BIC invalide (8 ou 11 caractères).",
     "prefix": "Lettres et chiffres uniquement, sans espace.",
-    "messageTooShort": "Votre message est un peu court (10 caractères minimum)."
+    "messageTooShort": "Votre message est un peu court (10 caractères minimum).",
+    "date": "Date invalide.",
+    "timecode": "Format attendu : mm:ss ou hh:mm:ss."
   },
   "dashboard": {
     "welcome": "Bonjour {name}",
@@ -428,7 +474,27 @@
           "body": "les comptes créés pour vous."
         }
       },
-      "periodLine": "Offre {plan} · période en cours jusqu’au {end}."
+      "periodLine": "Offre {plan} · période en cours jusqu’au {end}.",
+      "newRequest": "Faire une demande",
+      "sendVideo": "Envoyer une vidéo",
+      "toValidate": "{count, plural, one {# clip attend votre validation} other {# clips attendent votre validation}}",
+      "validateNow": "Valider maintenant",
+      "stats": {
+        "views": "Vues totales",
+        "thisMonth": "dont {count} ce mois-ci",
+        "followers": "Abonnés",
+        "accounts": "Comptes",
+        "published": "Clips publiés",
+        "upcoming": "Clips à venir"
+      },
+      "chartTitle": "Vues des 30 derniers jours",
+      "latestPublished": "Derniers clips publiés",
+      "seeAll": "Tout voir",
+      "noPublished": "Aucun clip publié pour le moment.",
+      "nextClips": "Prochains clips",
+      "noUpcoming": "Aucun clip programmé.",
+      "openRequests": "Demandes en cours",
+      "noRequests": "Aucune demande en cours."
     }
   },
   "admin": {
@@ -616,6 +682,181 @@
         "legal_terms": "Conditions générales de vente",
         "legal_privacy": "Politique de confidentialité"
       }
+    },
+    "clients": {
+      "title": "Clients",
+      "search": "Rechercher un créateur",
+      "all": "Tous",
+      "export": "Exporter (CSV)",
+      "empty": "Aucun client dans cette liste.",
+      "until": "jusqu’au {date}",
+      "since": "Client depuis le {date}",
+      "profile": "Profil créateur",
+      "fields": {
+        "name": "Nom",
+        "language": "Langue",
+        "channels": "Chaînes",
+        "goals": "Objectifs",
+        "availability": "Disponibilités"
+      },
+      "subscription": {
+        "title": "Abonnement",
+        "plan": "Offre",
+        "changePlan": "Changer d’offre",
+        "customPrice": "Prix personnalisé (€)",
+        "customPriceHint": "Laissez vide pour appliquer le prix de l’offre.",
+        "extendTo": "Prolonger jusqu’au",
+        "extend": "Prolonger",
+        "suspend": "Suspendre",
+        "reactivate": "Réactiver",
+        "archive": "Archiver",
+        "apply": "Appliquer",
+        "done": "Abonnement mis à jour.",
+        "requiresValidation": "Le client valide chaque clip avant publication"
+      },
+      "team": {
+        "title": "Équipe attribuée",
+        "empty": "Personne n’est encore attribué à ce client.",
+        "member": "Membre de l’équipe",
+        "choose": "Choisir…",
+        "role": "Rôle sur ce client",
+        "rolePlaceholder": "ex. monteur principal",
+        "assign": "Attribuer",
+        "remove": "Retirer {name}"
+      },
+      "invite": {
+        "title": "Inviter un client",
+        "lead": "Le client reçoit un e-mail pour choisir son mot de passe, puis complète son profil.",
+        "fullName": "Nom et prénom",
+        "creatorName": "Nom de créateur",
+        "email": "Adresse e-mail",
+        "locale": "Langue",
+        "submit": "Envoyer l’invitation",
+        "sent": "Invitation envoyée."
+      },
+      "clips": "Clips",
+      "videos": "Vidéos",
+      "accounts": "Comptes",
+      "payments": "Paiements",
+      "openRequests": "Demandes ouvertes",
+      "activity": "Activité récente",
+      "internalNotes": "Notes internes",
+      "internalNotesHint": "Visibles uniquement par l’équipe.",
+      "openKanban": "Ouvrir dans le suivi des clips",
+      "seeAll": "Tout voir"
+    },
+    "clips": {
+      "title": "Suivi des clips",
+      "new": "Nouveau clip",
+      "filters": {
+        "client": "Client",
+        "allClients": "Tous les clients",
+        "editor": "Monteur",
+        "allEditors": "Tous les monteurs",
+        "mine": "Mes clips",
+        "status": "Statut",
+        "allStatuses": "Tous les statuts",
+        "apply": "Filtrer"
+      },
+      "views": {
+        "kanban": "Tableau",
+        "list": "Liste"
+      },
+      "cols": {
+        "clip": "Clip",
+        "client": "Client",
+        "editor": "Monteur",
+        "status": "Statut",
+        "due": "Échéance"
+      },
+      "empty": "Aucun clip.",
+      "unassigned": "Non attribué",
+      "changeStatus": "Changer le statut de « {title} »",
+      "status": "Statut",
+      "clientFeedback": "Retour du client",
+      "file": "Fichier du clip",
+      "fileHint": "Le fichier monté (MP4 ou MOV), envoyé directement vers le stockage.",
+      "storageMissing": "Le stockage des vidéos n’est pas configuré : le fichier ne peut pas être envoyé.",
+      "downloadSource": "Télécharger la vidéo source",
+      "comments": "Commentaires",
+      "form": {
+        "client": "Client",
+        "source": "Vidéo source",
+        "title": "Titre",
+        "start": "Début",
+        "end": "Fin",
+        "timecodeHint": "mm:ss",
+        "hook": "Accroche",
+        "hookHint": "{count} caractères",
+        "caption": "Légende",
+        "hashtags": "Hashtags",
+        "hashtagsHint": "Séparés par des espaces : #podcast #business",
+        "account": "Compte de publication",
+        "editor": "Monteur",
+        "dueAt": "Échéance",
+        "scheduledAt": "Publication prévue",
+        "publishedUrl": "Lien de la publication",
+        "create": "Créer le clip"
+      }
+    },
+    "videos": {
+      "title": "Vidéos reçues",
+      "empty": "Aucune vidéo reçue.",
+      "download": "Télécharger",
+      "openLink": "Ouvrir le lien",
+      "newClip": "Nouveau clip",
+      "comments": "Commentaires",
+      "status": "Statut",
+      "editor": "Monteur",
+      "batchTitles": "Clips à créer (un titre par ligne)",
+      "batchHint": "Chaque ligne crée un clip « planifié » lié à cette vidéo.",
+      "createClips": "Créer les clips",
+      "created": "{count, plural, one {# clip créé} other {# clips créés}}"
+    },
+    "accounts": {
+      "title": "Comptes sociaux",
+      "new": "Nouveau compte",
+      "edit": "Modifier",
+      "editTitle": "Modifier le compte",
+      "empty": "Aucun compte.",
+      "summary": "{count, plural, one {# compte} other {# comptes}} · {followers} abonnés",
+      "clips": "{count, plural, =0 {aucun clip} one {# clip} other {# clips}}",
+      "passwordPolicy": "Les mots de passe ne sont jamais enregistrés ici : seule la référence de l’entrée dans le gestionnaire de mots de passe est conservée (visible par l’équipe uniquement).",
+      "form": {
+        "client": "Client",
+        "platform": "Plateforme",
+        "platforms": {
+          "tiktok": "TikTok",
+          "instagram": "Instagram",
+          "youtube": "YouTube",
+          "autre": "Autre"
+        },
+        "handle": "Identifiant (@…)",
+        "url": "Lien du profil",
+        "status": "Statut",
+        "followers": "Abonnés",
+        "createdOn": "Date de création",
+        "owner": "Responsable",
+        "passwordRef": "Référence dans le gestionnaire de mots de passe",
+        "passwordRefHint": "Exemple : « Bitwarden › Clients › Léa › TikTok ». Jamais le mot de passe lui-même.",
+        "notes": "Notes"
+      }
+    },
+    "requests": {
+      "title": "Demandes",
+      "tabs": {
+        "open": "Ouvertes",
+        "mine": "Qui me sont attribuées",
+        "closed": "Terminées"
+      },
+      "empty": "Aucune demande dans cette liste.",
+      "dueDate": "échéance souhaitée : {date}",
+      "assignedTo": "Attribuée à",
+      "status": "Statut",
+      "priority": "Priorité",
+      "toClip": "Transformer en clip",
+      "seeClip": "Voir le clip créé",
+      "conversation": "Conversation"
     }
   },
   "emails": {
@@ -673,6 +914,175 @@
       "title": "Nouveau message de contact",
       "body": "{name} ({email}) a écrit : {message}",
       "cta": "Ouvrir l’espace admin"
+    },
+    "video_received": {
+      "subject": "Nouvelle vidéo — {client}",
+      "title": "Nouvelle vidéo reçue",
+      "body": "{client} a envoyé une vidéo : {title}.",
+      "cta": "Voir la vidéo"
+    },
+    "request_created": {
+      "subject": "Nouvelle demande — {client}",
+      "title": "Nouvelle demande",
+      "body": "{client} a fait une demande : {title}.",
+      "cta": "Voir la demande"
+    },
+    "request_assigned": {
+      "subject": "Une demande vous est attribuée",
+      "title": "Demande attribuée",
+      "body": "La demande « {title} » vous a été attribuée.",
+      "cta": "Voir la demande"
+    },
+    "comment_added": {
+      "subject": "Nouveau message de {author}",
+      "title": "Nouveau message",
+      "body": "{author} a écrit : {body}",
+      "cta": "Répondre"
+    },
+    "clip_to_validate": {
+      "subject": "Un clip attend votre validation",
+      "title": "Un clip attend votre validation",
+      "body": "Le clip « {title} » est prêt. Validez-le ou demandez une modification.",
+      "cta": "Voir le clip"
+    },
+    "clip_published": {
+      "subject": "Votre clip est publié",
+      "title": "Clip publié",
+      "body": "Le clip « {title} » vient d’être publié.",
+      "cta": "Voir le clip"
+    },
+    "clip_changes_requested": {
+      "subject": "Modification demandée — {title}",
+      "title": "Le client demande une modification",
+      "body": "Sur le clip « {title} » : {feedback}",
+      "cta": "Ouvrir le clip"
     }
+  },
+  "uploads": {
+    "dropTitle": "Glissez votre fichier ici",
+    "chooseFile": "Choisir un fichier",
+    "progress": "{sent} Go sur {total} Go · {percent} %",
+    "keepOpen": "gardez cette page ouverte ; en cas de coupure, l’envoi reprendra où il s’est arrêté",
+    "cancel": "Annuler l’envoi"
+  },
+  "videos": {
+    "clientTitle": "Envoyer une vidéo",
+    "clientLead": "Envoyez vos vidéos sources (fichier lourd ou lien) : l’équipe en tire vos clips.",
+    "newVideo": "Nouvelle vidéo",
+    "myVideos": "Mes vidéos envoyées",
+    "empty": "Aucune vidéo envoyée pour le moment.",
+    "clipsCount": "{count, plural, =0 {aucun clip} one {# clip} other {# clips}}",
+    "download": "Télécharger",
+    "openLink": "Ouvrir le lien",
+    "readOnly": "Votre espace est en lecture seule : l’envoi de vidéos est désactivé.",
+    "priorities": {
+      "basse": "Basse",
+      "normale": "Normale",
+      "haute": "Haute"
+    },
+    "submit": {
+      "mode": "Type d’envoi",
+      "modes": {
+        "file": "Fichier",
+        "link": "Lien"
+      },
+      "storageMissing": "L’envoi de fichiers n’est pas encore disponible : partagez un lien (Google Drive, Dropbox, WeTransfer, YouTube…).",
+      "sent": "Vidéo envoyée. L’équipe a été prévenue.",
+      "title": "Titre",
+      "optional": "facultatif",
+      "recordedAt": "Date d’enregistrement",
+      "notes": "Notes pour l’équipe",
+      "notesHint": "Moments forts, passages à éviter, idées de clips…",
+      "priority": "Priorité",
+      "priorities": {
+        "basse": "Basse",
+        "normale": "Normale",
+        "haute": "Haute"
+      },
+      "fileHint": "MP4, MOV, WEBM, MKV ou AVI · jusqu’à {max}",
+      "url": "Lien vers la vidéo",
+      "urlHint": "Le lien doit commencer par https:// et être accessible à l’équipe.",
+      "hostDetected": "Hébergeur détecté : {host}",
+      "submit": "Envoyer la vidéo"
+    }
+  },
+  "clips": {
+    "clientTitle": "Mes clips",
+    "tabs": {
+      "upcoming": "À venir",
+      "published": "Publiés",
+      "calendar": "Calendrier"
+    },
+    "emptyUpcoming": "Aucun clip en préparation pour le moment.",
+    "emptyPublished": "Aucun clip publié pour le moment.",
+    "noDate": "Date à définir",
+    "info": "Informations",
+    "fields": {
+      "account": "Compte",
+      "publication": "Publication",
+      "source": "Vidéo source",
+      "hook": "Accroche",
+      "caption": "Légende",
+      "hashtags": "Hashtags",
+      "views": "Vues"
+    },
+    "download": "Télécharger le clip",
+    "noFileYet": "Le fichier du clip n’est pas encore disponible.",
+    "openPublication": "Voir la publication",
+    "comments": "Échanges avec l’équipe",
+    "review": {
+      "title": "Ce clip attend votre validation",
+      "approve": "Valider le clip",
+      "requestChanges": "Demander une modification",
+      "what": "Que faut-il modifier ?",
+      "tip": "Soyez précis : indiquez le moment (par exemple 0:41) et ce que vous voulez changer.",
+      "sendChanges": "Envoyer la demande",
+      "cancel": "Annuler"
+    }
+  },
+  "accounts": {
+    "clientTitle": "Mes comptes",
+    "clientLead": "Les comptes que l’agence gère pour vous.",
+    "empty": "Aucun compte pour le moment.",
+    "followers": "abonnés",
+    "clipsPosted": "clips publiés",
+    "createdOn": "Créé le {date}",
+    "open": "Ouvrir le compte",
+    "credentialsNote": "Les identifiants de vos comptes ne sont jamais stockés sur la plateforme : l’agence utilise un gestionnaire de mots de passe."
+  },
+  "requests": {
+    "clientTitle": "Mes demandes",
+    "clientLead": "Une idée de clip, un style à essayer, un nouveau compte ? Écrivez-nous ici.",
+    "new": "Nouvelle demande",
+    "list": "Mes demandes",
+    "empty": "Aucune demande pour le moment.",
+    "readOnly": "Votre espace est en lecture seule : les nouvelles demandes sont désactivées.",
+    "followedBy": "Suivie par {name}",
+    "conversation": "Conversation",
+    "markResolved": "Marquer comme résolue",
+    "types": {
+      "clip": "Idée de clip",
+      "style": "Style / montage",
+      "nouveau_compte": "Nouveau compte",
+      "modification": "Modification",
+      "autre": "Autre"
+    },
+    "form": {
+      "type": "Type de demande",
+      "title": "Titre",
+      "description": "Description",
+      "dueDate": "Échéance souhaitée",
+      "optional": "facultatif",
+      "submit": "Envoyer la demande"
+    }
+  },
+  "comments": {
+    "empty": "Aucun message pour le moment.",
+    "you": "Vous",
+    "internalBadge": "Interne",
+    "yourComment": "Votre message",
+    "newNote": "Nouvelle note",
+    "send": "Envoyer",
+    "internal": "Note interne (invisible pour le client)"
   }
 }

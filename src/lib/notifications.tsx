@@ -20,6 +20,13 @@ export const NOTIFICATION_TYPES = [
   "client_grace_started",
   "client_read_only",
   "contact_received",
+  "video_received",
+  "request_created",
+  "comment_added",
+  "clip_to_validate",
+  "clip_published",
+  "clip_changes_requested",
+  "request_assigned",
 ] as const;
 export type NotificationType = (typeof NOTIFICATION_TYPES)[number];
 

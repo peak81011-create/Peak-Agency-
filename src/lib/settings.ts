@@ -58,3 +58,9 @@ export function missingInvoiceFields(company: Settings<"company">): (keyof Setti
 export function isBankConfigured(bank: Settings<"bank">): boolean {
   return Boolean(bank.holder && bank.iban && bank.bic);
 }
+
+/** Paramètre libre (sans schéma dédié), avec valeur par défaut. */
+export async function getSettingsValue<T extends Record<string, unknown>>(key: string, fallback: T): Promise<T> {
+  const { data } = await createSupabaseAdminClient().from("settings").select("value").eq("key", key).maybeSingle();
+  return { ...fallback, ...((data?.value as Partial<T> | undefined) ?? {}) };
+}

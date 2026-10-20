@@ -55,6 +55,8 @@ jobs:
         run: npx supabase start -x studio,imgproxy,vector,logflare,supavisor,edge-runtime
       - name: Écrire .env.local
         run: bash scripts/supabase-local-env.sh
+      - name: Stockage vidéo de test (MinIO)
+        run: npm run storage:start
       - name: Tests base de données sur le vrai Postgres Supabase
         run: npm run test:db
       - name: Données de démonstration

@@ -72,6 +72,7 @@ Ensuite :
 ```bash
 npm install              # installe les dépendances (quelques minutes la 1re fois)
 npm run supabase:start   # démarre Supabase local, applique les migrations, écrit .env.local
+npm run storage:start    # (facultatif) stockage vidéo local MinIO, à la place de R2
 npm run seed             # crée les comptes et données de démonstration
 npm run dev              # lance le site sur http://localhost:3000
 ```
@@ -135,12 +136,35 @@ Faites-le dans cet ordre. Gardez les clés dans un endroit sûr (votre gestionna
    Renseignez aussi `EMAIL_FROM`, par exemple `Peak Clipping Agency <no-reply@votre-domaine.fr>` (adresse de votre domaine vérifié).
 4. Pour que les e-mails de Supabase (confirmation, mot de passe) partent aussi de votre domaine : Supabase → **Authentication → Emails → SMTP Settings** → activez *Custom SMTP* avec hôte `smtp.resend.com`, port `465`, utilisateur `resend`, mot de passe = votre clé API Resend.
 
-### 3. Cloudflare R2 (vidéos) — *utilisé à partir de la phase 3*
+### 3. Cloudflare R2 (vidéos)
 
-1. Créez un compte sur <https://dash.cloudflare.com>, puis **R2 Object Storage** (un moyen de paiement est demandé ; l'offre gratuite inclut 10 Go).
-2. **Create bucket** : nom `peak-videos`, **Location : European Union (EU jurisdiction)**. Le bucket reste **privé** (pas d'accès public).
-3. **Settings → CORS policy** du bucket : autorisez votre site à envoyer des fichiers (le modèle exact sera fourni en phase 3).
-4. **Manage R2 API Tokens → Create API token** : permission *Object Read & Write*, limité au bucket `peak-videos`. Notez l'**Access Key ID**, la **Secret Access Key** et l'**endpoint** (avec `eu` dans l'adresse).
+Les vidéos des clients (plusieurs Go) ne passent jamais par le site : le navigateur les envoie directement dans R2, en morceaux, avec une autorisation signée par le serveur pour un seul fichier. Si la connexion coupe, l'envoi reprend où il s'était arrêté.
+
+1. Créez un compte sur <https://dash.cloudflare.com>, puis ouvrez **R2 Object Storage** (un moyen de paiement est demandé ; l'offre gratuite inclut 10 Go, et R2 ne facture pas les téléchargements).
+2. **Create bucket** : nom `peak-videos`, **Location → Specify jurisdiction → European Union (EU)**. Laissez le bucket **privé** (ne pas activer « Public access »).
+3. Ouvrez le bucket → **Settings → CORS policy → Add CORS policy**, et collez (en remplaçant l'adresse par celle de votre site ; ajoutez aussi `http://localhost:3000` si vous testez en local avec R2) :
+
+   ```json
+   [
+     {
+       "AllowedOrigins": ["https://votre-domaine.fr"],
+       "AllowedMethods": ["GET", "PUT", "POST", "DELETE"],
+       "AllowedHeaders": ["*"],
+       "ExposeHeaders": ["ETag"],
+       "MaxAgeSeconds": 3600
+     }
+   ]
+   ```
+
+   `ETag` doit absolument être exposé : sans lui, les gros envois en plusieurs parties échouent.
+4. Revenez à **R2 Object Storage → Manage R2 API Tokens → Create API token** : permission **Object Read & Write**, **Apply to specific buckets only → `peak-videos`**. Validez, puis notez :
+   - **Access Key ID** → variable `S3_ACCESS_KEY_ID` ;
+   - **Secret Access Key** → variable `S3_SECRET_ACCESS_KEY` (affichée une seule fois) ;
+   - l'**endpoint « EU »** (de la forme `https://<identifiant>.eu.r2.cloudflarestorage.com`) → variable `S3_ENDPOINT`.
+5. Dans Vercel, ajoutez aussi `S3_BUCKET=peak-videos` et `S3_REGION=auto`. Laissez `S3_FORCE_PATH_STYLE` vide.
+6. (Facultatif) **Settings → Object lifecycle rules** : « Abort incomplete multipart uploads » après 7 jours, pour effacer les envois abandonnés.
+
+Sans ces variables, le site fonctionne : les clients envoient alors leurs vidéos par lien (Google Drive, Dropbox, WeTransfer…), et l'envoi de fichiers est grisé avec une explication.
 
 ### 4. Vercel (mise en ligne)
 
@@ -164,8 +188,11 @@ La liste complète, commentée, est dans [`.env.example`](.env.example).
 | `RESEND_API_KEY` | Resend → API Keys | **Oui** |
 | `EMAIL_FROM` | Une adresse de votre domaine vérifié dans Resend | Non |
 | `CRON_SECRET` | Texte aléatoire que vous générez | **Oui** |
-
-Les variables de Cloudflare R2 seront ajoutées en phase 3.
+| `S3_ENDPOINT` | Cloudflare R2 → endpoint EU du compte | Non |
+| `S3_ACCESS_KEY_ID` | Cloudflare R2 → API token | **Oui** |
+| `S3_SECRET_ACCESS_KEY` | Cloudflare R2 → API token | **Oui** |
+| `S3_BUCKET` | Nom du bucket (`peak-videos`) | Non |
+| `S3_REGION` | `auto` pour R2 | Non |
 
 ## Commandes utiles
 
@@ -174,6 +201,7 @@ Les variables de Cloudflare R2 seront ajoutées en phase 3.
 | `npm run dev` | Lance le site en local |
 | `npm run supabase:start` / `npm run supabase:stop` | Démarre / arrête Supabase local |
 | `npm run seed` | Crée les données de démonstration |
+| `npm run storage:start` / `npm run storage:stop` | Démarre / arrête le stockage vidéo local (MinIO, compatible R2) |
 | `npm run db:reset` | Remet la base locale à zéro (migrations + seed) |
 | `npm run db:types` | Génère les types TypeScript de la base |
 | `npm run lint` / `npm run typecheck` | Vérifie le code |
@@ -228,7 +256,7 @@ Connecté en owner, dans le menu de gauche :
 |---|---|---|
 | 1. Fondations | Next.js, design tokens, FR/EN, Supabase + RLS, authentification + 2FA, rôles et `can()`, seed, CI | ✅ |
 | 2. Site public + paiement | Vitrine, tarifs, contact, pages légales, parcours virement → validation → déblocage, factures PDF, e-mails, rappels de renouvellement | ✅ |
-| 3. Cœur de l'agence | Clients, vidéos (R2), clips (Kanban), comptes de diffusion, demandes, tableau de bord client | À faire |
+| 3. Cœur de l'agence | Clients, vidéos (R2), clips (Kanban), comptes de diffusion, demandes, tableau de bord client | ✅ |
 | 4. Équipe | Tâches, espaces assistante et monteur, rémunération, matrice des permissions, « voir en tant que », journal | À faire |
 | 5. Prospection | Prospects, pipeline, modèles de messages, import CSV, conversion, API pour agent IA | À faire |
 | 6. Statistiques et finitions | Stats, graphiques, notifications, tâches planifiées, exports, accessibilité, mobile | À faire |

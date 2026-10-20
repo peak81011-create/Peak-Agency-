@@ -65,3 +65,19 @@ Ce fichier liste les choix faits pendant la construction, quand le cahier des ch
 - **Offres** : enregistrer une offre de démonstration la transforme en offre réelle (le badge « Démo » disparaît). Une offre ne se supprime pas (l'historique des paiements y fait référence) : on la masque.
 - **Tâche quotidienne** : `/api/cron/subscriptions`, chaque jour à 6 h UTC (Vercel Cron), protégée par `CRON_SECRET`. Elle envoie les rappels, puis passe les clients en délai de grâce et en lecture seule.
 - **Hébergement Vercel** : région `cdg1` (Paris) fixée dans `vercel.json`, près de la base Supabase en UE.
+
+## Phase 3 — cœur de l'agence
+
+- **Envoi des vidéos** : directement du navigateur vers R2 (Uppy), en plusieurs parties au-delà de 100 Mo, reprise automatique après coupure ou rechargement. Le serveur ne signe une requête que pour une clé qu'il a lui-même préparée pour cet utilisateur (table `pending_uploads`, accessible au seul serveur) ; à la fin, il vérifie la taille réelle du fichier avant de marquer la vidéo « reçue ». Taille maximale réglable (10 Go par défaut). Formats : MP4, MOV, WEBM, MKV, AVI.
+- **Téléchargements** : liens signés valables 15 minutes, délivrés seulement si la personne peut lire la fiche (même règle que la base).
+- **En local et en CI**, MinIO remplace R2 (même protocole S3). Sans stockage configuré, seul l'envoi par lien est proposé.
+- **Liens externes** : seulement enregistrés (https uniquement), jamais téléchargés par le serveur. L'hébergeur est reconnu pour l'affichage.
+- **Clips et validation client** : un clip « à valider » attend le client si son abonnement l'exige (réglage par client dans sa fiche, désactivé par défaut) ; sinon il passe directement à « validé ». Une demande de modification exige un commentaire et renvoie le clip « en montage ». Les clips rejetés ne sont pas montrés au client.
+- **Monteurs** : ils voient tous les clips des clients qui leur sont attribués, mais ne modifient que ceux dont ils sont le monteur (owner et assistante : tous).
+- **Commentaires** : un seul système (clips, demandes, vidéos, fiche client). Les notes internes de la fiche client sont des commentaires internes ; un commentaire interne n'est jamais lisible par le client (règle en base).
+- **Comptes sociaux** : aucun mot de passe enregistré. Seule la référence de l'entrée dans le gestionnaire de mots de passe est conservée, dans une table séparée invisible pour le client.
+- **Statistiques** : saisies à la main pour l'instant (relevés datés par clip et par compte) ; la synchronisation automatique via les API officielles est prévue plus tard.
+- **Abonnement géré par l'agence** : changer d'offre, prix personnalisé, prolonger (réactive un client en lecture seule), suspendre, archiver. Chaque action est journalisée.
+- **Invitation d'un client par l'agence** : e-mail Supabase d'invitation ; le client choisit son mot de passe puis complète son profil et suit le parcours de paiement habituel.
+- **Demandes** : numérotées `#R-N`. Le client ne peut ni les attribuer ni changer leur statut, seulement les clore. L'agence peut transformer une demande en clip.
+

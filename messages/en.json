@@ -57,7 +57,13 @@
     "payments": "Payments",
     "plans": "Plans & pricing",
     "content": "Site content",
-    "settings": "Settings"
+    "settings": "Settings",
+    "clips": "Clips",
+    "videos": "Received videos",
+    "sendVideo": "Send a video",
+    "accounts": "Accounts",
+    "requests": "Requests",
+    "clients": "Clients"
   },
   "footer": {
     "tagline": "Your streams and long videos turned into vertical clips, published every day on dedicated accounts.",
@@ -99,6 +105,35 @@
       "a_verifier": "To review",
       "valide": "Approved",
       "refuse": "Rejected"
+    },
+    "clip": {
+      "planifie": "Planned",
+      "en_montage": "In editing",
+      "a_valider": "To approve",
+      "valide": "Approved",
+      "programme": "Scheduled",
+      "publie": "Published",
+      "rejete": "Rejected"
+    },
+    "video": {
+      "envoi": "Uploading",
+      "recue": "Received",
+      "en_traitement": "In progress",
+      "clips_extraits": "Clips extracted",
+      "archivee": "Archived",
+      "erreur": "Error"
+    },
+    "request": {
+      "nouvelle": "New",
+      "en_cours": "In progress",
+      "terminee": "Done",
+      "refusee": "Declined"
+    },
+    "account": {
+      "actif": "Active",
+      "en_croissance": "Growing",
+      "bloque": "Blocked",
+      "abandonne": "Abandoned"
     }
   },
   "home": {
@@ -190,7 +225,16 @@
       "uploadFailed": "The upload failed. Check your connection and try again.",
       "alreadyValidated": "This payment has already been approved.",
       "reasonRequired": "Enter the reason for rejecting.",
-      "tooLong": "Text too long."
+      "tooLong": "Text too long.",
+      "readOnlyOrForbidden": "Not possible: your space is read-only or you are not allowed to do this.",
+      "readOnly": "Your space is read-only: renew your subscription to continue.",
+      "storageMissing": "Video storage is not configured yet. Please send a link instead.",
+      "videoType": "Video format not accepted (MP4, MOV, WEBM, MKV or AVI).",
+      "videoSize": "The file exceeds the maximum allowed size.",
+      "feedbackRequired": "Please say what should be changed.",
+      "emailExists": "An account already exists with this email address.",
+      "timecodeOrder": "The end must be after the start.",
+      "price": "Invalid amount."
     }
   },
   "validation": {
@@ -212,7 +256,9 @@
     "iban": "Invalid IBAN (check what you typed).",
     "bic": "Invalid BIC (8 or 11 characters).",
     "prefix": "Letters and numbers only, no spaces.",
-    "messageTooShort": "Your message is a bit short (10 characters minimum)."
+    "messageTooShort": "Your message is a bit short (10 characters minimum).",
+    "date": "Invalid date.",
+    "timecode": "Expected format: mm:ss or hh:mm:ss."
   },
   "dashboard": {
     "welcome": "Hello {name}",
@@ -428,7 +474,27 @@
           "body": "the accounts created for you."
         }
       },
-      "periodLine": "{plan} plan · current period until {end}."
+      "periodLine": "{plan} plan · current period until {end}.",
+      "newRequest": "Make a request",
+      "sendVideo": "Send a video",
+      "toValidate": "{count, plural, one {# clip is waiting for your approval} other {# clips are waiting for your approval}}",
+      "validateNow": "Review now",
+      "stats": {
+        "views": "Total views",
+        "thisMonth": "{count} this month",
+        "followers": "Followers",
+        "accounts": "Accounts",
+        "published": "Clips published",
+        "upcoming": "Upcoming clips"
+      },
+      "chartTitle": "Views over the last 30 days",
+      "latestPublished": "Latest published clips",
+      "seeAll": "See all",
+      "noPublished": "No clips published yet.",
+      "nextClips": "Next clips",
+      "noUpcoming": "No clips scheduled.",
+      "openRequests": "Open requests",
+      "noRequests": "No open requests."
     }
   },
   "admin": {
@@ -616,6 +682,181 @@
         "legal_terms": "Terms of sale",
         "legal_privacy": "Privacy policy"
       }
+    },
+    "clients": {
+      "title": "Clients",
+      "search": "Search for a creator",
+      "all": "All",
+      "export": "Export (CSV)",
+      "empty": "No clients in this list.",
+      "until": "until {date}",
+      "since": "Client since {date}",
+      "profile": "Creator profile",
+      "fields": {
+        "name": "Name",
+        "language": "Language",
+        "channels": "Channels",
+        "goals": "Goals",
+        "availability": "Availability"
+      },
+      "subscription": {
+        "title": "Subscription",
+        "plan": "Plan",
+        "changePlan": "Change plan",
+        "customPrice": "Custom price (€)",
+        "customPriceHint": "Leave empty to use the plan price.",
+        "extendTo": "Extend until",
+        "extend": "Extend",
+        "suspend": "Suspend",
+        "reactivate": "Reactivate",
+        "archive": "Archive",
+        "apply": "Apply",
+        "done": "Subscription updated.",
+        "requiresValidation": "The client approves each clip before publication"
+      },
+      "team": {
+        "title": "Assigned team",
+        "empty": "Nobody is assigned to this client yet.",
+        "member": "Team member",
+        "choose": "Choose…",
+        "role": "Role for this client",
+        "rolePlaceholder": "e.g. lead editor",
+        "assign": "Assign",
+        "remove": "Remove {name}"
+      },
+      "invite": {
+        "title": "Invite a client",
+        "lead": "The client receives an email to choose a password, then completes their profile.",
+        "fullName": "Full name",
+        "creatorName": "Creator name",
+        "email": "Email address",
+        "locale": "Language",
+        "submit": "Send the invitation",
+        "sent": "Invitation sent."
+      },
+      "clips": "Clips",
+      "videos": "Videos",
+      "accounts": "Accounts",
+      "payments": "Payments",
+      "openRequests": "Open requests",
+      "activity": "Recent activity",
+      "internalNotes": "Internal notes",
+      "internalNotesHint": "Visible to the team only.",
+      "openKanban": "Open in clip tracking",
+      "seeAll": "See all"
+    },
+    "clips": {
+      "title": "Clip tracking",
+      "new": "New clip",
+      "filters": {
+        "client": "Client",
+        "allClients": "All clients",
+        "editor": "Editor",
+        "allEditors": "All editors",
+        "mine": "My clips",
+        "status": "Status",
+        "allStatuses": "All statuses",
+        "apply": "Filter"
+      },
+      "views": {
+        "kanban": "Board",
+        "list": "List"
+      },
+      "cols": {
+        "clip": "Clip",
+        "client": "Client",
+        "editor": "Editor",
+        "status": "Status",
+        "due": "Due"
+      },
+      "empty": "No clips.",
+      "unassigned": "Unassigned",
+      "changeStatus": "Change the status of “{title}”",
+      "status": "Status",
+      "clientFeedback": "Client feedback",
+      "file": "Clip file",
+      "fileHint": "The edited file (MP4 or MOV), uploaded directly to storage.",
+      "storageMissing": "Video storage is not configured: the file cannot be uploaded.",
+      "downloadSource": "Download the source video",
+      "comments": "Comments",
+      "form": {
+        "client": "Client",
+        "source": "Source video",
+        "title": "Title",
+        "start": "Start",
+        "end": "End",
+        "timecodeHint": "mm:ss",
+        "hook": "Hook",
+        "hookHint": "{count} characters",
+        "caption": "Caption",
+        "hashtags": "Hashtags",
+        "hashtagsHint": "Separated by spaces: #podcast #business",
+        "account": "Publishing account",
+        "editor": "Editor",
+        "dueAt": "Due date",
+        "scheduledAt": "Planned publication",
+        "publishedUrl": "Post link",
+        "create": "Create the clip"
+      }
+    },
+    "videos": {
+      "title": "Received videos",
+      "empty": "No videos received.",
+      "download": "Download",
+      "openLink": "Open link",
+      "newClip": "New clip",
+      "comments": "Comments",
+      "status": "Status",
+      "editor": "Editor",
+      "batchTitles": "Clips to create (one title per line)",
+      "batchHint": "Each line creates a “planned” clip linked to this video.",
+      "createClips": "Create the clips",
+      "created": "{count, plural, one {# clip created} other {# clips created}}"
+    },
+    "accounts": {
+      "title": "Social accounts",
+      "new": "New account",
+      "edit": "Edit",
+      "editTitle": "Edit the account",
+      "empty": "No accounts.",
+      "summary": "{count, plural, one {# account} other {# accounts}} · {followers} followers",
+      "clips": "{count, plural, =0 {no clips} one {# clip} other {# clips}}",
+      "passwordPolicy": "Passwords are never stored here: only the reference of the entry in the password manager is kept (visible to the team only).",
+      "form": {
+        "client": "Client",
+        "platform": "Platform",
+        "platforms": {
+          "tiktok": "TikTok",
+          "instagram": "Instagram",
+          "youtube": "YouTube",
+          "autre": "Other"
+        },
+        "handle": "Handle (@…)",
+        "url": "Profile link",
+        "status": "Status",
+        "followers": "Followers",
+        "createdOn": "Creation date",
+        "owner": "Owner",
+        "passwordRef": "Password manager reference",
+        "passwordRefHint": "Example: “Bitwarden › Clients › Lea › TikTok”. Never the password itself.",
+        "notes": "Notes"
+      }
+    },
+    "requests": {
+      "title": "Requests",
+      "tabs": {
+        "open": "Open",
+        "mine": "Assigned to me",
+        "closed": "Closed"
+      },
+      "empty": "No requests in this list.",
+      "dueDate": "desired due date: {date}",
+      "assignedTo": "Assigned to",
+      "status": "Status",
+      "priority": "Priority",
+      "toClip": "Turn into a clip",
+      "seeClip": "See the created clip",
+      "conversation": "Conversation"
     }
   },
   "emails": {
@@ -673,6 +914,175 @@
       "title": "New contact message",
       "body": "{name} ({email}) wrote: {message}",
       "cta": "Open the admin space"
+    },
+    "video_received": {
+      "subject": "New video — {client}",
+      "title": "New video received",
+      "body": "{client} sent a video: {title}.",
+      "cta": "View the video"
+    },
+    "request_created": {
+      "subject": "New request — {client}",
+      "title": "New request",
+      "body": "{client} made a request: {title}.",
+      "cta": "View the request"
+    },
+    "request_assigned": {
+      "subject": "A request was assigned to you",
+      "title": "Request assigned",
+      "body": "The request “{title}” was assigned to you.",
+      "cta": "View the request"
+    },
+    "comment_added": {
+      "subject": "New message from {author}",
+      "title": "New message",
+      "body": "{author} wrote: {body}",
+      "cta": "Reply"
+    },
+    "clip_to_validate": {
+      "subject": "A clip is waiting for your approval",
+      "title": "A clip is waiting for your approval",
+      "body": "The clip “{title}” is ready. Approve it or request a change.",
+      "cta": "View the clip"
+    },
+    "clip_published": {
+      "subject": "Your clip is live",
+      "title": "Clip published",
+      "body": "The clip “{title}” has just been published.",
+      "cta": "View the clip"
+    },
+    "clip_changes_requested": {
+      "subject": "Change requested — {title}",
+      "title": "The client requests a change",
+      "body": "On the clip “{title}”: {feedback}",
+      "cta": "Open the clip"
     }
+  },
+  "uploads": {
+    "dropTitle": "Drop your file here",
+    "chooseFile": "Choose a file",
+    "progress": "{sent} GB of {total} GB · {percent}%",
+    "keepOpen": "keep this page open; if the connection drops, the upload resumes where it stopped",
+    "cancel": "Cancel upload"
+  },
+  "videos": {
+    "clientTitle": "Send a video",
+    "clientLead": "Send your source videos (large file or link): the team turns them into clips.",
+    "newVideo": "New video",
+    "myVideos": "My videos",
+    "empty": "No video sent yet.",
+    "clipsCount": "{count, plural, =0 {no clips} one {# clip} other {# clips}}",
+    "download": "Download",
+    "openLink": "Open link",
+    "readOnly": "Your space is read-only: sending videos is disabled.",
+    "priorities": {
+      "basse": "Low",
+      "normale": "Normal",
+      "haute": "High"
+    },
+    "submit": {
+      "mode": "Send as",
+      "modes": {
+        "file": "File",
+        "link": "Link"
+      },
+      "storageMissing": "File upload is not available yet: share a link (Google Drive, Dropbox, WeTransfer, YouTube…).",
+      "sent": "Video sent. The team has been notified.",
+      "title": "Title",
+      "optional": "optional",
+      "recordedAt": "Recording date",
+      "notes": "Notes for the team",
+      "notesHint": "Highlights, parts to avoid, clip ideas…",
+      "priority": "Priority",
+      "priorities": {
+        "basse": "Low",
+        "normale": "Normal",
+        "haute": "High"
+      },
+      "fileHint": "MP4, MOV, WEBM, MKV or AVI · up to {max}",
+      "url": "Video link",
+      "urlHint": "The link must start with https:// and be accessible to the team.",
+      "hostDetected": "Host detected: {host}",
+      "submit": "Send the video"
+    }
+  },
+  "clips": {
+    "clientTitle": "My clips",
+    "tabs": {
+      "upcoming": "Upcoming",
+      "published": "Published",
+      "calendar": "Calendar"
+    },
+    "emptyUpcoming": "No clips in progress yet.",
+    "emptyPublished": "No clips published yet.",
+    "noDate": "Date to be set",
+    "info": "Details",
+    "fields": {
+      "account": "Account",
+      "publication": "Publication",
+      "source": "Source video",
+      "hook": "Hook",
+      "caption": "Caption",
+      "hashtags": "Hashtags",
+      "views": "Views"
+    },
+    "download": "Download the clip",
+    "noFileYet": "The clip file is not available yet.",
+    "openPublication": "View the post",
+    "comments": "Messages with the team",
+    "review": {
+      "title": "This clip is waiting for your approval",
+      "approve": "Approve the clip",
+      "requestChanges": "Request a change",
+      "what": "What should be changed?",
+      "tip": "Be specific: give the time (for example 0:41) and what you want changed.",
+      "sendChanges": "Send the request",
+      "cancel": "Cancel"
+    }
+  },
+  "accounts": {
+    "clientTitle": "My accounts",
+    "clientLead": "The accounts the agency manages for you.",
+    "empty": "No accounts yet.",
+    "followers": "followers",
+    "clipsPosted": "clips posted",
+    "createdOn": "Created on {date}",
+    "open": "Open the account",
+    "credentialsNote": "Your account credentials are never stored on the platform: the agency uses a password manager."
+  },
+  "requests": {
+    "clientTitle": "My requests",
+    "clientLead": "A clip idea, a style to try, a new account? Write to us here.",
+    "new": "New request",
+    "list": "My requests",
+    "empty": "No requests yet.",
+    "readOnly": "Your space is read-only: new requests are disabled.",
+    "followedBy": "Handled by {name}",
+    "conversation": "Conversation",
+    "markResolved": "Mark as resolved",
+    "types": {
+      "clip": "Clip idea",
+      "style": "Style / editing",
+      "nouveau_compte": "New account",
+      "modification": "Change",
+      "autre": "Other"
+    },
+    "form": {
+      "type": "Request type",
+      "title": "Title",
+      "description": "Description",
+      "dueDate": "Desired due date",
+      "optional": "optional",
+      "submit": "Send the request"
+    }
+  },
+  "comments": {
+    "empty": "No messages yet.",
+    "you": "You",
+    "internalBadge": "Internal",
+    "yourComment": "Your message",
+    "newNote": "New note",
+    "send": "Send",
+    "internal": "Internal note (hidden from the client)"
   }
 }

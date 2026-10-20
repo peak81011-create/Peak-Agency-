@@ -142,6 +142,89 @@ function isoDate(d: Date) {
   return d.toISOString().slice(0, 10);
 }
 
+/** Données de démonstration de la phase 3 pour le client actif (une seule fois). */
+async function seedAgencyData(clientId: string, ids: Record<keyof typeof DEMO_USERS, string>) {
+  const existing = await check("clips existants", db.from("clips").select("id").eq("client_id", clientId).limit(1));
+  if (existing.length) return;
+
+  await run(
+    "note interne",
+    db.from("comments").insert({
+      client_id: clientId,
+      entity_type: "client",
+      entity_id: clientId,
+      author_id: ids.owner,
+      body: "Note interne de démonstration (jamais visible par le client).",
+      is_internal: true,
+    }),
+  );
+
+  const accounts = await check(
+    "comptes",
+    db
+      .from("social_accounts")
+      .insert([
+        { client_id: clientId, platform: "tiktok", handle: "@lea.clips.demo", url: "https://www.tiktok.com/@lea.clips.demo", owner_employee_id: ids.editor, created_on: isoDate(new Date()), followers_count: 4820 },
+        { client_id: clientId, platform: "youtube", handle: "Léa Clips (démo)", url: "https://www.youtube.com/@leaclipsdemo", owner_employee_id: ids.editor, created_on: isoDate(new Date()), followers_count: 690 },
+      ])
+      .select("id, platform"),
+  );
+  await run(
+    "comptes (interne)",
+    db.from("social_account_private").insert(accounts.map((a) => ({ account_id: a.id, password_manager_ref: "Bitwarden › Peak › Démo" }))),
+  );
+
+  const video = await check(
+    "vidéo",
+    db
+      .from("source_videos")
+      .insert({
+        client_id: clientId,
+        uploaded_by: ids.clientActive,
+        title: "Live du jeudi (démo)",
+        kind: "lien",
+        url: "https://www.twitch.tv/videos/000000000",
+        notes: "Moment fort vers 1:05:00.",
+        priority: "haute",
+        status: "en_traitement",
+      })
+      .select("id")
+      .single(),
+  );
+
+  const day = (offset: number) => new Date(Date.now() + offset * 86_400_000).toISOString();
+  const tiktok = accounts.find((a) => a.platform === "tiktok")!.id;
+  const clips = await check(
+    "clips",
+    db
+      .from("clips")
+      .insert([
+        { client_id: clientId, source_video_id: video.id, social_account_id: tiktok, editor_id: ids.editor, title: "Le fou rire du live", hook: "Impossible de garder mon sérieux", status: "publie", published_at: day(-2), published_url: "https://www.tiktok.com/@lea.clips.demo", created_by: ids.owner },
+        { client_id: clientId, source_video_id: video.id, social_account_id: tiktok, editor_id: ids.editor, title: "La réaction du chat", hook: "Il n'a rien compris", status: "a_valider", scheduled_at: day(2), due_at: day(1), created_by: ids.owner },
+        { client_id: clientId, source_video_id: video.id, social_account_id: tiktok, editor_id: ids.editor, title: "Trois conseils pour débuter", status: "en_montage", due_at: day(3), created_by: ids.owner },
+      ])
+      .select("id, status"),
+  );
+  const published = clips.find((c) => c.status === "publie")!.id;
+  await run(
+    "statistiques",
+    db.from("clip_stats_snapshots").insert([
+      { clip_id: published, captured_at: day(-1), views: 12400, likes: 830, comments: 41, shares: 22, created_by: ids.owner },
+      { clip_id: published, captured_at: day(0), views: 18950, likes: 1210, comments: 63, shares: 37, created_by: ids.owner },
+    ]),
+  );
+  await run(
+    "demande",
+    db.from("requests").insert({
+      client_id: clientId,
+      created_by: ids.clientActive,
+      type: "style",
+      title: "Sous-titres en anglais sur les Shorts",
+      description: "Une partie de mon audience YouTube est anglophone.",
+    }),
+  );
+}
+
 async function main() {
   const ids: Record<keyof typeof DEMO_USERS, string> = {} as never;
   for (const [key, user] of Object.entries(DEMO_USERS) as [keyof typeof DEMO_USERS, DemoUser][]) {
@@ -223,10 +306,7 @@ async function main() {
       { onConflict: "user_id,client_id" },
     ),
   );
-  await run(
-    "notes internes",
-    db.from("client_private_notes").upsert({ client_id: active, body: "Note interne de démonstration (jamais visible par le client)." }),
-  );
+  await seedAgencyData(active, ids);
 
   // Coordonnées bancaires de démonstration (IBAN d'exemple officiel, invalide pour un vrai virement).
   // Écrites seulement si aucune coordonnée réelle n'a été saisie.

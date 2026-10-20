@@ -37,7 +37,10 @@ suite("RLS et permissions (Postgres)", () => {
        values ($1, $3, 10000, 'PEAK-A', 'a_verifier'), ($2, $3, 10000, 'PEAK-B', 'a_verifier')`,
       [c.A, c.B, plan.rows[0].id],
     );
-    await db.query("insert into public.client_private_notes (client_id, body) values ($1, 'secret')", [c.A]);
+    await db.query(
+      "insert into public.comments (client_id, entity_type, entity_id, body, is_internal) values ($1, 'client', $1, 'secret', true)",
+      [c.A],
+    );
   });
 
   afterAll(async () => {
@@ -82,11 +85,11 @@ suite("RLS et permissions (Postgres)", () => {
 
   it("un client ne lit jamais les notes internes", async () => {
     await asUser(db, u.clientA, async (q) => {
-      const notes = await q("select * from public.client_private_notes");
+      const notes = await q("select * from public.comments where is_internal");
       expect(notes.rowCount).toBe(0);
     });
     await asUser(db, u.editor, async (q) => {
-      const notes = await q("select body from public.client_private_notes");
+      const notes = await q("select body from public.comments where is_internal");
       expect(notes.rows).toEqual([{ body: "secret" }]);
     });
   });

@@ -20,6 +20,35 @@ const TONES = {
     valide: "green",
     refuse: "red",
   },
+  clip: {
+    planifie: "neutral",
+    en_montage: "blue",
+    a_valider: "amber",
+    valide: "teal",
+    programme: "violet",
+    publie: "forest",
+    rejete: "red",
+  },
+  video: {
+    envoi: "blue",
+    recue: "neutral",
+    en_traitement: "amber",
+    clips_extraits: "green",
+    archivee: "neutral",
+    erreur: "red",
+  },
+  request: {
+    nouvelle: "blue",
+    en_cours: "amber",
+    terminee: "green",
+    refusee: "red",
+  },
+  account: {
+    actif: "green",
+    en_croissance: "teal",
+    bloque: "red",
+    abandonne: "neutral",
+  },
 } as const satisfies Record<string, Record<string, Tone>>;
 
 type StatusType = keyof typeof TONES;
