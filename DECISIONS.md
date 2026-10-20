@@ -70,7 +70,7 @@ Ce fichier liste les choix faits pendant la construction, quand le cahier des ch
 
 - **Envoi des vidéos** : directement du navigateur vers R2 (Uppy), en plusieurs parties au-delà de 100 Mo, reprise automatique après coupure ou rechargement. Le serveur ne signe une requête que pour une clé qu'il a lui-même préparée pour cet utilisateur (table `pending_uploads`, accessible au seul serveur) ; à la fin, il vérifie la taille réelle du fichier avant de marquer la vidéo « reçue ». Taille maximale réglable (10 Go par défaut). Formats : MP4, MOV, WEBM, MKV, AVI.
 - **Téléchargements** : liens signés valables 15 minutes, délivrés seulement si la personne peut lire la fiche (même règle que la base).
-- **En local et en CI**, MinIO remplace R2 (même protocole S3). Sans stockage configuré, seul l'envoi par lien est proposé.
+- **En local et en CI**, un petit serveur compatible S3 (s3rver, sans Docker) remplace R2. Sans stockage configuré, seul l'envoi par lien est proposé.
 - **Liens externes** : seulement enregistrés (https uniquement), jamais téléchargés par le serveur. L'hébergeur est reconnu pour l'affichage.
 - **Clips et validation client** : un clip « à valider » attend le client si son abonnement l'exige (réglage par client dans sa fiche, désactivé par défaut) ; sinon il passe directement à « validé ». Une demande de modification exige un commentaire et renvoie le clip « en montage ». Les clips rejetés ne sont pas montrés au client.
 - **Monteurs** : ils voient tous les clips des clients qui leur sont attribués, mais ne modifient que ceux dont ils sont le monteur (owner et assistante : tous).

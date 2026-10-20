@@ -72,10 +72,11 @@ Ensuite :
 ```bash
 npm install              # installe les dépendances (quelques minutes la 1re fois)
 npm run supabase:start   # démarre Supabase local, applique les migrations, écrit .env.local
-npm run storage:start    # (facultatif) stockage vidéo local MinIO, à la place de R2
 npm run seed             # crée les comptes et données de démonstration
 npm run dev              # lance le site sur http://localhost:3000
 ```
+
+Pour essayer l'envoi de fichiers vidéo sans compte Cloudflare, ouvrez un second terminal et lancez `npm run storage:start` (stockage local compatible R2, fichiers dans `.storage-local/`). Laissez-le ouvert pendant vos essais.
 
 - Le site : <http://localhost:3000> (redirige vers `/fr`).
 - La console Supabase locale (tables, utilisateurs) : <http://127.0.0.1:54323>.
@@ -201,7 +202,7 @@ La liste complète, commentée, est dans [`.env.example`](.env.example).
 | `npm run dev` | Lance le site en local |
 | `npm run supabase:start` / `npm run supabase:stop` | Démarre / arrête Supabase local |
 | `npm run seed` | Crée les données de démonstration |
-| `npm run storage:start` / `npm run storage:stop` | Démarre / arrête le stockage vidéo local (MinIO, compatible R2) |
+| `npm run storage:start` | Stockage vidéo local compatible R2 (à laisser ouvert ; Ctrl+C pour arrêter) |
 | `npm run db:reset` | Remet la base locale à zéro (migrations + seed) |
 | `npm run db:types` | Génère les types TypeScript de la base |
 | `npm run lint` / `npm run typecheck` | Vérifie le code |

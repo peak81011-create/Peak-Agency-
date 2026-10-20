@@ -8,11 +8,11 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_SUPABASE_URL=$(get API_URL)
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=$(get ANON_KEY)
 SUPABASE_SECRET_KEY=$(get SERVICE_ROLE_KEY)
-# Stockage vidéo local (MinIO, voir « npm run storage:start »)
+# Stockage vidéo local (s3rver, voir « npm run storage:start »)
 S3_ENDPOINT=http://127.0.0.1:9000
 S3_REGION=auto
-S3_ACCESS_KEY_ID=peaklocal
-S3_SECRET_ACCESS_KEY=peaklocal-secret
+S3_ACCESS_KEY_ID=S3RVER
+S3_SECRET_ACCESS_KEY=S3RVER
 S3_BUCKET=peak-videos
 S3_FORCE_PATH_STYLE=true
 ENV
