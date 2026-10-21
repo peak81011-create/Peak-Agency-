@@ -49,6 +49,12 @@ const TONES = {
     bloque: "red",
     abandonne: "neutral",
   },
+  application: {
+    nouvelle: "blue",
+    en_cours: "amber",
+    acceptee: "green",
+    refusee: "red",
+  },
 } as const satisfies Record<string, Record<string, Tone>>;
 
 type StatusType = keyof typeof TONES;

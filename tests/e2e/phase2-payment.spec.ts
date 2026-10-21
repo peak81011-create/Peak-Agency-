@@ -36,6 +36,19 @@ test.describe("Site public", () => {
     await page.getByRole("button", { name: "Envoyer" }).click();
     await expect(page.getByText("Merci, votre message est bien envoyé.")).toBeVisible();
   });
+
+  test("un clipper peut postuler depuis l'accueil", async ({ page }) => {
+    await page.goto("/fr");
+    await page.locator("#audiences").getByRole("link", { name: "Postuler" }).click();
+    await expect(page).toHaveURL(/\/fr\/join$/);
+    await page.getByLabel("Nom et prénom").fill("Clipper E2E");
+    await page.getByLabel("E-mail").fill("clipper.e2e@demo.peak.local");
+    await page.getByText("TikTok", { exact: true }).click();
+    await page.getByLabel("Expérience en montage").selectOption("confirme");
+    await page.getByLabel("Disponibilité par semaine").selectOption("10_20");
+    await page.getByRole("button", { name: "Envoyer ma candidature" }).click();
+    await expect(page.getByText("Candidature envoyée")).toBeVisible();
+  });
 });
 
 test.describe("Parcours de paiement par virement", () => {

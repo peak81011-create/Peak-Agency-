@@ -13,6 +13,7 @@ import {
   SlidersHorizontal,
   Tag,
   Upload,
+  UserPlus,
   UserRound,
   UsersRound,
 } from "lucide-react";
@@ -34,4 +35,5 @@ export const NAV_ICONS: Record<NavIconName, LucideIcon> = {
   inbox: Inbox,
   video: Clapperboard,
   users: UsersRound,
+  userPlus: UserPlus,
 };

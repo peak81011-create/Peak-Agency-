@@ -63,7 +63,9 @@
     "sendVideo": "Send a video",
     "accounts": "Accounts",
     "requests": "Requests",
-    "clients": "Clients"
+    "clients": "Clients",
+    "join": "Become a clipper",
+    "applications": "Applications"
   },
   "footer": {
     "tagline": "Your streams and long videos turned into vertical clips, published every day on dedicated accounts.",
@@ -134,6 +136,12 @@
       "en_croissance": "Growing",
       "bloque": "Blocked",
       "abandonne": "Abandoned"
+    },
+    "application": {
+      "nouvelle": "New",
+      "en_cours": "In review",
+      "acceptee": "Accepted",
+      "refusee": "Declined"
     }
   },
   "home": {
@@ -153,7 +161,91 @@
     "testimonialsTitle": "They publish with us",
     "faqEyebrow": "FAQ",
     "faqTitle": "Frequently asked questions",
-    "faqMore": "Another question? <link>Write to us</link>."
+    "faqMore": "Another question? <link>Write to us</link>.",
+    "hero": {
+      "creatorCta": "I'm a creator",
+      "clipperCta": "Become a clipper",
+      "platforms": "TikTok · Instagram Reels · YouTube Shorts"
+    },
+    "audiences": {
+      "eyebrow": "Who it's for",
+      "title": "Two ways to work with us",
+      "creators": {
+        "label": "Creators",
+        "title": "You create, we get your clips out there",
+        "lead": "Streamers, podcasters, video makers: keep doing your long-form content, we handle the short formats.",
+        "points": {
+          "one": "We watch your streams and long videos for you",
+          "two": "Vertical clips, edited and captioned, with a hook",
+          "three": "Published every day on dedicated accounts",
+          "four": "A space to approve clips and track views"
+        },
+        "cta": "See plans"
+      },
+      "clippers": {
+        "label": "Clippers",
+        "title": "You edit, join the team",
+        "lead": "You can spot a great moment and make it land in 30 seconds? We're looking for reliable editors.",
+        "points": {
+          "one": "Source videos and clear briefs, ready to edit",
+          "two": "Paid missions, fully remote",
+          "three": "A pace that fits your availability",
+          "four": "Regular feedback to help you improve"
+        },
+        "cta": "Apply"
+      }
+    },
+    "services": {
+      "eyebrow": "What we handle",
+      "title": "From raw stream to published clip",
+      "lead": "The whole chain is handled by the team. You stay in control of what goes out.",
+      "items": {
+        "moments": {
+          "title": "Finding the moments",
+          "body": "We watch your long-form content and isolate the parts that hook."
+        },
+        "editing": {
+          "title": "Vertical editing",
+          "body": "9:16 reframing, pacing, readable captions and clean styling."
+        },
+        "hooks": {
+          "title": "Hooks and captions",
+          "body": "A first second that holds attention, a caption and fitting hashtags."
+        },
+        "accounts": {
+          "title": "Dedicated accounts",
+          "body": "TikTok, Reels and Shorts accounts created and managed in your name."
+        },
+        "publishing": {
+          "title": "Scheduled publishing",
+          "body": "Clips published regularly, when your audience is active."
+        },
+        "reporting": {
+          "title": "Results tracking",
+          "body": "Views, followers gained and upcoming clips, visible in your space."
+        }
+      }
+    },
+    "clippers": {
+      "eyebrow": "Hiring",
+      "title": "You know how to make a clip that holds? Join the team.",
+      "lead": "We work with remote clippers, paid for each mission. Apply in two minutes.",
+      "cta": "Apply now",
+      "steps": {
+        "apply": {
+          "title": "You apply",
+          "body": "A few questions about your experience, tools and availability, with a link to your clips if you have some."
+        },
+        "test": {
+          "title": "A short editing test",
+          "body": "We send you an excerpt to cut so we can see your style and speed."
+        },
+        "missions": {
+          "title": "Your first missions",
+          "body": "You receive videos and briefs in your space, and deliver your clips."
+        }
+      }
+    }
   },
   "auth": {
     "email": "Email",
@@ -857,6 +949,14 @@
       "toClip": "Turn into a clip",
       "seeClip": "See the created clip",
       "conversation": "Conversation"
+    },
+    "applications": {
+      "title": "Clipper applications",
+      "lead": "Applications sent from the “Become a clipper” page. Change the status to track progress; reply to the applicant by email.",
+      "all": "All",
+      "empty": "No applications in this list.",
+      "receivedOn": "Received on {date}",
+      "statusFor": "Status of {name}'s application"
     }
   },
   "emails": {
@@ -956,6 +1056,12 @@
       "title": "The client requests a change",
       "body": "On the clip “{title}”: {feedback}",
       "cta": "Open the clip"
+    },
+    "clipper_application": {
+      "subject": "New clipper application — {name}",
+      "title": "New clipper application",
+      "body": "{name} ({email}) would like to join the team.",
+      "cta": "View the application"
     }
   },
   "uploads": {
@@ -1084,5 +1190,50 @@
     "newNote": "New note",
     "send": "Send",
     "internal": "Internal note (hidden from the client)"
+  },
+  "join": {
+    "eyebrow": "Join the team",
+    "title": "Become a clipper at Peak",
+    "lead": "We're looking for editors who can find the right moment and make it land in vertical format. Fill in this form: we'll reply by email.",
+    "lookingFor": {
+      "title": "What we look for",
+      "one": "A sense of pacing and hooks that hold attention",
+      "two": "Consistency and meeting deadlines",
+      "three": "Command of an editing tool (CapCut, Premiere, DaVinci…)",
+      "four": "Good knowledge of TikTok, Reels or Shorts"
+    },
+    "next": "After you apply, we'll get back to you for a short editing test.",
+    "form": {
+      "fullName": "Full name",
+      "email": "Email",
+      "portfolio": "Link to your clips",
+      "portfolioHint": "A TikTok account, a YouTube playlist or a shared folder (https link).",
+      "optional": "(optional)",
+      "platforms": "Platforms you know",
+      "experience": "Editing experience",
+      "hours": "Availability per week",
+      "choose": "Choose…",
+      "experiences": {
+        "debutant": "Beginner",
+        "intermediaire": "Intermediate",
+        "confirme": "Experienced"
+      },
+      "hoursOptions": {
+        "moins_10": "Less than 10 h",
+        "10_20": "10 to 20 h",
+        "20_35": "20 to 35 h",
+        "temps_plein": "Full time"
+      },
+      "tools": "Editing tools",
+      "toolsPlaceholder": "CapCut, Premiere Pro…",
+      "languages": "Languages",
+      "languagesPlaceholder": "English, French…",
+      "message": "About you",
+      "messagePlaceholder": "Your background, creators you follow, what drives you…",
+      "privacy": "Your information is only used to review your application.",
+      "submit": "Send my application",
+      "sentTitle": "Application sent",
+      "sent": "Thank you! We'll review your profile and reply by email."
+    }
   }
 }

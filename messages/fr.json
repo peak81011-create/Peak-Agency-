@@ -63,7 +63,9 @@
     "sendVideo": "Envoyer une vidéo",
     "accounts": "Comptes",
     "requests": "Demandes",
-    "clients": "Clients"
+    "clients": "Clients",
+    "join": "Devenir clipper",
+    "applications": "Candidatures"
   },
   "footer": {
     "tagline": "Vos lives et vidéos longues transformés en clips verticaux, publiés chaque jour sur des comptes dédiés.",
@@ -134,6 +136,12 @@
       "en_croissance": "En croissance",
       "bloque": "Bloqué",
       "abandonne": "Abandonné"
+    },
+    "application": {
+      "nouvelle": "Nouvelle",
+      "en_cours": "En cours",
+      "acceptee": "Acceptée",
+      "refusee": "Refusée"
     }
   },
   "home": {
@@ -153,7 +161,91 @@
     "testimonialsTitle": "Ils publient avec nous",
     "faqEyebrow": "FAQ",
     "faqTitle": "Questions fréquentes",
-    "faqMore": "Une autre question ? <link>Écrivez-nous</link>."
+    "faqMore": "Une autre question ? <link>Écrivez-nous</link>.",
+    "hero": {
+      "creatorCta": "Je suis créateur",
+      "clipperCta": "Devenir clipper",
+      "platforms": "TikTok · Instagram Reels · YouTube Shorts"
+    },
+    "audiences": {
+      "eyebrow": "Pour qui",
+      "title": "Deux façons de travailler avec nous",
+      "creators": {
+        "label": "Créateurs",
+        "title": "Vous créez, on fait tourner vos clips",
+        "lead": "Streamers, podcasteurs, vidéastes : vous continuez vos contenus longs, on s'occupe des formats courts.",
+        "points": {
+          "one": "On regarde vos lives et vidéos longues à votre place",
+          "two": "Des clips verticaux montés, sous-titrés, avec une accroche",
+          "three": "Publiés chaque jour sur des comptes dédiés",
+          "four": "Un espace pour valider les clips et suivre les vues"
+        },
+        "cta": "Voir les offres"
+      },
+      "clippers": {
+        "label": "Clippers",
+        "title": "Vous montez, rejoignez la team",
+        "lead": "Vous savez repérer un bon moment et le rendre efficace en 30 secondes ? On cherche des monteurs fiables.",
+        "points": {
+          "one": "Des vidéos sources et des briefs clairs, prêts à monter",
+          "two": "Des missions rémunérées, à distance",
+          "three": "Un rythme adapté à vos disponibilités",
+          "four": "Des retours réguliers pour progresser"
+        },
+        "cta": "Postuler"
+      }
+    },
+    "services": {
+      "eyebrow": "Ce qu'on prend en charge",
+      "title": "Du live brut au clip publié",
+      "lead": "Toute la chaîne est gérée par l'équipe. Vous gardez la main sur ce qui sort.",
+      "items": {
+        "moments": {
+          "title": "Repérage des moments",
+          "body": "On visionne vos contenus longs et on isole les passages qui accrochent."
+        },
+        "editing": {
+          "title": "Montage vertical",
+          "body": "Recadrage 9:16, rythme, sous-titres lisibles et habillage sobre."
+        },
+        "hooks": {
+          "title": "Accroches et légendes",
+          "body": "Une première seconde qui retient, une légende et des hashtags adaptés."
+        },
+        "accounts": {
+          "title": "Comptes dédiés",
+          "body": "Création et gestion de comptes TikTok, Reels et Shorts à votre nom."
+        },
+        "publishing": {
+          "title": "Publication programmée",
+          "body": "Des clips publiés régulièrement, aux heures où votre audience est active."
+        },
+        "reporting": {
+          "title": "Suivi des résultats",
+          "body": "Vues, abonnés gagnés et clips à venir, visibles dans votre espace."
+        }
+      }
+    },
+    "clippers": {
+      "eyebrow": "Recrutement",
+      "title": "Vous savez faire un clip qui retient ? Rejoignez la team.",
+      "lead": "On travaille avec des clippers à distance, payés pour chaque mission. Postulez en deux minutes.",
+      "cta": "Postuler maintenant",
+      "steps": {
+        "apply": {
+          "title": "Vous postulez",
+          "body": "Quelques questions sur votre expérience, vos outils et vos disponibilités, avec un lien vers vos clips si vous en avez."
+        },
+        "test": {
+          "title": "Un court test de montage",
+          "body": "On vous envoie un extrait à découper pour voir votre style et votre rapidité."
+        },
+        "missions": {
+          "title": "Vos premières missions",
+          "body": "Vous recevez les vidéos et les briefs dans votre espace, et vous livrez vos clips."
+        }
+      }
+    }
   },
   "auth": {
     "email": "E-mail",
@@ -857,6 +949,14 @@
       "toClip": "Transformer en clip",
       "seeClip": "Voir le clip créé",
       "conversation": "Conversation"
+    },
+    "applications": {
+      "title": "Candidatures clippers",
+      "lead": "Les candidatures envoyées depuis la page « Devenir clipper ». Changez le statut pour suivre où vous en êtes ; répondez au candidat par e-mail.",
+      "all": "Toutes",
+      "empty": "Aucune candidature dans cette liste.",
+      "receivedOn": "Reçue le {date}",
+      "statusFor": "Statut de la candidature de {name}"
     }
   },
   "emails": {
@@ -956,6 +1056,12 @@
       "title": "Le client demande une modification",
       "body": "Sur le clip « {title} » : {feedback}",
       "cta": "Ouvrir le clip"
+    },
+    "clipper_application": {
+      "subject": "Nouvelle candidature clipper — {name}",
+      "title": "Nouvelle candidature clipper",
+      "body": "{name} ({email}) souhaite rejoindre l'équipe.",
+      "cta": "Voir la candidature"
     }
   },
   "uploads": {
@@ -1084,5 +1190,50 @@
     "newNote": "Nouvelle note",
     "send": "Envoyer",
     "internal": "Note interne (invisible pour le client)"
+  },
+  "join": {
+    "eyebrow": "Rejoindre la team",
+    "title": "Devenez clipper chez Peak",
+    "lead": "On cherche des monteurs qui savent trouver le bon moment et le rendre percutant au format vertical. Remplissez ce formulaire : on vous répond par e-mail.",
+    "lookingFor": {
+      "title": "Ce qu'on recherche",
+      "one": "Le sens du rythme et des accroches qui retiennent",
+      "two": "De la régularité et le respect des délais",
+      "three": "La maîtrise d'un outil de montage (CapCut, Premiere, DaVinci…)",
+      "four": "Une bonne connaissance de TikTok, Reels ou Shorts"
+    },
+    "next": "Après votre candidature, on vous recontacte pour un court test de montage.",
+    "form": {
+      "fullName": "Nom et prénom",
+      "email": "E-mail",
+      "portfolio": "Lien vers vos clips",
+      "portfolioHint": "Un compte TikTok, une playlist YouTube ou un dossier partagé (lien https).",
+      "optional": "(facultatif)",
+      "platforms": "Plateformes que vous connaissez",
+      "experience": "Expérience en montage",
+      "hours": "Disponibilité par semaine",
+      "choose": "Choisir…",
+      "experiences": {
+        "debutant": "Débutant",
+        "intermediaire": "Intermédiaire",
+        "confirme": "Confirmé"
+      },
+      "hoursOptions": {
+        "moins_10": "Moins de 10 h",
+        "10_20": "10 à 20 h",
+        "20_35": "20 à 35 h",
+        "temps_plein": "Temps plein"
+      },
+      "tools": "Outils de montage",
+      "toolsPlaceholder": "CapCut, Premiere Pro…",
+      "languages": "Langues",
+      "languagesPlaceholder": "Français, anglais…",
+      "message": "Un mot sur vous",
+      "messagePlaceholder": "Votre parcours, les créateurs que vous suivez, ce qui vous motive…",
+      "privacy": "Vos informations servent uniquement à étudier votre candidature.",
+      "submit": "Envoyer ma candidature",
+      "sentTitle": "Candidature envoyée",
+      "sent": "Merci ! On étudie votre profil et on vous répond par e-mail."
+    }
   }
 }
