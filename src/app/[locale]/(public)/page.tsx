@@ -1,7 +1,7 @@
 import { ArrowRight, Banknote, Layers, Play, ShieldCheck, TrendingUp } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { LogoMark } from "@/components/brand/logo";
+import { Logo3D } from "@/components/three/logo-3d";
 import { PillLink } from "@/components/layout/header-cta";
 import { buttonVariants } from "@/components/ui/button";
 import { TransitionLink } from "@/components/transition/page-transition";
@@ -52,8 +52,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* Héros : en-tête centré, gros titre, un bouton principal et trois garanties */}
       <section className="peak-glow relative overflow-hidden">
         <div aria-hidden className="pointer-events-none absolute inset-0 hidden lg:block">
-          <span className="peak-float absolute left-[6%] top-[26%] grid size-32 place-items-center rounded-[28px] bg-lime-400 shadow-3 [--tilt:-12deg]">
-            <LogoMark className="h-16 w-7 text-forest-900" />
+          <span className="peak-float absolute left-[7%] top-[22%] [--tilt:0deg]">
+            <Logo3D height={190} />
           </span>
           <span className="peak-float absolute right-[7%] top-[30%] grid size-24 place-items-center rounded-[24px] bg-forest-900 text-lime-400 shadow-3 [--tilt:10deg] [animation-delay:-3s]">
             <Play className="size-9 fill-current" />

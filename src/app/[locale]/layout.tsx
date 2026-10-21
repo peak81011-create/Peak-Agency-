@@ -29,7 +29,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   const t = await getTranslations({ locale, namespace: "meta" });
 
   return (
-    <html lang={locale} className={`${archivo.variable} ${inter.variable} ${jetbrains.variable}`}>
+    <html lang={locale} suppressHydrationWarning className={`${archivo.variable} ${inter.variable} ${jetbrains.variable}`}>
       <body>
         <NextIntlClientProvider>
           <PageTransitionProvider wordmark={t("siteName")}>{children}</PageTransitionProvider>

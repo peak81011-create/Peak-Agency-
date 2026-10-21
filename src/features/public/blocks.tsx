@@ -1,5 +1,6 @@
 import { ArrowRight, Check, Landmark, ShieldCheck, Smartphone, Wallet, X, Zap } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
+import { ClipCarousel3D, Coin3D } from "@/components/three/logo-3d";
 import { buttonVariants } from "@/components/ui/button";
 import { getPublicPlans } from "@/features/plans/catalog";
 import { AnswerText } from "@/features/faq/answer-text";
@@ -38,11 +39,7 @@ export async function ClippingExplainer({ tone = "light" }: { tone?: "light" | "
           </div>
           <p className="text-center text-sage-400">↓</p>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-sage-400">{t("diagram.clips")}</p>
-          <div className="grid grid-cols-6 gap-2">
-            {Array.from({ length: 6 }, (_, i) => (
-              <span key={i} className="aspect-[9/16] rounded-md border border-forest-600 bg-forest-800" />
-            ))}
-          </div>
+          <ClipCarousel3D />
           <p className="text-center text-sage-400">↓</p>
           <p className="text-center text-sm font-semibold">{t("diagram.platforms")}</p>
         </div>
@@ -186,7 +183,8 @@ export async function PerClipBanner() {
             ))}
           </ul>
         </div>
-        <div aria-hidden className="flex flex-col gap-5 rounded-[28px] bg-gradient-to-br from-money-600 to-money-700 p-6 text-white shadow-3 md:p-8">
+        <div aria-hidden className="relative flex flex-col gap-5 rounded-[28px] bg-gradient-to-br from-money-600 to-money-700 p-6 text-white shadow-3 md:p-8">
+          <Coin3D label={t("tag")} size={112} className="absolute -right-4 -top-12 hidden sm:inline-block" />
           <div className="flex items-center gap-3">
             <span className="grid size-10 place-items-center rounded-full bg-white/15">▶</span>
             <div className="h-3 grow overflow-hidden rounded-full bg-white/20">

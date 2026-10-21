@@ -5,6 +5,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { EarningsSimulator } from "@/features/clippers/earnings-simulator";
 import { forAudience, getFaq } from "@/features/faq/queries";
 import { FaqPreview } from "@/features/public/blocks";
+import { Logo3D } from "@/components/three/logo-3d";
 import { Section, SectionTitle } from "@/features/public/sections";
 import { Link } from "@/i18n/navigation";
 import { initPageLocale } from "@/i18n/page";
@@ -51,8 +52,9 @@ export default async function ClippersPage({ params }: { params: Promise<{ local
 
   return (
     <>
-      <section className="bg-forest-900 text-sage-100">
-        <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-6 px-4 py-14 md:px-8 md:py-24">
+      <section className="overflow-hidden bg-forest-900 text-sage-100">
+        <div className="relative mx-auto flex w-full max-w-[1200px] flex-col gap-6 px-4 py-14 md:px-8 md:py-24">
+          <Logo3D height={260} tone="sage" className="absolute right-12 top-1/2 hidden -translate-y-1/2 lg:inline-block" />
           <p className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-sage-400 [font-stretch:112%]">{t("hero.eyebrow")}</p>
           <h1 className="max-w-4xl text-balance font-display text-[40px] font-extrabold leading-[0.98] tracking-tight text-white md:text-6xl lg:text-[72px] [font-stretch:118%]">
             {t("hero.title")}

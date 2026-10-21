@@ -132,3 +132,9 @@ Ce fichier liste les choix faits pendant la construction, quand le cahier des ch
 - Nouvelle palette « budget » (`--money-*`, `--lime-*`) : chaque offre a son vert (menthe, émeraude, forêt, citron vert). Toute la carte est cliquable (lien étiré) et mène au détail.
 - Nouveaux blocs : « Un clip, c'est 0,99 € » (une vidéo longue → des clips à 0,99 €) et « Payez comme vous voulez » (virement depuis toute banque, PayPal, Revolut, autres applis) avec la marche à suivre en 5 étapes. Sur l'accueil, la page Offres et chaque page d'offre.
 - Paramètres → Moyens de paiement : champs PayPal et Revolut (facultatifs, stockés dans le réglage `bank`, sans migration), affichés sur la page de paiement du client avec la même référence. La preuve de paiement reste la même pour tous les moyens.
+
+## Éléments 3D (CSS, sans bibliothèque)
+
+- 3D en CSS pur (`transform-style: preserve-3d`, couches empilées) plutôt que three.js : aucun poids ajouté, rendu net, compatible mobile. Composants dans `src/components/three/`.
+- Écran d'entrée : le monogramme Peak en relief arrive en tournant, « PEAK » s'écrit lettre par lettre, puis l'écran remonte (≈ 3 s, une fois par visite, un clic le passe). Logo en vert forêt de la maquette (`--forest-*`), jamais en vert pomme. Ignoré pour « réduire les animations » et les tests automatisés ; disparaît seul même sans JavaScript.
+- Au défilement : chaque section bascule en 3D en entrant à l'écran ; cartes d'offres inclinables à la souris ; carrousel 3D de clips ; pièce « 0,99 € » qui tourne ; logo 3D dans les en-têtes Créateurs et Clippers.
