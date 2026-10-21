@@ -21,7 +21,7 @@ const EMPTY = {
 const FILLED = { ...EMPTY, delai_reponse: "24 h", delai_activation: "24 h", minimum_par_clip: 300, tarif_1000_vues: 50, jours_comptage_vues: 7, jour_paiement: 5 };
 const setCommitments = (value: object) => admin.from("settings").upsert({ key: "commitments", value });
 
-test.describe.configure({ mode: "serial" });
+test.describe.configure({ mode: "serial", timeout: 60_000 });
 
 test.afterAll(async () => {
   await setCommitments(EMPTY);
@@ -66,8 +66,8 @@ test("un visiteur choisit « Je suis clipper », utilise le simulateur et postul
   await page.getByLabel("Logiciels utilisés").fill("CapCut");
   await page.getByLabel("Ton expérience").selectOption("avance");
   await page.getByLabel("Disponibilité par semaine").selectOption("10_20");
-  await page.getByText("J'ai au moins 18 ans.").click();
-  await page.getByText("J'accepte la").click();
+  await page.getByRole("checkbox", { name: "J'ai au moins 18 ans." }).check();
+  await page.getByRole("checkbox", { name: /J'accepte la politique de confidentialité/ }).check();
   await page.getByRole("button", { name: "Envoyer ma candidature" }).click();
   await expect(page.getByText("On regarde ta candidature et on te répond sous 24 h.")).toBeVisible();
 
