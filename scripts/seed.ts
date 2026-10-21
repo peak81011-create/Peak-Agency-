@@ -277,7 +277,7 @@ async function main() {
     {
       client_id: active,
       plan_id: growth,
-      amount_cents: 27900,
+      amount_cents: 19800,
       status: "valide",
       submitted_at: start.toISOString(),
       validated_by: ids.owner,
@@ -285,7 +285,7 @@ async function main() {
       period_start: isoDate(start),
       period_end: isoDate(end),
     },
-    { client_id: pending, plan_id: starter, amount_cents: 14900, status: "a_verifier", submitted_at: new Date().toISOString() },
+    { client_id: pending, plan_id: starter, amount_cents: 9900, status: "a_verifier", submitted_at: new Date().toISOString() },
   ];
   for (const payment of demoPayments) {
     const existing = await check(

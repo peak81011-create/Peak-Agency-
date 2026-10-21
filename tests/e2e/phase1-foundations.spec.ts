@@ -6,7 +6,7 @@ test.describe("Fondations", () => {
   test("l'accueil s'affiche en français et en anglais, avec le sélecteur de langue", async ({ page }) => {
     await page.goto("/");
     await expectPath(page, /\/fr$/);
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("On transforme les longues vidéos");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("Vos lives cachent des pépites");
     await page.getByRole("group", { name: "Langue" }).first().getByRole("link", { name: "EN" }).click();
     await expectPath(page, /\/en$/);
     await expect(page.getByRole("heading", { level: 1 })).toContainText("We turn long videos");

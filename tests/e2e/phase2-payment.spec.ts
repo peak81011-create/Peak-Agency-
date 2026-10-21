@@ -4,8 +4,8 @@ import { DEMO_PASSWORD, DEMO_USERS, TINY_PNG, confirmationLink, expectPath, logi
 test.describe("Site public", () => {
   test("accueil et tarifs en français et en anglais", async ({ page }) => {
     await page.goto("/fr");
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("On transforme les longues vidéos");
-    await expect(page.locator("#how")).toContainText("Le créateur nous confie ses vidéos");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("Vos lives cachent des pépites");
+    await expect(page.locator("#how")).toContainText("Vous envoyez vos vidéos");
 
     await page.goto("/fr/pricing");
     const plans = page.getByTestId("pricing-plans");
@@ -17,7 +17,7 @@ test.describe("Site public", () => {
     await expect(page.getByTestId("pricing-plans")).toContainText("Growth");
     await expect(page.getByTestId("pricing-plans")).toContainText("/ month");
     await page.goto("/en");
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("We turn long videos");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("Your streams hide gems");
   });
 
   test("les pages légales existent, avec les champs de l'entreprise à compléter", async ({ page }) => {
@@ -68,7 +68,7 @@ test.describe("Parcours de paiement par virement", () => {
     await page.getByRole("button", { name: "Continuer vers le paiement" }).click();
     await expectPath(page, /\/fr\/app\/payment$/);
 
-    await expect(page.getByTestId("payment-amount")).toContainText("279,00");
+    await expect(page.getByTestId("payment-amount")).toContainText("198,00");
     await expect(page.getByTestId("bank-details")).toContainText("FR76 3000 6000 0112 3456 7890 189");
     reference = ((await page.getByTestId("payment-reference").textContent()) ?? "").trim();
     expect(reference).toMatch(/^PEAK-\d{4}-\d{4}$/);

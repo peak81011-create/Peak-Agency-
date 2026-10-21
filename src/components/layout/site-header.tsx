@@ -8,26 +8,25 @@ import type { Locale } from "@/i18n/routing";
 import { getSessionUser, homePathFor } from "@/lib/auth/session";
 import { localizedPath } from "@/lib/public-paths";
 import { cn } from "@/lib/utils";
-import { HeaderCta } from "./header-cta";
+import { HeaderCta, PillLink } from "./header-cta";
 import { LocaleSwitcher } from "./locale-switcher";
 
+/** En-tête flottant : une carte blanche arrondie qui reste en haut de l'écran. */
 export async function SiteHeader() {
   const [t, locale, user] = await Promise.all([getTranslations(), getLocale() as Promise<Locale>, getSessionUser()]);
   const links = [
     { href: localizedPath("/creators", locale), label: t("nav.creators") },
     { href: "/clippers", label: t("nav.clippersPage") },
+    { href: localizedPath("/pricing", locale), label: t("nav.pricing") },
     { href: "/faq", label: t("nav.faq") },
-    { href: localizedPath("/help", locale), label: t("nav.help") },
   ];
   const cta = { creators: t("nav.ctaCreators"), clippers: t("nav.ctaClippers"), start: t("common.start") };
 
   const actions = user ? (
-    <Link href={homePathFor(user)} className={buttonVariants({ variant: "accent" })}>
-      {t("common.mySpace")}
-    </Link>
+    <PillLink href={homePathFor(user)} label={t("common.mySpace")} />
   ) : (
     <>
-      <Link href="/login" className={cn(buttonVariants({ variant: "on-dark" }), "border-0")}>
+      <Link href="/login" className={cn(buttonVariants({ variant: "ghost" }), "font-semibold")}>
         {t("common.login")}
       </Link>
       <HeaderCta labels={cta} />
@@ -35,34 +34,34 @@ export async function SiteHeader() {
   );
 
   return (
-    <header className="border-b border-forest-800 bg-forest-900 text-sage-100">
-      <div className="mx-auto flex min-h-16 w-full max-w-[1200px] items-center justify-between gap-6 px-4 md:min-h-20 md:px-8">
-        <Link href="/" aria-label={t("common.homeAria")} className="text-sage-400 no-underline">
-          <Logo wordmark={t("common.wordmark")} className="[&>span:last-child]:text-sage-100" />
+    <header className="sticky top-0 z-30 px-3 pt-3 md:px-6 md:pt-4">
+      <div className="mx-auto flex min-h-16 w-full max-w-[1120px] items-center justify-between gap-4 rounded-2xl border border-border bg-white/95 px-4 shadow-2 backdrop-blur md:min-h-[76px] md:px-6">
+        <Link href="/" aria-label={t("common.homeAria")} className="text-forest-900 no-underline">
+          <Logo wordmark={t("common.wordmark")} />
         </Link>
-        <nav aria-label={t("nav.mainNav")} className="hidden items-center gap-7 md:flex">
+        <nav aria-label={t("nav.mainNav")} className="hidden items-center gap-8 lg:flex">
           {links.map((l) => (
-            <Link key={l.href} href={l.href} className="text-[15px] font-medium text-sage-200 no-underline hover:text-white">
+            <Link key={l.href} href={l.href} className="text-[16px] font-medium text-text-2 no-underline hover:text-forest-900">
               {l.label}
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <Suspense>
-            <LocaleSwitcher tone="dark" />
+            <LocaleSwitcher />
           </Suspense>
-          <div className="hidden items-center gap-3 md:flex">{actions}</div>
+          <div className="hidden items-center gap-2 lg:flex">{actions}</div>
           {/* Menu mobile sans JavaScript */}
-          <details className="group relative md:hidden">
+          <details className="group relative lg:hidden">
             <summary
               aria-label={t("common.openMenu")}
-              className={cn(buttonVariants({ variant: "on-dark", size: "icon" }), "list-none border-0 [&::-webkit-details-marker]:hidden")}
+              className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "list-none [&::-webkit-details-marker]:hidden")}
             >
               <Menu aria-hidden />
             </summary>
-            <div className="absolute right-0 z-20 mt-2 flex w-64 flex-col gap-1 rounded-lg bg-forest-800 p-3 shadow-3">
+            <div className="absolute right-0 z-20 mt-3 flex w-64 flex-col gap-1 rounded-2xl border border-border bg-white p-3 shadow-3">
               {links.map((l) => (
-                <Link key={l.href} href={l.href} className="flex min-h-11 items-center rounded-sm px-3 text-sage-100 no-underline hover:bg-forest-700">
+                <Link key={l.href} href={l.href} className="flex min-h-11 items-center rounded-md px-3 font-medium text-foreground no-underline hover:bg-muted">
                   {l.label}
                 </Link>
               ))}

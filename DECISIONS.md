@@ -119,3 +119,9 @@ Ce fichier liste les choix faits pendant la construction, quand le cahier des ch
 - **Fréquentation** (Admin → Fréquentation, permission reports.view_all) : pages vues et visiteurs uniques par jour, sans cookie ni donnée personnelle. Un visiteur est une empreinte hachée (IP + navigateur + date + secret) qui change chaque jour : impossible de le reconnaître ou de le suivre ; aucun bandeau cookies n'est nécessaire. Les robots sont ignorés. Variable facultative `ANALYTICS_SALT`.
 - **Tous les comptes** (Admin → Tous les comptes, permission users.manage) : liste de tous les comptes (créateurs, clippers, équipe), recherche, rôle, dernière visite. La modification des rôles et « voir en tant que » arrivent en phase 4.
 
+
+## Prix unique de 0,99 € le clip et nouvel accueil
+
+- Les 4 offres passent à 0,99 € le clip, avec des volumes ronds : Lancement 100 clips = 99 €, Croissance 200 = 198 €, Pro 400 = 396 €, Élite 600 = 594 €. Chaque bulle affiche le calcul (« 200 clips × 0,99 € = 198,00 € »). Migration `20261027000100_price_per_clip.sql` : ne modifie que les 4 offres repérées par leur adresse (slug).
+- Accueil refait sur le modèle demandé (en-tête flottant blanc, gros titre centré, bouton « pilule » en dégradé vert, trois garanties, tuiles flottantes) en gardant la palette Peak. Le titre « Phrase 1. Phrase 2. » met la seconde phrase en couleur.
+- Textes raccourcis (accueil, blocs, offres, créateurs, clippers) : une phrase courte par idée.

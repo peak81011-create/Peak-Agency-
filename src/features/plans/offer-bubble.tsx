@@ -12,6 +12,7 @@ type Labels = {
   accounts: (n: number) => string;
   delivery: (n: number) => string;
   details: string;
+  calc: (clips: number, unit: string, total: string) => string;
 };
 
 /**
@@ -53,6 +54,11 @@ export function OfferBubble({ plan, href, labels, action }: { plan: PlanView; hr
             <span className={cn("text-sm", muted)}>{plan.period}</span>
           </p>
           {plan.perClip ? <p className={cn("text-sm font-semibold", dark ? "text-sage-200" : "text-forest-700")}>{labels.perClip(plan.perClip)}</p> : null}
+          {plan.perClip && plan.clipsPerPeriod ? (
+            <p className={cn("text-xs tabular", muted)} data-testid="offer-calc">
+              {labels.calc(plan.clipsPerPeriod, plan.perClip, plan.price)}
+            </p>
+          ) : null}
         </div>
         <ul className="flex flex-col gap-2.5 text-[15px]">
           {facts.map(({ icon: Icon, text }) => (

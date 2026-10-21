@@ -18,7 +18,7 @@ export type PlanView = {
   tagline: string;
   clipLength: string;
   details: string;
-  /** Prix par clip (« 0,80 € »), si le nombre de clips est connu. */
+  /** Prix par clip (« 0,99 € »), si le nombre de clips est connu. */
   perClip: string | null;
   clipsPerPeriod: number | null;
   accounts: number | null;

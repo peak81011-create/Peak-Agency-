@@ -12,5 +12,6 @@ export async function offerLabels() {
     accounts: (n: number) => t("accounts", { n }),
     delivery: (n: number) => t("delivery", { n }),
     details: t("details"),
+    calc: (clips: number, unit: string, total: string) => t("calc", { clips, unit, total }),
   };
 }
