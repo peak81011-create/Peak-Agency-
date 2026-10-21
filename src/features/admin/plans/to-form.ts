@@ -21,5 +21,12 @@ export function planToForm(plan: PlanRow | null): PlanFormInput {
     sortOrder: String(plan?.sort_order ?? 0),
     isVisible: plan?.is_visible ?? true,
     isFeatured: plan?.is_featured ?? false,
+    slug: plan?.slug ?? "",
+    taglineFr: plan?.tagline_fr ?? "",
+    taglineEn: plan?.tagline_en ?? "",
+    clipLengthFr: plan?.clip_length_fr ?? "",
+    clipLengthEn: plan?.clip_length_en ?? "",
+    detailsFr: plan?.details_fr ?? "",
+    detailsEn: plan?.details_en ?? "",
   };
 }

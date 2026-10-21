@@ -129,3 +129,28 @@
 @utility tabular {
   font-variant-numeric: tabular-nums;
 }
+
+/* Transition entre pages : rideau vert du haut vers le bas, logo au centre */
+@keyframes peak-curtain-cover {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+@keyframes peak-curtain-reveal {
+  from { transform: translateY(0); }
+  to { transform: translateY(100%); }
+}
+@keyframes peak-logo-in {
+  from { transform: translateY(-40vh); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes peak-logo-out {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(30vh); opacity: 0; }
+}
+.peak-curtain-cover { animation: peak-curtain-cover 480ms cubic-bezier(0.65, 0, 0.35, 1) both; }
+.peak-curtain-reveal { animation: peak-curtain-reveal 520ms cubic-bezier(0.65, 0, 0.35, 1) both; }
+.peak-logo-in { animation: peak-logo-in 480ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.peak-logo-out { animation: peak-logo-out 520ms cubic-bezier(0.65, 0, 0.35, 1) both; }
+@media (prefers-reduced-motion: reduce) {
+  .peak-curtain-cover, .peak-curtain-reveal, .peak-logo-in, .peak-logo-out { animation: none; }
+}

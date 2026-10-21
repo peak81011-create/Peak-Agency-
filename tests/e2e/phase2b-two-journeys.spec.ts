@@ -102,3 +102,29 @@ test("la page Créateurs, la FAQ à deux onglets et le bouton « Besoin d'aide ?
   await page.goto("/en/creators");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("You create. We get you seen.");
 });
+
+test("les 4 offres en bulles, la page détaillée d'une offre avec la transition, puis l'inscription", async ({ page }) => {
+  await page.goto("/fr/tarifs");
+  await expect(page.getByTestId("pricing-plans").getByRole("article")).toHaveCount(4);
+  await expect(page.getByTestId("offer-elite")).toContainText("0,80");
+  await page.getByTestId("offer-croissance").getByRole("link", { name: /Voir tout le détail/ }).click();
+  await expect(page.getByTestId("page-transition")).toBeVisible();
+  await expect(page).toHaveURL(/\/fr\/tarifs\/croissance$/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Croissance");
+  await expect(page.getByText("200", { exact: true })).toBeVisible();
+  await expect(page.getByText("Pas de prélèvement automatique")).toBeVisible();
+  await expect(page.getByTestId("page-transition")).toHaveCount(0);
+  await page.getByRole("link", { name: "Je m'inscris avec l'offre Croissance" }).first().click();
+  await expect(page).toHaveURL(/\/fr\/signup\?plan=/);
+});
+
+test("l'owner voit la fréquentation du site et tous les comptes", async ({ page }) => {
+  await page.goto("/fr");
+  await page.goto("/fr/createurs");
+  await loginAsOwner(page);
+  await page.goto("/fr/admin/traffic");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Fréquentation du site");
+  await expect(page.getByTestId("top-pages")).toContainText("/fr");
+  await page.goto("/fr/admin/users");
+  await expect(page.getByTestId("users-table")).toContainText("client.actif@demo.peak.local");
+});

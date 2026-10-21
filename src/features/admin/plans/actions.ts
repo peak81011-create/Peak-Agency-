@@ -43,6 +43,13 @@ export async function savePlanAction(planId: string | null, input: PlanFormInput
     is_visible: v.isVisible,
     is_featured: v.isFeatured,
     is_demo: false,
+    slug: v.slug || null,
+    tagline_fr: v.taglineFr,
+    tagline_en: v.taglineEn,
+    clip_length_fr: v.clipLengthFr,
+    clip_length_en: v.clipLengthEn,
+    details_fr: v.detailsFr,
+    details_en: v.detailsEn,
   };
 
   // Session de l'utilisateur : la RLS (plans.manage) s'applique aussi en base.

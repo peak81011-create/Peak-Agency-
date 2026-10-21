@@ -203,7 +203,9 @@ suite("RLS et permissions (Postgres)", () => {
   it("un visiteur anonyme ne voit que les offres visibles et rien d'autre", async () => {
     await asUser(db, null, async (q) => {
       const plans = await q<{ name_fr: string }>("select name_fr from public.plans");
-      expect(plans.rows.map((r) => r.name_fr)).toEqual(["Démo"]);
+      const names = plans.rows.map((r) => r.name_fr);
+      expect(names).toContain("Démo");
+      expect(names).not.toContain("Cachée");
     });
     await expect(asUser(db, null, (q) => q("select * from public.clients"))).rejects.toThrow(/permission denied/);
     await expect(asUser(db, null, (q) => q("select * from public.settings"))).rejects.toThrow(/permission denied/);

@@ -82,6 +82,9 @@ async function ensureUser(user: DemoUser): Promise<string> {
 }
 
 async function ensurePlans(): Promise<string[]> {
+  // Les offres réelles (créées par la migration ou par l'admin) sont utilisées en priorité.
+  const real = await check("plans", db.from("plans").select("id").eq("is_demo", false).eq("is_visible", true).order("sort_order"));
+  if (real.length >= 2) return real.map((p) => p.id);
   const existing = await check("plans", db.from("plans").select("id").eq("is_demo", true).order("sort_order"));
   if (existing.length) return existing.map((p) => p.id);
   const rows = [
@@ -274,7 +277,7 @@ async function main() {
     {
       client_id: active,
       plan_id: growth,
-      amount_cents: 89000,
+      amount_cents: 27900,
       status: "valide",
       submitted_at: start.toISOString(),
       validated_by: ids.owner,
@@ -282,7 +285,7 @@ async function main() {
       period_start: isoDate(start),
       period_end: isoDate(end),
     },
-    { client_id: pending, plan_id: starter, amount_cents: 49000, status: "a_verifier", submitted_at: new Date().toISOString() },
+    { client_id: pending, plan_id: starter, amount_cents: 14900, status: "a_verifier", submitted_at: new Date().toISOString() },
   ];
   for (const payment of demoPayments) {
     const existing = await check(

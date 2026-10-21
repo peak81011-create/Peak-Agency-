@@ -25,6 +25,16 @@ export const planFormSchema = z.object({
   sortOrder: z.string().trim().regex(/^-?\d{1,4}$/, { message: "number" }),
   isVisible: z.boolean(),
   isFeatured: z.boolean(),
+  slug: z
+    .string()
+    .trim()
+    .refine((v) => v === "" || /^[a-z0-9-]{2,40}$/.test(v), { message: "slug" }),
+  taglineFr: z.string().trim().max(200, { message: "tooLong" }),
+  taglineEn: z.string().trim().max(200, { message: "tooLong" }),
+  clipLengthFr: z.string().trim().max(60, { message: "tooLong" }),
+  clipLengthEn: z.string().trim().max(60, { message: "tooLong" }),
+  detailsFr: z.string().max(8000, { message: "tooLong" }),
+  detailsEn: z.string().max(8000, { message: "tooLong" }),
 });
 export type PlanFormInput = z.infer<typeof planFormSchema>;
 

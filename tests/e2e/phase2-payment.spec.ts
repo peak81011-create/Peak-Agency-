@@ -9,12 +9,12 @@ test.describe("Site public", () => {
 
     await page.goto("/fr/pricing");
     const plans = page.getByTestId("pricing-plans");
-    await expect(plans.getByRole("article")).toHaveCount(3);
-    await expect(plans).toContainText("Démo — Croissance");
+    await expect(plans.getByRole("article")).toHaveCount(4);
+    await expect(plans).toContainText("Croissance");
     await expect(plans).toContainText("/ mois");
 
     await page.goto("/en/pricing");
-    await expect(page.getByTestId("pricing-plans")).toContainText("Demo — Growth");
+    await expect(page.getByTestId("pricing-plans")).toContainText("Growth");
     await expect(page.getByTestId("pricing-plans")).toContainText("/ month");
     await page.goto("/en");
     await expect(page.getByRole("heading", { level: 1 })).toContainText("We turn long videos");
@@ -46,7 +46,7 @@ test.describe("Parcours de paiement par virement", () => {
   test("un créateur s'inscrit, choisit une offre, voit l'IBAN et sa référence, dépose une preuve ; l'espace reste verrouillé", async ({ page }) => {
     // Choix de l'offre depuis la vitrine
     await page.goto("/fr/pricing");
-    await page.getByRole("article").filter({ hasText: "Démo — Croissance" }).getByRole("link", { name: "Choisir cette offre" }).click();
+    await page.getByRole("article").filter({ hasText: "Croissance" }).getByRole("link", { name: "Choisir cette offre" }).click();
     await expectPath(page, /\/fr\/signup\?plan=/);
 
     await page.getByLabel("Nom complet").fill("Créateur E2E");
@@ -64,11 +64,11 @@ test.describe("Parcours de paiement par virement", () => {
     await page.getByLabel("Twitch").fill("https://www.twitch.tv/e2e-live");
     await page.getByRole("button", { name: "Continuer" }).click();
     await expectPath(page, /\/fr\/app\/plan$/);
-    await expect(page.getByRole("radio", { name: /Démo — Croissance/ })).toHaveAttribute("aria-checked", "true");
+    await expect(page.getByRole("radio", { name: /Croissance/ })).toHaveAttribute("aria-checked", "true");
     await page.getByRole("button", { name: "Continuer vers le paiement" }).click();
     await expectPath(page, /\/fr\/app\/payment$/);
 
-    await expect(page.getByTestId("payment-amount")).toContainText("890,00");
+    await expect(page.getByTestId("payment-amount")).toContainText("279,00");
     await expect(page.getByTestId("bank-details")).toContainText("FR76 3000 6000 0112 3456 7890 189");
     reference = ((await page.getByTestId("payment-reference").textContent()) ?? "").trim();
     expect(reference).toMatch(/^PEAK-\d{4}-\d{4}$/);

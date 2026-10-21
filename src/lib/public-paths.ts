@@ -17,3 +17,8 @@ export function localizedPath(path: string, locale: Locale): string {
   const fr = (FR_PATHS as Record<string, string>)[base] ?? base;
   return hash ? `${fr}#${hash}` : fr;
 }
+
+/** Page détaillée d'une offre (/fr/tarifs/croissance, /en/pricing/growth…). */
+export function offerPath(slug: string, locale: Locale): string {
+  return `${localizedPath("/pricing", locale)}/${slug}`;
+}

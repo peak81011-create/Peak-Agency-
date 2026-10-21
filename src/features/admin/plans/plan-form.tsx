@@ -68,6 +68,11 @@ export function PlanForm({ planId, defaults }: { planId: string | null; defaults
         {text("accountsIncluded", t("accountsIncluded"), { inputMode: "numeric" })}
         {text("deliveryDays", t("deliveryDays"), { inputMode: "numeric" })}
         {text("sortOrder", t("sortOrder"), { inputMode: "numeric" })}
+        {text("slug", t("slug"))}
+        {text("taglineFr", t("taglineFr"))}
+        {text("taglineEn", t("taglineEn"))}
+        {text("clipLengthFr", t("clipLengthFr"))}
+        {text("clipLengthEn", t("clipLengthEn"))}
       </div>
       <fieldset className="flex flex-col gap-2">
         <legend className="mb-1 text-[13px] font-semibold">{t("platforms")}</legend>
@@ -86,6 +91,14 @@ export function PlanForm({ planId, defaults }: { planId: string | null; defaults
         </Field>
         <Field label={t("featuresEn")} htmlFor="featuresEn" hint={t("featuresHint")} error={errorText(errors.featuresEn?.message)}>
           <Textarea id="featuresEn" rows={4} {...register("featuresEn")} />
+        </Field>
+      </div>
+      <div className="grid gap-4 md:grid-cols-2">
+        <Field label={t("detailsFr")} htmlFor="detailsFr" hint={t("detailsHint")} error={errorText(errors.detailsFr?.message)}>
+          <Textarea id="detailsFr" rows={10} {...register("detailsFr")} />
+        </Field>
+        <Field label={t("detailsEn")} htmlFor="detailsEn" hint={t("detailsHint")} error={errorText(errors.detailsEn?.message)}>
+          <Textarea id="detailsEn" rows={10} {...register("detailsEn")} />
         </Field>
       </div>
       <div className="flex flex-wrap gap-6">

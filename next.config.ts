@@ -31,7 +31,10 @@ const nextConfig: NextConfig = {
   // Adresses françaises des pages publiques (voir src/lib/public-paths.ts)
   async rewrites() {
     return {
-      beforeFiles: Object.entries(FR_PATHS).map(([en, fr]) => ({ source: `/fr${fr}`, destination: `/fr${en}` })),
+      beforeFiles: [
+        ...Object.entries(FR_PATHS).map(([en, fr]) => ({ source: `/fr${fr}`, destination: `/fr${en}` })),
+        { source: "/fr/tarifs/:slug", destination: "/fr/pricing/:slug" },
+      ],
       afterFiles: [],
       fallback: [],
     };

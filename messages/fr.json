@@ -73,7 +73,9 @@
     "ctaClippers": "Postuler",
     "faqAdmin": "FAQ",
     "support": "Aide",
-    "supportAdmin": "Service client"
+    "supportAdmin": "Service client",
+    "traffic": "Fréquentation",
+    "users": "Tous les comptes"
   },
   "footer": {
     "tagline": "Vos lives et vidéos longues transformés en clips verticaux, publiés chaque jour sur des comptes dédiés.",
@@ -200,6 +202,17 @@
       "title": "Une question ?",
       "body": "Consultez la <faq>FAQ</faq> ou <contact>écrivez-nous</contact>.",
       "response": "On vous répond sous {delai_reponse}."
+    },
+    "clipperTeaser": {
+      "eyebrow": "Clippers",
+      "title": "Vous savez monter ? L'équipe recrute.",
+      "lead": "On cherche des clippers pour transformer les vidéos de nos créateurs en clips qui cartonnent. Payé à la performance, avec un minimum garanti.",
+      "cta": "Découvrir le métier de clipper",
+      "points": {
+        "one": "Des missions prêtes à monter : pas besoin de chercher des clients.",
+        "two": "Un gain par clip validé, plus une prime selon les vues.",
+        "three": "Tu travailles d'où tu veux, à ton rythme."
+      }
     }
   },
   "auth": {
@@ -309,7 +322,8 @@
     "prefix": "Lettres et chiffres uniquement, sans espace.",
     "messageTooShort": "Votre message est un peu court (10 caractères minimum).",
     "date": "Date invalide.",
-    "timecode": "Format attendu : mm:ss ou hh:mm:ss."
+    "timecode": "Format attendu : mm:ss ou hh:mm:ss.",
+    "slug": "Lettres minuscules, chiffres et tirets uniquement (ex. croissance)."
   },
   "dashboard": {
     "welcome": "Bonjour {name}",
@@ -349,7 +363,8 @@
       "trimestriel": "/ trimestre",
       "annuel": "/ an",
       "unique": "une fois"
-    }
+    },
+    "clipLength": "Clips de {length}"
   },
   "contact": {
     "eyebrow": "Contact",
@@ -629,7 +644,15 @@
         "featuresEn": "Autres avantages (anglais)",
         "featuresHint": "Un avantage par ligne.",
         "isVisible": "Visible sur le site",
-        "isFeatured": "Offre mise en avant"
+        "isFeatured": "Offre mise en avant",
+        "slug": "Adresse de la page (ex. croissance)",
+        "taglineFr": "Accroche (FR)",
+        "taglineEn": "Accroche (EN)",
+        "clipLengthFr": "Durée des clips (FR)",
+        "clipLengthEn": "Durée des clips (EN)",
+        "detailsFr": "Description détaillée (FR)",
+        "detailsEn": "Description détaillée (EN)",
+        "detailsHint": "Affichée sur la page de l'offre. « ## Titre » pour un intertitre, « - » pour une liste."
       }
     },
     "settings": {
@@ -1019,6 +1042,38 @@
         "create": "Ajouter",
         "delete": "Supprimer"
       }
+    },
+    "traffic": {
+      "title": "Fréquentation du site",
+      "lead": "Visites des pages publiques, comptées sans cookie ni donnée personnelle : un visiteur est compté une fois par jour, sans pouvoir être reconnu ni suivi.",
+      "visitorsToday": "Visiteurs aujourd'hui",
+      "visitors7": "Visiteurs sur 7 jours",
+      "visitors30": "Visiteurs sur 30 jours",
+      "viewsDetail": "{n, plural, one {# page vue} other {# pages vues}}",
+      "signups30": "Inscriptions créateurs (30 j)",
+      "applicationsDetail": "{applications} candidatures clippers · {messages} messages",
+      "chartTitle": "Visiteurs par jour (30 derniers jours)",
+      "visitors": "Visiteurs",
+      "topPages": "Pages les plus vues (30 j)",
+      "topReferrers": "D'où viennent les visiteurs (30 j)",
+      "empty": "Pas encore de visite enregistrée.",
+      "emptyReferrers": "Pas encore de visite venant d'un autre site."
+    },
+    "users": {
+      "title": "Tous les comptes",
+      "lead": "Tous les comptes du site : créateurs, clippers et équipe. Cliquez sur un créateur pour ouvrir sa fiche.",
+      "search": "Nom ou e-mail",
+      "role": "Rôle",
+      "allRoles": "Tous les rôles",
+      "filter": "Filtrer",
+      "count": "{count, plural, one {# compte} other {# comptes}}",
+      "inactive": "Désactivé",
+      "cols": {
+        "name": "Compte",
+        "role": "Rôle",
+        "created": "Créé le",
+        "lastSeen": "Dernière visite"
+      }
     }
   },
   "emails": {
@@ -1359,6 +1414,60 @@
     "final": {
       "title": "Prêt à être vu par plus de monde ?",
       "talk": "Parler à l'équipe"
+    },
+    "who": {
+      "eyebrow": "Pour qui ?",
+      "title": "Pour tous ceux qui font du contenu long",
+      "items": {
+        "streamers": {
+          "title": "Streamers",
+          "body": "Twitch, Kick, YouTube Live : vos heures de live regorgent de moments à partager."
+        },
+        "podcasts": {
+          "title": "Podcasts",
+          "body": "Une phrase forte, un débat, une anecdote : parfait en clip de 30 secondes."
+        },
+        "youtubers": {
+          "title": "YouTubers",
+          "body": "Vos vidéos longues méritent une seconde vie sur les formats courts."
+        },
+        "experts": {
+          "title": "Coachs et experts",
+          "body": "Vos conseils en vidéo courte font connaître votre expertise à un nouveau public."
+        }
+      }
+    },
+    "timeline": {
+      "eyebrow": "Concrètement",
+      "title": "Ce qui se passe après votre live",
+      "lead": "Un exemple de parcours, de l'envoi de la vidéo aux premiers résultats.",
+      "items": {
+        "day0": {
+          "when": "Le jour même",
+          "title": "Vous envoyez votre live",
+          "body": "Un lien Twitch, YouTube ou un fichier, depuis votre espace, avec vos remarques éventuelles."
+        },
+        "day1": {
+          "when": "Dans les jours qui suivent",
+          "title": "Les clippers repèrent les meilleurs moments",
+          "body": "Ils regardent la vidéo, sélectionnent les passages forts et montent les clips au format vertical, avec sous-titres et accroche."
+        },
+        "day2": {
+          "when": "Avant publication",
+          "title": "Vous validez (si vous le souhaitez)",
+          "body": "Les clips apparaissent dans votre espace. Vous les validez ou demandez une modification en un clic."
+        },
+        "week1": {
+          "when": "La première semaine",
+          "title": "Les clips sont publiés chaque jour",
+          "body": "Sur vos comptes dédiés, aux heures où votre audience est active. Vous suivez les vues de chaque clip."
+        },
+        "month1": {
+          "when": "Au fil des semaines",
+          "title": "On ajuste selon ce qui marche",
+          "body": "Les formats qui plaisent sont renforcés, les autres abandonnés. Votre communauté grandit, clip après clip."
+        }
+      }
     }
   },
   "clippers": {
@@ -1463,6 +1572,59 @@
     "final": {
       "title": "Prêt à transformer ton talent en revenus ?",
       "cta": "Postuler maintenant"
+    },
+    "job": {
+      "eyebrow": "Le métier",
+      "title": "C'est quoi, être clipper ?",
+      "p1": "Un clipper regarde les vidéos longues des créateurs (lives, podcasts, vidéos YouTube) et en tire les meilleurs moments pour en faire des clips courts et verticaux.",
+      "p2": "Ton rôle : repérer le passage qui accroche, le couper au bon endroit, ajouter des sous-titres lisibles et une accroche qui donne envie de regarder jusqu'au bout. Chaque clip que tu montes peut être vu par des milliers de personnes, et tu es payé selon ses résultats."
+    },
+    "mission": {
+      "title": "Une mission, étape par étape",
+      "items": {
+        "receive": {
+          "title": "Tu reçois une mission",
+          "body": "Une vidéo source, le nombre de clips attendus, les consignes du créateur et une échéance."
+        },
+        "watch": {
+          "title": "Tu repères les moments forts",
+          "body": "Réactions, fous rires, phrases marquantes, infos utiles : ce qui fait réagir."
+        },
+        "edit": {
+          "title": "Tu montes les clips",
+          "body": "Format vertical, coupe au bon rythme, sous-titres, accroche dans la première seconde."
+        },
+        "deliver": {
+          "title": "Tu livres dans ton espace",
+          "body": "L'équipe valide ou te fait un retour précis pour corriger."
+        },
+        "paid": {
+          "title": "Tu es payé",
+          "body": "Chaque clip validé compte dans ton relevé du mois, avec sa prime selon les vues."
+        }
+      }
+    },
+    "learn": {
+      "eyebrow": "Progresser",
+      "title": "Ce que tu vas apprendre",
+      "items": {
+        "hooks": {
+          "title": "Les accroches",
+          "body": "Capter l'attention dans la première seconde."
+        },
+        "rhythm": {
+          "title": "Le rythme",
+          "body": "Couper au bon moment, garder l'énergie jusqu'à la fin."
+        },
+        "captions": {
+          "title": "Les sous-titres",
+          "body": "Lisibles, bien placés, qui donnent envie de rester."
+        },
+        "trends": {
+          "title": "Les codes des plateformes",
+          "body": "Ce qui marche sur TikTok, Reels et Shorts, et pourquoi."
+        }
+      }
     }
   },
   "apply": {
@@ -1585,6 +1747,176 @@
       "mission": "Mission",
       "remuneration": "Rémunération",
       "autre": "Autre"
+    }
+  },
+  "offers": {
+    "eyebrow": "Nos offres",
+    "featured": "Le plus choisi",
+    "perClip": "soit {value} le clip",
+    "clipsPerMonth": "{n} clips par mois",
+    "perDay": "≈ {n} par jour",
+    "accounts": "{n, plural, one {# compte dédié} other {# comptes dédiés}}",
+    "delivery": "{n, plural, one {livrés sous 24 h} other {livrés sous # jours}}",
+    "details": "Voir tout le détail",
+    "teaserTitle": "Quatre offres, selon votre rythme",
+    "teaserLead": "Du premier compte TikTok à 20 clips par jour sur trois plateformes. Cliquez sur une offre pour tout savoir : nombre de clips, durée, comptes, délais.",
+    "compareAll": "Comparer les offres",
+    "compare": {
+      "eyebrow": "Comparatif",
+      "title": "Toutes les offres côte à côte",
+      "price": "Prix",
+      "perClip": "Prix par clip",
+      "clips": "Clips par mois",
+      "length": "Durée des clips",
+      "accounts": "Comptes dédiés",
+      "platforms": "Plateformes",
+      "delivery": "Livraison",
+      "approval": "Validation avant publication",
+      "yes": "Inclus",
+      "no": "Non inclus"
+    },
+    "start": {
+      "eyebrow": "Pour démarrer",
+      "title": "Commencer, c'est simple",
+      "lead": "En quelques minutes, votre espace est créé et votre offre choisie. Les premiers clips arrivent dès que votre virement est vérifié.",
+      "steps": {
+        "choose": {
+          "title": "Choisissez votre offre",
+          "body": "Comparez les quatre offres et cliquez sur celle qui vous correspond."
+        },
+        "account": {
+          "title": "Créez votre compte",
+          "body": "Votre e-mail, un mot de passe, et quelques infos sur votre chaîne : 2 minutes."
+        },
+        "transfer": {
+          "title": "Faites le virement",
+          "body": "Votre espace affiche le montant, nos coordonnées et votre référence. Déposez la capture du virement."
+        },
+        "send": {
+          "title": "Envoyez votre première vidéo",
+          "body": "Dès que votre espace est activé, envoyez un live ou une vidéo : les clippers s'y mettent."
+        }
+      }
+    },
+    "faq": {
+      "eyebrow": "Questions fréquentes",
+      "title": "Ce qu'on nous demande le plus",
+      "all": "Voir toute la FAQ"
+    },
+    "offerEyebrow": "Offre",
+    "signupWith": "Je m'inscris avec l'offre {name}",
+    "figures": {
+      "eyebrow": "En un coup d'œil",
+      "title": "Ce que comprend l'offre",
+      "clips": "Clips par mois",
+      "perDay": "Clips par jour",
+      "length": "Durée des clips",
+      "accounts": "Comptes dédiés",
+      "platforms": "Plateformes",
+      "delivery": "Délai de livraison"
+    },
+    "commitment": {
+      "title": "Ce qui vous engage",
+      "monthly": "Un abonnement mensuel, au prix affiché.",
+      "transfer": "Pas de prélèvement automatique : chaque mois, vous recevez un rappel et vous renouvelez par virement.",
+      "switch": "Vous pouvez passer à une offre supérieure à tout moment.",
+      "activation": "Votre espace est activé sous {delai_activation} après réception du virement.",
+      "stop": "{conditions_resiliation}"
+    },
+    "offerStart": {
+      "title": "Comment démarrer avec cette offre",
+      "steps": {
+        "account": {
+          "title": "Créez votre compte",
+          "body": "Cliquez sur « Je m'inscris » : l'offre est déjà sélectionnée."
+        },
+        "profile": {
+          "title": "Parlez-nous de votre chaîne",
+          "body": "Vos plateformes, vos horaires de live, ce que vous voulez mettre en avant."
+        },
+        "transfer": {
+          "title": "Faites le virement",
+          "body": "Avec la référence affichée dans votre espace, puis déposez la capture."
+        },
+        "send": {
+          "title": "Envoyez vos vidéos",
+          "body": "Dès l'activation, envoyez vos lives : les premiers clips arrivent."
+        }
+      }
+    },
+    "others": {
+      "eyebrow": "Les autres offres",
+      "title": "Comparer avec une autre offre"
+    }
+  },
+  "blocks": {
+    "clipping": {
+      "eyebrow": "Le clipping",
+      "title": "C'est quoi, le clipping ?",
+      "p1": "Le clipping, c'est transformer une vidéo longue (un live de 3 heures, un podcast, une vidéo YouTube) en dizaines de vidéos courtes et verticales, faites pour TikTok, Instagram Reels et YouTube Shorts.",
+      "p2": "Dans un long contenu, il y a toujours des pépites : une réaction, un fou rire, une phrase qui marque, un conseil utile. Seules, elles passent inaperçues au milieu des heures de vidéo. Découpées, sous-titrées et publiées au bon moment, elles deviennent des vidéos que des milliers de personnes regardent en quelques secondes.",
+      "p3": "Chaque clip est une porte d'entrée vers vous : la personne qui tombe dessus découvre votre univers, s'abonne, et finit par venir sur vos lives ou votre chaîne.",
+      "diagram": {
+        "source": "Votre live ou votre vidéo longue",
+        "clips": "Les meilleurs moments, montés en vertical",
+        "platforms": "Publiés sur TikTok · Reels · Shorts"
+      }
+    },
+    "why": {
+      "eyebrow": "Pourquoi ça marche",
+      "title": "Ce qu'un clip peut vous rapporter",
+      "lead": "Les vidéos courtes sont aujourd'hui le premier moyen de se faire découvrir. Voici pourquoi publier des clips chaque jour change la donne.",
+      "items": {
+        "discovery": {
+          "title": "Être découvert par des inconnus",
+          "body": "Sur TikTok, Reels et Shorts, les vidéos sont montrées à des gens qui ne vous suivent pas encore. Un bon clip peut toucher bien plus de monde que votre audience actuelle."
+        },
+        "chances": {
+          "title": "Multiplier vos chances",
+          "body": "Un live d'une soirée peut donner des dizaines de clips. Chaque clip est une nouvelle chance de tomber sur la bonne personne, au bon moment."
+        },
+        "lives": {
+          "title": "Ramener du monde sur vos lives",
+          "body": "Un clip donne envie de voir la suite. Les spectateurs qui vous découvrent en vidéo courte viennent vous regarder en direct et deviennent des fidèles."
+        },
+        "regular": {
+          "title": "Être régulier sans effort",
+          "body": "Publier tous les jours, c'est ce que les algorithmes récompensent. Avec l'agence, c'est fait pour vous, même les semaines où vous n'avez pas le temps."
+        }
+      }
+    },
+    "compare": {
+      "eyebrow": "Avec ou sans nous",
+      "title": "Ce qui change avec Peak",
+      "without": "Seul, sans agence",
+      "with": "Avec Peak Clipping Agency",
+      "rows": {
+        "time": {
+          "without": "Des heures à revoir vos lives et à monter vous-même.",
+          "with": "Zéro minute de montage : vous envoyez un lien, c'est tout."
+        },
+        "regularity": {
+          "without": "Des publications irrégulières, quand vous avez le temps.",
+          "with": "Des clips publiés chaque jour, même quand vous êtes occupé."
+        },
+        "platforms": {
+          "without": "Une seule plateforme, faute de temps.",
+          "with": "TikTok, Reels et Shorts, avec des comptes dédiés."
+        },
+        "skills": {
+          "without": "Apprendre le montage, les accroches, les tendances.",
+          "with": "Des clippers formés qui connaissent les codes de chaque plateforme."
+        },
+        "follow": {
+          "without": "Difficile de savoir ce qui marche.",
+          "with": "Un espace clair : chaque clip, ses vues, ce qui fonctionne."
+        }
+      }
+    },
+    "faq": {
+      "eyebrow": "Questions fréquentes",
+      "title": "Les réponses aux questions qu'on nous pose le plus",
+      "all": "Voir toutes les questions"
     }
   }
 }

@@ -23,10 +23,17 @@ export type PlanRow = {
   is_visible: boolean;
   is_featured: boolean;
   is_demo: boolean;
+  slug: string | null;
+  tagline_fr: string;
+  tagline_en: string;
+  clip_length_fr: string;
+  clip_length_en: string;
+  details_fr: string;
+  details_en: string;
 };
 
 export const PLAN_COLUMNS =
-  "id, name_fr, name_en, description_fr, description_en, price_cents, currency, billing_period, clips_per_period, accounts_included, platforms, delivery_days, features_fr, features_en, sort_order, is_visible, is_featured, is_demo";
+  "id, name_fr, name_en, description_fr, description_en, price_cents, currency, billing_period, clips_per_period, accounts_included, platforms, delivery_days, features_fr, features_en, sort_order, is_visible, is_featured, is_demo, slug, tagline_fr, tagline_en, clip_length_fr, clip_length_en, details_fr, details_en";
 
 export async function getVisiblePlans(): Promise<PlanRow[]> {
   const supabase = await createSupabaseServerClient();

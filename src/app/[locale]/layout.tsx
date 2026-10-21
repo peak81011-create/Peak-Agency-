@@ -3,6 +3,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
+import { PageTransitionProvider } from "@/components/transition/page-transition";
 import { routing } from "@/i18n/routing";
 import { archivo, inter, jetbrains } from "../fonts";
 import "../globals.css";
@@ -25,11 +26,14 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "meta" });
 
   return (
     <html lang={locale} className={`${archivo.variable} ${inter.variable} ${jetbrains.variable}`}>
       <body>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          <PageTransitionProvider wordmark={t("siteName")}>{children}</PageTransitionProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

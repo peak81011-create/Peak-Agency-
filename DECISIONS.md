@@ -104,3 +104,18 @@ Ce fichier liste les choix faits pendant la construction, quand le cahier des ch
 - **Notes internes** jamais lisibles par l'auteur (règle en base). **Réponses enregistrées** FR/EN : la version de la langue de l'utilisateur est insérée.
 - **Permission** `support.manage` (nouvelle), accordée par défaut à l'assistante. La note de satisfaction (1 à 5) est enregistrée ; les statistiques (délai moyen, note moyenne) arrivent en phase 6.
 
+## Offres, pages longues, transition et fréquentation (demande du propriétaire)
+
+- **4 offres proposées** (modifiables dans Admin → Offres & tarifs), ajoutées par la migration seulement si aucune offre réelle n'existe :
+  Lancement 149 €/mois (90 clips, 1 compte TikTok, 15–45 s, livraison 3 j) ;
+  Croissance 279 €/mois (200 clips, 2 comptes TikTok + Shorts, 15–60 s, 2 j, « le plus choisi ») ;
+  Pro 399 €/mois (360 clips, 3 comptes TikTok + Reels + Shorts, 15–60 s, 2 j) ;
+  Élite 480 €/mois (600 clips = 0,80 € le clip, 5 comptes, 15–90 s, 24 h, interlocuteur dédié).
+  Prix par clip dégressif (1,66 € → 0,80 €) : accessible aux petits créateurs, sans brader le travail.
+- **Page détaillée par offre** (/fr/tarifs/croissance…) : chiffres clés, description, « ce qui vous engage » (abonnement mensuel, pas de prélèvement automatique : renouvellement par virement, ce qui correspond au fonctionnement réel de la plateforme), étapes pour démarrer, autres offres. Nouveaux champs d'offre : adresse (slug), accroche, durée des clips, description détaillée.
+- **Transition** : rideau vert qui descend du haut de l'écran avec le logo Peak au centre, puis continue sa descente pour dévoiler la page (≈ 1 s au total). Utilisée sur les offres et les grandes portes de l'accueil ; désactivée si l'appareil demande moins d'animations.
+- **Pages allongées** : « C'est quoi le clipping ? » (avec schéma), « Ce qu'un clip peut vous rapporter », « Avec ou sans nous », « Pour qui ? », « Ce qui se passe après votre live », métier de clipper et mission type, questions fréquentes déjà ouvertes. Aucun chiffre de résultat inventé.
+- **FAQ** : 13 questions supplémentaires (durée et nombre de clips, droits d'auteur, changement d'offre, prélèvement, langues…).
+- **Fréquentation** (Admin → Fréquentation, permission reports.view_all) : pages vues et visiteurs uniques par jour, sans cookie ni donnée personnelle. Un visiteur est une empreinte hachée (IP + navigateur + date + secret) qui change chaque jour : impossible de le reconnaître ou de le suivre ; aucun bandeau cookies n'est nécessaire. Les robots sont ignorés. Variable facultative `ANALYTICS_SALT`.
+- **Tous les comptes** (Admin → Tous les comptes, permission users.manage) : liste de tous les comptes (créateurs, clippers, équipe), recherche, rôle, dernière visite. La modification des rôles et « voir en tant que » arrivent en phase 4.
+

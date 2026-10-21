@@ -2,9 +2,13 @@ import { ArrowRight, Clapperboard, Sparkles } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { buttonVariants } from "@/components/ui/button";
+import { TransitionLink } from "@/components/transition/page-transition";
+import { getFaq } from "@/features/faq/queries";
+import { BeforeAfter, ClippingExplainer, FaqPreview, OffersBubbles, WhyClips } from "@/features/public/blocks";
 import { Section, SectionTitle } from "@/features/public/sections";
 import { Link } from "@/i18n/navigation";
 import { initPageLocale } from "@/i18n/page";
+import { getSessionUser } from "@/lib/auth/session";
 import { commitmentVars, getCommitments } from "@/lib/commitments";
 import { getContent, parseList } from "@/lib/content/site-content";
 import { fillVars } from "@/lib/content/vars";
@@ -22,7 +26,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const locale = await initPageLocale(params);
-  const [t, c, commitments] = await Promise.all([getTranslations("home"), getContent(KEYS, locale), getCommitments()]);
+  const [t, c, commitments, user, faq] = await Promise.all([
+    getTranslations("home"),
+    getContent(KEYS, locale),
+    getCommitments(),
+    getSessionUser(),
+    getFaq(locale),
+  ]);
   const stats = parseList("home.stats", c["home.stats"]);
   const responseLine = fillVars(t.raw("questions.response") as string, commitmentVars(commitments, locale));
 
@@ -43,7 +53,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* Deux portes d'entrée */}
       <section className="bg-forest-900 pb-14 md:pb-24">
         <div className="mx-auto grid w-full max-w-[1200px] gap-4 px-4 md:grid-cols-2 md:gap-6 md:px-8">
-          <Link
+          <TransitionLink
             href={localizedPath("/creators", locale)}
             className="group flex flex-col gap-4 rounded-xl bg-paper p-7 text-foreground no-underline shadow-2 transition hover:-translate-y-0.5 md:p-9"
             data-testid="door-creator"
@@ -55,8 +65,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               {t("doors.creator.cta")}
               <ArrowRight className="transition group-hover:translate-x-0.5" aria-hidden />
             </span>
-          </Link>
-          <Link
+          </TransitionLink>
+          <TransitionLink
             href="/clippers"
             className="group flex flex-col gap-4 rounded-xl border border-forest-700 bg-forest-800 p-7 text-sage-100 no-underline shadow-2 transition hover:-translate-y-0.5 md:p-9"
             data-testid="door-clipper"
@@ -68,9 +78,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               {t("doors.clipper.cta")}
               <ArrowRight className="transition group-hover:translate-x-0.5" aria-hidden />
             </span>
-          </Link>
+          </TransitionLink>
         </div>
       </section>
+
+      <ClippingExplainer />
+      <WhyClips />
 
       <Section id="how">
         <SectionTitle eyebrow={t("how.eyebrow")} title={t("how.title")} />
@@ -82,6 +95,30 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </li>
           ))}
         </ol>
+      </Section>
+
+      <OffersBubbles user={user} />
+
+      <BeforeAfter />
+
+      {/* Clippers : rejoindre l'équipe */}
+      <Section tone="dark">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:items-center">
+          <div className="flex flex-col gap-4">
+            <SectionTitle eyebrow={t("clipperTeaser.eyebrow")} title={t("clipperTeaser.title")} lead={t("clipperTeaser.lead")} />
+            <TransitionLink href="/clippers" className={cn(buttonVariants({ variant: "accent", size: "lg" }), "self-start")}>
+              {t("clipperTeaser.cta")}
+              <ArrowRight aria-hidden />
+            </TransitionLink>
+          </div>
+          <ul className="flex flex-col gap-3">
+            {(["one", "two", "three"] as const).map((k) => (
+              <li key={k} className="rounded-lg border border-forest-700 bg-forest-800 px-5 py-4 text-sage-100">
+                {t(`clipperTeaser.points.${k}`)}
+              </li>
+            ))}
+          </ul>
+        </div>
       </Section>
 
       {/* Chiffres saisis par l'admin ; bloc masqué tant que la liste est vide */}
@@ -99,7 +136,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </Section>
       ) : null}
 
-      <Section tone="paper">
+      <FaqPreview items={faq.filter((f) => f.isTop).slice(0, 6)} tone="paper" />
+
+      <Section>
         <div className="flex flex-col items-start gap-3">
           <h2 className="font-display text-2xl font-bold md:text-3xl [font-stretch:110%]">{t("questions.title")}</h2>
           <p className="text-muted-foreground">

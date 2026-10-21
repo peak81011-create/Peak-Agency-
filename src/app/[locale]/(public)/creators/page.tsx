@@ -2,10 +2,8 @@ import { BarChart3, Clock, Eye, Radio, ShieldCheck, UserPlus } from "lucide-reac
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { buttonVariants } from "@/components/ui/button";
-import { getVisiblePlans } from "@/features/client/queries";
-import { PlanCard } from "@/features/plans/plan-card";
-import { presentPlan } from "@/features/plans/present";
-import { PlanCta } from "@/features/public/plan-cta";
+import { forAudience, getFaq } from "@/features/faq/queries";
+import { BeforeAfter, ClippingExplainer, FaqPreview, OffersBubbles, WhyClips } from "@/features/public/blocks";
 import { Section, SectionTitle } from "@/features/public/sections";
 import { Link } from "@/i18n/navigation";
 import { initPageLocale } from "@/i18n/page";
@@ -13,7 +11,6 @@ import { getSessionUser } from "@/lib/auth/session";
 import { commitmentVars, getCommitments } from "@/lib/commitments";
 import { fillVars } from "@/lib/content/vars";
 import { localizedPath } from "@/lib/public-paths";
-import { cn } from "@/lib/utils";
 
 const BENEFITS = [
   { key: "visibility", icon: Eye },
@@ -25,6 +22,8 @@ const BENEFITS = [
 ] as const;
 const STEPS = ["plan", "send", "create", "follow"] as const;
 const PROMISES = ["contact", "response", "image", "privacy"] as const;
+const WHO = ["streamers", "podcasts", "youtubers", "experts"] as const;
+const TIMELINE = ["day0", "day1", "day2", "week1", "month1"] as const;
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("creators");
@@ -33,9 +32,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function CreatorsPage({ params }: { params: Promise<{ locale: string }> }) {
   const locale = await initPageLocale(params);
-  const [t, plans, user, commitments] = await Promise.all([getTranslations("creators"), getVisiblePlans(), getSessionUser(), getCommitments()]);
+  const [t, user, commitments, faq] = await Promise.all([getTranslations("creators"), getSessionUser(), getCommitments(), getFaq(locale)]);
   const vars = commitmentVars(commitments, locale);
-  const planViews = await Promise.all(plans.slice(0, 3).map((p) => presentPlan(p, locale)));
   const promises = PROMISES.map((k) => fillVars(t.raw(`promises.items.${k}`) as string, vars)).filter((x): x is string => !!x);
   const pricing = localizedPath("/pricing", locale);
   const help = localizedPath("/help", locale);
@@ -59,6 +57,8 @@ export default async function CreatorsPage({ params }: { params: Promise<{ local
           </div>
         </div>
       </section>
+
+      <ClippingExplainer tone="paper" />
 
       <Section>
         <SectionTitle eyebrow={t("benefits.eyebrow")} title={t("benefits.title")} />
@@ -88,21 +88,37 @@ export default async function CreatorsPage({ params }: { params: Promise<{ local
         </ol>
       </Section>
 
-      {planViews.length ? (
-        <Section>
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <SectionTitle eyebrow={t("plans.eyebrow")} title={t("plans.title")} />
-            <Link href={pricing} className={buttonVariants({ variant: "secondary" })}>
-              {t("plans.compare")}
-            </Link>
-          </div>
-          <div className={cn("grid gap-6", planViews.length > 1 && "md:grid-cols-2 lg:grid-cols-3")}>
-            {planViews.map((p) => (
-              <PlanCard key={p.id} plan={p} featuredLabel={t("plans.featured")} action={<PlanCta planId={p.id} featured={p.featured} user={user} label={t("plans.choose")} />} />
-            ))}
-          </div>
-        </Section>
-      ) : null}
+      <WhyClips tone="light" />
+
+      <Section tone="paper">
+        <SectionTitle eyebrow={t("who.eyebrow")} title={t("who.title")} />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {WHO.map((k) => (
+            <div key={k} className="flex flex-col gap-2 rounded-xl border border-border bg-card p-6">
+              <h3 className="text-lg font-semibold">{t(`who.items.${k}.title`)}</h3>
+              <p className="text-sm text-muted-foreground">{t(`who.items.${k}.body`)}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section>
+        <SectionTitle eyebrow={t("timeline.eyebrow")} title={t("timeline.title")} lead={t("timeline.lead")} />
+        <ol className="relative flex flex-col gap-6 border-l-2 border-primary pl-6 md:pl-8">
+          {TIMELINE.map((k) => (
+            <li key={k} className="relative flex flex-col gap-1">
+              <span aria-hidden className="absolute -left-[33px] top-1.5 size-3.5 rounded-full border-2 border-primary bg-card md:-left-[41px]" />
+              <span className="text-xs font-semibold uppercase tracking-[0.14em] text-forest-700">{t(`timeline.items.${k}.when`)}</span>
+              <h3 className="text-lg font-semibold">{t(`timeline.items.${k}.title`)}</h3>
+              <p className="max-w-2xl text-muted-foreground">{t(`timeline.items.${k}.body`)}</p>
+            </li>
+          ))}
+        </ol>
+      </Section>
+
+      <OffersBubbles user={user} />
+
+      <BeforeAfter />
 
       <Section tone="paper">
         <SectionTitle eyebrow={t("promises.eyebrow")} title={t("promises.title")} />
@@ -115,6 +131,8 @@ export default async function CreatorsPage({ params }: { params: Promise<{ local
         </ul>
         <p className="max-w-2xl text-muted-foreground">{t("promises.honest")}</p>
       </Section>
+
+      <FaqPreview items={forAudience(faq, "createur").slice(0, 8)} tone="paper" />
 
       <Section tone="dark">
         <div className="flex flex-col items-start gap-6">

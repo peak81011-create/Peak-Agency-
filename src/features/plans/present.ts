@@ -14,6 +14,16 @@ export type PlanView = {
   includes: string[];
   featured: boolean;
   demo: boolean;
+  slug: string | null;
+  tagline: string;
+  clipLength: string;
+  details: string;
+  /** Prix par clip (« 0,80 € »), si le nombre de clips est connu. */
+  perClip: string | null;
+  clipsPerPeriod: number | null;
+  accounts: number | null;
+  platforms: string[];
+  deliveryDays: number | null;
 };
 
 export async function presentPlan(plan: PlanRow, locale: Locale, priceCents?: number): Promise<PlanView> {
@@ -23,6 +33,8 @@ export async function presentPlan(plan: PlanRow, locale: Locale, priceCents?: nu
   if (plan.accounts_included != null) includes.push(t("accounts", { count: plan.accounts_included }));
   if (plan.platforms.length) includes.push(plan.platforms.map((p) => t(`platformNames.${p}` as never)).join(", "));
   if (plan.delivery_days != null) includes.push(t("delivery", { count: plan.delivery_days }));
+  const clipLength = locale === "en" ? plan.clip_length_en : plan.clip_length_fr;
+  if (clipLength) includes.push(t("clipLength", { length: clipLength }));
   includes.push(...(locale === "en" ? plan.features_en : plan.features_fr));
   return {
     id: plan.id,
@@ -33,5 +45,14 @@ export async function presentPlan(plan: PlanRow, locale: Locale, priceCents?: nu
     includes,
     featured: plan.is_featured,
     demo: plan.is_demo,
+    slug: plan.slug,
+    tagline: locale === "en" ? plan.tagline_en : plan.tagline_fr,
+    clipLength,
+    details: locale === "en" ? plan.details_en : plan.details_fr,
+    perClip: plan.clips_per_period ? formatMoney(Math.round((priceCents ?? plan.price_cents) / plan.clips_per_period), plan.currency, locale) : null,
+    clipsPerPeriod: plan.clips_per_period,
+    accounts: plan.accounts_included,
+    platforms: plan.platforms.map((p) => t(`platformNames.${p}` as never)),
+    deliveryDays: plan.delivery_days,
   };
 }

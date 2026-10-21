@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { buttonVariants } from "@/components/ui/button";
 import { EarningsSimulator } from "@/features/clippers/earnings-simulator";
+import { forAudience, getFaq } from "@/features/faq/queries";
+import { FaqPreview } from "@/features/public/blocks";
 import { Section, SectionTitle } from "@/features/public/sections";
 import { Link } from "@/i18n/navigation";
 import { initPageLocale } from "@/i18n/page";
@@ -22,6 +24,8 @@ const REASONS = [
 ] as const;
 const PAY_ROWS = ["minimum", "bonus", "counted", "payout"] as const;
 const JOIN_STEPS = ["apply", "test", "welcome"] as const;
+const MISSION = ["receive", "watch", "edit", "deliver", "paid"] as const;
+const LEARN = ["hooks", "rhythm", "captions", "trends"] as const;
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("clippers");
@@ -31,10 +35,11 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ClippersPage({ params }: { params: Promise<{ locale: string }> }) {
   const locale = await initPageLocale(params);
   const supabase = await createSupabaseServerClient();
-  const [t, commitments, { data: levels }] = await Promise.all([
+  const [t, commitments, { data: levels }, faq] = await Promise.all([
     getTranslations("clippers"),
     getCommitments(),
     supabase.from("clipper_levels").select("id, name_fr, name_en, benefits_fr, benefits_en").order("sort_order"),
+    getFaq(locale),
   ]);
   const vars = commitmentVars(commitments, locale);
   const fill = (key: string) => fillVars(t.raw(key as never) as string, vars);
@@ -76,6 +81,40 @@ export default async function ClippersPage({ params }: { params: Promise<{ local
               </span>
               <h3 className="text-lg font-semibold">{t(`reasons.items.${key}.title`)}</h3>
               <p className="text-muted-foreground">{body}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section tone="paper">
+        <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+          <div className="flex flex-col gap-4">
+            <SectionTitle eyebrow={t("job.eyebrow")} title={t("job.title")} />
+            <p className="text-lg text-muted-foreground">{t("job.p1")}</p>
+            <p className="text-muted-foreground">{t("job.p2")}</p>
+          </div>
+          <div className="flex flex-col gap-4">
+            <h3 className="font-display text-xl font-bold [font-stretch:108%]">{t("mission.title")}</h3>
+            <ol className="relative flex flex-col gap-5 border-l-2 border-primary pl-6">
+              {MISSION.map((k) => (
+                <li key={k} className="relative flex flex-col gap-1">
+                  <span aria-hidden className="absolute -left-[33px] top-1.5 size-3.5 rounded-full border-2 border-primary bg-card" />
+                  <h4 className="font-semibold">{t(`mission.items.${k}.title`)}</h4>
+                  <p className="text-sm text-muted-foreground">{t(`mission.items.${k}.body`)}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </Section>
+
+      <Section>
+        <SectionTitle eyebrow={t("learn.eyebrow")} title={t("learn.title")} />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {LEARN.map((k) => (
+            <div key={k} className="flex flex-col gap-2 rounded-xl border border-border bg-card p-6">
+              <h3 className="font-semibold">{t(`learn.items.${k}.title`)}</h3>
+              <p className="text-sm text-muted-foreground">{t(`learn.items.${k}.body`)}</p>
             </div>
           ))}
         </div>
@@ -139,6 +178,8 @@ export default async function ClippersPage({ params }: { params: Promise<{ local
           </div>
         </div>
       </Section>
+
+      <FaqPreview items={forAudience(faq, "clipper").slice(0, 8)} tab="clippers" tone="paper" />
 
       <Section>
         <div className="flex flex-col items-start gap-6 rounded-xl border border-border bg-card p-8 md:p-12">
