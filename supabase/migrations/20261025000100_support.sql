@@ -188,3 +188,13 @@ grant execute on function public.ticket_resolve(uuid), public.ticket_reopen(uuid
   to authenticated;
 revoke execute on function public.ticket_resolve(uuid), public.ticket_reopen(uuid), public.ticket_rate(uuid, smallint, text),
   public.ticket_message_after_insert() from public, anon;
+
+-- ---------------------------------------------------------------------------
+-- Correctif FAQ : les visiteurs non connectés lisent les questions visibles
+-- (la règle précédente appelait une fonction réservée aux comptes connectés).
+-- ---------------------------------------------------------------------------
+drop policy faq_items_select on public.faq_items;
+create policy faq_items_select_public on public.faq_items for select to anon
+  using (is_visible);
+create policy faq_items_select on public.faq_items for select to authenticated
+  using (is_visible or public.has_permission('content.update'));

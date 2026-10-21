@@ -56,6 +56,17 @@ suite("Candidatures clippers (Postgres)", () => {
     ).rejects.toThrow(/row-level security/);
   });
 
+  it("un visiteur non connecté lit la FAQ visible", async () => {
+    await db.query("begin");
+    try {
+      await db.query("set local role anon");
+      const rows = await db.query("select id from public.faq_items");
+      expect(rows.rowCount).toBeGreaterThan(20);
+    } finally {
+      await db.query("rollback");
+    }
+  });
+
   it("le rôle clipper remplace editor", async () => {
     const roles = await db.query<{ r: string }>("select unnest(enum_range(null::public.app_role))::text r");
     expect(roles.rows.map((x) => x.r)).toContain("clipper");
