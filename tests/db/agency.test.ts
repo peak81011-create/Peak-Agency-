@@ -16,14 +16,14 @@ suite("Vidéos, clips, comptes, demandes (Postgres)", () => {
   beforeAll(async () => {
     db = await createTestDatabase("peak_test_agency");
     u.owner = await createUser(db, { email: "owner@test.local", role: "owner" });
-    u.editor = await createUser(db, { email: "editor@test.local", role: "editor" });
-    u.editor2 = await createUser(db, { email: "editor2@test.local", role: "editor" });
+    u.clipper = await createUser(db, { email: "clipper@test.local", role: "clipper" });
+    u.clipper2 = await createUser(db, { email: "clipper2@test.local", role: "clipper" });
     u.a = await createUser(db, { email: "a@test.local" });
     u.b = await createUser(db, { email: "b@test.local" });
     c.a = await clientIdOf(db, u.a);
     c.b = await clientIdOf(db, u.b);
     await db.query("update public.clients set status = 'actif', period_end = current_date + 20 where id in ($1, $2)", [c.a, c.b]);
-    await db.query("insert into public.assignments (user_id, client_id) values ($1, $2), ($3, $2)", [u.editor, c.a, u.editor2]);
+    await db.query("insert into public.assignments (user_id, client_id) values ($1, $2), ($3, $2)", [u.clipper, c.a, u.clipper2]);
 
     accountA = await one(
       "insert into public.social_accounts (client_id, platform, handle) values ($1, 'tiktok', '@a') returning id",
@@ -36,13 +36,13 @@ suite("Vidéos, clips, comptes, demandes (Postgres)", () => {
       [c.a, c.b],
     );
     clip.toReview = await one(
-      "insert into public.clips (client_id, title, status, editor_id, social_account_id) values ($1, 'À valider', 'a_valider', $2, $3) returning id",
-      [c.a, u.editor, accountA],
+      "insert into public.clips (client_id, title, status, clipper_id, social_account_id) values ($1, 'À valider', 'a_valider', $2, $3) returning id",
+      [c.a, u.clipper, accountA],
     );
     clip.rejected = await one("insert into public.clips (client_id, title, status) values ($1, 'Rejeté', 'rejete') returning id", [c.a]);
-    clip.otherEditor = await one(
-      "insert into public.clips (client_id, title, status, editor_id) values ($1, 'Autre monteur', 'en_montage', $2) returning id",
-      [c.a, u.editor2],
+    clip.otherClipper = await one(
+      "insert into public.clips (client_id, title, status, clipper_id) values ($1, 'Autre monteur', 'en_montage', $2) returning id",
+      [c.a, u.clipper2],
     );
     clip.b = await one("insert into public.clips (client_id, title, status) values ($1, 'Clip B', 'publie') returning id", [c.b]);
     await db.query("insert into public.clip_stats_snapshots (clip_id, views) values ($1, 100), ($2, 999)", [clip.toReview, clip.b]);
@@ -80,7 +80,7 @@ suite("Vidéos, clips, comptes, demandes (Postgres)", () => {
   });
 
   it("un monteur ne voit que les clients qui lui sont attribués", async () => {
-    await asUser(db, u.editor, async (q) => {
+    await asUser(db, u.clipper, async (q) => {
       const clips = (await q<{ client_id: string }>("select client_id from public.clips")).rows;
       expect(clips.length).toBeGreaterThan(0);
       expect(clips.every((r) => r.client_id === c.a)).toBe(true);
@@ -91,15 +91,15 @@ suite("Vidéos, clips, comptes, demandes (Postgres)", () => {
   });
 
   it("un monteur ne modifie que ses propres clips", async () => {
-    await asUser(db, u.editor, async (q) => {
+    await asUser(db, u.clipper, async (q) => {
       expect((await q("update public.clips set hook = 'x' where id = $1", [clip.toReview])).rowCount).toBe(1);
-      expect((await q("update public.clips set hook = 'x' where id = $1", [clip.otherEditor])).rowCount).toBe(0);
+      expect((await q("update public.clips set hook = 'x' where id = $1", [clip.otherClipper])).rowCount).toBe(0);
     });
     await asUser(
       db,
       u.owner,
       async (q) => {
-        expect((await q("update public.clips set hook = 'x' where id = $1", [clip.otherEditor])).rowCount).toBe(1);
+        expect((await q("update public.clips set hook = 'x' where id = $1", [clip.otherClipper])).rowCount).toBe(1);
       },
       { aal: "aal2" },
     );
@@ -172,7 +172,7 @@ suite("Vidéos, clips, comptes, demandes (Postgres)", () => {
   it("gestion de l'abonnement par l'agence : prolonger réactive un client en lecture seule", async () => {
     await db.query("update public.clients set status = 'lecture_seule', period_end = current_date - 30 where id = $1", [c.b]);
     await expect(
-      asUser(db, u.editor, (q) => q("select public.admin_update_subscription($1, 'extend', null, null, current_date + 30)", [c.b])),
+      asUser(db, u.clipper, (q) => q("select public.admin_update_subscription($1, 'extend', null, null, current_date + 30)", [c.b])),
     ).rejects.toThrow(/forbidden/);
     await commitAs(db, u.owner, "select public.admin_update_subscription($1, 'extend', null, null, current_date + 30)", [c.b], {
       aal: "aal2",
@@ -188,6 +188,6 @@ suite("Vidéos, clips, comptes, demandes (Postgres)", () => {
 
   it("l'équipe d'un client = personnes attribuées + owners", async () => {
     const team = (await db.query<{ id: string }>("select public.client_team($1) id", [c.a])).rows.map((r) => r.id).sort();
-    expect(team).toEqual([u.owner, u.editor, u.editor2].sort());
+    expect(team).toEqual([u.owner, u.clipper, u.clipper2].sort());
   });
 });

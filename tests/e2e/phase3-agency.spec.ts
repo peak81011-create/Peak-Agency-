@@ -10,7 +10,7 @@ async function login(page: Page, email: string) {
 }
 
 // Un second client actif, créé pour ces tests, qui ne doit jamais voir les
-// données de Léa (client actif de démonstration) ni être vu par le monteur.
+// données de Léa (client actif de démonstration) ni être vu par le clipper.
 const OTHER = { email: "client.isole@test.peak.local", creatorName: "Client isolé (test)" };
 
 const admin = adminClient();
@@ -105,8 +105,8 @@ test.describe("Isolement des données", () => {
     await expect(page.getByText("Le fou rire du live")).toHaveCount(0);
   });
 
-  test("le monteur ne voit que les clients qui lui sont attribués", async ({ page }) => {
-    const db = await asUser(DEMO_USERS.editor.email);
+  test("le clipper ne voit que les clients qui lui sont attribués", async ({ page }) => {
+    const db = await asUser(DEMO_USERS.clipper.email);
     const { data: clients } = await db.from("clients").select("id");
     expect((clients ?? []).map((c) => c.id)).toEqual([leaClient]);
     const { data: clips } = await db.from("clips").select("client_id");
@@ -115,7 +115,7 @@ test.describe("Isolement des données", () => {
     const { data: hidden } = await db.from("clips").select("id").eq("id", otherClip);
     expect(hidden).toEqual([]);
 
-    await login(page, DEMO_USERS.editor.email);
+    await login(page, DEMO_USERS.clipper.email);
     await expect(page).toHaveURL(/\/fr\/admin$/);
     await page.goto("/fr/admin/clips?view=list");
     await expect(page.getByText("La réaction du chat").first()).toBeVisible();

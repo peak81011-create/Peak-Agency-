@@ -164,8 +164,8 @@ async function seedAgencyData(clientId: string, ids: Record<keyof typeof DEMO_US
     db
       .from("social_accounts")
       .insert([
-        { client_id: clientId, platform: "tiktok", handle: "@lea.clips.demo", url: "https://www.tiktok.com/@lea.clips.demo", owner_employee_id: ids.editor, created_on: isoDate(new Date()), followers_count: 4820 },
-        { client_id: clientId, platform: "youtube", handle: "Léa Clips (démo)", url: "https://www.youtube.com/@leaclipsdemo", owner_employee_id: ids.editor, created_on: isoDate(new Date()), followers_count: 690 },
+        { client_id: clientId, platform: "tiktok", handle: "@lea.clips.demo", url: "https://www.tiktok.com/@lea.clips.demo", owner_employee_id: ids.clipper, created_on: isoDate(new Date()), followers_count: 4820 },
+        { client_id: clientId, platform: "youtube", handle: "Léa Clips (démo)", url: "https://www.youtube.com/@leaclipsdemo", owner_employee_id: ids.clipper, created_on: isoDate(new Date()), followers_count: 690 },
       ], { defaultToNull: false })
       .select("id, platform"),
   );
@@ -199,9 +199,9 @@ async function seedAgencyData(clientId: string, ids: Record<keyof typeof DEMO_US
     db
       .from("clips")
       .insert([
-        { client_id: clientId, source_video_id: video.id, social_account_id: tiktok, editor_id: ids.editor, title: "Le fou rire du live", hook: "Impossible de garder mon sérieux", status: "publie", published_at: day(-2), published_url: "https://www.tiktok.com/@lea.clips.demo", created_by: ids.owner },
-        { client_id: clientId, source_video_id: video.id, social_account_id: tiktok, editor_id: ids.editor, title: "La réaction du chat", hook: "Il n'a rien compris", status: "a_valider", scheduled_at: day(2), due_at: day(1), created_by: ids.owner },
-        { client_id: clientId, source_video_id: video.id, social_account_id: tiktok, editor_id: ids.editor, title: "Trois conseils pour débuter", status: "en_montage", due_at: day(3), created_by: ids.owner },
+        { client_id: clientId, source_video_id: video.id, social_account_id: tiktok, clipper_id: ids.clipper, title: "Le fou rire du live", hook: "Impossible de garder mon sérieux", status: "publie", published_at: day(-2), published_url: "https://www.tiktok.com/@lea.clips.demo", created_by: ids.owner },
+        { client_id: clientId, source_video_id: video.id, social_account_id: tiktok, clipper_id: ids.clipper, title: "La réaction du chat", hook: "Il n'a rien compris", status: "a_valider", scheduled_at: day(2), due_at: day(1), created_by: ids.owner },
+        { client_id: clientId, source_video_id: video.id, social_account_id: tiktok, clipper_id: ids.clipper, title: "Trois conseils pour débuter", status: "en_montage", due_at: day(3), created_by: ids.owner },
       ], { defaultToNull: false })
       .select("id, status"),
   );
@@ -299,7 +299,7 @@ async function main() {
     "attributions",
     db.from("assignments").upsert(
       [
-        { user_id: ids.editor, client_id: active, team_role: "monteur" },
+        { user_id: ids.clipper, client_id: active, team_role: "clipper" },
         { user_id: ids.assistant, client_id: active, team_role: "assistante" },
         { user_id: ids.assistant, client_id: pending, team_role: "assistante" },
       ],

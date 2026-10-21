@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
+import { FR_PATHS } from "./src/lib/public-paths";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
@@ -26,6 +27,20 @@ const nextConfig: NextConfig = {
         as: "*.css",
       },
     },
+  },
+  // Adresses françaises des pages publiques (voir src/lib/public-paths.ts)
+  async rewrites() {
+    return {
+      beforeFiles: Object.entries(FR_PATHS).map(([en, fr]) => ({ source: `/fr${fr}`, destination: `/fr${en}` })),
+      afterFiles: [],
+      fallback: [],
+    };
+  },
+  async redirects() {
+    return [
+      { source: "/fr/join", destination: "/fr/clippers/postuler", permanent: true },
+      { source: "/en/join", destination: "/en/clippers/apply", permanent: true },
+    ];
   },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];

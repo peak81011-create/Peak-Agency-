@@ -65,7 +65,13 @@
     "requests": "Demandes",
     "clients": "Clients",
     "join": "Devenir clipper",
-    "applications": "Candidatures"
+    "applications": "Candidatures",
+    "creators": "Créateurs",
+    "clippersPage": "Clippers",
+    "help": "Aide",
+    "ctaCreators": "Voir les offres",
+    "ctaClippers": "Postuler",
+    "faqAdmin": "FAQ"
   },
   "footer": {
     "tagline": "Vos lives et vidéos longues transformés en clips verticaux, publiés chaque jour sur des comptes dédiés.",
@@ -75,20 +81,26 @@
     "legalNotice": "Mentions légales",
     "terms": "CGV",
     "privacy": "Confidentialité",
-    "copyright": "© {year} Peak Clipping Agency"
+    "copyright": "© {year} Peak Clipping Agency",
+    "creators": "Créateurs",
+    "clippers": "Clippers",
+    "help": "Aide",
+    "apply": "Postuler",
+    "clipperTerms": "Conditions clippers",
+    "responseTime": "On vous répond sous {delai_reponse}."
   },
   "roles": {
     "owner": "Propriétaire",
     "assistant": "Assistante",
     "prospector": "Prospecteur",
-    "editor": "Monteur",
+    "clipper": "Clipper",
     "client": "Client"
   },
   "areas": {
     "owner": "Admin · contrôle total",
     "assistant": "Assistante",
     "prospector": "Prospecteur",
-    "editor": "Monteur",
+    "clipper": "Clipper",
     "client": "Espace client"
   },
   "status": {
@@ -141,110 +153,45 @@
       "nouvelle": "Nouvelle",
       "en_cours": "En cours",
       "acceptee": "Acceptée",
-      "refusee": "Refusée"
+      "refusee": "Refusée",
+      "recue": "Reçue",
+      "test_envoye": "Clip test envoyé",
+      "test_recu": "Clip test reçu"
     }
   },
   "home": {
-    "ctaPrimary": "Voir les offres",
-    "ctaSecondary": "Comment ça marche",
-    "ctaContact": "Nous contacter",
-    "howEyebrow": "Comment ça marche",
-    "statsEyebrow": "Résultats",
-    "statsTitle": "Les chiffres de l’agence",
-    "plansEyebrow": "Offres",
-    "plansTitle": "Choisissez votre rythme",
-    "plansCompare": "Comparer les offres",
     "featured": "Le plus choisi",
     "choose": "Choisir cette offre",
     "noPlans": "Les offres seront bientôt disponibles. Écrivez-nous pour en savoir plus.",
-    "testimonialsEyebrow": "Témoignages",
-    "testimonialsTitle": "Ils publient avec nous",
-    "faqEyebrow": "FAQ",
-    "faqTitle": "Questions fréquentes",
-    "faqMore": "Une autre question ? <link>Écrivez-nous</link>.",
-    "hero": {
-      "creatorCta": "Je suis créateur",
-      "clipperCta": "Devenir clipper",
-      "platforms": "TikTok · Instagram Reels · YouTube Shorts"
-    },
-    "audiences": {
-      "eyebrow": "Pour qui",
-      "title": "Deux façons de travailler avec nous",
-      "creators": {
-        "label": "Créateurs",
-        "title": "Vous créez, on fait tourner vos clips",
-        "lead": "Streamers, podcasteurs, vidéastes : vous continuez vos contenus longs, on s'occupe des formats courts.",
-        "points": {
-          "one": "On regarde vos lives et vidéos longues à votre place",
-          "two": "Des clips verticaux montés, sous-titrés, avec une accroche",
-          "three": "Publiés chaque jour sur des comptes dédiés",
-          "four": "Un espace pour valider les clips et suivre les vues"
-        },
-        "cta": "Voir les offres"
+    "doors": {
+      "creator": {
+        "title": "Je suis créateur",
+        "body": "Je veux plus de vues, plus d'abonnés et plus de monde sur mes lives.",
+        "cta": "Découvrir l'offre créateur"
       },
-      "clippers": {
-        "label": "Clippers",
-        "title": "Vous montez, rejoignez la team",
-        "lead": "Vous savez repérer un bon moment et le rendre efficace en 30 secondes ? On cherche des monteurs fiables.",
-        "points": {
-          "one": "Des vidéos sources et des briefs clairs, prêts à monter",
-          "two": "Des missions rémunérées, à distance",
-          "three": "Un rythme adapté à vos disponibilités",
-          "four": "Des retours réguliers pour progresser"
-        },
-        "cta": "Postuler"
+      "clipper": {
+        "title": "Je suis clipper",
+        "body": "Je veux monter des clips et être payé pour mes résultats.",
+        "cta": "Rejoindre l'équipe"
       }
     },
-    "services": {
-      "eyebrow": "Ce qu'on prend en charge",
-      "title": "Du live brut au clip publié",
-      "lead": "Toute la chaîne est gérée par l'équipe. Vous gardez la main sur ce qui sort.",
-      "items": {
-        "moments": {
-          "title": "Repérage des moments",
-          "body": "On visionne vos contenus longs et on isole les passages qui accrochent."
-        },
-        "editing": {
-          "title": "Montage vertical",
-          "body": "Recadrage 9:16, rythme, sous-titres lisibles et habillage sobre."
-        },
-        "hooks": {
-          "title": "Accroches et légendes",
-          "body": "Une première seconde qui retient, une légende et des hashtags adaptés."
-        },
-        "accounts": {
-          "title": "Comptes dédiés",
-          "body": "Création et gestion de comptes TikTok, Reels et Shorts à votre nom."
-        },
-        "publishing": {
-          "title": "Publication programmée",
-          "body": "Des clips publiés régulièrement, aux heures où votre audience est active."
-        },
-        "reporting": {
-          "title": "Suivi des résultats",
-          "body": "Vues, abonnés gagnés et clips à venir, visibles dans votre espace."
-        }
-      }
-    },
-    "clippers": {
-      "eyebrow": "Recrutement",
-      "title": "Vous savez faire un clip qui retient ? Rejoignez la team.",
-      "lead": "On travaille avec des clippers à distance, payés pour chaque mission. Postulez en deux minutes.",
-      "cta": "Postuler maintenant",
+    "how": {
+      "eyebrow": "Comment ça marche",
+      "title": "Des vidéos longues aux clips qui circulent",
       "steps": {
-        "apply": {
-          "title": "Vous postulez",
-          "body": "Quelques questions sur votre expérience, vos outils et vos disponibilités, avec un lien vers vos clips si vous en avez."
-        },
-        "test": {
-          "title": "Un court test de montage",
-          "body": "On vous envoie un extrait à découper pour voir votre style et votre rapidité."
-        },
-        "missions": {
-          "title": "Vos premières missions",
-          "body": "Vous recevez les vidéos et les briefs dans votre espace, et vous livrez vos clips."
-        }
+        "one": "Le créateur nous confie ses vidéos.",
+        "two": "Nos clippers en tirent les meilleurs moments.",
+        "three": "Les clips sont publiés et font grandir sa communauté."
       }
+    },
+    "stats": {
+      "eyebrow": "En chiffres",
+      "title": "Le travail de l'agence"
+    },
+    "questions": {
+      "title": "Une question ?",
+      "body": "Consultez la <faq>FAQ</faq> ou <contact>écrivez-nous</contact>.",
+      "response": "On vous répond sous {delai_reponse}."
     }
   },
   "auth": {
@@ -326,7 +273,11 @@
       "feedbackRequired": "Précisez ce qu’il faut modifier.",
       "emailExists": "Un compte existe déjà avec cette adresse e-mail.",
       "timecodeOrder": "La fin doit être après le début.",
-      "price": "Montant invalide."
+      "price": "Montant invalide.",
+      "ageRequired": "Tu dois confirmer ton âge.",
+      "privacyRequired": "Tu dois accepter la politique de confidentialité.",
+      "portfolioRequired": "Ajoute au moins un exemple de montage.",
+      "payoutDay": "Un jour entre 1 et 28."
     }
   },
   "validation": {
@@ -409,7 +360,8 @@
     "titles": {
       "notice": "Mentions légales",
       "terms": "Conditions générales de vente",
-      "privacy": "Politique de confidentialité"
+      "privacy": "Politique de confidentialité",
+      "clippers": "Conditions clippers"
     },
     "company": {
       "legal_name": "Éditeur (raison sociale)",
@@ -727,6 +679,31 @@
         "fields": {
           "admin_email": "E-mail de notification de l’agence"
         }
+      },
+      "commitments": {
+        "title": "Textes & engagements",
+        "lead": "Chiffres et délais affichés sur le site. Tant qu'une valeur est vide, le bloc qui l'utilise est masqué. Les montants servent aussi au calcul réel des gains des clippers.",
+        "fields": {
+          "delai_reponse": "Délai de réponse du service client",
+          "delai_activation": "Délai d'activation après réception du virement",
+          "delai_premiers_clips": "Délai avant les premiers clips publiés",
+          "conditions_resiliation": "Arrêt de l'abonnement (phrase affichée)",
+          "minimum_par_clip": "Minimum garanti par clip validé (€)",
+          "tarif_1000_vues": "Prime pour 1 000 vues (€)",
+          "jours_comptage_vues": "Vues comptées après (jours)",
+          "plafond_par_clip": "Gain maximum par clip (€, facultatif)",
+          "jour_paiement": "Jour de paiement des clippers (1 à 28)",
+          "clip_test_remunere": "Le clip test est-il payé ?",
+          "age_minimum": "Âge minimum des clippers"
+        },
+        "hints": {
+          "delai_reponse": "Exemple : 24 h ouvrées",
+          "delai_activation": "Exemple : 24 h",
+          "delai_premiers_clips": "Exemple : 7 jours",
+          "conditions_resiliation": "Exemple : Oui, à tout moment : l'abonnement s'arrête à la fin de la période payée.",
+          "minimum_par_clip": "Exemple : 3 ou 2,50",
+          "clip_test_remunere": "Exemple : Oui, 10 € s'il est validé."
+        }
       }
     },
     "content": {
@@ -759,20 +736,15 @@
         "home_hero_eyebrow": "Accueil — sur-titre",
         "home_hero_title": "Accueil — titre principal",
         "home_hero_lead": "Accueil — accroche",
-        "home_how_title": "Comment ça marche — titre",
-        "home_how_lead": "Comment ça marche — introduction",
-        "home_steps": "Comment ça marche — étapes",
         "home_stats": "Chiffres de l’agence",
-        "home_testimonials": "Témoignages (uniquement de vrais clients)",
-        "home_faq": "FAQ",
-        "home_cta_title": "Appel à l’action final",
         "pricing_title": "Tarifs — titre",
         "pricing_lead": "Tarifs — introduction",
         "pricing_note": "Tarifs — note sous les offres",
         "contact_lead": "Contact — introduction",
         "legal_notice": "Mentions légales",
         "legal_terms": "Conditions générales de vente",
-        "legal_privacy": "Politique de confidentialité"
+        "legal_privacy": "Politique de confidentialité",
+        "legal_clippers": "Conditions clippers"
       }
     },
     "clients": {
@@ -843,8 +815,8 @@
       "filters": {
         "client": "Client",
         "allClients": "Tous les clients",
-        "editor": "Monteur",
-        "allEditors": "Tous les monteurs",
+        "clipper": "Clipper",
+        "allClippers": "Tous les clippers",
         "mine": "Mes clips",
         "status": "Statut",
         "allStatuses": "Tous les statuts",
@@ -857,7 +829,7 @@
       "cols": {
         "clip": "Clip",
         "client": "Client",
-        "editor": "Monteur",
+        "clipper": "Clipper",
         "status": "Statut",
         "due": "Échéance"
       },
@@ -884,7 +856,7 @@
         "hashtags": "Hashtags",
         "hashtagsHint": "Séparés par des espaces : #podcast #business",
         "account": "Compte de publication",
-        "editor": "Monteur",
+        "clipper": "Clipper",
         "dueAt": "Échéance",
         "scheduledAt": "Publication prévue",
         "publishedUrl": "Lien de la publication",
@@ -899,7 +871,7 @@
       "newClip": "Nouveau clip",
       "comments": "Commentaires",
       "status": "Statut",
-      "editor": "Monteur",
+      "clipper": "Clipper",
       "batchTitles": "Clips à créer (un titre par ligne)",
       "batchHint": "Chaque ligne crée un clip « planifié » lié à cette vidéo.",
       "createClips": "Créer les clips",
@@ -952,11 +924,45 @@
     },
     "applications": {
       "title": "Candidatures clippers",
-      "lead": "Les candidatures envoyées depuis la page « Devenir clipper ». Changez le statut pour suivre où vous en êtes ; répondez au candidat par e-mail.",
+      "lead": "Les candidatures envoyées depuis la page « Postuler ». Change le statut pour suivre le parcours ; le recrutement complet (clip test, création du compte) arrive avec l'espace clipper.",
       "all": "Toutes",
       "empty": "Aucune candidature dans cette liste.",
       "receivedOn": "Reçue le {date}",
       "statusFor": "Statut de la candidature de {name}"
+    },
+    "launch": {
+      "title": "À compléter avant la mise en ligne",
+      "lead": "{count, plural, one {# point à régler} other {# points à régler}} : tant qu'une valeur est vide, le bloc qui l'utilise est masqué sur le site.",
+      "done": "Tout est prêt.",
+      "variable": "Renseigner « {name} »",
+      "demoPlan": "Remplacer ou masquer l'offre de démonstration « {name} »",
+      "company": "Compléter les informations de l'entreprise (factures, mentions légales)",
+      "bank": "Renseigner les coordonnées bancaires"
+    },
+    "faq": {
+      "title": "FAQ",
+      "lead": "Questions affichées sur la page FAQ, dans le bouton « Besoin d'aide ? » et la page Aide. Une réponse qui utilise une variable vide (ex. {delai_reponse}) n'est pas affichée.",
+      "new": "Nouvelle question",
+      "create": "Ajouter",
+      "audience": "Public",
+      "audiences": {
+        "createur": "Créateurs",
+        "clipper": "Clippers",
+        "tous": "Tous"
+      },
+      "order": "Ordre",
+      "visible": "Visible sur le site",
+      "top": "Question fréquente (mise en avant)",
+      "questionFr": "Question (FR)",
+      "answerFr": "Réponse (FR)",
+      "questionEn": "Question (EN)",
+      "answerEn": "Réponse (EN)",
+      "hint": "Liens internes : [Tarifs](/pricing). Variables : {delai_reponse}, {minimum_par_clip}…",
+      "delete": "Supprimer",
+      "confirmDelete": "Supprimer cette question ?",
+      "hidden": "Masquée",
+      "topBadge": "Fréquente",
+      "votes": "Utile : {yes} · Pas utile : {no}"
     }
   },
   "emails": {
@@ -1062,6 +1068,12 @@
       "title": "Nouvelle candidature clipper",
       "body": "{name} ({email}) souhaite rejoindre l'équipe.",
       "cta": "Voir la candidature"
+    },
+    "clipper_application_received": {
+      "subject": "On a bien reçu ta candidature",
+      "title": "Merci {name} !",
+      "body": "On a bien reçu ta candidature pour rejoindre l'équipe Peak. On la regarde et on te répond par e-mail.",
+      "cta": "Revoir la page clippers"
     }
   },
   "uploads": {
@@ -1191,49 +1203,270 @@
     "send": "Envoyer",
     "internal": "Note interne (invisible pour le client)"
   },
-  "join": {
-    "eyebrow": "Rejoindre la team",
-    "title": "Devenez clipper chez Peak",
-    "lead": "On cherche des monteurs qui savent trouver le bon moment et le rendre percutant au format vertical. Remplissez ce formulaire : on vous répond par e-mail.",
-    "lookingFor": {
-      "title": "Ce qu'on recherche",
-      "one": "Le sens du rythme et des accroches qui retiennent",
-      "two": "De la régularité et le respect des délais",
-      "three": "La maîtrise d'un outil de montage (CapCut, Premiere, DaVinci…)",
-      "four": "Une bonne connaissance de TikTok, Reels ou Shorts"
+  "creators": {
+    "meta": "Pour les créateurs",
+    "hero": {
+      "eyebrow": "Pour les créateurs",
+      "title": "Vous créez. On vous fait voir.",
+      "lead": "Vos lives et vos vidéos longues deviennent des clips courts, publiés chaque semaine sur TikTok, Reels et Shorts. Plus de visibilité, sans une minute de travail en plus.",
+      "plans": "Voir les offres",
+      "question": "Poser une question"
     },
-    "next": "Après votre candidature, on vous recontacte pour un court test de montage.",
+    "benefits": {
+      "eyebrow": "Ce que ça vous apporte",
+      "title": "Plus de monde vous découvre",
+      "items": {
+        "visibility": {
+          "title": "Plus de visibilité",
+          "body": "Vos meilleurs moments touchent des milliers de personnes qui ne vous connaissent pas encore."
+        },
+        "lives": {
+          "title": "Plus de monde sur vos lives",
+          "body": "Chaque clip donne envie de venir vous voir en direct."
+        },
+        "followers": {
+          "title": "Plus d'abonnés",
+          "body": "Des comptes dédiés publient pour vous, tous les jours."
+        },
+        "time": {
+          "title": "Zéro temps perdu",
+          "body": "Vous envoyez un lien, on s'occupe de tout le reste."
+        },
+        "control": {
+          "title": "Vous gardez le contrôle",
+          "body": "Vous voyez chaque clip et vous pouvez le valider avant publication."
+        },
+        "results": {
+          "title": "Des résultats clairs",
+          "body": "Un espace personnel avec vos clips, vos comptes et vos vues, mis à jour régulièrement."
+        }
+      }
+    },
+    "how": {
+      "eyebrow": "Comment ça marche",
+      "title": "Quatre étapes, c'est tout",
+      "steps": {
+        "plan": {
+          "title": "Choisissez votre offre",
+          "body": "En ligne, en 2 minutes."
+        },
+        "send": {
+          "title": "Envoyez vos vidéos",
+          "body": "Un lien YouTube ou Twitch, ou directement le fichier."
+        },
+        "create": {
+          "title": "On crée et on publie",
+          "body": "Nos clippers sélectionnent vos meilleurs moments et les montent au format vertical."
+        },
+        "follow": {
+          "title": "Suivez vos résultats",
+          "body": "Tout est dans votre espace, clip par clip."
+        }
+      }
+    },
+    "plans": {
+      "eyebrow": "Nos offres",
+      "title": "Choisissez votre rythme",
+      "compare": "Voir le détail des offres",
+      "featured": "Le plus choisi",
+      "choose": "Choisir cette offre"
+    },
+    "promises": {
+      "eyebrow": "Nos engagements",
+      "title": "Ce sur quoi vous pouvez compter",
+      "items": {
+        "contact": "Un interlocuteur qui connaît votre chaîne.",
+        "response": "Une réponse sous {delai_reponse}.",
+        "image": "Aucun clip qui ne correspond pas à votre image : vous fixez vos règles (sujets à éviter, ton, style).",
+        "privacy": "Vos vidéos et vos données restent privées et protégées."
+      },
+      "honest": "On ne promet pas de chiffres magiques : on promet un travail régulier, soigné et des résultats que vous pouvez suivre."
+    },
+    "final": {
+      "title": "Prêt à être vu par plus de monde ?",
+      "talk": "Parler à l'équipe"
+    }
+  },
+  "clippers": {
+    "meta": "Devenir clipper",
+    "hero": {
+      "eyebrow": "Pour les clippers",
+      "title": "Monte des clips. Sois payé pour tes résultats.",
+      "lead": "Rejoins l'équipe Peak. On t'apporte les créateurs, les vidéos et les outils. Toi, tu te concentres sur ce que tu fais de mieux : le montage.",
+      "apply": "Postuler",
+      "pay": "Voir la rémunération"
+    },
+    "reasons": {
+      "eyebrow": "Pourquoi nous rejoindre",
+      "title": "Tu montes, on s'occupe du reste",
+      "items": {
+        "noProspecting": {
+          "title": "Pas besoin de chercher des créateurs",
+          "body": "Trouver des clients, c'est notre travail. Toi, tu reçois directement tes missions."
+        },
+        "performance": {
+          "title": "Payé à la performance, pas à la chance",
+          "body": "Tu gagnes selon les vues réelles de tes clips, avec des règles simples, écrites et visibles dans ton espace."
+        },
+        "safetyNet": {
+          "title": "Un filet de sécurité",
+          "body": "Chaque clip validé te rapporte au minimum {minimum_par_clip}, même s'il fait peu de vues."
+        },
+        "reliable": {
+          "title": "Un paiement fiable",
+          "body": "Tu es payé chaque mois, le {jour_paiement}, avec un relevé détaillé clip par clip."
+        },
+        "grow": {
+          "title": "Un environnement pour progresser",
+          "body": "Un retour sur chacun de tes clips, des guides de montage, et des niveaux qui débloquent de meilleures missions."
+        },
+        "free": {
+          "title": "Tu restes libre",
+          "body": "Tu choisis tes missions et tu travailles d'où tu veux, à ton rythme."
+        }
+      }
+    },
+    "pay": {
+      "eyebrow": "Rémunération",
+      "title": "Combien tu gagnes",
+      "rows": {
+        "minimum": {
+          "label": "Minimum garanti par clip validé",
+          "value": "{minimum_par_clip}"
+        },
+        "bonus": {
+          "label": "Prime de performance",
+          "value": "{tarif_1000_vues} pour 1 000 vues"
+        },
+        "counted": {
+          "label": "Vues comptées",
+          "value": "{jours_comptage_vues} jours après la publication"
+        },
+        "payout": {
+          "label": "Paiement",
+          "value": "chaque mois, le {jour_paiement}"
+        }
+      }
+    },
+    "simulator": {
+      "label": "Nombre de vues du clip",
+      "views": "{views} vues",
+      "earn": "Tu gagnes :",
+      "disclaimer": "Exemple indicatif. Les gains dépendent des vues réelles de chaque clip."
+    },
+    "levels": {
+      "eyebrow": "Les niveaux",
+      "title": "Plus tu progresses, plus tu débloques",
+      "level": "Niveau {n}"
+    },
+    "join": {
+      "eyebrow": "Comment nous rejoindre",
+      "title": "Trois étapes",
+      "steps": {
+        "apply": {
+          "title": "Postule",
+          "body": "2 minutes, avec quelques exemples de tes montages."
+        },
+        "test": {
+          "title": "Fais ton clip test",
+          "body": "On t'envoie une vidéo, tu nous montres ce que tu sais faire."
+        },
+        "welcome": {
+          "title": "Bienvenue dans l'équipe",
+          "body": "Tu accèdes à ton espace et à tes premières missions."
+        }
+      }
+    },
+    "expect": {
+      "title": "Ce qu'on attend de toi",
+      "items": {
+        "software": "Savoir monter un clip vertical (CapCut, Premiere Pro, DaVinci… le logiciel de ton choix).",
+        "deadlines": "Respecter les délais.",
+        "charter": "Respecter la charte de l'équipe et la confidentialité des vidéos des créateurs.",
+        "age": "Avoir au moins {age_minimum} ans."
+      }
+    },
+    "final": {
+      "title": "Prêt à transformer ton talent en revenus ?",
+      "cta": "Postuler maintenant"
+    }
+  },
+  "apply": {
+    "eyebrow": "Rejoindre l'équipe",
+    "title": "Postule pour devenir clipper",
+    "lead": "2 minutes, une seule page. Montre-nous ce que tu sais faire.",
     "form": {
-      "fullName": "Nom et prénom",
+      "nickname": "Pseudo",
+      "firstName": "Prénom",
       "email": "E-mail",
-      "portfolio": "Lien vers vos clips",
-      "portfolioHint": "Un compte TikTok, une playlist YouTube ou un dossier partagé (lien https).",
-      "optional": "(facultatif)",
-      "platforms": "Plateformes que vous connaissez",
-      "experience": "Expérience en montage",
-      "hours": "Disponibilité par semaine",
+      "country": "Pays",
+      "languages": "Langue(s)",
+      "languagesPlaceholder": "Français, anglais…",
+      "portfolio": "Exemples de tes montages (1 à 5 liens)",
+      "portfolioHint": "TikTok, YouTube, Google Drive… Liens commençant par https://",
+      "portfolioLink": "Lien {n}",
+      "software": "Logiciels utilisés",
+      "softwarePlaceholder": "CapCut, Premiere Pro, DaVinci…",
+      "experience": "Ton expérience",
       "choose": "Choisir…",
       "experiences": {
         "debutant": "Débutant",
         "intermediaire": "Intermédiaire",
-        "confirme": "Confirmé"
+        "avance": "Avancé"
       },
+      "hours": "Disponibilité par semaine",
       "hoursOptions": {
         "moins_10": "Moins de 10 h",
         "10_20": "10 à 20 h",
         "20_35": "20 à 35 h",
-        "temps_plein": "Temps plein"
+        "plus_35": "Plus de 35 h"
       },
-      "tools": "Outils de montage",
-      "toolsPlaceholder": "CapCut, Premiere Pro…",
-      "languages": "Langues",
-      "languagesPlaceholder": "Français, anglais…",
-      "message": "Un mot sur vous",
-      "messagePlaceholder": "Votre parcours, les créateurs que vous suivez, ce qui vous motive…",
-      "privacy": "Vos informations servent uniquement à étudier votre candidature.",
+      "motivation": "Pourquoi veux-tu nous rejoindre ?",
+      "optional": "(facultatif)",
+      "age": "J'ai au moins {age} ans.",
+      "privacy": "J'accepte la <link>politique de confidentialité</link>.",
+      "terms": "Les conditions de collaboration sont détaillées dans les <link>conditions clippers</link>.",
       "submit": "Envoyer ma candidature",
-      "sentTitle": "Candidature envoyée",
-      "sent": "Merci ! On étudie votre profil et on vous répond par e-mail."
+      "sentTitle": "Merci !",
+      "sent": "On regarde ta candidature et on te répond par e-mail.",
+      "sentWithDelay": "On regarde ta candidature et on te répond sous {delai_reponse}."
     }
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Questions fréquentes",
+    "tabsLabel": "Choisir un public",
+    "tabs": {
+      "createur": "Créateurs",
+      "clipper": "Clippers"
+    },
+    "searchLabel": "Rechercher dans la FAQ",
+    "searchPlaceholder": "Rechercher (ex. virement, vues…)",
+    "noResult": "Aucune réponse trouvée. Essayez un autre mot, ou contactez-nous.",
+    "helpful": "Cette réponse vous a aidé ?",
+    "yes": "Oui",
+    "no": "Non",
+    "thanks": "Merci pour votre retour.",
+    "notFound": "Vous n'avez pas trouvé votre réponse ? Notre équipe est là pour vous.",
+    "contact": "Contacter le service client"
+  },
+  "help": {
+    "eyebrow": "Aide & contact",
+    "title": "Comment pouvons-nous vous aider ?",
+    "lead": "Les réponses aux questions les plus fréquentes, et un formulaire pour écrire à l'équipe.",
+    "quick": "Questions fréquentes",
+    "allFaq": "Voir toute la FAQ",
+    "contactTitle": "Écrire à l'équipe",
+    "response": "On vous répond sous {delai_reponse}."
+  },
+  "helpWidget": {
+    "button": "Besoin d'aide ?",
+    "title": "Besoin d'aide ?",
+    "close": "Fermer",
+    "search": "Rechercher dans la FAQ",
+    "frequent": "Questions fréquentes",
+    "results": "Résultats",
+    "noResult": "Aucune réponse trouvée.",
+    "contact": "Contacter l'équipe"
   }
 }

@@ -114,9 +114,9 @@ export async function prepareClipUploadAction(
   if (!mime) return { ok: false, error: "videoType" };
 
   const supabase = await createSupabaseServerClient();
-  const { data: clip } = await supabase.from("clips").select("id, client_id, editor_id").eq("id", clipId).maybeSingle();
+  const { data: clip } = await supabase.from("clips").select("id, client_id, clipper_id").eq("id", clipId).maybeSingle();
   if (!clip || !(await can(user, "clips.create", { clientId: clip.client_id }))) return { ok: false, error: "forbidden" };
-  if (clip.editor_id && clip.editor_id !== user.id && !(await can(user, "clients.update"))) return { ok: false, error: "forbidden" };
+  if (clip.clipper_id && clip.clipper_id !== user.id && !(await can(user, "clients.update"))) return { ok: false, error: "forbidden" };
 
   const key = objectKey("clip", clip.client_id, `${clip.id}-${Date.now()}`, file.fileName);
   await createSupabaseAdminClient()

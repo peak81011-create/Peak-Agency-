@@ -59,7 +59,7 @@ export default async function AdminAccountPage({ params }: { params: Promise<{ i
       <PageHeader title={isNew ? t("new") : t("editTitle")} />
       <PageBody>
         <Card>
-          <AccountForm accountId={isNew ? null : id} defaults={defaults} clients={options.clients} staff={options.editors} />
+          <AccountForm accountId={isNew ? null : id} defaults={defaults} clients={options.clients} staff={options.clippers} />
         </Card>
       </PageBody>
     </>

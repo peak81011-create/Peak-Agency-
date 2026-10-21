@@ -6,10 +6,10 @@ test.describe("Fondations", () => {
   test("l'accueil s'affiche en français et en anglais, avec le sélecteur de langue", async ({ page }) => {
     await page.goto("/");
     await expectPath(page, /\/fr$/);
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("Vos lives");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("On transforme les longues vidéos");
     await page.getByRole("group", { name: "Langue" }).first().getByRole("link", { name: "EN" }).click();
     await expectPath(page, /\/en$/);
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("Your streams");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("We turn long videos");
   });
 
   test("un visiteur est renvoyé vers la connexion depuis un espace privé", async ({ page }) => {
@@ -51,8 +51,8 @@ test.describe("Fondations", () => {
     await expectPath(page, /\/fr\/app$/);
   });
 
-  test("le monteur a ses permissions par défaut, sans la validation des paiements", async ({ page }) => {
-    await login(page, DEMO_USERS.editor.email);
+  test("le clipper a ses permissions par défaut, sans la validation des paiements", async ({ page }) => {
+    await login(page, DEMO_USERS.clipper.email);
     await expectPath(page, /\/fr\/admin$/);
     const list = page.getByTestId("permission-list");
     await expect(list).toContainText("clips.create");

@@ -2,15 +2,18 @@ import { describe, expect, it } from "vitest";
 import { joinSchema } from "./join";
 
 const valid = {
-  fullName: "Sam Clipper",
+  nickname: "samcuts",
+  firstName: "Sam",
   email: "sam@example.com",
-  portfolioUrl: "https://www.tiktok.com/@sam",
-  platforms: ["tiktok"],
-  experience: "intermediaire",
-  tools: "CapCut, Premiere Pro",
-  hoursPerWeek: "10_20",
+  ageConfirmed: true,
+  country: "France",
   languages: "Français, anglais",
-  message: "",
+  portfolioLinks: ["https://www.tiktok.com/@samcuts", "", "", "", ""],
+  software: "CapCut",
+  experience: "intermediaire",
+  hoursPerWeek: "10_20",
+  motivation: "",
+  privacyAccepted: true,
   website: "",
 };
 
@@ -19,9 +22,14 @@ describe("candidature clipper", () => {
     expect(joinSchema.safeParse(valid).success).toBe(true);
   });
 
-  it("le portfolio est facultatif mais doit être un lien https", () => {
-    expect(joinSchema.safeParse({ ...valid, portfolioUrl: "" }).success).toBe(true);
-    expect(joinSchema.safeParse({ ...valid, portfolioUrl: "http://exemple.fr" }).success).toBe(false);
+  it("au moins un exemple de montage, en lien https", () => {
+    expect(joinSchema.safeParse({ ...valid, portfolioLinks: ["", ""] }).success).toBe(false);
+    expect(joinSchema.safeParse({ ...valid, portfolioLinks: ["http://exemple.fr"] }).success).toBe(false);
+  });
+
+  it("âge minimum et confidentialité obligatoires", () => {
+    expect(joinSchema.safeParse({ ...valid, ageConfirmed: false }).success).toBe(false);
+    expect(joinSchema.safeParse({ ...valid, privacyAccepted: false }).success).toBe(false);
   });
 
   it("niveau et disponibilité obligatoires", () => {

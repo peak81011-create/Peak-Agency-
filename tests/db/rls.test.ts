@@ -14,7 +14,7 @@ suite("RLS et permissions (Postgres)", () => {
     db = await createTestDatabase("peak_test_rls");
     u.owner = await createUser(db, { email: "owner@test.local", role: "owner" });
     u.assistant = await createUser(db, { email: "assistant@test.local", role: "assistant" });
-    u.editor = await createUser(db, { email: "editor@test.local", role: "editor" });
+    u.clipper = await createUser(db, { email: "clipper@test.local", role: "clipper" });
     u.prospector = await createUser(db, { email: "prospector@test.local", role: "prospector" });
     u.clientA = await createUser(db, { email: "a@test.local" });
     u.clientB = await createUser(db, { email: "b@test.local" });
@@ -22,7 +22,7 @@ suite("RLS et permissions (Postgres)", () => {
     c.B = await clientIdOf(db, u.clientB);
 
     await db.query("insert into public.assignments (user_id, client_id) values ($1, $2), ($3, $2)", [
-      u.editor,
+      u.clipper,
       c.A,
       u.assistant,
     ]);
@@ -64,7 +64,7 @@ suite("RLS et permissions (Postgres)", () => {
       [u.owner, u.clientA],
     ]);
     expect(roles.rows.map((r) => r.role).sort()).toEqual(["client", "owner"]);
-    const staffClients = await db.query("select 1 from public.clients where profile_id = $1", [u.editor]);
+    const staffClients = await db.query("select 1 from public.clients where profile_id = $1", [u.clipper]);
     expect(staffClients.rowCount).toBe(0);
   });
 
@@ -76,7 +76,7 @@ suite("RLS et permissions (Postgres)", () => {
       expect(payments.rows.map((r) => r.reference)).toEqual(["PEAK-A"]);
       const profiles = await q<{ id: string }>("select id from public.profiles");
       // lui-même + l'équipe qui lui est attribuée (monteur, assistante)
-      expect(profiles.rows.map((r) => r.id).sort()).toEqual([u.clientA, u.editor, u.assistant].sort());
+      expect(profiles.rows.map((r) => r.id).sort()).toEqual([u.clientA, u.clipper, u.assistant].sort());
       // accès direct par id à la fiche d'un autre client : rien
       const other = await q("select * from public.clients where id = $1", [c.B]);
       expect(other.rowCount).toBe(0);
@@ -88,14 +88,14 @@ suite("RLS et permissions (Postgres)", () => {
       const notes = await q("select * from public.comments where is_internal");
       expect(notes.rowCount).toBe(0);
     });
-    await asUser(db, u.editor, async (q) => {
+    await asUser(db, u.clipper, async (q) => {
       const notes = await q("select body from public.comments where is_internal");
       expect(notes.rows).toEqual([{ body: "secret" }]);
     });
   });
 
   it("un monteur ne voit que les clients qui lui sont attribués", async () => {
-    await asUser(db, u.editor, async (q) => {
+    await asUser(db, u.clipper, async (q) => {
       const clients = await q<{ id: string }>("select id from public.clients");
       expect(clients.rows.map((r) => r.id)).toEqual([c.A]);
       const payments = await q("select * from public.payments");
@@ -147,11 +147,11 @@ suite("RLS et permissions (Postgres)", () => {
   });
 
   it("un compte désactivé perd toutes ses permissions", async () => {
-    await db.query("update public.profiles set is_active = false where id = $1", [u.editor]);
-    await asUser(db, u.editor, async (q) => {
+    await db.query("update public.profiles set is_active = false where id = $1", [u.clipper]);
+    await asUser(db, u.clipper, async (q) => {
       expect((await q("select * from public.clients")).rowCount).toBe(0);
     });
-    await db.query("update public.profiles set is_active = true where id = $1", [u.editor]);
+    await db.query("update public.profiles set is_active = true where id = $1", [u.clipper]);
   });
 
   it("un client peut modifier son profil créateur mais pas son statut ni son offre", async () => {
@@ -177,7 +177,7 @@ suite("RLS et permissions (Postgres)", () => {
       [u.assistant],
     );
     await expect(
-      asUser(db, u.assistant, (q) => q("update public.profiles set role = 'owner' where id = $1", [u.editor])),
+      asUser(db, u.assistant, (q) => q("update public.profiles set role = 'owner' where id = $1", [u.clipper])),
     ).rejects.toThrow(/propriétaire/);
     await db.query("delete from public.user_permission_overrides where user_id = $1", [u.assistant]);
   });

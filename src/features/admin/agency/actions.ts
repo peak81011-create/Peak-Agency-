@@ -144,7 +144,7 @@ function clipRow(v: z.infer<typeof clipFormSchema>) {
     end_seconds: parseTimecode(v.end),
     source_video_id: optionalUuid(v.sourceVideoId),
     social_account_id: optionalUuid(v.socialAccountId),
-    editor_id: optionalUuid(v.editorId),
+    clipper_id: optionalUuid(v.clipperId),
     due_at: optionalIso(v.dueAt),
     scheduled_at: optionalIso(v.scheduledAt),
     published_url: v.publishedUrl || null,
@@ -210,7 +210,7 @@ export async function setClipStatusAction(clipId: string, status: (typeof CLIP_S
 }
 
 /** Création en lot de clips planifiés à partir d'une vidéo source (un titre par ligne). */
-export async function createClipsFromVideoAction(videoId: string, titles: string, editorId: string): Promise<ActionResult<{ count: number }>> {
+export async function createClipsFromVideoAction(videoId: string, titles: string, clipperId: string): Promise<ActionResult<{ count: number }>> {
   const user = await getSessionUser();
   if (!user) return { ok: false, error: "unauthenticated" };
   if (!uuid.safeParse(videoId).success) return { ok: false, error: "generic" };
@@ -228,7 +228,7 @@ export async function createClipsFromVideoAction(videoId: string, titles: string
     list.map((title) => ({
       client_id: video.client_id,
       source_video_id: video.id,
-      editor_id: optionalUuid(editorId),
+      clipper_id: optionalUuid(clipperId),
       title: title.slice(0, 200),
       status: "planifie",
       created_by: user.id,

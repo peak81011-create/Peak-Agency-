@@ -9,6 +9,7 @@ import { getSettings } from "@/lib/settings";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { fieldErrors } from "@/lib/validation/auth";
 import { joinSchema, type JoinInput } from "@/lib/validation/join";
+import type { Locale } from "@/i18n/routing";
 
 export async function sendJoinApplicationAction(input: JoinInput): Promise<ActionResult> {
   // Robot (champ piège rempli) : on répond comme si tout allait bien.
@@ -20,24 +21,29 @@ export async function sendJoinApplicationAction(input: JoinInput): Promise<Actio
   }
 
   const v = parsed.data;
+  const locale = (await getLocale()) as Locale;
   const { error } = await createSupabaseAdminClient()
     .from("clipper_applications")
     .insert({
-      full_name: v.fullName,
+      nickname: v.nickname,
+      first_name: v.firstName,
       email: v.email,
-      portfolio_url: v.portfolioUrl || null,
-      platforms: [...new Set(v.platforms)],
+      age_confirmed: true,
+      country: v.country,
+      languages: v.languages,
+      portfolio_links: v.portfolioLinks.filter(Boolean),
+      software: v.software,
       experience: v.experience,
-      tools: v.tools || null,
       hours_per_week: v.hoursPerWeek,
-      languages: v.languages || null,
-      message: v.message || null,
-      locale: await getLocale(),
+      motivation: v.motivation || null,
+      locale,
     });
   logError("join.insert", error);
   if (error) return { ok: false, error: "generic" };
 
-  const payload = { name: v.fullName, email: v.email };
+  // Accusé de réception au candidat, puis notification de l'équipe.
+  await emailAddress(v.email, "clipper_application_received", { name: v.firstName }, "/clippers", locale);
+  const payload = { name: `${v.firstName} (${v.nickname})`, email: v.email };
   await notifyPermission("users.manage", "clipper_application", payload, "/admin/applications");
   const { admin_email } = await getSettings("notifications");
   if (admin_email) await emailAddress(admin_email, "clipper_application", payload, "/admin/applications");

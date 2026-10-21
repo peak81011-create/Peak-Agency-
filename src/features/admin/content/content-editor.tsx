@@ -42,7 +42,7 @@ function ListEditor({
         <div key={i} className="flex flex-col gap-2 rounded-md border border-border p-3">
           {fields.map((f) => {
             const id = `${contentKey}-${lang}-${i}-${f}`;
-            const long = f === "body" || f === "a" || f === "quote";
+            const long = f === "quote";
             const change = (value: string) => onChange(items.map((it, j) => (j === i ? { ...it, [f]: value } : it)));
             return (
               <Field key={f} label={t(`listFields.${f}`)} htmlFor={id}>

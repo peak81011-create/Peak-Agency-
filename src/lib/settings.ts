@@ -34,11 +34,30 @@ export const billingSchema = z.object({
 
 export const notificationSettingsSchema = z.object({ admin_email: str });
 
+// Textes & engagements affichés sur le site et utilisés par le calcul des
+// gains des clippers. Vide = non renseigné (le bloc concerné est masqué).
+const centsOrNull = z.number().int().min(0).nullable().catch(null);
+const intOrNull = z.number().int().min(0).nullable().catch(null);
+export const commitmentsSchema = z.object({
+  delai_reponse: str,
+  delai_activation: str,
+  delai_premiers_clips: str,
+  conditions_resiliation: z.string().trim().max(1000).catch(""),
+  minimum_par_clip: centsOrNull,
+  tarif_1000_vues: centsOrNull,
+  jours_comptage_vues: intOrNull,
+  plafond_par_clip: centsOrNull,
+  jour_paiement: z.number().int().min(1).max(28).nullable().catch(null),
+  clip_test_remunere: str,
+  age_minimum: z.number().int().min(13).max(99).catch(18),
+});
+
 export const SETTINGS = {
   company: companySchema,
   bank: bankSchema,
   billing: billingSchema,
   notifications: notificationSettingsSchema,
+  commitments: commitmentsSchema,
 } as const;
 
 export type SettingsKey = keyof typeof SETTINGS;

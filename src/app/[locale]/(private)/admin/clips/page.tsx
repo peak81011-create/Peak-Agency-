@@ -27,13 +27,13 @@ const uuid = /^[0-9a-f-]{36}$/;
 export default async function AdminClipsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ view?: string; client?: string; editor?: string; status?: string }>;
+  searchParams: Promise<{ view?: string; client?: string; clipper?: string; status?: string }>;
 }) {
   const user = await requirePermission("clips.read");
   const params = await searchParams;
   const view = params.view === "list" ? "list" : "kanban";
   const clientId = params.client && uuid.test(params.client) ? params.client : undefined;
-  const editorId = params.editor === "me" ? user.id : params.editor && uuid.test(params.editor) ? params.editor : undefined;
+  const clipperId = params.clipper === "me" ? user.id : params.clipper && uuid.test(params.clipper) ? params.clipper : undefined;
   const status = COLUMNS.find((s) => s === params.status);
 
   const supabase = await createSupabaseServerClient();
@@ -41,14 +41,14 @@ export default async function AdminClipsPage({
     getTranslations("admin.clips"),
     getTranslations("status.clip"),
     getLocale(),
-    listClips({ clientId, editorId, statuses: status ? [status] : undefined, order: "upcoming", limit: 500 }),
+    listClips({ clientId, clipperId, statuses: status ? [status] : undefined, order: "upcoming", limit: 500 }),
     staffOptions(),
     supabase.from("clients").select("id, creator_name").order("creator_name"),
     can(user, "clips.create"),
   ]);
   const query = (extra: Record<string, string>) => ({
     ...(clientId ? { client: clientId } : {}),
-    ...(params.editor ? { editor: params.editor } : {}),
+    ...(params.clipper ? { clipper: params.clipper } : {}),
     ...(status ? { status } : {}),
     view,
     ...extra,
@@ -78,8 +78,8 @@ export default async function AdminClipsPage({
               </option>
             ))}
           </Select>
-          <Select name="editor" defaultValue={params.editor ?? ""} aria-label={t("filters.editor")} className="w-auto min-w-44">
-            <option value="">{t("filters.allEditors")}</option>
+          <Select name="clipper" defaultValue={params.clipper ?? ""} aria-label={t("filters.clipper")} className="w-auto min-w-44">
+            <option value="">{t("filters.allClippers")}</option>
             <option value="me">{t("filters.mine")}</option>
             {staff.map((s) => (
               <option key={s.id} value={s.id}>
@@ -131,7 +131,7 @@ export default async function AdminClipsPage({
                         {c.account ? <PlatformBadge platform={c.account.platform} /> : null}
                       </p>
                       <p className="text-xs text-subtle-foreground">
-                        {c.editor?.full_name ?? t("unassigned")} {c.due_at ? `· ${formatDateTime(c.due_at, locale)}` : ""}
+                        {c.clipper?.full_name ?? t("unassigned")} {c.due_at ? `· ${formatDateTime(c.due_at, locale)}` : ""}
                       </p>
                       <ClipStatusSelect clipId={c.id} status={c.status} label={t("changeStatus", { title: c.title })} />
                     </article>
@@ -148,7 +148,7 @@ export default async function AdminClipsPage({
                   <tr className="border-b border-border bg-sage-50 text-left text-xs uppercase tracking-[0.04em] text-subtle-foreground">
                     <th className="px-4 py-3 font-semibold">{t("cols.clip")}</th>
                     <th className="px-4 py-3 font-semibold">{t("cols.client")}</th>
-                    <th className="px-4 py-3 font-semibold">{t("cols.editor")}</th>
+                    <th className="px-4 py-3 font-semibold">{t("cols.clipper")}</th>
                     <th className="px-4 py-3 font-semibold">{t("cols.due")}</th>
                     <th className="px-4 py-3 font-semibold">{t("cols.status")}</th>
                   </tr>
@@ -162,7 +162,7 @@ export default async function AdminClipsPage({
                         </Link>
                       </td>
                       <td className="px-4 py-3">{c.client?.creator_name}</td>
-                      <td className="px-4 py-3">{c.editor?.full_name ?? "—"}</td>
+                      <td className="px-4 py-3">{c.clipper?.full_name ?? "—"}</td>
                       <td className="px-4 py-3 whitespace-nowrap">{formatDateTime(c.due_at, locale)}</td>
                       <td className="px-4 py-3">
                         <StatusBadge type="clip" value={c.status} />

@@ -17,11 +17,11 @@ describe("menus", () => {
   it("l'équipe ne voit que les entrées autorisées", () => {
     const keys = navFor({ role: "assistant", permissions: new Set<Permission>(["payments.validate"]), client: null }).map((i) => i.key);
     expect(keys).toEqual(["overview", "payments", "account"]);
-    const editor = navFor({
-      role: "editor",
+    const clipper = navFor({
+      role: "clipper",
       permissions: new Set<Permission>(["clients.read", "clips.read", "videos.read", "accounts.read"]),
       client: null,
     }).map((i) => i.key);
-    expect(editor).toEqual(["overview", "clients", "clips", "videos", "accounts", "account"]);
+    expect(clipper).toEqual(["overview", "clients", "clips", "videos", "accounts", "account"]);
   });
 });

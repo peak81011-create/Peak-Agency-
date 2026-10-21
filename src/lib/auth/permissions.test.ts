@@ -17,9 +17,9 @@ describe("resolvePermission", () => {
   });
 
   it("applique les permissions par défaut du rôle", () => {
-    const roleDefaults = DEFAULT_ROLE_PERMISSIONS.editor;
-    expect(resolvePermission({ ...base, role: "editor", roleDefaults, permission: "clips.create" })).toBe(true);
-    expect(resolvePermission({ ...base, role: "editor", roleDefaults, permission: "payments.validate" })).toBe(false);
+    const roleDefaults = DEFAULT_ROLE_PERMISSIONS.clipper;
+    expect(resolvePermission({ ...base, role: "clipper", roleDefaults, permission: "clips.create" })).toBe(true);
+    expect(resolvePermission({ ...base, role: "clipper", roleDefaults, permission: "payments.validate" })).toBe(false);
   });
 
   it("une exception utilisateur l'emporte sur le rôle (ajout comme retrait)", () => {

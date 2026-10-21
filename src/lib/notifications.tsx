@@ -28,6 +28,7 @@ export const NOTIFICATION_TYPES = [
   "clip_changes_requested",
   "request_assigned",
   "clipper_application",
+  "clipper_application_received",
 ] as const;
 export type NotificationType = (typeof NOTIFICATION_TYPES)[number];
 

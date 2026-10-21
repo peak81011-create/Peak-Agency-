@@ -21,14 +21,14 @@ export function ClipForm({
   clients,
   videos,
   accounts,
-  editors,
+  clippers,
 }: {
   clipId: string | null;
   defaults: ClipFormInput;
   clients: Option[];
   videos: (Option & { clientId: string })[];
   accounts: (Option & { clientId: string })[];
-  editors: Option[];
+  clippers: Option[];
 }) {
   const t = useTranslations("admin.clips.form");
   const tc = useTranslations("common");
@@ -107,10 +107,10 @@ export function ClipForm({
         <Field label={t("hook")} htmlFor="clip-hook" hint={t("hookHint", { count: hook.length })} error={errorText(errors.hook?.message)}>
           <Input id="clip-hook" maxLength={80} {...register("hook")} />
         </Field>
-        <Field label={t("editor")} htmlFor="clip-editor">
-          <Select id="clip-editor" {...register("editorId")}>
+        <Field label={t("clipper")} htmlFor="clip-clipper">
+          <Select id="clip-clipper" {...register("clipperId")}>
             <option value="">—</option>
-            {editors.map((e) => (
+            {clippers.map((e) => (
               <option key={e.id} value={e.id}>
                 {e.label}
               </option>

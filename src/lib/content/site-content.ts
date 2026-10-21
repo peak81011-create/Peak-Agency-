@@ -6,10 +6,8 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 // Contenu éditable par l'admin (table site_content), en FR et EN.
 
 export const listSchemas = {
-  "home.steps": z.array(z.object({ title: z.string(), body: z.string() })),
   "home.stats": z.array(z.object({ value: z.string(), label: z.string() })),
   "home.testimonials": z.array(z.object({ quote: z.string(), name: z.string(), handle: z.string().optional() })),
-  "home.faq": z.array(z.object({ q: z.string(), a: z.string() })),
 } as const;
 
 export type ListKey = keyof typeof listSchemas;

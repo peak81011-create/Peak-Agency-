@@ -3,6 +3,7 @@
 import { logError } from "@/lib/log";
 import { revalidatePath } from "next/cache";
 import { logActivity } from "@/lib/activity";
+import { parseEurosToCents } from "@/lib/format";
 import type { ActionResult } from "@/lib/auth/actions";
 import { authorize } from "@/lib/auth/actions";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
@@ -30,6 +31,21 @@ export async function saveSettingsAction(key: SettingsFormKey, values: Record<st
       grace_days: Number(b.grace_days),
       reminder_days_before: Number(b.reminder_days_before),
       currency: "EUR",
+    };
+  }
+
+  if (key === "commitments") {
+    const c = parsed.data as Record<string, string>;
+    const cents = (v: string) => (v ? parseEurosToCents(v) : null);
+    const int = (v: string) => (v ? Number(v) : null);
+    value = {
+      ...c,
+      minimum_par_clip: cents(c.minimum_par_clip),
+      tarif_1000_vues: cents(c.tarif_1000_vues),
+      plafond_par_clip: cents(c.plafond_par_clip),
+      jours_comptage_vues: int(c.jours_comptage_vues),
+      jour_paiement: int(c.jour_paiement),
+      age_minimum: Number(c.age_minimum),
     };
   }
 

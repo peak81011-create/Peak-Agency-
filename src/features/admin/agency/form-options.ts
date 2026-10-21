@@ -18,6 +18,6 @@ export async function clipFormOptions() {
     clients: (clients ?? []).map((c) => ({ id: c.id as string, label: c.creator_name as string })),
     videos: videos.map((v) => ({ id: v.id, clientId: v.client_id, label: v.title || v.file_name || v.url || v.id })),
     accounts: accounts.map((a) => ({ id: a.id, clientId: a.client_id, label: `${a.platform} · ${a.handle}` })),
-    editors: staff.map((s) => ({ id: s.id, label: `${s.full_name} · ${tr(s.role as "editor")}` })),
+    clippers: staff.map((s) => ({ id: s.id, label: `${s.full_name} · ${tr(s.role as "clipper")}` })),
   };
 }

@@ -12,9 +12,25 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: t("title") };
 }
 
-const asStrings = (o: Record<string, unknown>) => Object.fromEntries(Object.entries(o).map(([k, v]) => [k, String(v ?? "")]));
+const asStrings = (o: Record<string, unknown>) => Object.fromEntries(Object.entries(o).map(([k, v]) => [k, v === null || v === undefined ? "" : String(v)]));
 
-const GROUPS: { key: "company" | "bank" | "billing" | "notifications"; fields: SettingsField[] }[] = [
+const GROUPS: { key: "commitments" | "company" | "bank" | "billing" | "notifications"; fields: SettingsField[] }[] = [
+  {
+    key: "commitments",
+    fields: [
+      { name: "delai_reponse" },
+      { name: "delai_activation" },
+      { name: "delai_premiers_clips" },
+      { name: "conditions_resiliation", multiline: true },
+      { name: "minimum_par_clip", inputMode: "numeric" },
+      { name: "tarif_1000_vues", inputMode: "numeric" },
+      { name: "jours_comptage_vues", inputMode: "numeric" },
+      { name: "plafond_par_clip", inputMode: "numeric" },
+      { name: "jour_paiement", inputMode: "numeric" },
+      { name: "clip_test_remunere" },
+      { name: "age_minimum", inputMode: "numeric" },
+    ],
+  },
   {
     key: "company",
     fields: [
@@ -47,13 +63,27 @@ const GROUPS: { key: "company" | "bank" | "billing" | "notifications"; fields: S
 export default async function AdminSettingsPage() {
   await requirePermission("settings.update");
   const t = await getTranslations("admin.settings");
-  const [company, bank, billing, notifications] = await Promise.all([
+  const [commitments, company, bank, billing, notifications] = await Promise.all([
+    getSettings("commitments"),
     getSettings("company"),
     getSettings("bank"),
     getSettings("billing"),
     getSettings("notifications"),
   ]);
-  const values = { company, bank, billing, notifications };
+  // Montants stockés en centimes, saisis en euros (« 0,50 »).
+  const euros = (v: number | null) => (v === null ? "" : (v / 100).toFixed(2).replace(".", ",").replace(",00", ""));
+  const values = {
+    commitments: {
+      ...commitments,
+      minimum_par_clip: euros(commitments.minimum_par_clip),
+      tarif_1000_vues: euros(commitments.tarif_1000_vues),
+      plafond_par_clip: euros(commitments.plafond_par_clip),
+    },
+    company,
+    bank,
+    billing,
+    notifications,
+  };
   const missing = missingInvoiceFields(company);
 
   return (

@@ -50,8 +50,9 @@ const TONES = {
     abandonne: "neutral",
   },
   application: {
-    nouvelle: "blue",
-    en_cours: "amber",
+    recue: "blue",
+    test_envoye: "amber",
+    test_recu: "violet",
     acceptee: "green",
     refusee: "red",
   },

@@ -20,7 +20,8 @@ export type NavIconName =
   | "at"
   | "inbox"
   | "video"
-  | "userPlus";
+  | "userPlus"
+  | "help";
 
 export type NavLabelKey =
   | "dashboard"
@@ -40,7 +41,8 @@ export type NavLabelKey =
   | "accounts"
   | "requests"
   | "clients"
-  | "applications";
+  | "applications"
+  | "faqAdmin";
 
 // Menus de l'espace privé. Chaque phase ajoute ses entrées ici ; une entrée
 // n'apparaît que si l'utilisateur a la permission indiquée.
@@ -83,6 +85,7 @@ const STAFF_NAV: NavItem[] = [
   { key: "requests", href: "/admin/requests", labelKey: "requests", icon: "inbox", group: "steering", permission: "requests.read" },
   { key: "applications", href: "/admin/applications", labelKey: "applications", icon: "userPlus", group: "team", permission: "users.manage" },
   { key: "plans", href: "/admin/plans", labelKey: "plans", icon: "tag", group: "settings", permission: "plans.manage" },
+  { key: "faq", href: "/admin/faq", labelKey: "faqAdmin", icon: "help", group: "settings", permission: "content.update" },
   { key: "content", href: "/admin/content", labelKey: "content", icon: "file", group: "settings", permission: "content.update" },
   { key: "settings", href: "/admin/settings", labelKey: "settings", icon: "sliders", group: "settings", permission: "settings.update" },
   { key: "account", href: "/account", labelKey: "account", icon: "user", group: "settings" },

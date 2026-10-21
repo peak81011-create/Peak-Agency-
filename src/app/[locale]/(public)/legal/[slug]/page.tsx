@@ -10,7 +10,7 @@ import { RichText } from "@/lib/content/rich-text";
 import { getSettings } from "@/lib/settings";
 import { cn } from "@/lib/utils";
 
-const SLUGS = { notice: "legal.notice", terms: "legal.terms", privacy: "legal.privacy" } as const;
+const SLUGS = { notice: "legal.notice", terms: "legal.terms", privacy: "legal.privacy", clippers: "legal.clippers" } as const;
 type Slug = keyof typeof SLUGS;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {

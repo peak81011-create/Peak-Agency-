@@ -9,6 +9,7 @@ import {
   IdCard,
   Inbox,
   Landmark,
+  LifeBuoy,
   LineChart,
   SlidersHorizontal,
   Tag,
@@ -36,4 +37,5 @@ export const NAV_ICONS: Record<NavIconName, LucideIcon> = {
   video: Clapperboard,
   users: UsersRound,
   userPlus: UserPlus,
+  help: LifeBuoy,
 };

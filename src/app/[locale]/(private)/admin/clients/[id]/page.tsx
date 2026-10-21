@@ -116,7 +116,7 @@ export default async function AdminClientPage({ params }: { params: Promise<{ id
               clientId={id}
               editable={canTeam}
               members={client.assignments.map((a) => ({ user_id: a.user_id, team_role: a.team_role, name: a.user?.full_name ?? "—" }))}
-              staff={staff.map((s) => ({ id: s.id, label: `${s.full_name} · ${tr(s.role as "editor")}` }))}
+              staff={staff.map((s) => ({ id: s.id, label: `${s.full_name} · ${tr(s.role as "clipper")}` }))}
             />
           </Card>
           <Card>

@@ -15,19 +15,19 @@ const STATUSES = ["recue", "en_traitement", "clips_extraits", "archivee", "erreu
 export function VideoActions({
   videoId,
   status,
-  editors,
+  clippers,
   canCreate,
 }: {
   videoId: string;
   status: (typeof STATUSES)[number] | "envoi";
-  editors: { id: string; label: string }[];
+  clippers: { id: string; label: string }[];
   canCreate: boolean;
 }) {
   const t = useTranslations("admin.videos");
   const ts = useTranslations("status.video");
   const errorText = useErrorText();
   const [titles, setTitles] = useState("");
-  const [editor, setEditor] = useState("");
+  const [clipper, setClipper] = useState("");
   const [message, setMessage] = useState<string>();
   const [error, setError] = useState<string>();
   const [pending, startTransition] = useTransition();
@@ -63,7 +63,7 @@ export function VideoActions({
           onSubmit={(e) => {
             e.preventDefault();
             startTransition(async () => {
-              const res = await createClipsFromVideoAction(videoId, titles, editor);
+              const res = await createClipsFromVideoAction(videoId, titles, clipper);
               if (res.ok) {
                 setTitles("");
                 setMessage(t("created", { count: res.data?.count ?? 0 }));
@@ -75,10 +75,10 @@ export function VideoActions({
           <Field label={t("batchTitles")} htmlFor={`batch-${videoId}`} hint={t("batchHint")}>
             <Textarea id={`batch-${videoId}`} rows={4} value={titles} onChange={(e) => setTitles(e.target.value)} />
           </Field>
-          <Field label={t("editor")} htmlFor={`batch-editor-${videoId}`}>
-            <Select id={`batch-editor-${videoId}`} value={editor} onChange={(e) => setEditor(e.target.value)}>
+          <Field label={t("clipper")} htmlFor={`batch-clipper-${videoId}`}>
+            <Select id={`batch-clipper-${videoId}`} value={clipper} onChange={(e) => setClipper(e.target.value)}>
               <option value="">—</option>
-              {editors.map((ed) => (
+              {clippers.map((ed) => (
                 <option key={ed.id} value={ed.id}>
                   {ed.label}
                 </option>

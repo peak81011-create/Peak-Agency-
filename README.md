@@ -93,7 +93,7 @@ Créés par `npm run seed`. Mot de passe commun : **`Peak-Demo-2026!`**
 | Owner (admin) | `owner@demo.peak.local` | Doit activer la double authentification à la 1re connexion |
 | Assistante | `assistante@demo.peak.local` | Attribuée aux clients Léa et Hugo |
 | Prospecteur | `prospecteur@demo.peak.local` | — |
-| Monteur | `monteur@demo.peak.local` | Attribué à la cliente Léa |
+| Clipper | `clipper@demo.peak.local` | Attribué à la cliente Léa |
 | Client actif | `client.actif@demo.peak.local` | Léa Live : paiement validé, espace débloqué |
 | Client à vérifier | `client.verif@demo.peak.local` | Hugo Gaming : preuve de virement à vérifier |
 | Nouveau client | `client.nouveau@demo.peak.local` | Inès Talks : vient de s'inscrire, espace verrouillé |
@@ -256,10 +256,10 @@ Connecté en owner, dans le menu de gauche :
 | Phase | Contenu | État |
 |---|---|---|
 | 1. Fondations | Next.js, design tokens, FR/EN, Supabase + RLS, authentification + 2FA, rôles et `can()`, seed, CI | ✅ |
-| 2. Site public + paiement | Vitrine, tarifs, contact, pages légales, parcours virement → validation → déblocage, factures PDF, e-mails, rappels de renouvellement | ✅ |
-| 3. Cœur de l'agence | Clients, vidéos (R2), clips (Kanban), comptes de diffusion, demandes, tableau de bord client | ✅ |
-| 4. Équipe | Tâches, espaces assistante et monteur, rémunération, matrice des permissions, « voir en tant que », journal | À faire |
+| 2. Site public + paiement | Vitrine à deux parcours (créateurs / clippers), simulateur de gains, FAQ, aide, candidature clipper, « Besoin d'aide ? », textes & engagements, parcours virement → validation → factures | ✅ |
+| 3. Cœur de l'agence | Clients, vidéos (R2), clips (Kanban), comptes, demandes, tableau de bord client · **à ajouter : tickets du service client et réponses enregistrées** | En cours |
+| 4. Équipe et clippers | Recrutement (clip test, création du compte), démarrage du clipper (charte, paiement), missions, revue des clips, rémunération et relevés, niveaux, espace clipper, ressources, permissions, « voir en tant que » | À faire |
 | 5. Prospection | Prospects, pipeline, modèles de messages, import CSV, conversion, API pour agent IA | À faire |
-| 6. Statistiques et finitions | Stats, graphiques, notifications, tâches planifiées, exports, accessibilité, mobile | À faire |
+| 6. Statistiques et finitions | Stats, statistiques du service client (délai, satisfaction), votes FAQ, notifications, exports, accessibilité | À faire |
 
 Plus tard (hors périmètre actuel) : agent IA de prospection, synchronisation automatique des statistiques via les API officielles de TikTok, YouTube et Instagram (soumises à validation par les plateformes), paiement par carte si besoin.

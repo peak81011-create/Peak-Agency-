@@ -4,8 +4,8 @@ import { DEMO_PASSWORD, DEMO_USERS, TINY_PNG, confirmationLink, expectPath, logi
 test.describe("Site public", () => {
   test("accueil et tarifs en français et en anglais", async ({ page }) => {
     await page.goto("/fr");
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("Vos lives");
-    await expect(page.locator("#how")).toContainText("Envoi des vidéos");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("On transforme les longues vidéos");
+    await expect(page.locator("#how")).toContainText("Le créateur nous confie ses vidéos");
 
     await page.goto("/fr/pricing");
     const plans = page.getByTestId("pricing-plans");
@@ -17,7 +17,7 @@ test.describe("Site public", () => {
     await expect(page.getByTestId("pricing-plans")).toContainText("Demo — Growth");
     await expect(page.getByTestId("pricing-plans")).toContainText("/ month");
     await page.goto("/en");
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("Your streams");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("We turn long videos");
   });
 
   test("les pages légales existent, avec les champs de l'entreprise à compléter", async ({ page }) => {
@@ -37,18 +37,6 @@ test.describe("Site public", () => {
     await expect(page.getByText("Merci, votre message est bien envoyé.")).toBeVisible();
   });
 
-  test("un clipper peut postuler depuis l'accueil", async ({ page }) => {
-    await page.goto("/fr");
-    await page.locator("#audiences").getByRole("link", { name: "Postuler" }).click();
-    await expect(page).toHaveURL(/\/fr\/join$/);
-    await page.getByLabel("Nom et prénom").fill("Clipper E2E");
-    await page.getByLabel("E-mail").fill("clipper.e2e@demo.peak.local");
-    await page.getByText("TikTok", { exact: true }).click();
-    await page.getByLabel("Expérience en montage").selectOption("confirme");
-    await page.getByLabel("Disponibilité par semaine").selectOption("10_20");
-    await page.getByRole("button", { name: "Envoyer ma candidature" }).click();
-    await expect(page.getByText("Candidature envoyée")).toBeVisible();
-  });
 });
 
 test.describe("Parcours de paiement par virement", () => {

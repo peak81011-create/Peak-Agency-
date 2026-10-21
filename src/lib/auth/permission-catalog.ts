@@ -2,9 +2,9 @@
 // de chaque rôle. Doit rester identique à la migration
 // supabase/migrations/20261020000200_reference_data.sql (vérifié par les tests).
 
-export const ROLES = ["owner", "assistant", "prospector", "editor", "client"] as const;
+export const ROLES = ["owner", "assistant", "prospector", "clipper", "client"] as const;
 export type Role = (typeof ROLES)[number];
-export const STAFF_ROLES = ["owner", "assistant", "prospector", "editor"] as const satisfies readonly Role[];
+export const STAFF_ROLES = ["owner", "assistant", "prospector", "clipper"] as const satisfies readonly Role[];
 
 export const PERMISSION_GROUPS = {
   clients: [
@@ -45,7 +45,7 @@ export const DEFAULT_ROLE_PERMISSIONS: Record<Exclude<Role, "owner">, readonly P
     "payouts.read_own",
   ],
   prospector: ["prospects.work", "payouts.read_own"],
-  editor: [
+  clipper: [
     "clients.read",
     "clients.internal_notes",
     "videos.read",

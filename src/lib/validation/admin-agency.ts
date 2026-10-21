@@ -23,7 +23,7 @@ export const clipFormSchema = z.object({
   end: timecode,
   sourceVideoId: z.string(),
   socialAccountId: z.string(),
-  editorId: z.string(),
+  clipperId: z.string(),
   dueAt: optionalDateTime,
   scheduledAt: optionalDateTime,
   publishedUrl: optionalUrl,

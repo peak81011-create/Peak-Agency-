@@ -15,19 +15,18 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: t("title") };
 }
 
-const PLATFORM_LABELS: Record<string, string> = { tiktok: "TikTok", instagram: "Reels", youtube: "Shorts" };
-
 type Application = {
   id: string;
-  full_name: string;
+  nickname: string;
+  first_name: string;
   email: string;
-  portfolio_url: string | null;
-  platforms: string[];
-  experience: "debutant" | "intermediaire" | "confirme";
-  tools: string | null;
-  hours_per_week: "moins_10" | "10_20" | "20_35" | "temps_plein";
-  languages: string | null;
-  message: string | null;
+  country: string;
+  languages: string;
+  portfolio_links: string[];
+  software: string;
+  experience: "debutant" | "intermediaire" | "avance";
+  hours_per_week: "moins_10" | "10_20" | "20_35" | "plus_35";
+  motivation: string | null;
   status: (typeof APPLICATION_STATUSES)[number];
   created_at: string;
 };
@@ -38,14 +37,14 @@ export default async function AdminApplicationsPage({ searchParams }: { searchPa
   const filter = APPLICATION_STATUSES.find((s) => s === params.status);
   const [t, tj, ts, locale] = await Promise.all([
     getTranslations("admin.applications"),
-    getTranslations("join.form"),
+    getTranslations("apply.form"),
     getTranslations("status.application"),
     getLocale(),
   ]);
   const supabase = await createSupabaseServerClient();
   let query = supabase
     .from("clipper_applications")
-    .select("id, full_name, email, portfolio_url, platforms, experience, tools, hours_per_week, languages, message, status, created_at")
+    .select("id, nickname, first_name, email, country, languages, portfolio_links, software, experience, hours_per_week, motivation, status, created_at")
     .order("created_at", { ascending: false })
     .limit(200);
   if (filter) query = query.eq("status", filter);
@@ -78,49 +77,37 @@ export default async function AdminApplicationsPage({ searchParams }: { searchPa
             <Card key={a.id} className="flex flex-col gap-3">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <p className="font-semibold">{a.full_name}</p>
+                  <p className="font-semibold">
+                    {a.first_name} · {a.nickname}
+                  </p>
                   <a href={`mailto:${a.email}`} className="text-sm text-forest-700">
                     {a.email}
                   </a>
                   <p className="text-xs text-subtle-foreground">{t("receivedOn", { date: formatDate(a.created_at, locale) })}</p>
                 </div>
-                <ApplicationStatusSelect id={a.id} status={a.status} label={t("statusFor", { name: a.full_name })} />
+                <ApplicationStatusSelect id={a.id} status={a.status} label={t("statusFor", { name: a.first_name })} />
               </div>
               <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 text-sm">
                 <dt className="text-subtle-foreground">{tj("experience")}</dt>
                 <dd>{tj(`experiences.${a.experience}`)}</dd>
                 <dt className="text-subtle-foreground">{tj("hours")}</dt>
                 <dd>{tj(`hoursOptions.${a.hours_per_week}`)}</dd>
-                {a.platforms.length ? (
-                  <>
-                    <dt className="text-subtle-foreground">{tj("platforms")}</dt>
-                    <dd>{a.platforms.map((p) => PLATFORM_LABELS[p] ?? p).join(", ")}</dd>
-                  </>
-                ) : null}
-                {a.tools ? (
-                  <>
-                    <dt className="text-subtle-foreground">{tj("tools")}</dt>
-                    <dd>{a.tools}</dd>
-                  </>
-                ) : null}
-                {a.languages ? (
-                  <>
-                    <dt className="text-subtle-foreground">{tj("languages")}</dt>
-                    <dd>{a.languages}</dd>
-                  </>
-                ) : null}
-                {a.portfolio_url ? (
-                  <>
-                    <dt className="text-subtle-foreground">{tj("portfolio")}</dt>
-                    <dd className="min-w-0 truncate">
-                      <a href={a.portfolio_url} target="_blank" rel="noreferrer noopener" className="text-forest-700">
-                        {a.portfolio_url}
-                      </a>
-                    </dd>
-                  </>
-                ) : null}
+                <dt className="text-subtle-foreground">{tj("software")}</dt>
+                <dd>{a.software}</dd>
+                <dt className="text-subtle-foreground">{tj("country")}</dt>
+                <dd>{a.country}</dd>
+                <dt className="text-subtle-foreground">{tj("languages")}</dt>
+                <dd>{a.languages}</dd>
+                <dt className="text-subtle-foreground">{tj("portfolio")}</dt>
+                <dd className="flex min-w-0 flex-col">
+                  {a.portfolio_links.map((l) => (
+                    <a key={l} href={l} target="_blank" rel="noreferrer noopener" className="truncate text-forest-700">
+                      {l}
+                    </a>
+                  ))}
+                </dd>
               </dl>
-              {a.message ? <p className="whitespace-pre-line rounded-md bg-paper p-3 text-sm">{a.message}</p> : null}
+              {a.motivation ? <p className="whitespace-pre-line rounded-md bg-paper p-3 text-sm">{a.motivation}</p> : null}
             </Card>
           ))}
         </div>

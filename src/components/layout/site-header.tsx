@@ -1,23 +1,25 @@
 import { Menu } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import { Logo } from "@/components/brand/logo";
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
+import type { Locale } from "@/i18n/routing";
 import { getSessionUser, homePathFor } from "@/lib/auth/session";
+import { localizedPath } from "@/lib/public-paths";
 import { cn } from "@/lib/utils";
+import { HeaderCta } from "./header-cta";
 import { LocaleSwitcher } from "./locale-switcher";
 
 export async function SiteHeader() {
-  const t = await getTranslations();
-  const user = await getSessionUser();
+  const [t, locale, user] = await Promise.all([getTranslations(), getLocale() as Promise<Locale>, getSessionUser()]);
   const links = [
-    { href: "/#how", label: t("nav.how") },
-    { href: "/pricing", label: t("nav.pricing") },
-    { href: "/#faq", label: t("nav.faq") },
-    { href: "/join", label: t("nav.join") },
-    { href: "/contact", label: t("nav.contact") },
-  ] as const;
+    { href: localizedPath("/creators", locale), label: t("nav.creators") },
+    { href: "/clippers", label: t("nav.clippersPage") },
+    { href: "/faq", label: t("nav.faq") },
+    { href: localizedPath("/help", locale), label: t("nav.help") },
+  ];
+  const cta = { creators: t("nav.ctaCreators"), clippers: t("nav.ctaClippers"), start: t("common.start") };
 
   const actions = user ? (
     <Link href={homePathFor(user)} className={buttonVariants({ variant: "accent" })}>
@@ -28,9 +30,7 @@ export async function SiteHeader() {
       <Link href="/login" className={cn(buttonVariants({ variant: "on-dark" }), "border-0")}>
         {t("common.login")}
       </Link>
-      <Link href="/pricing" className={buttonVariants({ variant: "accent" })}>
-        {t("common.start")}
-      </Link>
+      <HeaderCta labels={cta} />
     </>
   );
 
@@ -62,11 +62,7 @@ export async function SiteHeader() {
             </summary>
             <div className="absolute right-0 z-20 mt-2 flex w-64 flex-col gap-1 rounded-lg bg-forest-800 p-3 shadow-3">
               {links.map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  className="flex min-h-11 items-center rounded-sm px-3 text-sage-100 no-underline hover:bg-forest-700"
-                >
+                <Link key={l.href} href={l.href} className="flex min-h-11 items-center rounded-sm px-3 text-sage-100 no-underline hover:bg-forest-700">
                   {l.label}
                 </Link>
               ))}

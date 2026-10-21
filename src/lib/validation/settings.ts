@@ -12,6 +12,8 @@ export function isValidIban(input: string): boolean {
 }
 
 const text = (max = 200) => z.string().trim().max(max, { message: "tooLong" });
+// Montant en euros (« 1 », « 0,50 ») ou vide
+const money = z.string().trim().regex(/^(\d{1,6}([.,]\d{1,2})?)?$/, { message: "price" });
 
 export const settingsFormSchemas = {
   company: z.object({
@@ -40,6 +42,19 @@ export const settingsFormSchemas = {
     reminder_days_before: z.string().trim().regex(/^\d{1,2}$/, { message: "number" }),
   }),
   notifications: z.object({ admin_email: z.union([z.literal(""), z.email({ message: "email" })]) }),
+  commitments: z.object({
+    delai_reponse: text(60),
+    delai_activation: text(60),
+    delai_premiers_clips: text(60),
+    conditions_resiliation: text(1000),
+    minimum_par_clip: money,
+    tarif_1000_vues: money,
+    jours_comptage_vues: z.string().trim().regex(/^(\d{1,3})?$/, { message: "number" }),
+    plafond_par_clip: money,
+    jour_paiement: z.string().trim().refine((v) => v === "" || (/^\d{1,2}$/.test(v) && Number(v) >= 1 && Number(v) <= 28), { message: "payoutDay" }),
+    clip_test_remunere: text(200),
+    age_minimum: z.string().trim().regex(/^\d{2}$/, { message: "number" }),
+  }),
 } as const;
 
 export type SettingsFormKey = keyof typeof settingsFormSchemas;

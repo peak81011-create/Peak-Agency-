@@ -88,7 +88,7 @@ export default async function AdminVideosPage({ searchParams }: { searchParams: 
                   videoId={selected.id}
                   status={selected.status}
                   canCreate={canCreate}
-                  editors={staff.map((s) => ({ id: s.id, label: s.full_name }))}
+                  clippers={staff.map((s) => ({ id: s.id, label: s.full_name }))}
                 />
               </Card>
               <Card>

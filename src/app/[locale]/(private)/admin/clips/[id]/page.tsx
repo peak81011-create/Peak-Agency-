@@ -43,7 +43,7 @@ export default async function AdminClipPage({ params, searchParams }: { params: 
     end: formatTimecode(clip?.end_seconds),
     sourceVideoId: clip?.source_video_id ?? query.video ?? "",
     socialAccountId: clip?.social_account_id ?? "",
-    editorId: clip?.editor_id ?? (isNew ? user.id : ""),
+    clipperId: clip?.clipper_id ?? (isNew ? user.id : ""),
     dueAt: local(clip?.due_at ?? null),
     scheduledAt: local(clip?.scheduled_at ?? null),
     publishedUrl: clip?.published_url ?? "",

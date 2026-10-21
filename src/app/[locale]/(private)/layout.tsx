@@ -1,6 +1,9 @@
 import { getLocale } from "next-intl/server";
 import type { ReactNode } from "react";
+import { HelpWidget } from "@/features/faq/help-widget";
+import { getFaq } from "@/features/faq/queries";
 import { AppShell } from "@/features/shell/app-shell";
+import type { Locale } from "@/i18n/routing";
 import { redirect } from "@/i18n/navigation";
 import { requireUser } from "@/lib/auth/session";
 import { touchLastSeen } from "@/lib/auth/presence";
@@ -20,5 +23,11 @@ export default async function PrivateLayout({ children }: { children: ReactNode 
   }
 
   await touchLastSeen(user.id);
-  return <AppShell user={user}>{children}</AppShell>;
+  const faq = await getFaq(locale as Locale);
+  return (
+    <AppShell user={user}>
+      {children}
+      <HelpWidget items={faq} audience={user.role === "clipper" ? "clipper" : "createur"} />
+    </AppShell>
+  );
 }

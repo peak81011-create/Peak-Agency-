@@ -102,7 +102,7 @@ export async function reviewClipAction(clipId: string, approve: boolean, feedbac
     return { ok: false, error: error.message.includes("lecture seule") ? "readOnly" : "generic" };
   }
 
-  const { data: clip } = await createSupabaseAdminClient().from("clips").select("client_id, title, editor_id").eq("id", clipId).single();
+  const { data: clip } = await createSupabaseAdminClient().from("clips").select("client_id, title, clipper_id").eq("id", clipId).single();
   if (clip && !approve) {
     const team = await teamOf(clip.client_id);
     await notifyUsers(team, "clip_changes_requested", { title: clip.title, feedback: feedback.slice(0, 300) }, `/admin/clips/${clipId}`);

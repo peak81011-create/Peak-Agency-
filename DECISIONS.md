@@ -81,3 +81,17 @@ Ce fichier liste les choix faits pendant la construction, quand le cahier des ch
 - **Invitation d'un client par l'agence** : e-mail Supabase d'invitation ; le client choisit son mot de passe puis complète son profil et suit le parcours de paiement habituel.
 - **Demandes** : numérotées `#R-N`. Le client ne peut ni les attribuer ni changer leur statut, seulement les clore. L'agence peut transformer une demande en clip.
 
+## Deux parcours : créateurs et clippers (mise à jour du cahier des charges)
+
+- **Rôle `editor` renommé `clipper`** partout (base, code, interface), ainsi que `clips.editor_id` → `clipper_id`. Le compte de démonstration devient `clipper@demo.peak.local`.
+- **Textes & engagements** : les délais, montants et conditions (`{delai_reponse}`, `{minimum_par_clip}`…) sont dans `settings.commitments`, modifiables dans Admin → Paramètres. Montants stockés en centimes. Aucune valeur par défaut inventée (seul l'âge minimum vaut 18).
+- **Règle d'honnêteté appliquée par le code** : un texte qui utilise une variable vide n'est pas affiché (`fillVars` renvoie null) ; une question de FAQ dont la réponse dépend d'une variable vide est masquée. La vue d'ensemble de l'admin liste ces variables dans « À compléter avant la mise en ligne », avec les offres « démo » et les informations légales manquantes.
+- **Calcul des gains** : une seule fonction `calculerGainClip()` (src/lib/earnings/calculate.ts), testée, utilisée par le simulateur public et (phase 4) par l'espace clipper et les relevés. Ordre : minimum + prime aux 1 000 vues, puis plafond, puis coefficient de niveau. Sans relevé de vues, seul le minimum compte. Le simulateur n'apparaît que si minimum, prime et jours de comptage sont renseignés.
+- **Adresses traduites** : les pages existent sous leur nom anglais (/en/creators, /en/help…) ; les adresses françaises (/fr/createurs, /fr/tarifs, /fr/clippers/postuler, /fr/aide) sont des réécritures déclarées dans next.config.ts (src/lib/public-paths.ts). /fr/pricing et /fr/join restent valides (la seconde redirige).
+- **FAQ** : table `faq_items` (public créateur / clipper / tous, FR et EN, ordre, visible, « question fréquente »), éditable dans Admin → FAQ, avec le décompte des votes « utile ». Les votes sont anonymes, limités par adresse IP. Les liens internes s'écrivent [libellé](/page). L'ancienne FAQ de l'accueil (contenu du site) est supprimée.
+- **Bouton « Besoin d'aide ? »** sur toutes les pages : recherche par mots-clés (accents ignorés), 3 questions fréquentes du public concerné (clippers sur les pages clippers et pour le rôle clipper), et « Contacter l'équipe » qui mène à la page Aide. Les tickets du service client (complément de la phase 3) remplaceront le formulaire de contact pour les personnes connectées.
+- **Candidature clipper** : nouveau formulaire (pseudo, prénom, âge minimum, pays, langues, 1 à 5 exemples, logiciels, expérience, disponibilité, motivation, confidentialité), accusé de réception par e-mail. Statuts : reçue → clip test envoyé → clip test reçu → acceptée / refusée. Le recrutement complet (envoi du clip test, création du compte) est en phase 4.
+- **Niveaux** : table `clipper_levels` (Nouveau, Confirmé, Expert) avec conditions et coefficient de rémunération vides par défaut (coefficient 1) ; l'écran d'édition arrive en phase 4.
+- **Ton** : vouvoiement pour les créateurs, tutoiement pour les clippers (FR) ; « you » en anglais.
+- **Nouvelle page légale** « Conditions clippers » (modèle à compléter, éditable dans Contenu du site).
+

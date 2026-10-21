@@ -1,27 +1,39 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import { Logo } from "@/components/brand/logo";
 import { Link } from "@/i18n/navigation";
+import type { Locale } from "@/i18n/routing";
+import { commitmentVars, getCommitments } from "@/lib/commitments";
+import { fillVars } from "@/lib/content/vars";
+import { localizedPath } from "@/lib/public-paths";
 import { LocaleSwitcher } from "./locale-switcher";
 
 export async function SiteFooter() {
-  const t = await getTranslations();
+  const [t, locale, commitments] = await Promise.all([getTranslations(), getLocale() as Promise<Locale>, getCommitments()]);
+  const responseLine = fillVars(t.raw("footer.responseTime") as string, commitmentVars(commitments, locale));
   const columns = [
     {
-      title: t("footer.agency"),
+      title: t("footer.creators"),
       links: [
-        { href: "/#how", label: t("nav.how") },
-        { href: "/pricing", label: t("nav.pricing") },
-        { href: "/#faq", label: t("nav.faq") },
-        { href: "/join", label: t("nav.join") },
-        { href: "/contact", label: t("nav.contact") },
+        { href: localizedPath("/creators", locale), label: t("nav.creators") },
+        { href: localizedPath("/pricing", locale), label: t("nav.pricing") },
+        { href: "/signup", label: t("common.signup") },
       ],
     },
     {
-      title: t("footer.space"),
+      title: t("footer.clippers"),
       links: [
+        { href: "/clippers", label: t("nav.clippersPage") },
+        { href: localizedPath("/clippers/apply", locale), label: t("footer.apply") },
+        { href: "/legal/clippers", label: t("footer.clipperTerms") },
+      ],
+    },
+    {
+      title: t("footer.help"),
+      links: [
+        { href: "/faq", label: t("nav.faq") },
+        { href: localizedPath("/help", locale), label: t("nav.help") },
         { href: "/login", label: t("common.login") },
-        { href: "/signup", label: t("common.signup") },
       ],
     },
     {
@@ -43,6 +55,7 @@ export async function SiteFooter() {
               <Logo wordmark={t("common.wordmark")} className="[&>span:last-child]:text-sage-100" />
             </span>
             <p className="text-[13px] text-sage-400">{t("footer.tagline")}</p>
+            {responseLine ? <p className="text-[13px] text-sage-300">{responseLine}</p> : null}
           </div>
           <div className="flex flex-wrap items-start gap-12 md:gap-16">
             {columns.map((col) => (

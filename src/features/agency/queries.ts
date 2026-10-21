@@ -25,30 +25,30 @@ export type ClipRow = {
   published_at: string | null;
   published_url: string | null;
   client_feedback: string | null;
-  editor_id: string | null;
+  clipper_id: string | null;
   source_video_id: string | null;
   social_account_id: string | null;
   created_at: string;
   account: { handle: string; platform: Platform } | null;
-  editor: { full_name: string } | null;
+  clipper: { full_name: string } | null;
   client: { creator_name: string } | null;
   video: { title: string } | null;
 };
 
 export const CLIP_COLUMNS =
-  "id, client_id, title, hook, caption, hashtags, status, start_seconds, end_seconds, storage_key, file_name, due_at, scheduled_at, published_at, published_url, client_feedback, editor_id, source_video_id, social_account_id, created_at, account:social_accounts(handle, platform), editor:profiles!clips_editor_id_fkey(full_name), client:clients(creator_name), video:source_videos(title)";
+  "id, client_id, title, hook, caption, hashtags, status, start_seconds, end_seconds, storage_key, file_name, due_at, scheduled_at, published_at, published_url, client_feedback, clipper_id, source_video_id, social_account_id, created_at, account:social_accounts(handle, platform), clipper:profiles!clips_clipper_id_fkey(full_name), client:clients(creator_name), video:source_videos(title)";
 
 export async function listClips(filter: {
   clientId?: string;
   statuses?: ClipStatus[];
-  editorId?: string;
+  clipperId?: string;
   order?: "published" | "upcoming" | "recent";
   limit?: number;
 }): Promise<ClipRow[]> {
   const supabase = await createSupabaseServerClient();
   let q = supabase.from("clips").select(CLIP_COLUMNS);
   if (filter.clientId) q = q.eq("client_id", filter.clientId);
-  if (filter.editorId) q = q.eq("editor_id", filter.editorId);
+  if (filter.clipperId) q = q.eq("clipper_id", filter.clipperId);
   if (filter.statuses?.length) q = q.in("status", filter.statuses);
   if (filter.order === "published") q = q.order("published_at", { ascending: false, nullsFirst: false });
   else if (filter.order === "upcoming") q = q.order("scheduled_at", { ascending: true, nullsFirst: false }).order("due_at", { ascending: true });
