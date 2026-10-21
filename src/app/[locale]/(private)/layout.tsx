@@ -27,7 +27,7 @@ export default async function PrivateLayout({ children }: { children: ReactNode 
   return (
     <AppShell user={user}>
       {children}
-      <HelpWidget items={faq} audience={user.role === "clipper" ? "clipper" : "createur"} />
+      <HelpWidget items={faq} audience={user.role === "clipper" ? "clipper" : "createur"} signedIn />
     </AppShell>
   );
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { buttonVariants } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { AnswerText } from "@/features/faq/answer-text";
 import { getFaq } from "@/features/faq/queries";
@@ -7,6 +8,7 @@ import { ContactForm } from "@/features/public/contact-form";
 import { Section, SectionTitle } from "@/features/public/sections";
 import { Link } from "@/i18n/navigation";
 import { initPageLocale } from "@/i18n/page";
+import { getSessionUser } from "@/lib/auth/session";
 import { commitmentVars, getCommitments } from "@/lib/commitments";
 import { fillVars } from "@/lib/content/vars";
 
@@ -17,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function HelpPage({ params }: { params: Promise<{ locale: string }> }) {
   const locale = await initPageLocale(params);
-  const [t, faq, commitments] = await Promise.all([getTranslations("help"), getFaq(locale), getCommitments()]);
+  const [t, faq, commitments, user] = await Promise.all([getTranslations("help"), getFaq(locale), getCommitments(), getSessionUser()]);
   const response = fillVars(t.raw("response") as string, commitmentVars(commitments, locale));
   const top = faq.filter((f) => f.isTop).slice(0, 6);
 
@@ -50,7 +52,16 @@ export default async function HelpPage({ params }: { params: Promise<{ locale: s
             <CardTitle>{t("contactTitle")}</CardTitle>
           </CardHeader>
           {response ? <p className="-mt-2 mb-4 text-sm font-medium text-forest-700">{response}</p> : null}
-          <ContactForm />
+          {user ? (
+            <div className="flex flex-col items-start gap-3">
+              <p className="text-sm text-muted-foreground">{t("signedIn")}</p>
+              <Link href="/support/new" className={buttonVariants()}>
+                {t("openTicket")}
+              </Link>
+            </div>
+          ) : (
+            <ContactForm />
+          )}
         </Card>
       </div>
     </Section>

@@ -257,7 +257,7 @@ Connecté en owner, dans le menu de gauche :
 |---|---|---|
 | 1. Fondations | Next.js, design tokens, FR/EN, Supabase + RLS, authentification + 2FA, rôles et `can()`, seed, CI | ✅ |
 | 2. Site public + paiement | Vitrine à deux parcours (créateurs / clippers), simulateur de gains, FAQ, aide, candidature clipper, « Besoin d'aide ? », textes & engagements, parcours virement → validation → factures | ✅ |
-| 3. Cœur de l'agence | Clients, vidéos (R2), clips (Kanban), comptes, demandes, tableau de bord client · **à ajouter : tickets du service client et réponses enregistrées** | En cours |
+| 3. Cœur de l'agence | Clients, vidéos (R2), clips (Kanban), comptes, demandes, tableau de bord client, service client (tickets, réponses enregistrées) | ✅ |
 | 4. Équipe et clippers | Recrutement (clip test, création du compte), démarrage du clipper (charte, paiement), missions, revue des clips, rémunération et relevés, niveaux, espace clipper, ressources, permissions, « voir en tant que » | À faire |
 | 5. Prospection | Prospects, pipeline, modèles de messages, import CSV, conversion, API pour agent IA | À faire |
 | 6. Statistiques et finitions | Stats, statistiques du service client (délai, satisfaction), votes FAQ, notifications, exports, accessibilité | À faire |

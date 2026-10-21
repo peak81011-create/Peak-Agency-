@@ -7,7 +7,7 @@ const intl = createIntlMiddleware(routing);
 
 // Espaces privés : la vérification fine (rôle, permissions, 2FA) est faite
 // côté serveur dans les layouts ; ici on redirige seulement les visiteurs.
-const PRIVATE_PREFIXES = ["/app", "/admin", "/account", "/mfa"];
+const PRIVATE_PREFIXES = ["/app", "/admin", "/account", "/mfa", "/support"];
 
 export async function proxy(request: NextRequest) {
   const response = intl(request);

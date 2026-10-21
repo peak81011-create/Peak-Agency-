@@ -17,7 +17,7 @@ import { searchFaq } from "./search";
  * Bouton « Besoin d'aide ? » présent sur toutes les pages : recherche dans la
  * FAQ, questions fréquentes du public concerné, contact de l'équipe.
  */
-export function HelpWidget({ items, audience }: { items: FaqEntry[]; audience?: FaqAudience }) {
+export function HelpWidget({ items, audience, signedIn = false }: { items: FaqEntry[]; audience?: FaqAudience; signedIn?: boolean }) {
   const t = useTranslations("helpWidget");
   const locale = useLocale() as Locale;
   const pathname = usePathname();
@@ -66,7 +66,7 @@ export function HelpWidget({ items, audience }: { items: FaqEntry[]; audience?: 
             </ul>
           </div>
           <div className="border-t border-border p-4">
-            <Link href={localizedPath("/help", locale)} onClick={() => setOpen(false)} className={cn(buttonVariants(), "w-full")}>
+            <Link href={signedIn ? "/support/new" : localizedPath("/help", locale)} onClick={() => setOpen(false)} className={cn(buttonVariants(), "w-full")}>
               {t("contact")}
             </Link>
           </div>

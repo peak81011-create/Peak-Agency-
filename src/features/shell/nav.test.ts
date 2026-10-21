@@ -9,8 +9,8 @@ const client = (status: "inscrit" | "actif") => ({
 });
 
 describe("menus", () => {
-  it("un client verrouillé n'a que profil, offre, paiement et compte", () => {
-    expect(navFor(client("inscrit")).map((i) => i.key)).toEqual(["dashboard", "profile", "plan", "payment", "account"]);
+  it("un client verrouillé n'a que profil, offre, paiement, aide et compte", () => {
+    expect(navFor(client("inscrit")).map((i) => i.key)).toEqual(["dashboard", "profile", "plan", "payment", "support", "account"]);
     expect(navFor(client("actif")).map((i) => i.key)).toContain("billing");
   });
 

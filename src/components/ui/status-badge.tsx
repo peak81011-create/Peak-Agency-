@@ -49,6 +49,12 @@ const TONES = {
     bloque: "red",
     abandonne: "neutral",
   },
+  ticket: {
+    ouvert: "blue",
+    en_cours: "amber",
+    attente_utilisateur: "violet",
+    resolu: "green",
+  },
   application: {
     recue: "blue",
     test_envoye: "amber",

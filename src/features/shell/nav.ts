@@ -42,7 +42,9 @@ export type NavLabelKey =
   | "requests"
   | "clients"
   | "applications"
-  | "faqAdmin";
+  | "faqAdmin"
+  | "support"
+  | "supportAdmin";
 
 // Menus de l'espace privé. Chaque phase ajoute ses entrées ici ; une entrée
 // n'apparaît que si l'utilisateur a la permission indiquée.
@@ -61,6 +63,7 @@ const CLIENT_LOCKED_NAV: NavItem[] = [
   { key: "profile", href: "/app/profile", labelKey: "creatorProfile", icon: "idCard" },
   { key: "plan", href: "/app/plan", labelKey: "choosePlan", icon: "tag" },
   { key: "payment", href: "/app/payment", labelKey: "payment", icon: "bank" },
+  { key: "support", href: "/support", labelKey: "support", icon: "help" },
   { key: "account", href: "/account", labelKey: "account", icon: "user" },
 ];
 
@@ -72,6 +75,7 @@ const CLIENT_NAV: NavItem[] = [
   { key: "requests", href: "/app/requests", labelKey: "requests", icon: "inbox" },
   { key: "billing", href: "/app/billing", labelKey: "billing", icon: "card" },
   { key: "profile", href: "/app/profile", labelKey: "creatorProfile", icon: "idCard" },
+  { key: "support", href: "/support", labelKey: "support", icon: "help" },
   { key: "account", href: "/account", labelKey: "account", icon: "user" },
 ];
 
@@ -83,6 +87,7 @@ const STAFF_NAV: NavItem[] = [
   { key: "videos", href: "/admin/videos", labelKey: "videos", icon: "video", group: "steering", permission: "videos.read" },
   { key: "accounts", href: "/admin/accounts", labelKey: "accounts", icon: "at", group: "steering", permission: "accounts.read" },
   { key: "requests", href: "/admin/requests", labelKey: "requests", icon: "inbox", group: "steering", permission: "requests.read" },
+  { key: "support", href: "/admin/support", labelKey: "supportAdmin", icon: "help", group: "steering", permission: "support.manage" },
   { key: "applications", href: "/admin/applications", labelKey: "applications", icon: "userPlus", group: "team", permission: "users.manage" },
   { key: "plans", href: "/admin/plans", labelKey: "plans", icon: "tag", group: "settings", permission: "plans.manage" },
   { key: "faq", href: "/admin/faq", labelKey: "faqAdmin", icon: "help", group: "settings", permission: "content.update" },

@@ -71,7 +71,9 @@
     "help": "Help",
     "ctaCreators": "See plans",
     "ctaClippers": "Apply",
-    "faqAdmin": "FAQ"
+    "faqAdmin": "FAQ",
+    "support": "Help",
+    "supportAdmin": "Support"
   },
   "footer": {
     "tagline": "Your streams and long videos turned into vertical clips, published every day on dedicated accounts.",
@@ -157,6 +159,12 @@
       "recue": "Received",
       "test_envoye": "Test clip sent",
       "test_recu": "Test clip received"
+    },
+    "ticket": {
+      "ouvert": "Open",
+      "en_cours": "In progress",
+      "attente_utilisateur": "Waiting for your reply",
+      "resolu": "Resolved"
     }
   },
   "home": {
@@ -963,6 +971,54 @@
       "hidden": "Hidden",
       "topBadge": "Frequent",
       "votes": "Helpful: {yes} · Not helpful: {no}"
+    },
+    "support": {
+      "title": "Support",
+      "savedReplies": "Saved replies",
+      "tabs": {
+        "tickets": "Tickets",
+        "contact": "Contact form"
+      },
+      "empty": "Nothing in this list.",
+      "audiences": {
+        "createur": "Creator",
+        "clipper": "Clipper",
+        "equipe": "Team"
+      },
+      "filters": {
+        "audience": "Audience",
+        "allAudiences": "All audiences",
+        "category": "Category",
+        "allCategories": "All categories",
+        "status": "Status",
+        "open": "Unresolved",
+        "assigned": "Assignment",
+        "anyone": "Anyone",
+        "me": "Assigned to me",
+        "unassigned": "Unassigned",
+        "apply": "Filter"
+      },
+      "noSla": "Fill in the response time (Settings → Texts & commitments) to flag late tickets.",
+      "late": "Late",
+      "markHandled": "Mark as handled",
+      "markUnhandled": "Mark as not handled",
+      "details": "Details",
+      "author": "Author",
+      "createdAt": "Opened on",
+      "elapsed": "Time elapsed",
+      "hours": "{n, plural, one {# hour} other {# hours}}",
+      "firstResponse": "First reply",
+      "satisfaction": "Satisfaction",
+      "replies": {
+        "title": "Saved replies",
+        "lead": "Reusable reply templates, in French and English. In a ticket, the version in the user's language is inserted.",
+        "new": "New template",
+        "name": "Template name",
+        "bodyFr": "Text (FR)",
+        "bodyEn": "Text (EN)",
+        "create": "Add",
+        "delete": "Delete"
+      }
     }
   },
   "emails": {
@@ -1074,6 +1130,24 @@
       "title": "Thank you {name}!",
       "body": "We received your application to join the Peak team. We'll look at it and reply by email.",
       "cta": "See the clippers page"
+    },
+    "ticket_created": {
+      "subject": "New help request #{number} — {subject}",
+      "title": "New help request",
+      "body": "{name} wrote to support: “{subject}”.",
+      "cta": "Open the ticket"
+    },
+    "ticket_reply": {
+      "subject": "New reply — {subject}",
+      "title": "New reply to your request",
+      "body": "{body}",
+      "cta": "See the conversation"
+    },
+    "ticket_assigned": {
+      "subject": "A ticket was assigned to you — #{number}",
+      "title": "Ticket assigned",
+      "body": "The ticket “{subject}” was assigned to you.",
+      "cta": "Open the ticket"
     }
   },
   "uploads": {
@@ -1457,7 +1531,9 @@
     "quick": "Frequent questions",
     "allFaq": "See the full FAQ",
     "contactTitle": "Write to the team",
-    "response": "We reply within {delai_reponse}."
+    "response": "We reply within {delai_reponse}.",
+    "signedIn": "You're signed in: write to the team from your space, and follow the reply in the same place.",
+    "openTicket": "Write to the team"
   },
   "helpWidget": {
     "button": "Need help?",
@@ -1468,5 +1544,47 @@
     "results": "Results",
     "noResult": "No answer found.",
     "contact": "Contact the team"
+  },
+  "support": {
+    "title": "Help",
+    "new": "Write to the team",
+    "emptyTitle": "No help requests yet.",
+    "emptyBody": "A question, an issue? Write to the team: you'll follow the reply here.",
+    "category": "Topic",
+    "subject": "Title",
+    "message": "Your message",
+    "create": "Send",
+    "suggestions": "These answers may help you right away:",
+    "response": "We reply within {delai_reponse}.",
+    "team": "Peak team",
+    "you": "You",
+    "internal": "Internal note",
+    "yourMessage": "Your reply",
+    "send": "Send",
+    "internalNote": "Internal note (hidden from the user)",
+    "savedReply": "Saved reply",
+    "savedReplyChoose": "Choose a template…",
+    "markResolved": "My issue is solved",
+    "rateTitle": "How was our reply?",
+    "stars": "{n, plural, one {# star} other {# stars}}",
+    "rateComment": "Any comment? (optional)",
+    "rateSend": "Send my rating",
+    "rated": "Thanks for your rating.",
+    "reopen": "Reopen the request",
+    "resolvedReopen": "Request resolved. You can reopen it within 7 days if needed.",
+    "resolvedNew": "Request resolved. For a new question, write to the team.",
+    "status": "Status",
+    "priority": "Priority",
+    "assignedTo": "Assigned to",
+    "categories": {
+      "paiement": "Payment",
+      "clips": "My clips",
+      "comptes": "My accounts",
+      "demande": "Special request",
+      "compte": "My account",
+      "mission": "Mission",
+      "remuneration": "Pay",
+      "autre": "Other"
+    }
   }
 }

@@ -29,6 +29,9 @@ export const NOTIFICATION_TYPES = [
   "request_assigned",
   "clipper_application",
   "clipper_application_received",
+  "ticket_created",
+  "ticket_reply",
+  "ticket_assigned",
 ] as const;
 export type NotificationType = (typeof NOTIFICATION_TYPES)[number];
 

@@ -71,7 +71,9 @@
     "help": "Aide",
     "ctaCreators": "Voir les offres",
     "ctaClippers": "Postuler",
-    "faqAdmin": "FAQ"
+    "faqAdmin": "FAQ",
+    "support": "Aide",
+    "supportAdmin": "Service client"
   },
   "footer": {
     "tagline": "Vos lives et vidéos longues transformés en clips verticaux, publiés chaque jour sur des comptes dédiés.",
@@ -157,6 +159,12 @@
       "recue": "Reçue",
       "test_envoye": "Clip test envoyé",
       "test_recu": "Clip test reçu"
+    },
+    "ticket": {
+      "ouvert": "Ouvert",
+      "en_cours": "En cours",
+      "attente_utilisateur": "En attente de votre réponse",
+      "resolu": "Résolu"
     }
   },
   "home": {
@@ -963,6 +971,54 @@
       "hidden": "Masquée",
       "topBadge": "Fréquente",
       "votes": "Utile : {yes} · Pas utile : {no}"
+    },
+    "support": {
+      "title": "Service client",
+      "savedReplies": "Réponses enregistrées",
+      "tabs": {
+        "tickets": "Tickets",
+        "contact": "Formulaire de contact"
+      },
+      "empty": "Rien dans cette liste.",
+      "audiences": {
+        "createur": "Créateur",
+        "clipper": "Clipper",
+        "equipe": "Équipe"
+      },
+      "filters": {
+        "audience": "Public",
+        "allAudiences": "Tous les publics",
+        "category": "Catégorie",
+        "allCategories": "Toutes les catégories",
+        "status": "Statut",
+        "open": "Non résolus",
+        "assigned": "Attribution",
+        "anyone": "Tout le monde",
+        "me": "Attribués à moi",
+        "unassigned": "Non attribués",
+        "apply": "Filtrer"
+      },
+      "noSla": "Renseignez le délai de réponse (Paramètres → Textes & engagements) pour signaler les tickets en retard.",
+      "late": "En retard",
+      "markHandled": "Marquer traité",
+      "markUnhandled": "Marquer non traité",
+      "details": "Informations",
+      "author": "Auteur",
+      "createdAt": "Ouvert le",
+      "elapsed": "Temps écoulé",
+      "hours": "{n, plural, one {# heure} other {# heures}}",
+      "firstResponse": "Première réponse",
+      "satisfaction": "Satisfaction",
+      "replies": {
+        "title": "Réponses enregistrées",
+        "lead": "Modèles de réponse réutilisables, en français et en anglais. Dans un ticket, la version de la langue de l'utilisateur est insérée.",
+        "new": "Nouveau modèle",
+        "name": "Nom du modèle",
+        "bodyFr": "Texte (FR)",
+        "bodyEn": "Texte (EN)",
+        "create": "Ajouter",
+        "delete": "Supprimer"
+      }
     }
   },
   "emails": {
@@ -1074,6 +1130,24 @@
       "title": "Merci {name} !",
       "body": "On a bien reçu ta candidature pour rejoindre l'équipe Peak. On la regarde et on te répond par e-mail.",
       "cta": "Revoir la page clippers"
+    },
+    "ticket_created": {
+      "subject": "Nouvelle demande d'aide #{number} — {subject}",
+      "title": "Nouvelle demande d'aide",
+      "body": "{name} a écrit au service client : « {subject} ».",
+      "cta": "Ouvrir le ticket"
+    },
+    "ticket_reply": {
+      "subject": "Nouvelle réponse — {subject}",
+      "title": "Nouvelle réponse à votre demande",
+      "body": "{body}",
+      "cta": "Voir la conversation"
+    },
+    "ticket_assigned": {
+      "subject": "Un ticket vous est attribué — #{number}",
+      "title": "Ticket attribué",
+      "body": "Le ticket « {subject} » vous a été attribué.",
+      "cta": "Ouvrir le ticket"
     }
   },
   "uploads": {
@@ -1457,7 +1531,9 @@
     "quick": "Questions fréquentes",
     "allFaq": "Voir toute la FAQ",
     "contactTitle": "Écrire à l'équipe",
-    "response": "On vous répond sous {delai_reponse}."
+    "response": "On vous répond sous {delai_reponse}.",
+    "signedIn": "Vous êtes connecté : écrivez à l'équipe depuis votre espace, vous suivrez la réponse au même endroit.",
+    "openTicket": "Écrire à l'équipe"
   },
   "helpWidget": {
     "button": "Besoin d'aide ?",
@@ -1468,5 +1544,47 @@
     "results": "Résultats",
     "noResult": "Aucune réponse trouvée.",
     "contact": "Contacter l'équipe"
+  },
+  "support": {
+    "title": "Aide",
+    "new": "Écrire à l'équipe",
+    "emptyTitle": "Aucune demande d'aide pour le moment.",
+    "emptyBody": "Une question, un souci ? Écrivez à l'équipe : vous suivrez la réponse ici.",
+    "category": "Sujet",
+    "subject": "Titre",
+    "message": "Votre message",
+    "create": "Envoyer",
+    "suggestions": "Ces réponses peuvent vous aider tout de suite :",
+    "response": "On vous répond sous {delai_reponse}.",
+    "team": "Équipe Peak",
+    "you": "Vous",
+    "internal": "Note interne",
+    "yourMessage": "Votre réponse",
+    "send": "Envoyer",
+    "internalNote": "Note interne (invisible pour l'utilisateur)",
+    "savedReply": "Réponse enregistrée",
+    "savedReplyChoose": "Choisir un modèle…",
+    "markResolved": "Mon problème est réglé",
+    "rateTitle": "Comment s'est passée notre réponse ?",
+    "stars": "{n, plural, one {# étoile} other {# étoiles}}",
+    "rateComment": "Un commentaire ? (facultatif)",
+    "rateSend": "Envoyer ma note",
+    "rated": "Merci pour votre note.",
+    "reopen": "Rouvrir la demande",
+    "resolvedReopen": "Demande résolue. Vous pouvez la rouvrir pendant 7 jours si besoin.",
+    "resolvedNew": "Demande résolue. Pour une nouvelle question, écrivez à l'équipe.",
+    "status": "Statut",
+    "priority": "Priorité",
+    "assignedTo": "Attribué à",
+    "categories": {
+      "paiement": "Paiement",
+      "clips": "Mes clips",
+      "comptes": "Mes comptes",
+      "demande": "Demande particulière",
+      "compte": "Mon compte",
+      "mission": "Mission",
+      "remuneration": "Rémunération",
+      "autre": "Autre"
+    }
   }
 }

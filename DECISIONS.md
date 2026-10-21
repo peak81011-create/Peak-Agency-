@@ -95,3 +95,12 @@ Ce fichier liste les choix faits pendant la construction, quand le cahier des ch
 - **Ton** : vouvoiement pour les créateurs, tutoiement pour les clippers (FR) ; « you » en anglais.
 - **Nouvelle page légale** « Conditions clippers » (modèle à compléter, éditable dans Contenu du site).
 
+## Service client (complément de la phase 3)
+
+- **Tickets** pour toute personne connectée (créateur, clipper, équipe), depuis « Aide » dans le menu, le bouton « Besoin d'aide ? » ou la page Aide. Les visiteurs non connectés utilisent le formulaire de contact, visible dans la même boîte de réception (onglet « Formulaire de contact »).
+- **Statuts** : ouvert → en cours → en attente de votre réponse → résolu. Ils changent automatiquement : une réponse de l'équipe met le ticket « en attente de votre réponse » (et enregistre la première réponse), une réponse de l'utilisateur le repasse « en cours ». Un ticket résolu se rouvre pendant 7 jours ; ensuite, il faut en ouvrir un nouveau.
+- **Suggestions de la FAQ** pendant la saisie du titre (3 réponses, recherche par mots-clés, accents ignorés).
+- **Retard** : le délai de réponse saisi en texte (« 24 h », « 2 jours ») est converti en heures ; un ticket en attente de l'équipe depuis plus longtemps passe en rouge en haut de la liste. Sans délai renseigné, rien n'est signalé.
+- **Notes internes** jamais lisibles par l'auteur (règle en base). **Réponses enregistrées** FR/EN : la version de la langue de l'utilisateur est insérée.
+- **Permission** `support.manage` (nouvelle), accordée par défaut à l'assistante. La note de satisfaction (1 à 5) est enregistrée ; les statistiques (délai moyen, note moyenne) arrivent en phase 6.
+
