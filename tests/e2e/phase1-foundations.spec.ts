@@ -9,7 +9,7 @@ test.describe("Fondations", () => {
     await expect(page.getByRole("heading", { level: 1 })).toContainText("Vos lives cachent des pépites");
     await page.getByRole("group", { name: "Langue" }).first().getByRole("link", { name: "EN" }).click();
     await expectPath(page, /\/en$/);
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("We turn long videos");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("Your streams hide gems");
   });
 
   test("un visiteur est renvoyé vers la connexion depuis un espace privé", async ({ page }) => {
