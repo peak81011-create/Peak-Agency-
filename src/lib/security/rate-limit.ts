@@ -20,8 +20,14 @@ export async function rateLimit(bucket: string, max: number, windowSeconds: numb
     p_max: max * factor,
     p_window_seconds: windowSeconds,
   });
-  // En cas de panne de la base, on bloque plutôt que de laisser passer.
-  if (error) return false;
+  // Compteur indisponible (clé SUPABASE_SECRET_KEY absente ou erronée, base
+  // injoignable) : on laisse passer et on le signale dans les journaux Vercel,
+  // plutôt que d'afficher « trop de tentatives » à tout le monde. Supabase
+  // Auth applique de toute façon ses propres limites sur la connexion.
+  if (error) {
+    console.error(`[rate-limit] compteur indisponible (${bucket}) : ${error.message}`);
+    return true;
+  }
   return data === true;
 }
 
