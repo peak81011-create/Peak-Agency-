@@ -8,7 +8,7 @@ import { Link } from "@/i18n/navigation";
 import { PERMISSIONS } from "@/lib/auth/permission-catalog";
 import { can, requireUser } from "@/lib/auth/session";
 import { getCommitments, missingCommitments } from "@/lib/commitments";
-import { getSettings, isBankConfigured, missingInvoiceFields } from "@/lib/settings";
+import { getSettings, hasPaymentMethod, missingInvoiceFields } from "@/lib/settings";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -30,7 +30,7 @@ async function LaunchChecklist() {
     ...missingCommitments(commitments).map((k) => ({ key: `var-${k}`, label: t("variable", { name: tv(k as never) }), href: "/admin/settings" as const })),
     ...(demoPlans ?? []).map((p) => ({ key: `plan-${p.id}`, label: t("demoPlan", { name: p.name_fr }), href: `/admin/plans/${p.id}` })),
     ...(missingInvoiceFields(company).length ? [{ key: "company", label: t("company"), href: "/admin/settings" as const }] : []),
-    ...(isBankConfigured(bank) ? [] : [{ key: "bank", label: t("bank"), href: "/admin/settings" as const }]),
+    ...(hasPaymentMethod(bank) ? [] : [{ key: "bank", label: t("bank"), href: "/admin/settings" as const }]),
   ];
   return (
     <Card data-testid="launch-checklist">

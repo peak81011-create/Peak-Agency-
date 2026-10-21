@@ -47,7 +47,7 @@ const GROUPS: { key: "commitments" | "company" | "bank" | "billing" | "notificat
       { name: "host", multiline: true },
     ],
   },
-  { key: "bank", fields: [{ name: "holder" }, { name: "bank_name" }, { name: "iban" }, { name: "bic" }] },
+  { key: "bank", fields: [{ name: "holder" }, { name: "bank_name" }, { name: "iban" }, { name: "bic" }, { name: "paypal" }, { name: "revolut" }] },
   {
     key: "billing",
     fields: [

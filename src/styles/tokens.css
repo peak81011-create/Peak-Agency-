@@ -20,6 +20,16 @@
   --sage-100: #ebefe6;
   --sage-50: #f4f6f1;
 
+  /* — Verts « budget » (accueil, offres) — */
+  --money-700: #0f6b3d;
+  --money-600: #15834b;
+  --money-500: #1fa463;
+  --money-300: #7fd6a2;
+  --money-100: #dcf4e4;
+  --money-50: #effaf2;
+  --lime-400: #c4ee5a;
+  --lime-200: #e6f8b3;
+
   /* — Neutres — */
   --white: #ffffff;
   --paper: #fbfcfa;

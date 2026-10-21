@@ -209,7 +209,10 @@
         "approval": "You approve every clip",
         "transfer": "No automatic charges",
         "platforms": "TikTok · Reels · Shorts"
-      }
+      },
+      "price": "€0.99 per clip · 4 plans",
+      "fallbackTitle": "Your streams hide gems. Peak turns them into clips.",
+      "fallbackLead": "We cut your streams and videos into short clips, posted every day on TikTok, Reels and Shorts."
     }
   },
   "auth": {
@@ -458,21 +461,21 @@
     "payment": {
       "eyebrow": "Client space",
       "eyebrowRenewal": "Renewal",
-      "title": "Payment by bank transfer",
+      "title": "Payment",
       "refusedTitle": "Your proof of payment was rejected",
       "refusedHelp": "Correct the transfer if needed, then upload a new proof below.",
-      "step1": "1 · Make the transfer",
+      "step1": "1 · Pay",
       "planLine": "{plan} plan",
-      "amount": "Amount to transfer",
+      "amount": "Amount to pay",
       "reference": "Required reference",
-      "referenceHelp": "Copy it into the transfer description, otherwise it cannot be matched.",
+      "referenceHelp": "Add it to the payment label or message, otherwise it can't be matched.",
       "holder": "Beneficiary",
       "iban": "IBAN",
       "bic": "BIC",
-      "bankMissing": "The agency has not entered its bank details yet. Come back a little later or write to us.",
+      "bankMissing": "The agency hasn't added its payment details yet. Come back a bit later or write to us.",
       "delayHint": "A transfer can take 1 to 3 business days to arrive. An instant transfer speeds up unlocking.",
       "step2": "2 · Upload the proof",
-      "proofHelp": "Screenshot or PDF of the transfer order, showing the amount, date and reference.",
+      "proofHelp": "Screenshot or PDF of the payment, showing the amount, date and reference.",
       "uploading": "Uploading…",
       "dropTitle": "Drop the screenshot here",
       "dropHint": "PNG, JPG, WEBP or PDF · 10 MB maximum",
@@ -484,7 +487,12 @@
         "review": "Review by the team",
         "unlocked": "Space unlocked"
       },
-      "questions": "A question about your payment? <link>Contact us</link>."
+      "questions": "A question about your payment? <link>Contact us</link>.",
+      "bankTitle": "Bank transfer, from any bank",
+      "otherMethods": "Or pay with",
+      "paypal": "PayPal",
+      "revolut": "Revolut",
+      "open": "Open"
     },
     "billing": {
       "title": "Subscription & invoices",
@@ -678,13 +686,15 @@
         }
       },
       "bank": {
-        "title": "Bank details",
-        "lead": "Shown to clients on the payment page. Every change is recorded in the activity log.",
+        "title": "Payment methods",
+        "lead": "Shown to clients on the payment page: bank transfer (IBAN), PayPal and Revolut. Leave empty what you don't use. Every change is recorded in the activity log.",
         "fields": {
           "holder": "Account holder",
           "bank_name": "Bank",
           "iban": "IBAN",
-          "bic": "BIC"
+          "bic": "BIC",
+          "paypal": "PayPal (paypal.me link or email)",
+          "revolut": "Revolut (revolut.me link or @tag)"
         }
       },
       "billing": {
@@ -1747,14 +1757,14 @@
     }
   },
   "offers": {
-    "eyebrow": "Our plans",
+    "eyebrow": "Our 4 plans",
     "featured": "Most popular",
-    "perClip": "that's {value} per clip",
+    "perClip": "{value} / clip",
     "clipsPerMonth": "{n} clips a month",
     "perDay": "≈ {n} a day",
     "accounts": "{n, plural, one {# dedicated account} other {# dedicated accounts}}",
     "delivery": "{n, plural, one {delivered within 24 h} other {delivered within # days}}",
-    "details": "See all the details",
+    "details": "Everything about this plan",
     "teaserTitle": "4 plans, one price: €0.99 per clip",
     "teaserLead": "Just choose how many clips you want each month.",
     "compareAll": "Compare plans",
@@ -1845,7 +1855,12 @@
       "eyebrow": "Other plans",
       "title": "Compare with another plan"
     },
-    "calc": "{clips} clips × {unit} = {total}"
+    "calc": "{clips} clips × {unit} = {total}",
+    "hero": {
+      "price": "€0.99 per clip",
+      "title": "4 plans, one price",
+      "lead": "Choose how many clips you want each month. Click a block to learn everything."
+    }
   },
   "blocks": {
     "clipping": {
@@ -1915,6 +1930,65 @@
       "eyebrow": "Frequent questions",
       "title": "Most asked questions",
       "all": "See all questions"
+    }
+  },
+  "money": {
+    "perClip": {
+      "eyebrow": "The price",
+      "titleStart": "One clip is",
+      "titlePrice": "€0.99.",
+      "lead": "Every plan uses the same price. You just choose how many clips you want each month.",
+      "example": "{clips} clips / month",
+      "video": "1 long video (stream, podcast, YouTube)",
+      "clips": "= dozens of clips, €0.99 each",
+      "tag": "€0.99"
+    },
+    "pay": {
+      "eyebrow": "Payment",
+      "title": "Pay the way you like",
+      "lead": "No card to save, no direct debit: pay from the app you already use.",
+      "methods": {
+        "transfer": {
+          "title": "Bank transfer",
+          "body": "From any bank: BNP, Crédit Agricole, Boursorama, N26, Qonto…"
+        },
+        "paypal": {
+          "title": "PayPal",
+          "body": "From your PayPal account, in a few clicks."
+        },
+        "revolut": {
+          "title": "Revolut",
+          "body": "An instant payment from the Revolut app."
+        },
+        "apps": {
+          "title": "And other apps",
+          "body": "Wise, Sumeria (Lydia)… any app that makes a transfer."
+        }
+      },
+      "howTitle": "How it works, step by step",
+      "steps": {
+        "choose": {
+          "title": "Choose your plan",
+          "body": "Click one of the 4 blocks."
+        },
+        "account": {
+          "title": "Create your account",
+          "body": "2 minutes: email and password."
+        },
+        "pay": {
+          "title": "Pay with your reference",
+          "body": "The amount, reference and our details appear in your space."
+        },
+        "proof": {
+          "title": "Send the screenshot",
+          "body": "A screenshot of the payment is enough."
+        },
+        "start": {
+          "title": "Off you go",
+          "body": "Your space opens: send your videos."
+        }
+      },
+      "note": "Each month, you get a reminder with a new reference. Nothing is charged without you."
     }
   }
 }

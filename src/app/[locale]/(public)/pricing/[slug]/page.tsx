@@ -3,9 +3,10 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { TransitionLink } from "@/components/transition/page-transition";
-import { getVisiblePlans } from "@/features/client/queries";
+import { getPublicPlans } from "@/features/plans/catalog";
 import { offerLabels } from "@/features/plans/offer-labels";
 import { presentPlan } from "@/features/plans/present";
+import { PaymentMethods } from "@/features/public/blocks";
 import { PlanCta } from "@/features/public/plan-cta";
 import { Section, SectionTitle } from "@/features/public/sections";
 import { initPageLocale } from "@/i18n/page";
@@ -14,10 +15,9 @@ import { commitmentVars, getCommitments } from "@/lib/commitments";
 import { RichText } from "@/lib/content/rich-text";
 import { fillVars } from "@/lib/content/vars";
 import { offerPath } from "@/lib/public-paths";
-import { cn } from "@/lib/utils";
 
 async function findPlan(slug: string) {
-  const plans = await getVisiblePlans();
+  const plans = await getPublicPlans();
   return { plan: plans.find((p) => p.slug === slug) ?? null, plans };
 }
 
@@ -67,19 +67,23 @@ export default async function OfferPage({ params }: { params: Promise<{ locale: 
 
   return (
     <>
-      <section className={cn(view.featured ? "bg-primary" : "bg-forest-900", "text-sage-100")}>
+      <section className="bg-gradient-to-br from-forest-950 via-forest-900 to-money-700 text-sage-100">
         <div className="mx-auto grid w-full max-w-[1200px] gap-8 px-4 py-14 md:px-8 md:py-20 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:items-end">
           <div className="flex flex-col gap-5">
-            <p className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-sage-400 [font-stretch:112%]">{t("offerEyebrow")}</p>
+            <p className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-lime-400 [font-stretch:112%]">{t("offerEyebrow")}</p>
             <h1 className="font-display text-[44px] font-extrabold leading-[0.98] text-white md:text-7xl [font-stretch:118%]">{view.name}</h1>
             {view.tagline ? <p className="max-w-xl text-[17px] text-sage-200 md:text-[19px]">{view.tagline}</p> : null}
           </div>
-          <div className="flex flex-col gap-4 rounded-[28px] bg-forest-800/70 p-6 md:p-8">
+          <div className="flex flex-col gap-4 rounded-[28px] bg-white p-6 text-forest-900 shadow-3 md:p-8">
             <p className="flex items-baseline gap-2">
-              <span className="font-display text-6xl font-extrabold leading-none text-white [font-stretch:115%]">{view.price}</span>
-              <span className="text-sage-300">{view.period}</span>
+              <span className="font-display text-6xl font-extrabold leading-none tabular [font-stretch:115%]">{view.priceCompact}</span>
+              <span className="text-text-2">{view.period}</span>
             </p>
-            {view.perClip ? <p className="font-semibold text-sage-200">{labels.perClip(view.perClip)}</p> : null}
+            {view.perClip && view.clipsPerPeriod ? (
+              <p className="self-start rounded-lg bg-money-100 px-3 py-1.5 text-sm font-semibold text-money-700 tabular" data-testid="offer-calc">
+                {labels.calc(view.clipsPerPeriod, view.perClip, view.priceCompact)}
+              </p>
+            ) : null}
             <PlanCta planId={view.id} featured user={user} label={t("signupWith", { name: view.name })} />
           </div>
         </div>
@@ -90,7 +94,7 @@ export default async function OfferPage({ params }: { params: Promise<{ locale: 
         <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {figures.map(({ icon: Icon, label, value }) => (
             <div key={label} className="flex items-start gap-4 rounded-xl border border-border bg-card p-5">
-              <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-md bg-muted text-forest-700">
+              <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-money-100 text-money-700">
                 <Icon className="size-5" aria-hidden />
               </span>
               <div className="flex flex-col gap-0.5">
@@ -103,7 +107,7 @@ export default async function OfferPage({ params }: { params: Promise<{ locale: 
         {view.includes.length ? (
           <ul className="grid gap-2 md:grid-cols-2">
             {view.includes.map((i) => (
-              <li key={i} className="rounded-lg bg-paper px-4 py-3 text-[15px]">
+              <li key={i} className="rounded-lg bg-money-50 px-4 py-3 text-[15px]">
                 {i}
               </li>
             ))}
@@ -137,7 +141,7 @@ export default async function OfferPage({ params }: { params: Promise<{ locale: 
         <SectionTitle eyebrow={t("start.eyebrow")} title={t("offerStart.title")} />
         <ol className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {START_STEPS.map((k, i) => (
-            <li key={k} className="flex flex-col gap-3 border-t-2 border-primary pt-6">
+            <li key={k} className="flex flex-col gap-3 border-t-4 border-money-500 pt-6">
               <span className="font-display text-[40px] font-extrabold leading-none [font-stretch:120%]">{String(i + 1).padStart(2, "0")}</span>
               <h3 className="text-lg font-semibold">{t(`offerStart.steps.${k}.title`)}</h3>
               <p className="text-muted-foreground">{t(`offerStart.steps.${k}.body`)}</p>
@@ -148,6 +152,8 @@ export default async function OfferPage({ params }: { params: Promise<{ locale: 
           <PlanCta planId={view.id} featured={false} user={user} label={t("signupWith", { name: view.name })} />
         </div>
       </Section>
+
+      <PaymentMethods />
 
       {others.length ? (
         <Section tone="paper">

@@ -47,6 +47,14 @@
   --color-sage-200: var(--sage-200);
   --color-sage-100: var(--sage-100);
   --color-sage-50: var(--sage-50);
+  --color-money-700: var(--money-700);
+  --color-money-600: var(--money-600);
+  --color-money-500: var(--money-500);
+  --color-money-300: var(--money-300);
+  --color-money-100: var(--money-100);
+  --color-money-50: var(--money-50);
+  --color-lime-400: var(--lime-400);
+  --color-lime-200: var(--lime-200);
   --color-text: var(--text);
   --color-text-2: var(--text-2);
   --color-text-3: var(--text-3);
@@ -157,11 +165,15 @@
 
 /* Accueil : bouton principal en dégradé vert, halo du héros, tuiles flottantes */
 .peak-cta {
-  background-image: linear-gradient(90deg, var(--forest-900) 0%, var(--forest-600) 55%, var(--forest-500) 100%);
-  box-shadow: 0 0 0 6px color-mix(in oklab, var(--sage-400) 35%, transparent), 0 14px 30px -12px color-mix(in oklab, var(--forest-900) 60%, transparent);
+  background-image: linear-gradient(90deg, var(--forest-900) 0%, var(--money-600) 60%, var(--money-500) 100%);
+  box-shadow: 0 0 0 6px color-mix(in oklab, var(--money-300) 40%, transparent), 0 14px 30px -12px color-mix(in oklab, var(--forest-900) 60%, transparent);
 }
 .peak-glow {
-  background-image: radial-gradient(60% 55% at 50% 100%, color-mix(in oklab, var(--sage-400) 55%, transparent) 0%, transparent 70%);
+  background-color: var(--money-50);
+  background-image:
+    radial-gradient(55% 60% at 50% 105%, color-mix(in oklab, var(--money-300) 70%, transparent) 0%, transparent 70%),
+    radial-gradient(35% 40% at 8% 10%, color-mix(in oklab, var(--lime-200) 80%, transparent) 0%, transparent 70%),
+    radial-gradient(30% 35% at 95% 20%, color-mix(in oklab, var(--money-100) 90%, transparent) 0%, transparent 70%);
 }
 @keyframes peak-float {
   0%, 100% { transform: translateY(0) rotate(var(--tilt, -10deg)); }

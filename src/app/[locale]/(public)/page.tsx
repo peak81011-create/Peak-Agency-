@@ -6,7 +6,7 @@ import { PillLink } from "@/components/layout/header-cta";
 import { buttonVariants } from "@/components/ui/button";
 import { TransitionLink } from "@/components/transition/page-transition";
 import { getFaq } from "@/features/faq/queries";
-import { BeforeAfter, ClippingExplainer, FaqPreview, OffersBubbles, WhyClips } from "@/features/public/blocks";
+import { BeforeAfter, ClippingExplainer, FaqPreview, OffersBubbles, PaymentMethods, PerClipBanner, WhyClips } from "@/features/public/blocks";
 import { Section, SectionTitle } from "@/features/public/sections";
 import { Link } from "@/i18n/navigation";
 import { initPageLocale } from "@/i18n/page";
@@ -42,7 +42,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   ]);
   const stats = parseList("home.stats", c["home.stats"]);
   // « Phrase 1. Phrase 2. » : la seconde phrase du titre est mise en couleur.
-  const title = c["home.hero.title"] ?? "";
+  const title = c["home.hero.title"] || t("hero.fallbackTitle");
   const cut = title.indexOf(". ");
   const [titleStart, titleEnd] = cut > 0 ? [title.slice(0, cut + 1), title.slice(cut + 2)] : [title, ""];
   const responseLine = fillVars(t.raw("questions.response") as string, commitmentVars(commitments, locale));
@@ -52,30 +52,33 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* Héros : en-tête centré, gros titre, un bouton principal et trois garanties */}
       <section className="peak-glow relative overflow-hidden">
         <div aria-hidden className="pointer-events-none absolute inset-0 hidden lg:block">
-          <span className="peak-float absolute left-[6%] top-[26%] grid size-32 place-items-center rounded-[28px] border border-border bg-white shadow-3 [--tilt:-12deg]">
-            <LogoMark className="h-16 w-7 text-forest-700" />
+          <span className="peak-float absolute left-[6%] top-[26%] grid size-32 place-items-center rounded-[28px] bg-lime-400 shadow-3 [--tilt:-12deg]">
+            <LogoMark className="h-16 w-7 text-forest-900" />
           </span>
-          <span className="peak-float absolute right-[7%] top-[30%] grid size-24 place-items-center rounded-[24px] bg-forest-900 text-sage-300 shadow-3 [--tilt:10deg] [animation-delay:-3s]">
+          <span className="peak-float absolute right-[7%] top-[30%] grid size-24 place-items-center rounded-[24px] bg-forest-900 text-lime-400 shadow-3 [--tilt:10deg] [animation-delay:-3s]">
             <Play className="size-9 fill-current" />
           </span>
-          <span className="peak-float absolute bottom-[14%] right-[16%] grid size-16 place-items-center rounded-[18px] border border-border bg-white text-forest-600 shadow-2 [--tilt:-6deg] [animation-delay:-1.5s]">
+          <span className="peak-float absolute bottom-[14%] right-[16%] grid size-16 place-items-center rounded-[18px] bg-money-600 text-white shadow-2 [--tilt:-6deg] [animation-delay:-1.5s]">
             <TrendingUp className="size-7" />
           </span>
         </div>
         <div className="relative mx-auto flex w-full max-w-[1000px] flex-col items-center gap-7 px-4 pb-20 pt-16 text-center md:gap-9 md:px-8 md:pb-28 md:pt-24">
           {c["home.hero.eyebrow"] ? (
-            <p className="rounded-full border border-border bg-white px-4 py-1.5 text-sm font-semibold text-forest-700 shadow-1">{c["home.hero.eyebrow"]}</p>
+            <p className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-money-700 [font-stretch:112%]">{c["home.hero.eyebrow"]}</p>
           ) : null}
+          <a href="#offres" className="rounded-full bg-money-600 px-4 py-1.5 text-sm font-bold text-white no-underline shadow-2 hover:bg-money-700">
+            {t("hero.price")}
+          </a>
           <h1 className="text-balance font-display text-[42px] font-extrabold leading-[1.02] tracking-tight text-forest-900 md:text-[68px] lg:text-[84px] [font-stretch:112%]">
             {titleStart}
             {titleEnd ? (
               <>
                 {" "}
-                <span className="bg-gradient-to-r from-forest-700 to-forest-500 bg-clip-text text-transparent">{titleEnd}</span>
+                <span className="bg-gradient-to-r from-money-700 via-money-600 to-money-500 bg-clip-text text-transparent">{titleEnd}</span>
               </>
             ) : null}
           </h1>
-          <p className="max-w-2xl text-pretty text-[18px] text-text-2 md:text-[21px]">{c["home.hero.lead"]}</p>
+          <p className="max-w-2xl text-pretty text-[18px] text-text-2 md:text-[21px]">{c["home.hero.lead"] || t("hero.fallbackLead")}</p>
           <div className="flex flex-col items-center gap-4">
             <PillLink href={localizedPath("/creators", locale)} label={t("hero.cta")} size="lg" transition testId="door-creator" />
             <TransitionLink href="/clippers" className="font-semibold text-forest-700 underline-offset-4 hover:underline" data-testid="door-clipper">
@@ -85,7 +88,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-[15px] text-text-2 md:text-base">
             {TRUST.map(({ key, icon: Icon }, i) => (
               <li key={key} className={cn("flex items-center gap-2", i > 0 && "md:border-l md:border-border-strong md:pl-6")}>
-                <Icon className="size-5 text-forest-600" aria-hidden />
+                <Icon className="size-5 text-money-600" aria-hidden />
                 {t(`hero.trust.${key}`)}
               </li>
             ))}
@@ -93,14 +96,16 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
       </section>
 
+      <OffersBubbles user={user} />
+      <PerClipBanner />
       <ClippingExplainer />
-      <WhyClips />
+      <WhyClips tone="mint" />
 
       <Section id="how">
         <SectionTitle eyebrow={t("how.eyebrow")} title={t("how.title")} />
         <ol className="grid gap-6 md:grid-cols-3">
           {STEPS.map((k, i) => (
-            <li key={k} className="flex flex-col gap-3 border-t-2 border-primary pt-6">
+            <li key={k} className="flex flex-col gap-3 border-t-4 border-money-500 pt-6">
               <span className="font-display text-[40px] font-extrabold leading-none [font-stretch:120%]">{String(i + 1).padStart(2, "0")}</span>
               <p className="text-lg font-semibold">{t(`how.steps.${k}`)}</p>
             </li>
@@ -108,7 +113,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </ol>
       </Section>
 
-      <OffersBubbles user={user} />
+      <PaymentMethods />
 
       <BeforeAfter />
 

@@ -34,6 +34,8 @@ export const settingsFormSchemas = {
     iban: text(42).refine((v) => v === "" || isValidIban(v), { message: "iban" }),
     bic: text(11).refine((v) => v === "" || /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/i.test(v.replace(/\s/g, "")), { message: "bic" }),
     bank_name: text(),
+    paypal: text(200),
+    revolut: text(200),
   }),
   billing: z.object({
     payment_reference_prefix: z.string().trim().regex(/^[A-Za-z0-9]{2,12}$/, { message: "prefix" }),

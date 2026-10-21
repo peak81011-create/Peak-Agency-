@@ -125,3 +125,10 @@ Ce fichier liste les choix faits pendant la construction, quand le cahier des ch
 - Les 4 offres passent à 0,99 € le clip, avec des volumes ronds : Lancement 100 clips = 99 €, Croissance 200 = 198 €, Pro 400 = 396 €, Élite 600 = 594 €. Chaque bulle affiche le calcul (« 200 clips × 0,99 € = 198,00 € »). Migration `20261027000100_price_per_clip.sql` : ne modifie que les 4 offres repérées par leur adresse (slug).
 - Accueil refait sur le modèle demandé (en-tête flottant blanc, gros titre centré, bouton « pilule » en dégradé vert, trois garanties, tuiles flottantes) en gardant la palette Peak. Le titre « Phrase 1. Phrase 2. » met la seconde phrase en couleur.
 - Textes raccourcis (accueil, blocs, offres, créateurs, clippers) : une phrase courte par idée.
+
+## Offres toujours visibles, plus de vert, moyens de paiement
+
+- Les 4 offres de la vitrine ne dépendent plus de la base : si aucune offre réelle n'y existe (migrations pas encore passées), un catalogue intégré (`src/features/plans/catalog.ts`, mêmes valeurs à 0,99 € le clip) prend le relais. Le bouton mène alors à l'inscription simple ; l'offre se choisit dans l'espace.
+- Nouvelle palette « budget » (`--money-*`, `--lime-*`) : chaque offre a son vert (menthe, émeraude, forêt, citron vert). Toute la carte est cliquable (lien étiré) et mène au détail.
+- Nouveaux blocs : « Un clip, c'est 0,99 € » (une vidéo longue → des clips à 0,99 €) et « Payez comme vous voulez » (virement depuis toute banque, PayPal, Revolut, autres applis) avec la marche à suivre en 5 étapes. Sur l'accueil, la page Offres et chaque page d'offre.
+- Paramètres → Moyens de paiement : champs PayPal et Revolut (facultatifs, stockés dans le réglage `bank`, sans migration), affichés sur la page de paiement du client avec la même référence. La preuve de paiement reste la même pour tous les moyens.

@@ -209,7 +209,10 @@
         "approval": "Vous validez chaque clip",
         "transfer": "Sans prélèvement automatique",
         "platforms": "TikTok · Reels · Shorts"
-      }
+      },
+      "price": "0,99 € le clip · 4 offres",
+      "fallbackTitle": "Vos lives cachent des pépites. Peak en fait des clips.",
+      "fallbackLead": "On découpe vos lives et vos vidéos en clips courts, publiés chaque jour sur TikTok, Reels et Shorts."
     }
   },
   "auth": {
@@ -458,21 +461,21 @@
     "payment": {
       "eyebrow": "Espace client",
       "eyebrowRenewal": "Renouvellement",
-      "title": "Paiement par virement",
+      "title": "Paiement",
       "refusedTitle": "Votre preuve de paiement a été refusée",
       "refusedHelp": "Corrigez le virement si besoin, puis déposez une nouvelle preuve ci-dessous.",
-      "step1": "1 · Faites le virement",
+      "step1": "1 · Payez",
       "planLine": "Offre {plan}",
-      "amount": "Montant à virer",
+      "amount": "Montant à payer",
       "reference": "Référence obligatoire",
-      "referenceHelp": "À copier dans le libellé du virement, sinon il ne pourra pas être rattaché.",
+      "referenceHelp": "À indiquer dans le libellé ou le message du paiement, sinon il ne pourra pas être rattaché.",
       "holder": "Bénéficiaire",
       "iban": "IBAN",
       "bic": "BIC",
-      "bankMissing": "Les coordonnées bancaires n’ont pas encore été renseignées par l’agence. Revenez un peu plus tard ou écrivez-nous.",
+      "bankMissing": "Les moyens de paiement n’ont pas encore été renseignés par l’agence. Revenez un peu plus tard ou écrivez-nous.",
       "delayHint": "Un virement peut mettre 1 à 3 jours ouvrés à arriver. Le virement instantané accélère le déblocage.",
       "step2": "2 · Déposez la preuve",
-      "proofHelp": "Capture d’écran ou PDF de l’ordre de virement, où l’on voit le montant, la date et la référence.",
+      "proofHelp": "Capture d’écran ou PDF du paiement, où l’on voit le montant, la date et la référence.",
       "uploading": "Envoi en cours…",
       "dropTitle": "Glissez la capture ici",
       "dropHint": "PNG, JPG, WEBP ou PDF · 10 Mo maximum",
@@ -484,7 +487,12 @@
         "review": "Vérification par l’équipe",
         "unlocked": "Espace débloqué"
       },
-      "questions": "Une question sur votre paiement ? <link>Contactez-nous</link>."
+      "questions": "Une question sur votre paiement ? <link>Contactez-nous</link>.",
+      "bankTitle": "Virement bancaire, depuis n'importe quelle banque",
+      "otherMethods": "Ou payez avec",
+      "paypal": "PayPal",
+      "revolut": "Revolut",
+      "open": "Ouvrir"
     },
     "billing": {
       "title": "Abonnement & factures",
@@ -678,13 +686,15 @@
         }
       },
       "bank": {
-        "title": "Coordonnées bancaires",
-        "lead": "Affichées aux clients sur la page de paiement. Chaque modification est inscrite au journal d’activité.",
+        "title": "Moyens de paiement",
+        "lead": "Affichés aux clients sur la page de paiement : virement (IBAN), PayPal et Revolut. Laissez vide ce que vous n'utilisez pas. Chaque modification est inscrite au journal d’activité.",
         "fields": {
           "holder": "Titulaire du compte",
           "bank_name": "Banque",
           "iban": "IBAN",
-          "bic": "BIC"
+          "bic": "BIC",
+          "paypal": "PayPal (lien paypal.me ou e-mail)",
+          "revolut": "Revolut (lien revolut.me ou @identifiant)"
         }
       },
       "billing": {
@@ -1747,14 +1757,14 @@
     }
   },
   "offers": {
-    "eyebrow": "Nos offres",
+    "eyebrow": "Nos 4 offres",
     "featured": "Le plus choisi",
-    "perClip": "soit {value} le clip",
+    "perClip": "{value} / clip",
     "clipsPerMonth": "{n} clips par mois",
     "perDay": "≈ {n} par jour",
     "accounts": "{n, plural, one {# compte dédié} other {# comptes dédiés}}",
     "delivery": "{n, plural, one {livrés sous 24 h} other {livrés sous # jours}}",
-    "details": "Voir tout le détail",
+    "details": "Tout savoir sur l'offre",
     "teaserTitle": "4 offres, un seul prix : 0,99 € le clip",
     "teaserLead": "Choisissez simplement combien de clips vous voulez par mois.",
     "compareAll": "Comparer les offres",
@@ -1845,7 +1855,12 @@
       "eyebrow": "Les autres offres",
       "title": "Comparer avec une autre offre"
     },
-    "calc": "{clips} clips × {unit} = {total}"
+    "calc": "{clips} clips × {unit} = {total}",
+    "hero": {
+      "price": "0,99 € le clip",
+      "title": "4 offres, un seul prix",
+      "lead": "Choisissez combien de clips vous voulez par mois. Cliquez sur un bloc pour tout savoir."
+    }
   },
   "blocks": {
     "clipping": {
@@ -1915,6 +1930,65 @@
       "eyebrow": "Questions fréquentes",
       "title": "Les questions les plus posées",
       "all": "Voir toutes les questions"
+    }
+  },
+  "money": {
+    "perClip": {
+      "eyebrow": "Le prix",
+      "titleStart": "Un clip, c'est",
+      "titlePrice": "0,99 €.",
+      "lead": "Toutes les offres sont calculées au même prix. Vous choisissez simplement combien de clips vous voulez par mois.",
+      "example": "{clips} clips / mois",
+      "video": "1 vidéo longue (live, podcast, YouTube)",
+      "clips": "= des dizaines de clips, à 0,99 € chacun",
+      "tag": "0,99 €"
+    },
+    "pay": {
+      "eyebrow": "Paiement",
+      "title": "Payez comme vous voulez",
+      "lead": "Pas de carte à enregistrer, pas de prélèvement : vous payez depuis l'appli que vous utilisez déjà.",
+      "methods": {
+        "transfer": {
+          "title": "Virement bancaire",
+          "body": "Depuis n'importe quelle banque : BNP, Crédit Agricole, Boursorama, N26, Qonto…"
+        },
+        "paypal": {
+          "title": "PayPal",
+          "body": "Depuis votre compte PayPal, en quelques clics."
+        },
+        "revolut": {
+          "title": "Revolut",
+          "body": "Un paiement instantané depuis l'appli Revolut."
+        },
+        "apps": {
+          "title": "Et les autres applis",
+          "body": "Wise, Sumeria (Lydia)… toute appli qui fait un virement."
+        }
+      },
+      "howTitle": "Comment faire, étape par étape",
+      "steps": {
+        "choose": {
+          "title": "Choisissez votre offre",
+          "body": "Cliquez sur un des 4 blocs."
+        },
+        "account": {
+          "title": "Créez votre compte",
+          "body": "2 minutes : e-mail et mot de passe."
+        },
+        "pay": {
+          "title": "Payez avec votre référence",
+          "body": "Le montant, la référence et nos coordonnées s'affichent dans votre espace."
+        },
+        "proof": {
+          "title": "Envoyez la capture",
+          "body": "Une capture du paiement suffit."
+        },
+        "start": {
+          "title": "C'est parti",
+          "body": "Votre espace s'ouvre : envoyez vos vidéos."
+        }
+      },
+      "note": "Chaque mois, vous recevez un rappel avec une nouvelle référence. Rien n'est prélevé sans vous."
     }
   }
 }

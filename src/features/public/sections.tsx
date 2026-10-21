@@ -2,7 +2,7 @@ import { Plus } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-export function Section({ id, tone = "light", children, className }: { id?: string; tone?: "light" | "paper" | "dark" | "sage"; children: ReactNode; className?: string }) {
+export function Section({ id, tone = "light", children, className }: { id?: string; tone?: "light" | "paper" | "dark" | "sage" | "mint" | "money"; children: ReactNode; className?: string }) {
   return (
     <section
       id={id}
@@ -11,6 +11,8 @@ export function Section({ id, tone = "light", children, className }: { id?: stri
         tone === "paper" && "bg-paper",
         tone === "dark" && "bg-forest-900 text-sage-100",
         tone === "sage" && "bg-accent text-forest-900",
+        tone === "mint" && "bg-money-50",
+        tone === "money" && "bg-gradient-to-br from-money-600 to-money-700 text-white",
         className,
       )}
     >

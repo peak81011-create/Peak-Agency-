@@ -22,7 +22,7 @@ export const companySchema = z.object({
   host: str,
 });
 
-export const bankSchema = z.object({ holder: str, iban: str, bic: str, bank_name: str });
+export const bankSchema = z.object({ holder: str, iban: str, bic: str, bank_name: str, paypal: str, revolut: str });
 
 export const billingSchema = z.object({
   payment_reference_prefix: z.string().trim().max(12).catch("PEAK"),
@@ -76,6 +76,11 @@ export function missingInvoiceFields(company: Settings<"company">): (keyof Setti
 
 export function isBankConfigured(bank: Settings<"bank">): boolean {
   return Boolean(bank.holder && bank.iban && bank.bic);
+}
+
+/** Au moins un moyen de paiement renseigné (virement, PayPal ou Revolut). */
+export function hasPaymentMethod(bank: Settings<"bank">): boolean {
+  return isBankConfigured(bank) || Boolean(bank.paypal || bank.revolut);
 }
 
 /** Paramètre libre (sans schéma dédié), avec valeur par défaut. */

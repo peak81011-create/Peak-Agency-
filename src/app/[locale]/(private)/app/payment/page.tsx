@@ -1,6 +1,7 @@
 import { CircleCheck, Clock, Hourglass } from "lucide-react";
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
+import { buttonVariants } from "@/components/ui/button";
 import { Callout } from "@/components/ui/callout";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { CopyButton } from "@/components/ui/copy-button";
@@ -13,7 +14,7 @@ import { PageBody, PageHeader } from "@/features/shell/app-shell";
 import { Link, redirect } from "@/i18n/navigation";
 import { requireUser } from "@/lib/auth/session";
 import { formatDateTime, formatIban, formatMoney } from "@/lib/format";
-import { getSettings, isBankConfigured } from "@/lib/settings";
+import { getSettings, hasPaymentMethod, isBankConfigured } from "@/lib/settings";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("client.payment");
@@ -28,6 +29,27 @@ function CopyRow({ label, value, display }: { label: string; value: string; disp
         <p className="break-all font-mono text-base font-medium tracking-wide">{display ?? value}</p>
       </div>
       <CopyButton value={value} label={label} />
+    </div>
+  );
+}
+
+/** PayPal ou Revolut : identifiant à copier, et lien direct quand c'est une adresse web. */
+function MethodRow({ label, value, open }: { label: string; value: string; open: string }) {
+  const href = /^https:\/\//i.test(value) ? value : null;
+  return (
+    <div className="flex flex-wrap items-center justify-between gap-3 rounded-md border border-border bg-card py-3 pl-4 pr-3">
+      <div className="min-w-0">
+        <p className="text-xs font-semibold uppercase tracking-[0.06em] text-subtle-foreground">{label}</p>
+        <p className="break-all font-mono text-base font-medium">{value}</p>
+      </div>
+      <div className="flex items-center gap-2">
+        {href ? (
+          <a href={href} target="_blank" rel="noopener noreferrer" className={buttonVariants({ variant: "secondary", size: "sm" })}>
+            {open}
+          </a>
+        ) : null}
+        <CopyButton value={value} label={label} />
+      </div>
     </div>
   );
 }
@@ -90,13 +112,20 @@ export default async function PaymentPage() {
             </div>
             {isBankConfigured(bank) ? (
               <div className="flex flex-col gap-2" data-testid="bank-details">
+                <p className="text-sm font-semibold">{t("bankTitle")}</p>
                 <CopyRow label={t("holder")} value={bank.holder} />
                 <CopyRow label={t("iban")} value={bank.iban.replace(/\s+/g, "")} display={formatIban(bank.iban)} />
                 <CopyRow label={t("bic")} value={bank.bic} />
               </div>
-            ) : (
-              <Callout tone="warn">{t("bankMissing")}</Callout>
-            )}
+            ) : null}
+            {bank.paypal || bank.revolut ? (
+              <div className="flex flex-col gap-2" data-testid="other-methods">
+                <p className="text-sm font-semibold">{t("otherMethods")}</p>
+                {bank.paypal ? <MethodRow label={t("paypal")} value={bank.paypal} open={t("open")} /> : null}
+                {bank.revolut ? <MethodRow label={t("revolut")} value={bank.revolut} open={t("open")} /> : null}
+              </div>
+            ) : null}
+            {!hasPaymentMethod(bank) ? <Callout tone="warn">{t("bankMissing")}</Callout> : null}
             <p className="text-xs text-subtle-foreground">{t("delayHint")}</p>
           </Card>
 

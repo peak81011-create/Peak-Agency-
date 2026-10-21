@@ -106,8 +106,8 @@ test("la page Créateurs, la FAQ à deux onglets et le bouton « Besoin d'aide ?
 test("les 4 offres en bulles, la page détaillée d'une offre avec la transition, puis l'inscription", async ({ page }) => {
   await page.goto("/fr/tarifs");
   await expect(page.getByTestId("pricing-plans").getByRole("article")).toHaveCount(4);
-  await expect(page.getByTestId("offer-elite")).toContainText("600 clips × 0,99 € = 594,00 €");
-  await page.getByTestId("offer-croissance").getByRole("link", { name: /Voir tout le détail/ }).click();
+  await expect(page.getByTestId("offer-elite")).toContainText("600 clips × 0,99 € = 594 €");
+  await page.getByTestId("offer-croissance").getByRole("link", { name: "Croissance", exact: true }).click();
   await expect(page.getByTestId("page-transition")).toBeVisible();
   await expect(page).toHaveURL(/\/fr\/tarifs\/croissance$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Croissance");

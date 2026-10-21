@@ -6,6 +6,17 @@ export function formatMoney(cents: number, currency: string, locale: Locale): st
   return new Intl.NumberFormat(intlLocale(locale), { style: "currency", currency }).format(cents / 100);
 }
 
+/** Montant sans centimes quand il tombe juste (« 99 € »), sinon avec (« 0,99 € »). */
+export function formatMoneyCompact(cents: number, currency: string, locale: Locale): string {
+  const whole = cents % 100 === 0;
+  return new Intl.NumberFormat(intlLocale(locale), {
+    style: "currency",
+    currency,
+    minimumFractionDigits: whole ? 0 : 2,
+    maximumFractionDigits: whole ? 0 : 2,
+  }).format(cents / 100);
+}
+
 export function formatDate(value: string | Date | null | undefined, locale: Locale): string {
   if (!value) return "—";
   const date = typeof value === "string" ? new Date(value.length === 10 ? `${value}T12:00:00Z` : value) : value;

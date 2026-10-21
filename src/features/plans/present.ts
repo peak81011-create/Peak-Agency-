@@ -1,7 +1,7 @@
 import "server-only";
 import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
-import { formatMoney } from "@/lib/format";
+import { formatMoney, formatMoneyCompact } from "@/lib/format";
 import type { PlanRow } from "@/features/client/queries";
 
 // Mise en forme d'une offre pour l'affichage (vitrine, choix d'offre, admin).
@@ -10,6 +10,8 @@ export type PlanView = {
   name: string;
   description: string;
   price: string;
+  /** Prix sans centimes quand il tombe juste (« 198 € »), pour les blocs d'offres. */
+  priceCompact: string;
   period: string;
   includes: string[];
   featured: boolean;
@@ -41,6 +43,7 @@ export async function presentPlan(plan: PlanRow, locale: Locale, priceCents?: nu
     name: locale === "en" ? plan.name_en : plan.name_fr,
     description: locale === "en" ? plan.description_en : plan.description_fr,
     price: formatMoney(priceCents ?? plan.price_cents, plan.currency, locale),
+    priceCompact: formatMoneyCompact(priceCents ?? plan.price_cents, plan.currency, locale),
     period: t(`periods.${plan.billing_period}`),
     includes,
     featured: plan.is_featured,
